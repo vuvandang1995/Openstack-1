@@ -40,7 +40,7 @@
 
 - Thiết lập IP 
 
-	```
+	```.
 
 echo "Setup IP  eth0"
 nmcli c modify eth0 ipv4.addresses 192.168.40.70/24
@@ -70,10 +70,13 @@ sudo systemctl enable network
 sudo systemctl start network
 
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
-  ```
-- Khai báo repos cho OpenStack Newton
+  
+  .```
+  
+  - Khai báo repos cho OpenStack Newton
 
-```
+
+```.
 yum install centos-release-openstack-queens.x86_64 -y
 
     sudo yum install -y wget crudini fping   (vi /etc/yum.repos.d/CentOS-QEMU-EV.repo sua lai cai duong dan repos 'baseurlhttp://mirror.centos.org/centos-7/7/virt/x86_64/kvm-common/' neu khong cai duoc)
@@ -81,20 +84,20 @@ yum install centos-release-openstack-queens.x86_64 -y
     yum install -y openstack-packstack
     
     init 6
-    
+   
 ```
 
 ### 2.2. Các bước chuẩn bị trên trên Compute1
 
 - Thiết lập hostname
 
-    ```sh
+    ```.
     hostnamectl set-hostname compute1
     ```
 
 - Thiết lập IP 
 
-  ```sh
+  ```.
   echo "Setup IP  ens3"
   nmcli c modify ens3 ipv4.addresses 192.168.100.100/24
   nmcli c modify ens3 ipv4.gateway 192.168.100.1
@@ -119,7 +122,7 @@ yum install centos-release-openstack-queens.x86_64 -y
  
 - Khai báo repos cho OpenStack Newton
 
-```sh
+```.
     sudo yum install -y centos-release-openstack-newton
     yum update -y
 
