@@ -33,13 +33,13 @@
 
 - Thiết lập hostname
 
-	```sh
+	```
 	hostnamectl set-hostname controller
 	```
 
 - Thiết lập IP 
 
-	```sh
+	```
   echo "Setup IP  ens3"
   nmcli c modify ens3 ipv4.addresses 192.168.100.99/24
   nmcli c modify ens3 ipv4.gateway 192.168.100.1
@@ -76,13 +76,13 @@
 
 - Thiết lập hostname
 
-    ```sh
+    ```
     hostnamectl set-hostname compute1
     ```
 
 - Thiết lập IP 
 
-  ```sh
+  ```
 	echo "Setup IP  eth0"
 	nmcli c modify eth0 ipv4.addresses 192.168.40.70/24
 	nmcli c modify eth0 ipv4.gateway 192.168.40.1
