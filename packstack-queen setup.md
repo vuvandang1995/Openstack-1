@@ -16,8 +16,8 @@
 
 - Distro: CentOS 7.x
 - OpenStack Newton
-- NIC1 - ens3: Là dải mạng mà các máy ảo sẽ giao tiếp với bên ngoài. Dải mạng này sử dụng chế độ bridge hoặc NAT của VMware Workstation
-- NIC2 - ens4: là dải mạng sử dụng cho các traffic MGNT + API + DATA VM. Dải mạng này sử dụng chế độ hostonly trong VMware Workstation
+- NIC1 - eth0: Là dải mạng mà các máy ảo sẽ giao tiếp với bên ngoài. Dải mạng này sử dụng chế độ bridge hoặc NAT của VMware Workstation
+- NIC2 - eth1: là dải mạng sử dụng cho các traffic MGNT + API + DATA VM. Dải mạng này sử dụng chế độ hostonly trong VMware Workstation
 
 
 ### 1.3. Mô hình
@@ -63,7 +63,7 @@
   ```
 - Khai báo repos cho OpenStack Newton
 
-```sh
+```
 	yum install centos-release-openstack-queens.x86_64 -y
 
 	sudo yum install -y wget crudini fping   (vi /etc/yum.repos.d/CentOS-QEMU-EV.repo sửa lại đường dẫn repos 'baseurlhttp://mirror.centos.org/centos-7/7/virt/x86_64/kvm-common/' nếu repos báo lỗi sai)
