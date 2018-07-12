@@ -22,11 +22,11 @@
 
 ### 1.3. Mô hình
 
-<img src="http://i.imgur.com/1NjX5NW.png">
+<img src="https://i.imgur.com/8qTHAh0.png">
 
 ### 1.4. IP Planning
 
-<img src="http://i.imgur.com/JT1t7Mi.png">
+<img src="https://i.imgur.com/4UYKYHk.png">
 
 ## 2. Các bước cài đặt
 ### 2.1. Các bước chuẩn bị trên trên Controller
