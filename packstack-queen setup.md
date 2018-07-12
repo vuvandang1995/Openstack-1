@@ -66,7 +66,7 @@
 ```sh
 	yum install centos-release-openstack-queens.x86_64 -y
 
-	sudo yum install -y wget crudini fping   (vi /etc/yum.repos.d/CentOS-QEMU-EV.repo sua lai cai duong dan repos 'baseurlhttp://mirror.centos.org/centos-7/7/virt/x86_64/kvm-common/' neu khong cai duoc)
+	sudo yum install -y wget crudini fping   (vi /etc/yum.repos.d/CentOS-QEMU-EV.repo sửa lại đường dẫn repos 'baseurlhttp://mirror.centos.org/centos-7/7/virt/x86_64/kvm-common/' nếu repos báo lỗi sai)
 	yum install -y openstack-packstack
 	init 6
 
