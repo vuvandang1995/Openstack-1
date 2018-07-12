@@ -40,17 +40,17 @@
 - Thiết lập IP 
 
 	```
-  echo "Setup IP  ens3"
-  nmcli c modify ens3 ipv4.addresses 192.168.100.99/24
-  nmcli c modify ens3 ipv4.gateway 192.168.100.1
-  nmcli c modify ens3 ipv4.dns 8.8.8.8
-  nmcli c modify ens3 ipv4.method manual
-  nmcli con mod ens3 connection.autoconnect yes
+  echo "Setup IP  eth0"
+  nmcli c modify eth0 ipv4.addresses 192.168.40.70/24
+  nmcli c modify eth0 ipv4.gateway 192.168.40.1
+  nmcli c modify eth0 ipv4.dns 8.8.8.8
+  nmcli c modify eth0 ipv4.method manual
+  nmcli con mod eth0 connection.autoconnect yes
   
-  echo "Setup IP  ens4"
-  nmcli c modify ens4 ipv4.addresses 10.10.10.99/24
-  nmcli c modify ens4 ipv4.method manual
-  nmcli con mod ens4 connection.autoconnect yes
+  echo "Setup IP  eth1"
+  nmcli c modify eth1 ipv4.addresses 10.10.10.70/24
+  nmcli c modify eth1 ipv4.method manual
+  nmcli con mod eth1 connection.autoconnect yes
 
   sudo systemctl disable firewalld
   sudo systemctl stop firewalld
