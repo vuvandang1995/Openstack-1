@@ -1,5 +1,4 @@
 # Phần này hướng dẫn cài openstack trên packstack-queen
-
 ## 1. Các bước chuẩn bị
 ### 1.1. Giới thiệu
 
@@ -40,73 +39,16 @@
 
 - Thiết lập IP 
 
-	```.
-
-echo "Setup IP  eth0"
-nmcli c modify eth0 ipv4.addresses 192.168.40.70/24
-nmcli c modify eth0 ipv4.gateway 192.168.40.1
-nmcli c modify eth0 ipv4.dns 8.8.8.8
-nmcli c modify eth0 ipv4.method manual
-nmcli con mod eth0 connection.autoconnect yes
-
-echo "Setup IP  eth1"
-
-nmcli c modify eth1 ipv4.addresses 10.10.10.99/24
-
-nmcli c modify eth1 ipv4.method manual
-
-nmcli con mod eth1 connection.autoconnect yes
-
-sudo systemctl disable firewalld
-
-sudo systemctl stop firewalld
-
-sudo systemctl disable NetworkManager
-
-sudo systemctl stop NetworkManager
-
-sudo systemctl enable network
-
-sudo systemctl start network
-
-sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
-  
-  .```
-  
-  - Khai báo repos cho OpenStack Newton
-
-
-```.
-yum install centos-release-openstack-queens.x86_64 -y
-
-    sudo yum install -y wget crudini fping   (vi /etc/yum.repos.d/CentOS-QEMU-EV.repo sua lai cai duong dan repos 'baseurlhttp://mirror.centos.org/centos-7/7/virt/x86_64/kvm-common/' neu khong cai duoc)
-    
-    yum install -y openstack-packstack
-    
-    init 6
-   
-```
-
-### 2.2. Các bước chuẩn bị trên trên Compute1
-
-- Thiết lập hostname
-
-    ```.
-    hostnamectl set-hostname compute1
-    ```
-
-- Thiết lập IP 
-
-  ```.
+	```sh
   echo "Setup IP  ens3"
-  nmcli c modify ens3 ipv4.addresses 192.168.100.100/24
+  nmcli c modify ens3 ipv4.addresses 192.168.100.99/24
   nmcli c modify ens3 ipv4.gateway 192.168.100.1
   nmcli c modify ens3 ipv4.dns 8.8.8.8
   nmcli c modify ens3 ipv4.method manual
   nmcli con mod ens3 connection.autoconnect yes
   
   echo "Setup IP  ens4"
-  nmcli c modify ens4 ipv4.addresses 10.10.10.100/24
+  nmcli c modify ens4 ipv4.addresses 10.10.10.99/24
   nmcli c modify ens4 ipv4.method manual
   nmcli con mod ens4 connection.autoconnect yes
 
@@ -119,10 +61,53 @@ yum install centos-release-openstack-queens.x86_64 -y
 
   sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
   ```
+- Khai báo repos cho OpenStack Newton
+
+```sh
+	yum install centos-release-openstack-queens.x86_64 -y
+
+	sudo yum install -y wget crudini fping   (vi /etc/yum.repos.d/CentOS-QEMU-EV.repo sua lai cai duong dan repos 'baseurlhttp://mirror.centos.org/centos-7/7/virt/x86_64/kvm-common/' neu khong cai duoc)
+	yum install -y openstack-packstack
+	init 6
+
+```
+
+### 2.2. Các bước chuẩn bị trên trên Compute1
+
+- Thiết lập hostname
+
+    ```sh
+    hostnamectl set-hostname compute1
+    ```
+
+- Thiết lập IP 
+
+  ```sh
+	echo "Setup IP  eth0"
+	nmcli c modify eth0 ipv4.addresses 192.168.40.70/24
+	nmcli c modify eth0 ipv4.gateway 192.168.40.1
+	nmcli c modify eth0 ipv4.dns 8.8.8.8
+	nmcli c modify eth0 ipv4.method manual
+	nmcli con mod eth0 connection.autoconnect yes
+
+	echo "Setup IP  eth1"
+	nmcli c modify eth1 ipv4.addresses 10.10.10.99/24
+	nmcli c modify eth1 ipv4.method manual
+	nmcli con mod eth1 connection.autoconnect yes
+
+	sudo systemctl disable firewalld
+	sudo systemctl stop firewalld
+	sudo systemctl disable NetworkManager
+	sudo systemctl stop NetworkManager
+	sudo systemctl enable network
+	sudo systemctl start network
+
+	sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
+  ```
  
 - Khai báo repos cho OpenStack Newton
 
-```.
+```sh
     sudo yum install -y centos-release-openstack-newton
     yum update -y
 
