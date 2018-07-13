@@ -14,3 +14,34 @@ OpenStack là một phần mềm mã nguồn mở, một hệ điều hành đá
 
 - Cần hiểu thoáng và nhanh gọn hình này, ở đây OpenStack đã bao trùm cả lên phần ảo hóa, nó chính là trong khối Compute. Do vậy bạn đừng hiểu nhầm sang khía cạnh Ảo hóa
 
+#### Cloud Computing có 5 đặc tính, 4 mô hình dịch vụ và 3 mô hình triển khai
+
+**5 đặc tính:**
+
+- Rapid elasticity: Khả năng thu hồi và cấp phát tài nguyên
+
+-Broad network access: Truy nhập qua các chuẩn mạng
+
+-Measured service: Dịch vụ sử dụng đo đếm được, hay là chi trả theo mức độ sử dụng pay as you go
+
+-On-demand self-service: Khả năng tự phục vụ
+
+-Resource pooling: Chia sẻ tài nguyên
+
+**4 mô hình dịch vụ**
+
+- Public Cloud: Đám mây công cộng (là các dịch vụ trên nền tảng Cloud Computing để cho các cá nhân và tổ chức thuê, họ dùng chung tài nguyên).
+
+- Private Cloud: Đám mây riêng (dùng trong một doanh nghiệp và không chia sẻ với người dùng ngoài doanh nghiệp đó)
+
+- Community Cloud: Đám mây cộng đồng (là các dịch vụ trên nền tảng Cloud computing do các công ty cùng hợp tác xây dựng và cung cấp các dịch vụ cho cộng đồng
+
+- Hybrid Cloud : Là mô hình kết hợp (lai) giữa các mô hình Public Cloud và Private Cloud
+
+**3 mô hình triển khai**
+
+- Hạ tầng như một dịch vụ (Infrastructure as a Service)
+
+- Nền tảng như một dịch vụ (Platform as a Service)
+
+- Nền tảng như một dịch vụ (Platform as a Service)
