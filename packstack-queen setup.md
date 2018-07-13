@@ -175,9 +175,9 @@
 	
 **Đứng trên Controller1 thực hiện lệnh dưới để sửa các cấu hình cần thiết:**
 
-	```sed -i -e 's/enable_isolated_metadata=False/enable_isolated_metadata=True/g' /etc/neutron/dhcp_agent.ini
+	sed -i -e 's/enable_isolated_metadata=False/enable_isolated_metadata=True/g' /etc/neutron/dhcp_agent.ini
 
 	ssh -o StrictHostKeyChecking=no root@192.168.40.69 "sed -i -e 's/compute1/192.168.40.69/g' /etc/nova/nova.conf"
 
 	ssh -o StrictHostKeyChecking=no root@192.168.40.68 "sed -i -e 's/compute2/192.168.40.68/g' /etc/nova/nova.conf"
-	```
+	
