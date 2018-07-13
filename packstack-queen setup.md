@@ -1,4 +1,4 @@
-# Phần này hướng dẫn cài openstack trên packstack-queen
+# Phần này hướng dẫn cài openstack trên packstack-queen và tạo máy ảo trên dashboard
 ## 1. Các bước chuẩn bị
 ### 1.1. Giới thiệu
 
