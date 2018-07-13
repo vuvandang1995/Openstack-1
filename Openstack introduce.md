@@ -14,7 +14,7 @@ OpenStack là một phần mềm mã nguồn mở, một hệ điều hành đá
 
 - Cần hiểu thoáng và nhanh gọn hình này, ở đây OpenStack đã bao trùm cả lên phần ảo hóa, nó chính là trong khối Compute. Do vậy bạn đừng hiểu nhầm sang khía cạnh Ảo hóa
 
-#### Cloud Computing có 5 đặc tính, 4 mô hình dịch vụ và 3 mô hình triển khai
+### Cloud Computing có 5 đặc tính, 4 mô hình dịch vụ và 3 mô hình triển khai
 
 **5 đặc tính:**
 
@@ -28,7 +28,7 @@ OpenStack là một phần mềm mã nguồn mở, một hệ điều hành đá
 
 -Resource pooling: Chia sẻ tài nguyên
 
-**4 mô hình dịch vụ**
+**4 mô hình dịch vụ:**
 
 - Public Cloud: Đám mây công cộng (là các dịch vụ trên nền tảng Cloud Computing để cho các cá nhân và tổ chức thuê, họ dùng chung tài nguyên).
 
@@ -38,7 +38,7 @@ OpenStack là một phần mềm mã nguồn mở, một hệ điều hành đá
 
 - Hybrid Cloud : Là mô hình kết hợp (lai) giữa các mô hình Public Cloud và Private Cloud
 
-**3 mô hình triển khai**
+**3 mô hình triển khai:**
 
 - Hạ tầng như một dịch vụ (Infrastructure as a Service)
 
