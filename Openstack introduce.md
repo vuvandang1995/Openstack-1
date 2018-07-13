@@ -1,20 +1,12 @@
 # Phần này giới thiệu về openstack
 
+### Cloud computing
 
+Cloud Computing là mô hình cho phép truy cập qua mạng để lựa chọn và sử dụng tài nguyên có thể được tính toán (ví dụ: mạng, máy chủ, lưu trữ, ứng dụng và dịch vụ) theo nhu cầu một cách thuận tiện và nhanh chóng; đồng thời cho phép kết thúc sử dụng dịch vụ, giải phóng tài nguyên dễ dàng, giảm thiểu các giao tiếp với nhà cung cấp
 
-OpenStack là một phần mềm mã nguồn mở, một hệ điều hành đám mây điều khiển các kho lưu trữ lớn, tính toán việc lưu trữ và tài nguyên mạng trong toàn bộ trung tâm dữ liệu, tất cả được quản lý thông qua bảng điều khiển cho phép quản trị viên kiểm soát đồng thời trao quyền cho người dùng của họ với tài nguyên cung cấp thông qua giao diện web dùng để triển khai Cloud Computing (bao gồm private cloud và public cloud) 
+Có thể coi đây là bước kế tiếp của Ảo hóa. Ảo hóa phần cứng, ảo hóa ứng dụng. là thành phần quản lý và tổ chức, vận hành các hệ thống ảo hóa trước đó.
 
-<img src="https://i.imgur.com/or7Ws0w.png">
-
-- Phía dưới là phần cứng của, đã được ảo hóa để chia sẻ cho ứng dụng, người dùng
-
-- Trên cùng là các ứng dụng của bạn, tức là các phần mềm mà bạn sử dụng
-
-- Và OpenStack là phần ở giữa 2 phần trên, trong OpenStack có các thành phần, module khác nhau nhưng trong hình minh họa các thành phần cơ bản: Dashboard, Compute, Networking, API, Storage …
-
-- Cần hiểu thoáng và nhanh gọn hình này, ở đây OpenStack đã bao trùm cả lên phần ảo hóa, nó chính là trong khối Compute. Do vậy bạn đừng hiểu nhầm sang khía cạnh Ảo hóa
-
-### Cloud Computing có 5 đặc tính, 4 mô hình dịch vụ và 3 mô hình triển khai
+#### Cloud Computing có 5 đặc tính, 4 mô hình dịch vụ và 3 mô hình triển khai:
 
 **5 đặc tính:**
 
@@ -46,6 +38,24 @@ OpenStack là một phần mềm mã nguồn mở, một hệ điều hành đá
 
 - Nền tảng như một dịch vụ (Platform as a Service)
 
+------
+
+## 1. Giới thiệu Openstack
+
+**OpenStack** là một phần mềm mã nguồn mở, một hệ điều hành đám mây điều khiển các kho lưu trữ lớn, tính toán việc lưu trữ và tài nguyên mạng trong toàn bộ trung tâm dữ liệu, tất cả được quản lý thông qua bảng điều khiển cho phép quản trị viên kiểm soát đồng thời trao quyền cho người dùng của họ với tài nguyên cung cấp thông qua giao diện web dùng để triển khai Cloud Computing (bao gồm private cloud và public cloud) 
+
+<img src="https://i.imgur.com/or7Ws0w.png">
+
+- Phía dưới là phần cứng của, đã được ảo hóa để chia sẻ cho ứng dụng, người dùng
+
+- Trên cùng là các ứng dụng của bạn, tức là các phần mềm mà bạn sử dụng
+
+- Và OpenStack là phần ở giữa 2 phần trên, trong OpenStack có các thành phần, module khác nhau nhưng trong hình minh họa các thành phần cơ bản: Dashboard, Compute, Networking, API, Storage …
+
+- Cần hiểu thoáng và nhanh gọn hình này, ở đây OpenStack đã bao trùm cả lên phần ảo hóa, nó chính là trong khối Compute. Do vậy bạn đừng hiểu nhầm sang khía cạnh Ảo hóa
+
+
+
 ### Một vài thông tin tóm tắt về OpenStack:
 
 *Ban đầu, OpenStack được phát triển bởi NASA và Rackspace, và ra phiên bản đầu tiên vào năm 2010. Định hướng của họ từ khi mới bắt đầu là tạo ra một dự án nguồn mở mà mọi người có thể sử dụng hoặc đóng góp. OpenStack dưới chuẩn Apache License 2.0, và vì thế phiên bản đầu tiên đã phát triển rộng rãi trong cộng đồng được hỗ trợ bởi hơn 9000 cộng tác viên trên gần 90 quốc gia, và hơn 150 công ty bao gồm Redhat, Canonical, IBM, AT&T, Cisco, Intel, PayPal, Comcast và một nhiều cái tên khác. Đến nay, OpenStack đã cho ra mắt 15 phiên bản, các bạn có thể xem thêm tại đây*
@@ -56,7 +66,7 @@ OpenStack là một phần mềm mã nguồn mở, một hệ điều hành đá
 
 *Tên các phiên bản được bắt đầu theo thứ tự A, B, C, D …trong bảng chữ cái*
 
-## 2. Thành phần
+## 2. Các thành phần chính trong openstack
 
 OpenStack không phải là một dự án đơn lẻ mà là một nhóm các dự án nguồn mở nhằm mục đích cung cấp các dịch vụ cloud hoàn chỉnh
 
