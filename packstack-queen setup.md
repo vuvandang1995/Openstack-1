@@ -202,3 +202,14 @@
 <img src="https://i.imgur.com/N3hZ1i0.png">
 
 - Ngoài ra có thể kiểm tra thêm bằng cách lệnh khác: openstack user list , openstack service list, openstack catalog list
+
+- Kiểm tra trạng thái của các service NOVA bằng lệnh `openstack compute service list`, nếu state là `up` thì có thể tiếp tục các bước dưới
+
+<img src="https://i.imgur.com/HrqgvgN.png">
+
+- Kiểm tra trạng thái của dịch vụ neutron bằng lệnh `neutron agent-list`, nếu có biểu tượng :-) thì có thể tiếp tục bước dưới
+
+<img src="https://i.imgur.com/DS2ogLx.png">
+
+
+#### Truy cập vào web theo địa chỉ http://192.168.100.99/dashboard , tài khoản là admin, mật khẩu là Welcome123
