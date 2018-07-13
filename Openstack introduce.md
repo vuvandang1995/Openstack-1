@@ -20,13 +20,13 @@ OpenStack là một phần mềm mã nguồn mở, một hệ điều hành đá
 
 - Rapid elasticity: Khả năng thu hồi và cấp phát tài nguyên
 
--Broad network access: Truy nhập qua các chuẩn mạng
+- Broad network access: Truy nhập qua các chuẩn mạng
 
--Measured service: Dịch vụ sử dụng đo đếm được, hay là chi trả theo mức độ sử dụng pay as you go
+- Measured service: Dịch vụ sử dụng đo đếm được, hay là chi trả theo mức độ sử dụng pay as you go
 
--On-demand self-service: Khả năng tự phục vụ
+- On-demand self-service: Khả năng tự phục vụ
 
--Resource pooling: Chia sẻ tài nguyên
+- Resource pooling: Chia sẻ tài nguyên
 
 **4 mô hình dịch vụ:**
 
