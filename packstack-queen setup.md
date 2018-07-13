@@ -181,3 +181,33 @@
 
 	ssh -o StrictHostKeyChecking=no root@192.168.40.68 "sed -i -e 's/compute2/192.168.40.68/g' /etc/nova/nova.conf"
 	
+**Khởi động lại cả 03 node Controller1, Compute1, Compute2**
+
+	ssh -o StrictHostKeyChecking=no root@192.168.40.68 "init 6"
+
+	ssh -o StrictHostKeyChecking=no root@192.168.40.69 "init 6"
+
+	init 6
+	
+**Đăng nhập lại vào Controller1 bằng quyền root và kiểm tra hoạt động của openstack sau khi cài:**
+
+- Khai báo biến môi trường  
+	
+	`source ~/keystonerc_admin`
+
+- Kiểm tra hoạt động của openstack  (lưu ý: có thể phải mất vài phút để các service của OpenStack khởi động xong)
+
+	`openstack token issue`
+	
+`	
+[root@controller ~(keystone_admin)]# openstack token issue
++------------+----------------------------------------------------------------------------------------------------                                   -------------------------------------------------------------------------------------+
+| Field      | Value                                                                                                                                                                                                                      |
++------------+----------------------------------------------------------------------------------------------------                                   -------------------------------------------------------------------------------------+
+| expires    | 2018-07-13T04:54:55+0000                                                                                                                                                                                                   |
+| id         | gAAAAABbSCKPX0lRI0aeTGdBDdRx30pNNRoQ29oFxpJkZ4oqt_uUVcE1WTjoK1G2WHJLxVE_x9bLuCg_xdjeHjcoWi0rV1GS48o                                   gKBjliOb1PtMWPbvzaNAOxFH2p2PwcXjUdWOEHx2PNrW1pR4-p9RcDiBeUsQJslhkx2ses7UEx-sXUD4PHAQ |
+| project_id | 261a834c64244034a7dbb1cdfeff4c3a                                                                                                                                                                                           |
+| user_id    | 3838871aa53c445e8cfb79c820cec580                                                                                                                                                                                           |
++------------+----------------------------------------------------------------------------------------------------                                   -------------------------------------------------------------------------------------+
+`
+
