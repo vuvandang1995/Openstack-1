@@ -216,3 +216,27 @@
 
 ### 5. Quản trị với dashboard
 
+**Đầu tiên muốn tạo máy ảo cần tạo 1 image trước
+
+<img src="https://i.imgur.com/B47PNeI.png">
+
+- Click vào mục Project -> Compute -> Images
+
+<img src="https://i.imgur.com/uQ9rJHv.png">
+
+- Tạo image
+
+<img src="https://i.imgur.com/iS8ggvW.png">
+
+- Tiếp theo tạo card mạng để sử dụng khi tạo máy ảo: click Network -> Networks -> Create Network
+
+<img src="https://i.imgur.com/toZ80vn.png">
+
+<img src="https://i.imgur.com/z6yzrYr.png">
+
+<img src="https://i.imgur.com/s1jPfUG.png">
+
+
+
+
+
