@@ -55,3 +55,21 @@ OpenStack là một phần mềm mã nguồn mở, một hệ điều hành đá
 *Tháng 10/2010 Racksapce và NASA công bố phiên bản đầu tiên của OpenStack, có tên là OpenStack Austin, với 2 thành phần chính ( project con) : Compute (tên mã là Nova) và Object Storage (tên mã là Swift)*
 
 *Tên các phiên bản được bắt đầu theo thứ tự A, B, C, D …trong bảng chữ cái*
+
+## 2. Thành phần
+
+OpenStack không phải là một dự án đơn lẻ mà là một nhóm các dự án nguồn mở nhằm mục đích cung cấp các dịch vụ cloud hoàn chỉnh
+
+OpenStack chứa nhiều thành phần, dưới đây là một số thành phần chính:
+
+- OpenStack compute (code-name Nova): là module quản lý và cung cấp máy ảo. Tên phát triển của nó Nova. Nó hỗ trợ nhiều hypervisors gồm KVM, QEMU, LXC, XenServer... Compute là một công cụ mạnh mẽ mà có thể điều khiển toàn bộ các công việc: networking, CPU, storage, memory, tạo, điều khiển và xóa bỏ máy ảo, security, access control. Bạn có thể điều khiển tất cả bằng lệnh hoặc từ giao diện dashboard trên web.
+
+- OpenStack Glance (code-name Glance): Là OpenStack Image Service, quản lý các disk image ảo. Glance hỗ trợ các ảnh Raw, Hyper-V (VHD), VirtualBox (VDI), Qemu (qcow2) và VMWare (VMDK, OVF). Bạn có thể thực hiện: cập nhật thêm các virtual disk images, cấu hình các public và private image và điều khiển việc truy cập vào chúng, và tất nhiên là có thể tạo và xóa chúng.
+
+- Block Storage Service (code-name Cinder): Cinder là một dịch vụ lưu trữ (Block Storage service) cho OpenStack. Nó được thiết kế để người dùng có thể thực hiện việc lưu trữ bởi Nova, việc này được thực hiện bởi `LVM` hoặc các plugin driver cho các nền tảng lưu trữ khác. Cinder ảo hóa việc quản lý các thiết bị block storage và cung cấp cho người dùng cuối một API đáp ứng được nhu cầu tự phục vụ cũng như tiêu thụ các tài nguyên. Self service API được sử dụng để giao tiếp với các dịch vụ Cinder
+
+- Identity Server(code-name Keystone): quản lý xác thực cho user và projects.
+
+- OpenStack Netwok (code-name Neutron): là thành phần quản lý network cho các máy ảo. Cung cấp chức năng network as a service. Đây là hệ thống có các tính chất pluggable, scalable và API-driven.
+
+- OpenStack dashboard (code-name Horizon): cung cấp cho người quản trị cũng như người dùng giao diện đồ họa để truy cập, cung cấp và tự động tài nguyên cloud. Việc thiết kế có thể mở rộng giúp dễ dàng thêm vào các sản phẩm cũng như dịch vụ ngoài như billing, monitoring và các công cụ giám sát khác.
