@@ -228,7 +228,7 @@
 
 <img src="https://i.imgur.com/iS8ggvW.png">
 
-- Tiếp theo tạo card mạng để sử dụng khi tạo máy ảo: click Network -> Networks -> Create Network
+**Tiếp theo tạo card mạng để sử dụng khi tạo máy ảo: click Network -> Networks -> Create Network**
 
 <img src="https://i.imgur.com/toZ80vn.png">
 
@@ -236,6 +236,27 @@
 
 <img src="https://i.imgur.com/s1jPfUG.png">
 
+**Tạo máy ảo**
+
+
+
+<img src="https://i.imgur.com/t0oLLYT.png">
+
+
+
+<img src="https://i.imgur.com/TfWgzLU.png">
+
+
+
+<img src="https://i.imgur.com/83WCdvm.png">
+
+
+
+<img src="https://i.imgur.com/iofH3Fq.png">
+
+
+
+<img src="">
 
 
 
