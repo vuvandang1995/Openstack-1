@@ -201,4 +201,4 @@
 	
 <img src="https://i.imgur.com/N3hZ1i0.png">
 
-
+- Ngoài ra có thể kiểm tra thêm bằng cách lệnh khác: openstack user list , openstack service list, openstack catalog list
