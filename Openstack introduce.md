@@ -70,7 +70,7 @@ Có thể coi đây là bước kế tiếp của Ảo hóa. Ảo hóa phần c�
 
 OpenStack không phải là một dự án đơn lẻ mà là một nhóm các dự án nguồn mở nhằm mục đích cung cấp các dịch vụ cloud hoàn chỉnh
 
-OpenStack chứa nhiều thành phần, dưới đây là một số thành phần chính:
+**OpenStack chứa nhiều thành phần, dưới đây là một số thành phần chính:**
 
 - OpenStack compute (code-name Nova): là module quản lý và cung cấp máy ảo. Tên phát triển của nó Nova. Nó hỗ trợ nhiều hypervisors gồm KVM, QEMU, LXC, XenServer... Compute là một công cụ mạnh mẽ mà có thể điều khiển toàn bộ các công việc: networking, CPU, storage, memory, tạo, điều khiển và xóa bỏ máy ảo, security, access control. Bạn có thể điều khiển tất cả bằng lệnh hoặc từ giao diện dashboard trên web.
 
