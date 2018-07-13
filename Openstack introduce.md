@@ -64,7 +64,27 @@ Có thể coi đây là bước kế tiếp của Ảo hóa. Ảo hóa phần c�
 
 *Tháng 10/2010 Racksapce và NASA công bố phiên bản đầu tiên của OpenStack, có tên là OpenStack Austin, với 2 thành phần chính ( project con) : Compute (tên mã là Nova) và Object Storage (tên mã là Swift)*
 
-*Tên các phiên bản được bắt đầu theo thứ tự A, B, C, D …trong bảng chữ cái Austin, Bexar, Cactus, Diablo, Essex, Folsom, Grizzly, Havana...*
+*Tên các phiên bản được bắt đầu theo thứ tự A, B, C, D …trong bảng chữ cái Austin (21/10/2010), Bexar(3/2/2011), Cactus(15/4/2011), Diablo(22/9/2011), Essex(5/4/2012), Folsom(27/9/2012), Grizzly(4/4/2013), Havana(17/10/2013)...*
+
+|Tên phiên bản                |Thời điểm phát hành              | Các thành phần bao gồm
+|-----------------------------|---------------------------------|----------------------------------
+|Austin|21/10/2010|Nova, Swift
+|Bexar|3/2/2011|Nova, Glance, Swift
+|Cactus|15/4/2011|Nova, Glance, Swift
+|Diablo|22/9/2011|Nova, Glance, Swift
+|Essex|5/4/2012|Nova, Glance, Swift, Horizon, Keystone
+|Folsom|27/9/2012|Nova, Glance, Swift, Horizon, Keystone, Quantum, Cinder
+|Grizzly|4/4/2013|Nova, Glance, Swift, Horizon, Keystone, Quantum, Cinder
+|Havana|17/10/2013|Nova, Glance, Swift, Horizon, Keystone, Neutron, Cinder, Heat, Ceilometer
+|Icehouse|17/4/2013|Nova, Glance, Swift, Horizon, Keystone, Neutron, Cinder, Heat, Ceilometer, Trove
+|Juno|16/10/2014|Nova, Glance, Swift, Horizon, Keystone, Neutron, Cinder, Heat, Ceilometer, Trove, Sahara
+|Kilo|30/4/2015|Nova, Glance, Swift, Horizon, Keystone, Neutron, Cinder, Heat, Ceilometer, Trove, Sahara, Ironic
+|Liberty|16/10/2015|Nova, Glance, Swift, Horizon, Keystone, Neutron, Cinder, Heat, Ceilometer, Trove, Sahara, Ironic, Zaqar, Manila, Designate, Barbican, Searchlight
+|Mitaka|7/4/2016|Nova, Glance, Swift, Horizon, Keystone, Neutron, Cinder, Heat, Ceilometer, Trove, Sahara, Ironic, Zaqar, Manila, Designate, Barbican, Searchlight, Magnum
+|Newton|6/10/2016|Nova, Glance, Swift, Horizon, Keystone, Neutron, Cinder, Heat, Ceilometer, Trove, Sahara, Ironic, Zaqar, Manila, Designate, Barbican, Searchlight, Magnum, aodh, cloudkitty, congress, freezer, mistral, monasca-api, monasca-log-api, murano, panko, senlin, solum, tacker, vitrage, Watcher
+|Ocata|22/2/2017|Nova, Glance, Swift, Horizon, Keystone, Neutron, Cinder, Heat, Ceilometer, Trove, Sahara, Ironic, Zaqar, Manila, Designate, Barbican, Searchlight, Magnum, aodh, cloudkitty, congress, freezer, mistral, monasca-api, monasca-log-api, murano, panko, senlin, solum, tacker, vitrage, Watcher
+|Pike|30/8/2017|Nova, Glance, Swift, Horizon, Keystone, Neutron, Cinder, Heat, Ceilometer, Trove, Sahara, Ironic, Zaqar, Manila, Designate, Barbican, Searchlight, Magnum, aodh, cloudkitty, congress, freezer, mistral, monasca-api, monasca-log-api, murano, panko, senlin, solum, tacker, vitrage, Watcher
+|Queens|28/2/2018|Nova, Glance, Swift, Horizon, Keystone, Neutron, Cinder, Heat, Ceilometer, Trove, Sahara, Ironic, Zaqar, Manila, Designate, Barbican, Searchlight, Magnum, aodh, cloudkitty, congress, freezer, mistral, monasca-api, monasca-log-api, murano, panko, senlin, solum, tacker, vitrage, Watcher, blazar, ceilometer-powervm, karbor, octavia, storlets, tricircle, zun
 
 ## 2. Các thành phần chính trong openstack
 
