@@ -212,4 +212,4 @@
 <img src="https://i.imgur.com/DS2ogLx.png">
 
 
-#### Truy cập vào web theo địa chỉ http://192.168.100.99/dashboard , tài khoản là admin, mật khẩu là Welcome123
+#### Truy cập vào web theo địa chỉ http://192.168.40.70/dashboard , tài khoản là admin, mật khẩu là Welcome123
