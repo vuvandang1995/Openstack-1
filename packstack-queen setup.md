@@ -216,7 +216,7 @@
 
 ### 5. Quản trị với dashboard
 
-**Đầu tiên muốn tạo máy ảo cần tạo 1 image trước
+**Đầu tiên muốn tạo máy ảo cần tạo 1 image trước**
 
 <img src="https://i.imgur.com/B47PNeI.png">
 
