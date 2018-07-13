@@ -64,7 +64,7 @@ Có thể coi đây là bước kế tiếp của Ảo hóa. Ảo hóa phần c�
 
 *Tháng 10/2010 Racksapce và NASA công bố phiên bản đầu tiên của OpenStack, có tên là OpenStack Austin, với 2 thành phần chính ( project con) : Compute (tên mã là Nova) và Object Storage (tên mã là Swift)*
 
-*Tên các phiên bản được bắt đầu theo thứ tự A, B, C, D …trong bảng chữ cái*
+*Tên các phiên bản được bắt đầu theo thứ tự A, B, C, D …trong bảng chữ cái Austin, Bexar, Cactus, Diablo, Essex, Folsom, Grizzly, Havana...*
 
 ## 2. Các thành phần chính trong openstack
 
