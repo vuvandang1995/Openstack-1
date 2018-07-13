@@ -161,7 +161,7 @@
 
 ### 3.Fix lỗi trước khi sử dụng
 
-1. Trước khi vào dashboard để tạo máy ảo ta cần chỉnh sửa một vài lỗi sau
+#### Trước khi vào dashboard để tạo máy ảo ta cần chỉnh sửa một vài lỗi sau
 
 **Không nhận metadata:**
 
@@ -213,3 +213,6 @@
 
 
 #### Cuối cùng truy cập vào web theo địa chỉ http://192.168.40.70/dashboard , tài khoản là admin, mật khẩu là Welcome123 để quản trị openstack
+
+### 5. Quản trị với dashboard
+
