@@ -45,3 +45,13 @@ OpenStack là một phần mềm mã nguồn mở, một hệ điều hành đá
 - Nền tảng như một dịch vụ (Platform as a Service)
 
 - Nền tảng như một dịch vụ (Platform as a Service)
+
+### Một vài thông tin tóm tắt về OpenStack:
+
+*Ban đầu, OpenStack được phát triển bởi NASA và Rackspace, và ra phiên bản đầu tiên vào năm 2010. Định hướng của họ từ khi mới bắt đầu là tạo ra một dự án nguồn mở mà mọi người có thể sử dụng hoặc đóng góp. OpenStack dưới chuẩn Apache License 2.0, và vì thế phiên bản đầu tiên đã phát triển rộng rãi trong cộng đồng được hỗ trợ bởi hơn 9000 cộng tác viên trên gần 90 quốc gia, và hơn 150 công ty bao gồm Redhat, Canonical, IBM, AT&T, Cisco, Intel, PayPal, Comcast và một nhiều cái tên khác. Đến nay, OpenStack đã cho ra mắt 15 phiên bản, các bạn có thể xem thêm tại đây*
+
+*OpenStack hoạt động theo hướng mở: (Open) Công khai lộ trình phát triển, (Open) công khai mã nguồn … Stack mang nghĩa là tầng, lớp (ở đây được hiểu là OpenStack được phát triển theo nguyên lí các tầng lớp chồng lên nhau)*
+
+*Tháng 10/2010 Racksapce và NASA công bố phiên bản đầu tiên của OpenStack, có tên là OpenStack Austin, với 2 thành phần chính ( project con) : Compute (tên mã là Nova) và Object Storage (tên mã là Swift)*
+
+*Tên các phiên bản được bắt đầu theo thứ tự A, B, C, D …trong bảng chữ cái*
