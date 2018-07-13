@@ -1,4 +1,4 @@
-# Phần này hướng dẫn cài openstack trên packstack-queen và tạo máy ảo trên dashboard
+# Phần này hướng dẫn cài openstack trên packstack-queens và tạo máy ảo trên dashboard
 ## 1. Các bước chuẩn bị
 ### 1.1. Giới thiệu
 
@@ -15,7 +15,7 @@
 ### 1.2. Môi trường thực hiện 
 
 - Distro: CentOS 7.x
-- OpenStack Newton
+- OpenStack Queens
 - NIC1 - eth0: Là dải mạng mà các máy ảo sẽ giao tiếp với bên ngoài. Dải mạng này sử dụng chế độ bridge hoặc NAT của VMware Workstation
 - NIC2 - eth1: là dải mạng sử dụng cho các traffic MGNT + API + DATA VM. Dải mạng này sử dụng chế độ hostonly trong VMware Workstation
 
