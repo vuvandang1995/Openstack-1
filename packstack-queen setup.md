@@ -117,4 +117,45 @@
 
 ### 2.3. Các bước chuẩn bị trên trên Compute2
 
-Làm tương tự như với compute1
+
+- Thiết lập hostname
+
+    ```
+    hostnamectl set-hostname compute2
+    ```
+
+- Thiết lập IP 
+
+  ```
+	echo "Setup IP  eth0"
+	nmcli c modify eth0 ipv4.addresses 192.168.40.68/24
+	nmcli c modify eth0 ipv4.gateway 192.168.40.1
+	nmcli c modify eth0 ipv4.dns 8.8.8.8
+	nmcli c modify eth0 ipv4.method manual
+	nmcli con mod eth0 connection.autoconnect yes
+
+	echo "Setup IP  eth1"
+	nmcli c modify eth1 ipv4.addresses 10.10.10.68/24
+	nmcli c modify eth1 ipv4.method manual
+	nmcli con mod eth1 connection.autoconnect yes
+
+	sudo systemctl disable firewalld
+	sudo systemctl stop firewalld
+	sudo systemctl disable NetworkManager
+	sudo systemctl stop NetworkManager
+	sudo systemctl enable network
+	sudo systemctl start network
+
+	sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
+
+  ```
+ 
+- Khai báo repos cho OpenStack Newton
+
+```
+    yum install centos-release-openstack-queens.x86_64 -y
+    yum install -y wget crudini fping
+    yum install -y openstack-packstack
+    init 6
+```
+
