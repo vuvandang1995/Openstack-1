@@ -212,4 +212,4 @@
 <img src="https://i.imgur.com/DS2ogLx.png">
 
 
-#### Truy cập vào web theo địa chỉ http://192.168.40.70/dashboard , tài khoản là admin, mật khẩu là Welcome123
+#### Cuối cùng truy cập vào web theo địa chỉ http://192.168.40.70/dashboard , tài khoản là admin, mật khẩu là Welcome123 để quản trị openstack
