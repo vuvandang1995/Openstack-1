@@ -173,6 +173,22 @@
     init 6
 ```
 
+### 2.4. Cài đặt openstack
+
+```
+	packstack --allinone \
+	--default-password=Welcome123 \
+	--os-cinder-install=y \
+	--os-neutron-ovs-bridge-mappings=extnet:br-ex \
+	--os-neutron-ovs-bridge-interfaces=br-ex:eth0 \
+	--os-neutron-ovs-bridges-compute=br-ex \
+	--os-neutron-ml2-type-drivers=vxlan,flat \
+	--os-controller-host=192.168.40.70 \
+	--os-compute-hosts=192.168.40.69,192.168.40.68 \
+	--os-neutron-ovs-tunnel-if=eth1 \
+	--provision-demo=n
+```
+
 ### 3.Fix lỗi trước khi sử dụng
 
 #### Trước khi vào dashboard để tạo máy ảo ta cần chỉnh sửa một vài lỗi sau
@@ -225,21 +241,7 @@
 
 <img src="https://i.imgur.com/DS2ogLx.png">
 
-- Cài đặt openstack
 
-```
-	packstack --allinone \
-	--default-password=Welcome123 \
-	--os-cinder-install=y \
-	--os-neutron-ovs-bridge-mappings=extnet:br-ex \
-	--os-neutron-ovs-bridge-interfaces=br-ex:eth0 \
-	--os-neutron-ovs-bridges-compute=br-ex \
-	--os-neutron-ml2-type-drivers=vxlan,flat \
-	--os-controller-host=192.168.40.70 \
-	--os-compute-hosts=192.168.40.69,192.168.40.68 \
-	--os-neutron-ovs-tunnel-if=eth1 \
-	--provision-demo=n
-```
 
 #### Cuối cùng truy cập vào web theo địa chỉ http://192.168.40.70/dashboard , tài khoản là admin, mật khẩu là Welcome123 để quản trị openstack
 
