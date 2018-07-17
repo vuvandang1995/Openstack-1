@@ -29,7 +29,7 @@
 **Trong openstack có 2 chế độ card mạng là Provider và self-service:**
 <ul>
 <li>Provider: Là chế độ cho phép các máy ảo bên trong các compute kết nối trực tiếp ra ngoài internet thông qua dải provider</li>
-<li>Self service: Là chế độ cho phép các máy ảo kết nối tới 1 dải ip private và từ dải đó sẽ được NAT hoặc không NAT ra giải provider qua 1 con router ảo có các interface  đấu nối 1 đầu tới dải provider và 1 đầu tới giải private để đi internet, mục đích là để chia các máy ảo vào các vùng mạng khác nhau để thuận tiện cho việc quản lý hoặc theo yêu cầu của người sử dụng</li>
+<li>Self service: Là chế độ cho phép các máy ảo kết nối tới 1 dải ip private và từ dải đó sẽ được NAT hoặc không NAT ra giải provider qua 1 con router ảo có các interface  đấu nối 1 đầu tới dải provider và 1 đầu tới giải private để đi internet, mục đích là để chia các máy ảo vào các vùng mạng khác nhau để thuận tiện cho việc quản lý hoặc theo yêu cầu của người sử dụng (ở mô hình này sẽ sử dụng dải self service bằng dải 10.10.10.0/24 trùng với giải management)</li>
 </ul>
 			
 			
@@ -187,6 +187,37 @@
 	--os-compute-hosts=192.168.40.69,192.168.40.68 \
 	--os-neutron-ovs-tunnel-if=eth1 \
 	--provision-demo=n
+```
+
+- Tạo network public
+```
+	neutron net-create external_network --provider:network_type flat \
+	--provider:physical_network extnet  \
+	--router:external \
+	--shared
+```
+
+- Tạo subnet trong network public
+```
+	neutron subnet-create --name public_subnet \
+	--enable_dhcp=False \
+	--allocation-pool=start=192.168.40.3,end=192.168.40.254 \
+	--gateway=192.168.40.1 external_network 192.168.40.0/24
+```
+
+- Tạo network private (dải self service)
+
+```
+	neutron net-create private_network
+	neutron subnet-create --name private_subnet private_network 10.0.0.0/24 \
+	--dns-nameserver 8.8.8.8
+```
+
+- Tạo router và addd các interface (đây chính là router ảo để nat dải private(self service network) ra giải provider
+```
+	neutron router-create router
+	neutron router-gateway-set router external_network
+	neutron router-interface-add router private_subnet
 ```
 
 ### 3.Fix lỗi trước khi sử dụng
