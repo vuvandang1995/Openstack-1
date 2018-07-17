@@ -257,7 +257,7 @@
 
 - Tạo image
 
-<img src="https://i.imgur.com/iS8ggvW.png">
+<img src="https://i.imgur.com/ZGjyFQg.png">
 
 **Tiếp theo tạo card mạng để sử dụng khi tạo máy ảo: click Network -> Networks -> Create Network**
 
