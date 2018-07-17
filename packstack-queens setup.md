@@ -188,6 +188,14 @@
 	--os-neutron-ovs-tunnel-if=eth1 \
 	--provision-demo=n
 ```
+- Upload image
+```
+	curl http://download.cirros-cloud.net/0.3.4/cirros-0.3.4-x86_64-disk.img | glance \
+	image-create --name='cirros' \
+	--visibility=public \
+	--container-format=bare \
+	--disk-format=qcow2
+```
 
 - Tạo network public
 ```
