@@ -22,9 +22,21 @@
 
 ### 1.3. Mô hình
 
+ - Ở phần này sẽ gộp dải manager +API +DATA vào dải provider network và dải self service network riêng
+
 <img src="https://i.imgur.com/8qTHAh0.png">
 
- - Ở phần này sẽ gộp dải manager +API +DATA vào dải provider network và dải self service network riêng
+**Trong openstack có 2 chế độ card mạng là Provider và self-service:**
+<ul>
+	<li>
+		<li>Provider: Là chế độ cho phép các máy ảo bên trong các compute kết nối trực tiếp ra ngoài internet thông qua dải provider</li>
+		<li>Self-service: Là chế độ cho phép các máy ảo kết nối tới 1 dải ip private và từ dải đó sẽ được NAT hoặc không NAT ra giải provider qua 1 con router ảo có các interface  đấu nối 1 đầu tới dải provider và 1 đầu tới giải private để đi internet, mục đích là để chia các máy ảo vào các vùng mạng khác nhau để thuận tiện cho việc quản lý hoặc theo yêu cầu của người sử dụng</li>
+	<li>
+		<li>
+			</ul>
+			
+			
+ 
 
 ### 1.4. IP Planning
 
