@@ -29,7 +29,7 @@
 **Trong openstack có 2 chế độ card mạng là Provider và self-service:**
 <ul>
 <li>Provider: Là chế độ cho phép các máy ảo bên trong các compute kết nối trực tiếp ra ngoài internet thông qua dải provider</li>
-<li>Self-service: Là chế độ cho phép các máy ảo kết nối tới 1 dải ip private và từ dải đó sẽ được NAT hoặc không NAT ra giải provider qua 1 con router ảo có các interface  đấu nối 1 đầu tới dải provider và 1 đầu tới giải private để đi internet, mục đích là để chia các máy ảo vào các vùng mạng khác nhau để thuận tiện cho việc quản lý hoặc theo yêu cầu của người sử dụng</li>
+<li>Self service: Là chế độ cho phép các máy ảo kết nối tới 1 dải ip private và từ dải đó sẽ được NAT hoặc không NAT ra giải provider qua 1 con router ảo có các interface  đấu nối 1 đầu tới dải provider và 1 đầu tới giải private để đi internet, mục đích là để chia các máy ảo vào các vùng mạng khác nhau để thuận tiện cho việc quản lý hoặc theo yêu cầu của người sử dụng</li>
 </ul>
 			
 			
