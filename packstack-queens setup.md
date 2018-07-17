@@ -41,6 +41,7 @@
 
 ## 2. Các bước cài đặt
 ### 2.1. Các bước chuẩn bị trên trên Controller
+- Đẩu tiên start network manager : `systemctl start NetworkManager`
 
 - Thiết lập hostname
 
@@ -84,6 +85,8 @@
 ```
 
 ### 2.2. Các bước chuẩn bị trên trên Compute1
+
+- Đẩu tiên start network manager : `systemctl start NetworkManager`
 
 - Thiết lập hostname
 
