@@ -23,6 +23,7 @@
 ### 1.3. Mô hình
 
 <img src="https://i.imgur.com/8qTHAh0.png">
+ - Ở phần này sẽ gộp dải manager +API +DATA vào dải provider và dải self service riêng
 
 ### 1.4. IP Planning
 
