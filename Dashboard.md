@@ -21,6 +21,14 @@
 
 <img src="https://i.imgur.com/s1jPfUG.png">
 
+- Nếu muốn tạo card external ta phải tạo ở mục admin đây là mục dành riêng cho admin quản lý
+
+<img src="https://i.imgur.com/qdkLss9.png">
+
+kiểm tra bằng lệnh `less /etc/neutron/plugins/ml2/openvswitch_agent.ini | egrep -v '^#|^$'`, ở đây kêt quả là **extnet** 
+
+<img src="https://i.imgur.com/nCooNoZ.png">
+
 **Tạo máy ảo**
 
 
