@@ -53,5 +53,13 @@ kiểm tra bằng lệnh `less /etc/neutron/plugins/ml2/openvswitch_agent.ini | 
 
 ----
 
-Sử dụng keypair
+- Phân quyền tren project: Với mỗi project sẽ được coi như 1 vùng quản lý riêng biệt và sẽ gán quyền cho các user có thể thao tác được gì trên project đó
+
+ví dụ ở đây là project ducnm37
+
+<img src="https://i.imgur.com/x9flMfW.png">
+
+ở đây gán quyền member cho user ducnm372 và quyền admin cho user admin trên project ducnm37
+
+<img src="https://i.imgur.com/zd3WJhE.png">
 
