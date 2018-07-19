@@ -70,3 +70,13 @@ ví dụ ở đây là project ducnm37
 
 <img src="https://i.imgur.com/mhQQNbn.png">
 
+**Tạo volume:** Tạo máy ảo bằng volume trước tiên ta cần tạo 1 image chứa hệ điều hành, sau đó ta tạo volume chứa image đó, tiếp tục tạo máy ảo nhưng chọn chế độ bằng volume
+
+- Tạo volume chứa image
+
+<img src="https://i.imgur.com/BJBi1Jd.png">
+
+- Tạo máy ảo bằng volume
+
+<img src="https://i.imgur.com/tKrWCk3.png">
+
