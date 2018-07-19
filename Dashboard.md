@@ -66,5 +66,7 @@ ví dụ ở đây là project ducnm37
 
 **Xem port network** Với mỗi IP sẽ có 1 port ID gắn với nó, xem bằng cách vào controller gõ lệnh `openstack port list` hoặc trên dashboard click vào mục network -> click vào tên network -> click vào tên port tương ứng với ip -> Sau đó dòng ID chính là port ID gắn cho ip tương ứng, muốn chỉnh sửa port phải truy cập vào network trong mục admin
 
+**Security Groups:** Tạo rule cho các vm , mặc định sẽ sử dụng group `default`, ta có thể tự tạo 1 sercurity group mới trong mục `Network -> Security Group` sau đó muốn add rule trong security group vừa tạo này vào máy ảo , ta truy cập vào mục `Compute -> instance ` và click vào `edit Security Groups` và thêm mục security groups mới vào
 
+<img src="https://i.imgur.com/mhQQNbn.png">
 
