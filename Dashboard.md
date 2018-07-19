@@ -51,9 +51,10 @@ kiểm tra bằng lệnh `less /etc/neutron/plugins/ml2/openvswitch_agent.ini | 
 
 <img src="https://i.imgur.com/s7CffN1.png">
 
-----
+-------
+-------
 
-- Phân quyền tren project: Với mỗi project sẽ được coi như 1 vùng quản lý riêng biệt và sẽ gán quyền cho các user có thể thao tác được gì trên project đó
+**Phân quyền trên project:** Với mỗi project sẽ được coi như 1 vùng quản lý riêng biệt và sẽ gán quyền cho các user có thể thao tác được gì trên project đó
 
 ví dụ ở đây là project ducnm37
 
@@ -62,4 +63,7 @@ ví dụ ở đây là project ducnm37
 ở đây gán quyền member cho user ducnm372 và quyền admin cho user admin trên project ducnm37
 
 <img src="https://i.imgur.com/zd3WJhE.png">
+
+**Xem port network** Với mỗi IP sẽ có 1 port ID gắn với nó, xem bằng cách vào controller gõ lệnh `openstack port list` hoặc trên dashboard click vào mục network -> click vào tên network -> click vào tên port tương ứng với ip -> Sau đó dòng ID chính là port ID gắn cho ip tương ứng
+
 
