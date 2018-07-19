@@ -64,6 +64,7 @@ ví dụ ở đây là project ducnm37
 
 <img src="https://i.imgur.com/zd3WJhE.png">
 
-**Xem port network** Với mỗi IP sẽ có 1 port ID gắn với nó, xem bằng cách vào controller gõ lệnh `openstack port list` hoặc trên dashboard click vào mục network -> click vào tên network -> click vào tên port tương ứng với ip -> Sau đó dòng ID chính là port ID gắn cho ip tương ứng
+**Xem port network** Với mỗi IP sẽ có 1 port ID gắn với nó, xem bằng cách vào controller gõ lệnh `openstack port list` hoặc trên dashboard click vào mục network -> click vào tên network -> click vào tên port tương ứng với ip -> Sau đó dòng ID chính là port ID gắn cho ip tương ứng, muốn chỉnh sửa port phải truy cập vào network trong mục admin
+
 
 
