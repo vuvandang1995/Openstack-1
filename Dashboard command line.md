@@ -1,5 +1,7 @@
 # Phần này nói về việc quản lý dashboard bằng dòng lệnh
 
+------------------------------------------------------------------------------
+
 ### Glance
 
 - Chạy câu lệnh xác thực biến môi trường: `source /root/keystonerc_admin`
@@ -39,6 +41,8 @@ Trong đó:
 - Thay đổi tên image: `openstack image set --name cirros1 cirros`
 
 - Xóa image: openstack `image delete <tên/ID image>`
+
+----------------------------------------------------------------------------------
 
 ### Neutron
 
@@ -253,6 +257,8 @@ Ví dụ: Update lại tên của router từ “new_router” thành “update_
 
 - Xoá Router: `openstack router delete <tên hoặc ID router>`
 
+-------------------------------------------------
+
 ### Nova
 
 - Tạo flavor:
@@ -450,6 +456,8 @@ Ví dụ: `openstack server resize --flavor m1.small vm01` Đợi đến khi tr�
 Tiến hành xác nhận bằng câu lệnh sau: `openstack server resize --confirm <tên máy ảo>`
 
 Nếu muốn quay trở về sử dụng máy ảo cũ, sử dụng câu lệnh sau: `openstack server resize --revert <tên máy ảo>`
+
+------------------------------------
 
 
 
