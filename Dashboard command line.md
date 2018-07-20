@@ -52,7 +52,8 @@ openstack network create
  [--provider-network-type <provider-network-type>]
  [--provider-physical-network <provider-physical-network>]
  <tên network>
- 
+`
+
  Trong đó:
  
 --share | --no-share: chọn chế độ share hoặc không share network này
