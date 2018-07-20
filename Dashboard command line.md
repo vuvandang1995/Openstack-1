@@ -45,14 +45,14 @@ Trong đó:
 
 - Tạo Network:
 
-`
+```
 openstack network create
  [--share | --no-share] [--enable | --disable]
  [--enable-port-security | --disable-port-security]
  [--provider-network-type <provider-network-type>]
  [--provider-physical-network <provider-physical-network>]
  <tên network>
-`
+```
 
  Trong đó:
  
