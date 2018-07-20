@@ -582,5 +582,24 @@ Trong đó:
   
 Ví dụ:
 ```
-openstack server create --flavor m1.tiny --volume my-volume \
+openstack server create 
+--flavor m1.tiny 
+--volume my-volume 
 --nic net-id=e6aa71b0-9a50-4614-a8e2-6f371b3dc18a MDT-VM02
+```
+- Resize volume: `openstack volume set --size <size> <volume>`
+
+Ví dụ: `openstack volume set --size 8 my-volume`
+
+Lưu ý: Để resize volume đang được gán vào máy ảo, trước tiên phải detach nó ra khỏi máy ảo. Chỉ có thể tăng kích thước của volume
+
+- Snapshot volume: `openstack snapshot create --name <snapshot-name> <volume>`
+
+Trong đó:
+
+<volume> : volume cần tạo snapshot
+
+<snapshot-name> : tên snapshot
+
+Ví dụ: `openstack volume snapshot create --name my-volume-snap my-volume`
+
