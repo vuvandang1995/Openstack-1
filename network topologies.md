@@ -12,4 +12,4 @@
 
 
 
-### Trong openstack việc đặt ip sẽ được gắn mỗi ip cho 1 port cố định việc đặt trùng ip giữa các máy ảo sẽ không làm ảnh hưởng đến hoạt động đến hệ thống, và các máy ảo đặt trùng ip sẽ không thể kết nối được với các máy ảo khác hoặc bên ngoài
+### Trong openstack việc đặt ip sẽ được gắn mỗi ip cho 1 port ID cố định việc đặt trùng ip giữa các máy ảo sẽ không làm ảnh hưởng đến hoạt động đến hệ thống, và các máy ảo đặt trùng ip sẽ không thể kết nối được với các máy ảo khác hoặc bên ngoài
