@@ -4,7 +4,7 @@
 
 ### Glance
 
-- Chạy câu lệnh xác thực biến môi trường: `source /root/keystonerc_admin`
+**Chạy câu lệnh xác thực biến môi trường:** `source /root/keystonerc_admin`
 
 - Hiển thị danh sách image: `openstack image list`
 
@@ -45,6 +45,8 @@ Trong đó:
 ----------------------------------------------------------------------------------
 
 ### Neutron
+
+**Chạy câu lệnh xác thực biến môi trường:** `source /root/keystonerc_admin`
 
 - Hiển thị toàn bộ danh sách các network hiện tại: `openstack network list`
 
@@ -261,6 +263,8 @@ Ví dụ: Update lại tên của router từ “new_router” thành “update_
 
 ### Nova
 
+**Chạy câu lệnh xác thực biến môi trường:** `source /root/keystonerc_admin`
+
 - Tạo flavor:
 
 `openstack flavor create --id <id> --ram <size-mb> --disk <size-gb> --vcpus <num-cpu> --public|--private <flavor-name>`
@@ -459,9 +463,124 @@ Nếu muốn quay trở về sử dụng máy ảo cũ, sử dụng câu lệnh 
 
 ------------------------------------
 
+### Cinder
 
+**Chạy câu lệnh xác thực biến môi trường:** `source /root/keystonerc_admin`
 
+- Xem danh sách các volume đang có: `openstack volume list`
 
+- Xem danh sách các volume type: `openstack volume type list`
 
+- Xem danh sách các volume snapshot: `openstack volume snapshot list`
 
+- Hiển thị thông tin chi tiết của volume: `openstack volume show <tên/ID volume>`
 
+```
+Giải thích một số thông số quan trọng:
+
+attachments : Thông tin về trạng thái “gán” của volume, ở đây do volume chưa
+được gán nên thông tin trống
+
+availability_zone : availability zone mà volume được tạo
+
+bootable : Khả năng boot, volume ở ví dụ này không có khả năng boot
+
+created_at : Thời gian volume được tạo
+
+migration_status : Trạng thái migrate
+
+os-vol-host-attr:host : host đặt volume
+
+status : Trạng thái volume
+
+type : Loại volume
+```
+
+**Trong Openstack, volume được chia thành 2 dạng :
+
+    Volume dùng để boot máy ảo (bootable volume)
+
+    Volume dùng để gắn vào máy ảo, dùng như một ổ đĩa ngoài (non-bootable volume)
+
+-  Tạo non-bootable volume: `openstack volume create --size <size> --type <volume-type> <name>`
+
+Trong đó:
+
+<size> : kích thước của volume (GB)
+
+<volume-type> : tùy chọn không bắt buộc chỉ ra loại volume
+
+<name> : tên volume muốn tạo
+
+Ví dụ: tạo một volume có tên là “vl1” với kích thước 1GB: `openstack volume create --size 1 --type iscsi vl1`
+
+- Tạo bootable volume: 
+  Xem danh sách các image đang có `openstack image list`
+  
+  Để tạo bootable volume, ta khai báo image trong phần câu lệnh: `openstack volume create --image <image> --size <size> <volume>`
+
+Trong đó:
+
+<image> : tên hoặc ID của image mà bạn muốn tạo volume
+
+<size> : kích thước volume
+
+<volume> : tên volume muốn tạo
+
+Ví dụ: `openstack volume create --image cirros --size 8 my-volume`
+
+- Sửa volume:
+```
+openstack volume set
+--name <name>
+--size <size>
+--description <description>
+--type <volume-type>
+--read-only | --read-write
+<volume>
+```
+Trong đó:
+
+--name, --size, --type là các thông số muốn thay đổi
+
+<volume> là tên hoặc ID của volume muốn thay đổi
+  
+Ví dụ: Sửa kích thước của volume “vl1” từ 5GB thành 6GB `openstack volume set --size 6 vl1`
+
+- Xoá volume: `openstack volume delete <tên/ID volume>`
+
+-  Gán volume vào máy ảo: `openstack server add volume <tên/ID VM> <tên/ID volume>`
+
+Lưu ý: Để có thể được gán vào máy ảo, volume phải ở trạng thái “Available”.
+
+- Tại máy ảo được gán volume, kiểm tra xem volume đã được gán hay chưa: `lsblk`
+
+Nếu máy ảo đã được gán volume với dung lượng 1GB, ta tiến hành format và mount ổ để sử dụng
+```
+mkfs -t ext4 /dev/vdb
+mkdir -p /test/
+mount /dev/vdb /test/
+```
+
+Kiểm tra lại `df -h`
+
+-  Gỡ volume ra khỏi máy ảo: `openstack server remove volume <tên/ID VM> <tên/ID volume>`
+
+Kiểm tra lại `lsblk`
+
+- Tạo máy ảo từ volume: `openstack server create --flavor <flavor> --volume <volume> --nic net-id=<net-id> <server>`
+
+Trong đó:
+
+<flavor> : tên của flavor gán cho máy ảo
+  
+<volume> : tên hoặc ID của bootable volume
+
+<net-id> : ID của network gán cho máy ảo
+
+<server> : tên máy ảo
+  
+Ví dụ:
+```
+openstack server create --flavor m1.tiny --volume my-volume \
+--nic net-id=e6aa71b0-9a50-4614-a8e2-6f371b3dc18a MDT-VM02
