@@ -156,12 +156,101 @@ openstack port create
 ```
 
 Trong đó:
---network: tên hoặc ID của network chứa port.
---device: device ID của port.
---device-owner: device-owner của port.
+
+--network: tên hoặc ID của network chứa port
+
+--device: device ID của port
+
+--device-owner: device-owner của port
+
 --vnic-type: loại VNIC dành cho port, có thể là direct, direct-physical,...
---host: ID của host, port đặt lên.
---fixed-ip: thông tin của subnet, và IP muốn gán cho port.
---mac-address: gán MAC cho port.
---enable | --disable: enable hoặc disable port này.
+
+--host: ID của host, port đặt lên
+
+--fixed-ip: thông tin của subnet, và IP muốn gán cho port
+
+--mac-address: gán MAC cho port
+
+--enable | --disable: enable hoặc disable port này
+
+
+Ví dụ: Tạo một port trên private_subnet thuộc network private_network và có IP=10.10.10.100.
+`
+openstack port create --network private_netwok --fixed-ip subnet=private_subnet, ip-address=10.10.10.100 port_test
+`
+
+- Sửa Port:
+```
+openstack port set
+ --name <name>
+ --device <device-id>
+ --device-owner <device-owner>
+ --vnic-type <vnic-type> 
+ --host <host-id>
+ --enable | --disable 
+ --fixed-ip subnet=<subnet>,ip-address=<ip-address> | --no-fixed-ip
+ --binding-profile <binding-profile> | --no-binding-profile]
+ <tên hoặc ID port>
+```
+Trong đó:
+
+--device: update lại device ID của port.
+
+--device-owner: update lại device-owner của port.
+
+--vnic-type: update lại vnic-type của port
+
+--enable | --disable: update lại trạng thái của port.
+
+--fixed-ip: thêm subnet và địa chỉ IP cho port
+
+--binding-porfile: update lại binding-profile của port.
+
+Ví dụ: Update lại thông tin của port vừa tạo với tên là “port_test" thành “port_update". `openstack port set --name port_update port_test`
+
+-  Xoá Port: `openstack port delete <tên hoặc ID của Port>`
+
+- Hiển thị toàn bộ router hiện có: `openstack router list --long`
+
+Trong đó: --long: dùng để hiển thị thêm nhiều thông tin.
+
+- Hiển thị thông tin chi tiết một router: `openstack router show <tên hoặc ID router>`
+
+- Tạo Router:
+```
+openstack router create 
+--enable | --disable 
+--distributed
+<tên router>
+```
+Trong đó:
+
+--enable | --disable: trạng thái của router
+
+--distributed: có phân tán router hay không, đây là một tính năng HA cho router
+ Ví dụ: openstack router create new_router
+
+- Sửa Router: 
+```
+openstack router set
+ --name <name> 
+ --enable | --disable
+ --distributed | --centralized
+ --route destination=<subnet>,gateway=<ip-address> | --no-route
+ <tên router>
+```
+Trong đó:
+
+--name: update tên router.
+
+--enable | --disable: update lại trạng thái của router.
+
+--distributed | --centralized: update lại router phân tán hay tập chung.
+
+--router: thêm route cho router.
+
+Ví dụ: Update lại tên của router từ “new_router” thành “update_router” `openstack router set --name update_router new_router`
+
+- Xoá Router: `openstack router delete <tên hoặc ID router>`
+
 
