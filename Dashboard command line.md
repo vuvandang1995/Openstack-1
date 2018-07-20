@@ -372,7 +372,7 @@ openstack server create
 
 - Reboot máy ảo: `openstack server reboot --hard | --soft <tên/ID máy ảo>`
 
-- Tạm ngưng máy ảo: `openstack server suspend <tên/ID máy ảo>`
+- Suspend tạm ngưng máy ảo: `openstack server suspend <tên/ID máy ảo>`
 
 - Xóa máy ảo: `openstack server delete <tên/ID máy ảo>`
 
@@ -418,7 +418,7 @@ Vm_name là tên máy ảo cần migrate
 
 Compute_host là host chỉ định để migrate máy ảo tới
 
--  Block live migration
+- Block live migration
 
 `openstack server migrate --live Compute_host --block-migration Vm_name`
 
@@ -428,4 +428,32 @@ Vm_name là tên máy ảo cần migrate
 
 Compute_host là host chỉ định để migrate máy ảo tới
 
--   resize Thay đổi kích thước máy ảo:
+- resize Thay đổi kích thước máy ảo:
+
+```
+openstack server resize
+--flavor <flavor> | --confirm | --revert
+ <server>
+```
+Trong đó
+
+<flavor> là flavor muốn máy ảo chuyển đổi sang
+
+--confirm : xác nhận việc resize máy ảo và loại bỏ máy ảo cũ
+
+--revert : loại bỏ máy ảo mới, quay trở về máy ảo cũ
+
+<server> : tên/ID máy ảo muốn resize
+
+Ví dụ: `openstack server resize --flavor m1.small vm01` Đợi đến khi trạng thái máy ảo chuyển về “VERIFY_RESIZE” (dùng câu lệnh `openstack server show` để xem). Ta tiến hành xác nhận hoặc loại bỏ kết quả của việc resize máy ảo.
+
+Tiến hành xác nhận bằng câu lệnh sau: `openstack server resize --confirm <tên máy ảo>`
+
+Nếu muốn quay trở về sử dụng máy ảo cũ, sử dụng câu lệnh sau: `openstack server resize --revert <tên máy ảo>`
+
+
+
+
+
+
+
