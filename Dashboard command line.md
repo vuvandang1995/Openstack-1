@@ -253,4 +253,179 @@ Ví dụ: Update lại tên của router từ “new_router” thành “update_
 
 - Xoá Router: `openstack router delete <tên hoặc ID router>`
 
+### Nova
 
+- Tạo flavor:
+
+`openstack flavor create --id <id> --ram <size-mb> --disk <size-gb> --vcpus <num-cpu> --public|--private <flavor-name>`
+
+Ví dụ: tạo flavor có các thông số như sau :
+RAM: 512 MB
+Disk: 1 GB
+Vcpus: 1
+Được phép sử dụng bởi các project khác
+Tên flavor: m1.tiny
+
+`openstack flavor create --ram 512 --disk 1 --vcpus 1 --public m1.tiny`
+
+- Sửa Flavor: 
+```
+openstack flavor set 
+--property <key=value> 
+--project <project>
+--project-domain <project-domain> <flavor>
+```
+Trong đó
+<key=value> : thông số của flavor, ví dụ ram, disk,...
+
+<project> : tùy chỉnh project được phép sử dụng flavor
+
+<project-domain> : tùy chỉnh domain được phép sử dụng flavor
+
+<flavor> : tên flavor muốn chỉnh sửa
+
+- Xem danh sách các flavor đang có: `openstack flavor list`
+
+- Xóa Flavor: `openstack flavor delete <tên hoặc ID flavor>`
+
+- Tạo key pair: `openstack keypair create <name> <file_private>`
+
+Trong đó:
+
+<name> : Tên của keypair
+
+<file_private> : Tên file để lưu private key, nếu không được chọn, private key sẽ được in ra màn hình
+
+Lưu ý: Public key được tạo sẽ được đẩy lên OpenStack 
+
+Ví dụ: tạo key pair key1 `openstack keypair create key1 > private_key1`
+
+- Xem danh sách keypair: `openstack keypair list`
+
+- Xóa key pair: `openstack keypair delete <tên key pair>`
+
+
+Trước khi sử dụng private key, bạn nên chắc chắn rằng private key đó tuân thủ theo đúng GNU/Linux permissions:
+
+```
+chmod 600 private_key1
+ls -l
+ssh -i ~/key1 root@192.168.100.245
+```
+
+Để SSH vào máy ảo đã được chèn key pair, sử dụng câu lệnh sau: `ssh -i ~/key1 root@192.168.100.245`
+
+Trong đó:
+
+Tùy chọn –i giúp khai báo thông tin của private key
+
+~/key1 là file private key
+
+root@192.168.100.245 là tên tài khoản và ip của máy ảo muốn ssh tới
+
+- Tạo máy ảo boot từ image:
+```
+openstack server create 
+--image <image> 
+--flavor <flavor>
+--security-group <security-group> 
+--key-name <key-name>
+--user-data <user-data> 
+--nic <net-id> <server-name>
+```
+
+Trong đó:
+<image> : Tên hoặc ID của image dùng để boot máy ảo
+  
+<flavor> : Tên hoặc ID của flavor được dùng để boot máy ảo
+  
+<security-group> : Tên hoặc ID của security group để gán vào máy ảo, mặc định sẽ được gán vào default security group
+
+<key-name> : Tên của key pair gán vào máy ảo
+
+<user-data> : File chèn vào máy ảo trước khi boot
+
+<net-id> : ID của network mà máy ảo sử dụng
+
+<server-name> : Tên máy ảo muốn tạo
+
+Các thông số bắt buộc đó là Tên, Flavor, Image, Network
+
+
+Ví dụ: Tạo một máy ảo mới có tên MDT-VM02, sử dụng image ubuntu, flavor m1.small, ssh key pair là key1, file cloud-init chèn password là data.file và network sử dụng là external_network.
+
+```
+openstack server create 
+--image ubuntu 
+--flavor m1.small
+--key-name key1 
+--user-data data.file 
+--nic net-id=e6aa71b0-9a50-4614-a8e2-6f371b3dc18a MDT-VM02
+```
+- Xem danh sách máy ảo đang có: `openstack server list`
+
+- Lấy địa chỉ URL kết nối tới giao diện máy ảo thông qua noVNC: `openstack console url show --novnc <tên máy ảo>`
+
+- Tắt máy ảo: `openstack server stop <tên/ID máy ảo>`
+
+- Bật máy ảo: `openstack server start <tên/ID máy ảo>`
+
+- Reboot máy ảo: `openstack server reboot --hard | --soft <tên/ID máy ảo>`
+
+- Tạm ngưng máy ảo: `openstack server suspend <tên/ID máy ảo>`
+
+- Xóa máy ảo: `openstack server delete <tên/ID máy ảo>`
+
+- Tạo snapshot từ máy ảo: `openstack server image create --name <name> <vm_name>`
+
+Trong đó:
+
+<vm_name> là tên máy ảo muốn tạo snapshot
+
+<name> là tên của snapshot được tạo ra
+
+Ví dụ: Tạo snapshot có tên “snap1” của máy ảo vm01 `openstack server image create --name snap1 vm01`
+
+- Tạo snapshot máy ảo (*Snapshot được tạo sẽ được lưu dưới dạng image, ta có thể dùng nó để boot mới máy
+ảo*): `openstack server create --image <image> --flavor <flavor> <name>`
+
+Trong đó:
+
+<image> : tên hoặc ID của image snapshot được tạo từ VMs
+
+<flavor> : tên flavor sử dụng cho máy ảo mới
+
+<name> : tên máy ảo mới
+  
+- Cold migrate
+
+Tắt máy ảo: `openstack server stop <tên máy ảo>`
+
+Migrate vm, nova-scheduler sẽ dựa vào cấu hình balancing weitgh và filter để define ra
+node compute đích: `openstack migrate <tên máy ảo>`
+
+Theo dõi trạng thái của máy ảo: `openstack server show <tên máy ảo>`
+
+Chờ đến khi vm thay đổi trạng thái sang VERIFY_RESIZE, confirm việc migrate: `openstack server resize --confirm`
+
+- True live migration
+
+`nova live-migration Compute_host Vm_name`
+
+Trong đó:
+
+Vm_name là tên máy ảo cần migrate
+
+Compute_host là host chỉ định để migrate máy ảo tới
+
+-  Block live migration
+
+`openstack server migrate --live Compute_host --block-migration Vm_name`
+
+Trong đó:
+
+Vm_name là tên máy ảo cần migrate
+
+Compute_host là host chỉ định để migrate máy ảo tới
+
+-   resize Thay đổi kích thước máy ảo:
