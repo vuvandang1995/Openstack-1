@@ -19,17 +19,17 @@
 
 ```
 openstack image set
- [--name <name>]
- [--container-format <container-format>]
- [--disk-format <disk-format>]
- [--size <size>]
- [--protected | --unprotected]
- [--public | --private | --community | --shared]
- [--store <store>]
- [--location <image-url>]
- [--copy-from <image-url>]
- [--file <file>]
- [--volume <volume>]
+ --name <name>
+ --container-format <container-format>
+ --disk-format <disk-format>
+ --size <size>
+ --protected | --unprotected
+ --public | --private | --community | --shared
+ --store <store>
+ --location <image-url>
+ --copy-from <image-url>
+ --file <file>
+ --volume <volume>
 <image>
 ```
 
@@ -56,10 +56,10 @@ Trong đó:
 
 ```
 openstack network create
- [--share | --no-share] [--enable | --disable]
- [--enable-port-security | --disable-port-security]
- [--provider-network-type <provider-network-type>]
- [--provider-physical-network <provider-physical-network>]
+ --share | --no-share --enable | --disable
+ --enable-port-security | --disable-port-security
+ --provider-network-type <provider-network-type>
+ --provider-physical-network <provider-physical-network>
  <tên network>
 ```
 
@@ -83,9 +83,9 @@ openstack network create --share \
 
 ```
 openstack network set
- [--name <name>] [--enable | --disable]
- [--share | --no-share]
- [--enable-port-security | --disable-port-security]
+ --name <name> --enable | --disable
+ --share | --no-share]
+ --enable-port-security | --disable-port-security
  <tên network>
 ```
 
