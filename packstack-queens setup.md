@@ -177,6 +177,16 @@
 Thực hiện lệnh fping từ máy controller để kiểm tra các IP trên các máy đã thiết lập đúng hay chưa.
 fping 10.10.10.68 10.10.10.69
 
+**Để tránh trường hợp đang cà openstack trên packstack mà bị mất phiên ssh ta cài đặt byobu trên centos 7 sẽ giữ được trạng thái cài đặt của openstack ngay cả khi ngắt phiên ssh**
+
+- Cài đặt epel-release: `yum install -y epel-release`
+
+- Cài đặt byobu:  `yum install byobu -y`
+
+Note: sau khi cài đặt, tiến hành gõ "byobu" và thực hiện các tác vụ trên terminal của byobu.
+Trường hợp tắt phiên, sau khi ssh lại máy chủ, tiến hành gõ "byobu", giao diện terminal lúc đầu sẽ hiện ra.
+
+
 ### 2.4. Cài đặt openstack
 
 ```
