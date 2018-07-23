@@ -36,7 +36,7 @@ Có thể coi đây là bước kế tiếp của Ảo hóa. Ảo hóa phần c�
 
 - Nền tảng như một dịch vụ (Platform as a Service)
 
-- Nền tảng như một dịch vụ (Platform as a Service)
+- Phần mềm như một dịch vụ (Software as a Service)
 
 ------
 
