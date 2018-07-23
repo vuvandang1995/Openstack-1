@@ -174,6 +174,9 @@
     init 6
 ```
 
+Thực hiện lệnh fping từ máy controller để kiểm tra các IP trên các máy đã thiết lập đúng hay chưa.
+fping 10.10.10.68 10.10.10.69
+
 ### 2.4. Cài đặt openstack
 
 ```
