@@ -46,7 +46,7 @@ Có thể coi đây là bước kế tiếp của Ảo hóa. Ảo hóa phần c�
 
 <img src="https://i.imgur.com/or7Ws0w.png">
 
-- Phía dưới là phần cứng của, đã được ảo hóa để chia sẻ cho ứng dụng, người dùng
+- Phía dưới là phần cứng đã được ảo hóa để chia sẻ cho ứng dụng, người dùng
 
 - Trên cùng là các ứng dụng của bạn, tức là các phần mềm mà bạn sử dụng
 
