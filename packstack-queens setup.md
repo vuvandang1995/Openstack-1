@@ -242,7 +242,7 @@
 
 	`enable_isolated_metadata = True`
 	
-**Đứng trên Controller1 thực hiện lệnh dưới để sửa các cấu hình cần thiết:**
+**Đứng trên Controller thực hiện lệnh dưới để sửa các cấu hình cần thiết:**
 
 	sed -i -e 's/enable_isolated_metadata=False/enable_isolated_metadata=True/g' /etc/neutron/dhcp_agent.ini
 
@@ -250,7 +250,7 @@
 
 	ssh -o StrictHostKeyChecking=no root@192.168.40.68 "sed -i -e 's/compute2/192.168.40.68/g' /etc/nova/nova.conf"
 	
-**Khởi động lại cả 03 node Controller1, Compute1, Compute2**
+**Khởi động lại cả 03 node Controller, Compute1, Compute2**
 
 	ssh -o StrictHostKeyChecking=no root@192.168.40.68 "init 6"
 
@@ -258,7 +258,7 @@
 
 	init 6
 	
-**Đăng nhập lại vào Controller1 bằng quyền root và kiểm tra hoạt động của openstack sau khi cài:**
+**Đăng nhập lại vào Controller bằng quyền root và kiểm tra hoạt động của openstack sau khi cài:**
 
 - Khai báo biến môi trường  
 	
