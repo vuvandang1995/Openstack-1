@@ -73,7 +73,7 @@
 
   sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
   ```
-- Khai báo repos cho OpenStack Newton
+- Khai báo repos cho OpenStack Queens
 
 ```
 	yum install centos-release-openstack-queens.x86_64 -y
@@ -120,7 +120,7 @@
 
   ```
  
-- Khai báo repos cho OpenStack Newton
+- Khai báo repos cho OpenStack Queens
 
 ```
     yum install centos-release-openstack-queens.x86_64 -y
@@ -164,7 +164,7 @@
 
   ```
  
-- Khai báo repos cho OpenStack Newton
+- Khai báo repos cho OpenStack Queens
 
 ```
     yum install centos-release-openstack-queens.x86_64 -y
