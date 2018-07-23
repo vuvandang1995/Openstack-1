@@ -228,7 +228,7 @@
 	neutron router-interface-add router private_subnet
 ```
 
-### 3.Fix lỗi trước khi sử dụng
+### 3.Fix lỗi nếu có
 
 #### Trước khi vào dashboard để tạo máy ảo ta cần chỉnh sửa một vài lỗi sau
 
