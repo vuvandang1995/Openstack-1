@@ -1,32 +1,10 @@
 # Live migrate & cold migrate
 ### Các bước thực hiện.
 
-SSH vào compute2 và thực hiện lệnh để khai báo file /etc/hosts trên controlller1
+SSH vào compute2 và thực hiện lệnh để khai báo ip và tên compute tương ứng để ssh file `/etc/hosts` trên controlller1, compute1, compute2
 
-cat << EOF > /etc/hosts
-127.0.0.1   localhost controller1
-172.16.68.201 controller1
-172.16.68.202 compute1
-172.16.68.203 compute2
-EOF
+<img src="https://i.imgur.com/J8wVJC4.png">
 
-SSH vào compute2 và thực hiện lệnh để khai báo file /etc/hosts trên compute1
-
-cat << EOF > /etc/hosts
-127.0.0.1   localhost compute1
-172.16.68.201 controller1
-172.16.68.202 compute1
-172.16.68.203 compute2
-EOF
-
-SSH vào compute2 và thực hiện lệnh để khai báo file /etc/hosts trên compute2
-
-cat << EOF > /etc/hosts
-127.0.0.1   localhost compute2
-172.16.68.201 controller1
-172.16.68.202 compute1
-172.16.68.203 compute2
-EOF
 
 ### Thực hiện đứng từ các node compute và ssh với tài khoản root sang nhau.
 
