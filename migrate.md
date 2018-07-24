@@ -52,19 +52,19 @@ Sau đó có thể tạo máy ảo và live migrate
 ##### Thực hiện đặt mật khẩu cho tài khoản nova trên compute1
 
 Đặt mật khẩu cho user nova, lưu ý mật khẩu này để sử dụng
+	
+		usermod -s /bin/bash nova
 
-usermod -s /bin/bash nova
-
-passwd nova
+		passwd nova
 
 
 ##### Thực hiện đặt mật khẩu cho tài khoản nova trên compute2
 
 Đặt mật khẩu cho user nova, lưu ý mật khẩu này để sử dụng
 
-usermod -s /bin/bash nova
+		usermod -s /bin/bash nova
 
-passwd nova
+		passwd nova
 
 
 
@@ -73,7 +73,7 @@ passwd nova
 
 Tạo keypair trên compute1 để sử dụng cho user nova, public key sẽ được copy sang compute2, thực hiện lệnh dưới và ấn mặc định enter để tạo key
 
-ssh-keygen
+		ssh-keygen
 
 
 
@@ -81,27 +81,25 @@ ssh-keygen
 
 Tạo keypair trên compute2 để sử dụng cho user nova, public key sẽ được copy sang compute1, thực hiện lệnh dưới và ấn mặc định enter để tạo key
 
-ssh-keygen
-
-
+		ssh-keygen
 
 
 
 #### Copy public key từ compute1 sang compute2
 
 
-	* Copy key và nhập mật khẩu của compute2 khi được hỏi.
+- Copy key và nhập mật khẩu của compute2 khi được hỏi.
 
 
-ssh-copy-id nova@compute2
+		ssh-copy-id nova@compute2
 
 
-	* Thử ssh sang compute2 bằng tài khoản nova
+Thử ssh sang compute2 bằng tài khoản nova
 
 
 Khi ssh từ compute1 sang nova của compute2 mà ko bắt hỏi mật khẩu là ok
 
-`ssh nova@compute2`
+		ssh nova@compute2
 
 
 
@@ -122,7 +120,7 @@ Khi ssh từ compute1 sang nova của compute2 mà ko bắt hỏi mật khẩu l
 
 Khi ssh từ compute2 sang nova của compute1 mà ko bắt hỏi mật khẩu là ok
 
-`ssh nova@compute1`
+		ssh nova@compute1
 
 
 #### Phân quyền cho file /etc/nova/migration/identity  trên cả compute1 và compute2
