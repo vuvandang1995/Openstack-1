@@ -88,10 +88,10 @@ Tạo keypair trên compute2 để sử dụng cho user nova, public key sẽ đ
 #### Copy public key từ compute1 sang compute2
 
 
-- Copy key và nhập mật khẩu của compute2 khi được hỏi.
+-  Đứng từ compute1 Copy key và nhập mật khẩu sang compute2 
 
 
-		ssh-copy-id nova@compute2
+		ssh-copy-id nova@compute2 (sao chép public key của compute1 vào mục ~/.ssh/authorized_keys của compute2)
 
 
 Thử ssh sang compute2 bằng tài khoản nova
@@ -107,10 +107,10 @@ Khi ssh từ compute1 sang nova của compute2 mà ko bắt hỏi mật khẩu l
 #### Copy public key từ compute2 sang compute1
 
 
-- Copy key và nhập mật khẩu của compute1 khi được hỏi.
+- Đứng từ compute2 Copy key và nhập mật khẩu sang compute1 
 
 
-		ssh-copy-id nova@compute1
+		ssh-copy-id nova@compute1 (sao chép public key của compute2 vào mục ~/.ssh/authorized_keys của compute1)
 
 
 - Thử ssh sang compute1 bằng tài khoản nova
