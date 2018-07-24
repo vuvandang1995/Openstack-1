@@ -1,4 +1,4 @@
-# Live migrate & cold migrate (resize VM instance)
+# Live migrate & cold migrate & resize
 
 ## Các bước thực hiện.
 
@@ -127,3 +127,5 @@ Khi ssh từ compute2 sang nova của compute1 mà ko bắt hỏi mật khẩu l
 #### Phân quyền cho file /etc/nova/migration/identity  trên cả compute1 và compute2
 
 chown nova:nova /etc/nova/migration/identity
+
+## resize máy ảo làm tương tự như cold migrate
