@@ -1,15 +1,23 @@
 # Lưu trữ máy ảo version Queens
 
+
+#### Boot hệ điều hành từ máy local
 - `/var/lib/glance/images` lưu image trên controller khi boot os từ local lên dashboard
 
 - `/var/lib/nova/instances/_base`  đây là nơi lưu hệ điều hành máy ảo trên compute trong trường hợp boot os từ local
 
 - boot máy ảo từ local sẽ tạo ra máy ảo chứa các file disk ,disk.info ,  console.log `/var/lib/nova/instances` và hệ điều hành sẽ lưu ở `/var/lib/nova/instances/_base`
 
+#### Boot từ volume 
+
+- Boot hệ điều hành từ volume sẽ lưu tại controller `/var/lib/glance/images`-
+
+
+- File disk máy ảo sẽ lưu tại `/var/lib/cinder/cinder-volumes`
+
+
 
 ----------------
-
-Nếu boot từ volume thì sẽ lưu ở controller
 
 Kiểm tra xem máy ảo có hệ điều hành trong `/var/lib/nova/instances/_base` tên là gì:
 
