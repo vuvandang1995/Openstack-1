@@ -54,7 +54,7 @@ ssh root@compute1
 Màn hình sẽ hỏi yes/no, ta nhập yes và khai báo mật khẩu cho tài khoản root của máy compute1. Tham khảo http://prntscr.com/k0h6uc. 
 Đăng nhập thành công nhớ exit nhé, vì lúc này đang ở trong compute1
 
-Sau đó có thể tạo máy ảo và live migrate 🙂 
+Sau đó có thể tạo máy ảo và live migrate  
 
 
 #### Đối với cold migrate
