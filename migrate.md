@@ -22,14 +22,20 @@ SSH vào compute2 và thực hiện lệnh để khai báo ip và tên compute t
 
 ssh root@compute2
 
-Màn hình sẽ hỏi yes/no, ta nhập yes và khai báo mật khẩu cho tài khoản root của máy compute2. Tham khảo http://prntscr.com/k0h6h9. ư
+Màn hình sẽ hỏi yes/no, ta nhập yes và khai báo mật khẩu cho tài khoản root của máy compute2.
+
+<img src="http://prntscr.com/k0h6h9>
+
 Đăng nhập thành công nhớ exit nhé, vì lúc này đang ở trong compute2
 
 Đứng trên compute2 và thực hiện ssh sang compute1 với tài khoản root của compute1
 
 ssh root@compute1
 
-Màn hình sẽ hỏi yes/no, ta nhập yes và khai báo mật khẩu cho tài khoản root của máy compute1. Tham khảo http://prntscr.com/k0h6uc. 
+Màn hình sẽ hỏi yes/no, ta nhập yes và khai báo mật khẩu cho tài khoản root của máy compute1.
+
+<img src="http://prntscr.com/k0h6uc">
+
 Đăng nhập thành công nhớ exit nhé, vì lúc này đang ở trong compute1
 
 Sau đó có thể tạo máy ảo và live migrate  
@@ -61,7 +67,7 @@ usermod -s /bin/bash nova
 
 passwd nova
 
-Tham khảo:  http://prntscr.com/k0h8cr
+<img src="http://prntscr.com/k0h8cr">
 
 
 ##### Thực hiện tạo keypair trên compute1
@@ -70,7 +76,7 @@ Tạo keypair trên compute1 để sử dụng cho user nova, public key sẽ đ
 
 ssh-keygen
 
-Kết quả: http://prntscr.com/k0h9ma
+<img src="http://prntscr.com/k0h9ma">
 
 ##### Thực hiện tạo keypair trên compute2
 
@@ -78,7 +84,7 @@ Tạo keypair trên compute2 để sử dụng cho user nova, public key sẽ đ
 
 ssh-keygen
 
-Kết quả: http://prntscr.com/k0h9ma
+<img src="http://prntscr.com/k0h9ma">
 
 
 
@@ -96,7 +102,9 @@ ssh-copy-id nova@compute2
 
 ssh nova@compute2
 
-Kết quả như sau là ok: http://prntscr.com/k0hcqw
+Kết quả như sau là ok: 
+
+<img src="http://prntscr.com/k0hcqw">
 
 #### Copy public key từ compute2 sang compute1
 
@@ -112,7 +120,9 @@ ssh-copy-id nova@compute1
 
 ssh nova@compute1
 
-Kết quả như sau là ok: http://prntscr.com/k0hdav
+Kết quả như sau là ok: 
+
+<img src="http://prntscr.com/k0hdav">
 
 
 #### Phân quyền cho file /etc/nova/migration/identity  trên cả compute1 và compute2
