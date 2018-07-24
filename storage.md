@@ -8,7 +8,7 @@ Nếu boot từ volume thì sẽ lưu ở controller
 
 Kiểm tra xem máy ảo có hệ điều hành trong `/var/lib/nova/instances/_base` tên là gì:
 
-Ví dụ: máy ảo có id là ca1dc120-46e9-4763-a700-cef9cd174c0f
+**Ví dụ**: máy ảo có id là ca1dc120-46e9-4763-a700-cef9cd174c0f
 
 - Ta truy cập vào `/var/lib/nova/instances/ca1dc120-46e9-4763-a700-cef9cd174c0f` có các file `console.log` , `disk` , `disk.info`
 
