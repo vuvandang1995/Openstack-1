@@ -1,5 +1,6 @@
 # Live migrate & cold migrate
-### Các bước thực hiện.
+
+## Các bước thực hiện.
 
 SSH vào compute2 và thực hiện lệnh để khai báo ip và tên compute tương ứng để ssh file `/etc/hosts` trên controlller1, compute1, compute2
 
@@ -11,8 +12,9 @@ SSH vào compute2 và thực hiện lệnh để khai báo ip và tên compute t
 
 `Mặc định khi sử dụng packstack để cài OpenStack Queens ta sẽ sử dụng giao thức ssh (có 2 giao thức là ssh hoặc TCP) để thực hiện live migrate (không cần reboot VM khi migrate) và cold migrate (khi migrate thì VMsẽ bị reboot lại). Do vậy ta cần thực hiện một số thao tác phụ để đảm bảo cold migrate và live migrate được. Các bước dưới sẽ hướng dẫn`
 
+----------------
 
-#### Đối với live migrate
+## Đối với live migrate
 
 
 `Đối với live migrate trong khi cài OpenStack Queens bằng packstack, ta chỉ cần đứng từ node compute này ssh sang note compute còn lại (ở đây có compute1 và compute2), thực hiện ssh = tài khoản root để quá trình xác thực lần đầu được thực hiện. Sau đó việc live migrate sẽ thực hiện tự động hoàn toàn`
@@ -37,7 +39,7 @@ Màn hình sẽ hỏi yes/no, ta nhập yes và khai báo mật khẩu cho tài 
 Sau đó có thể tạo máy ảo và live migrate  
 
 
-#### Đối với cold migrate
+## Đối với cold migrate
 
 Đối với cold migrate cần thực hiện các bước đặt mật khẩu chon tài khoản nova (tài khoản dùng để ssh khi cold migrate và thực thi các lệnh).
 
