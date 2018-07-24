@@ -24,17 +24,13 @@ ssh root@compute2
 
 Màn hình sẽ hỏi yes/no, ta nhập yes và khai báo mật khẩu cho tài khoản root của máy compute2.
 
-<img src="http://prntscr.com/k0h6h9>
-
-Đăng nhập thành công nhớ exit nhé, vì lúc này đang ở trong compute2
+Đăng nhập thành công nhớ exit , vì lúc này đang ở trong compute2
 
 Đứng trên compute2 và thực hiện ssh sang compute1 với tài khoản root của compute1
 
 ssh root@compute1
 
 Màn hình sẽ hỏi yes/no, ta nhập yes và khai báo mật khẩu cho tài khoản root của máy compute1.
-
-<img src="http://prntscr.com/k0h6uc">
 
 Đăng nhập thành công nhớ exit nhé, vì lúc này đang ở trong compute1
 
@@ -67,7 +63,7 @@ usermod -s /bin/bash nova
 
 passwd nova
 
-<img src="http://prntscr.com/k0h8cr">
+
 
 
 ##### Thực hiện tạo keypair trên compute1
@@ -76,7 +72,7 @@ Tạo keypair trên compute1 để sử dụng cho user nova, public key sẽ đ
 
 ssh-keygen
 
-<img src="http://prntscr.com/k0h9ma">
+
 
 ##### Thực hiện tạo keypair trên compute2
 
@@ -84,7 +80,7 @@ Tạo keypair trên compute2 để sử dụng cho user nova, public key sẽ đ
 
 ssh-keygen
 
-<img src="http://prntscr.com/k0h9ma">
+
 
 
 
@@ -100,29 +96,30 @@ ssh-copy-id nova@compute2
 	* Thử ssh sang compute2 bằng tài khoản nova
 
 
-ssh nova@compute2
+Khi ssh từ compute1 sang nova của compute2 mà ko bắt hỏi mật khẩu là ok
 
-Kết quả như sau là ok: 
+`ssh nova@compute2`
 
-<img src="http://prntscr.com/k0hcqw">
+
+
 
 #### Copy public key từ compute2 sang compute1
 
 
-	* Copy key và nhập mật khẩu của compute1 khi được hỏi.
+- Copy key và nhập mật khẩu của compute1 khi được hỏi.
 
 
-ssh-copy-id nova@compute1
+		ssh-copy-id nova@compute1
 
 
-	* Thử ssh sang compute1 bằng tài khoản nova
+- Thử ssh sang compute1 bằng tài khoản nova
 
 
-ssh nova@compute1
+		ssh nova@compute1
 
-Kết quả như sau là ok: 
+Khi ssh từ compute2 sang nova của compute1 mà ko bắt hỏi mật khẩu là ok
 
-<img src="http://prntscr.com/k0hdav">
+`ssh nova@compute1`
 
 
 #### Phân quyền cho file /etc/nova/migration/identity  trên cả compute1 và compute2
