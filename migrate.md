@@ -20,21 +20,21 @@ SSH vào compute2 và thực hiện lệnh để khai báo ip và tên compute t
 `Đối với live migrate trong khi cài OpenStack Queens bằng packstack, ta chỉ cần đứng từ node compute này ssh sang note compute còn lại (ở đây có compute1 và compute2), thực hiện ssh = tài khoản root để quá trình xác thực lần đầu được thực hiện. Sau đó việc live migrate sẽ thực hiện tự động hoàn toàn`
 
 
-Đứng trên compute1 và thực hiện ssh sang compute2 với tài khoản root của compute2
+- Đứng trên compute1 và thực hiện ssh sang compute2 với tài khoản root của compute2
 
-ssh root@compute2
+			ssh root@compute2
 
 Màn hình sẽ hỏi yes/no, ta nhập yes và khai báo mật khẩu cho tài khoản root của máy compute2.
 
 Đăng nhập thành công nhớ exit , vì lúc này đang ở trong compute2
 
-Đứng trên compute2 và thực hiện ssh sang compute1 với tài khoản root của compute1
+- Đứng trên compute2 và thực hiện ssh sang compute1 với tài khoản root của compute1
 
-ssh root@compute1
+			ssh root@compute1
 
 Màn hình sẽ hỏi yes/no, ta nhập yes và khai báo mật khẩu cho tài khoản root của máy compute1.
 
-Đăng nhập thành công nhớ exit nhé, vì lúc này đang ở trong compute1
+Đăng nhập thành công nhớ exit , vì lúc này đang ở trong compute1
 
 Sau đó có thể tạo máy ảo và live migrate  
 
