@@ -16,6 +16,7 @@ SSH vào compute2 và thực hiện lệnh để khai báo ip và tên compute t
 
 ## Đối với live migrate
 
+- Khi migrate với máy ảo boot từ volume sẽ chỉ chuyển file console.log sang compute khác còn hệ điều hành và disk vẫn nằm trên controller 
 
 `Đối với live migrate trong khi cài OpenStack Queens bằng packstack, ta chỉ cần đứng từ node compute này ssh sang note compute còn lại (ở đây có compute1 và compute2), thực hiện ssh = tài khoản root để quá trình xác thực lần đầu được thực hiện. Sau đó việc live migrate sẽ thực hiện tự động hoàn toàn`
 
