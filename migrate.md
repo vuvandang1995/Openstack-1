@@ -44,7 +44,7 @@ Sau đó có thể tạo máy ảo và live migrate
 
 Đối với cold migrate cần thực hiện các bước đặt mật khẩu chon tài khoản nova (tài khoản dùng để ssh khi cold migrate và thực thi các lệnh).
 
-- Nguyên lý khi migrate là các flavor sẽ được chuyển từ compute này sang flavor của compute khác do vậy cần ssh từ nova của compute này sang compute khác để thực hiện quá trình migrate thành công. Mặc định trong bản packstack sẽ không cho phép các compute truy cập bằng user nova mà bắt truy cập bằng user nova_migration. Khi đó sẽ có file `/var/lib/nova/.ssh/config` chỉ cho phép truy cập vào nova bằng user **nova_migration**  ta cần xóa nội dung file đó đi, hoặc xem file `/etc/ssh/sshd_config` hoặc `/etc/ssh/ssh_config` ở đoạn cuối ta có thể thấy user sử dụng là **nova_migration** ta có thể xóa đoạn đó đi để bỏ qua xác thực bằng user **nova_migration**
+**Nguyên lý khi migrate là các flavor sẽ được chuyển từ compute này sang flavor của compute khác do vậy cần ssh từ nova của compute này sang compute khác để thực hiện quá trình migrate thành công. Mặc định trong bản packstack sẽ không cho phép các compute truy cập bằng user nova mà bắt truy cập bằng user nova_migration. Khi đó sẽ có file `/var/lib/nova/.ssh/config` chỉ cho phép truy cập vào nova bằng user **nova_migration**  ta cần xóa nội dung file đó đi, hoặc xem file `/etc/ssh/sshd_config` hoặc `/etc/ssh/ssh_config` ở đoạn cuối ta có thể thấy user sử dụng là **nova_migration** ta có thể xóa đoạn đó đi để bỏ qua xác thực bằng user `nova_migration`**
 
 <img src="https://i.imgur.com/A5fvzYa.png">
 
