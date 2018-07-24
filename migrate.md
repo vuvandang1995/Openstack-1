@@ -1,4 +1,4 @@
-# Live migrate & cold migrate
+# Live migrate & cold migrate (resize VM instance)
 
 ## Các bước thực hiện.
 
