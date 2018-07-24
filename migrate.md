@@ -38,6 +38,7 @@ Màn hình sẽ hỏi yes/no, ta nhập yes và khai báo mật khẩu cho tài 
 
 Sau đó có thể tạo máy ảo và live migrate  
 
+-------------
 
 ## Đối với cold migrate
 
