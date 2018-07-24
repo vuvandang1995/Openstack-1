@@ -14,4 +14,6 @@ ví dụ: máy ảo có id là ca1dc120-46e9-4763-a700-cef9cd174c0f
 
 <img src="https://i.imgur.com/Rk9XAXU.png">
 
-- Tiếp tục trong thư mục  `/var/lib/nova/instances/ca1dc120-46e9-4763-a700-cef9cd174c0f` ta gõ lệnh `qemu-img info disk` (disk ở đây là disk của máy ảo với id ca1dc120-46e9-4763-a700-cef9cd174c0f)
+- Tiếp tục trong thư mục  `/var/lib/nova/instances/ca1dc120-46e9-4763-a700-cef9cd174c0f` ta gõ lệnh `qemu-img info disk` sẽ hiện ra đường dẫn đến hệ điều hành tương ứng (disk ở đây là disk của máy ảo với id ca1dc120-46e9-4763-a700-cef9cd174c0f)
+
+<img src="https://i.imgur.com/WUF5AsV.png">
