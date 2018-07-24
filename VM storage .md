@@ -7,7 +7,7 @@
 - boot máy ảo từ local sẽ tạo ra máy ảo chứa các file disk ,disk.info ,  console.log `/var/lib/nova/instances` và hệ điều hành sẽ lưu ở `/var/lib/nova/instances/_base`
 
 
-====================
+----------------
 
 Nếu boot từ volume thì sẽ lưu ở controller
 
