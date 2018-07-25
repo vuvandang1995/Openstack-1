@@ -36,7 +36,7 @@ EXtend volume `openstack volume set <volume ID> --size <dung lượng muốn m�
 
 Ta có thể tạo fixed ip bằng cách click vào network mà ta đã tạo -> port -> tạo port tương ứng với ip fixed, sau đó detach interface và attach interface vào máy ảo là máy ảo có ip fixed
 
-Tạo fixed ip:
+Ví dụ tạo fixed ip 10.10.10.10:
 
 ```
 openstack network create localll
