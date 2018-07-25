@@ -36,6 +36,16 @@ EXtend volume `openstack volume set <volume ID> --size <dung lượng muốn m�
 
 Ta có thể tạo fixed ip bằng cách click vào network mà ta đã tạo -> port -> tạo port tương ứng với ip fixed, sau đó detach interface và attach interface vào máy ảo là máy ảo có ip fixed
 
+Tạo fixed ip:
+
+```
+openstack network create local
+
+openstack subnet create subnets --network local --subnet-range 10.10.10.0/24
+
+openstack port create --network local --fixed-ip subnet=subnets,ip-address=10.10.10.10 port1
+```
+
 
 Khi xóa máy ảo và ip tạo bằng dhcp thì port sẽ bị mất nhưng nếu tạo ip bằng fixed sẽ không mất
 
