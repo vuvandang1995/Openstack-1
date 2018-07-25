@@ -26,22 +26,24 @@ Khi tạo 1 volume trống để sử dụng attach cho máy ảo,
 
 #### Cách xóa network
 
-- Hiển thị máy ảo 
+Cần xóa các resource như router, port, subnet... liên quan đến network mới có thể xóa được
 
-`nova list`
+- Hiển thị máy ảo  `nova list`
 
-- Detach interface 
+- Xóa router : openstack router delete <router ID>
 
-`nova interface-list <tên máy ảo>`
+- Detach interface khi đang có port được sử dụng nếu port không được sử dụng ta có thể xóa port luôn  `openstack port delete <port ID>`
+
+- Hiển thị thông tin port tương ứng với máy ảo `nova interface-list <tên máy ảo>`
 
 <img src="https://i.imgur.com/HhNfoio.png">
 
 
-Lệnh detach interfaec khỏi máy ảo `nova interface-detach ducnm37-22222 a733b22b-9a4e-47ee-aec8-8cd69f5e8e0e` 
+- Detach interface khỏi máy ảo `nova interface-detach ducnm37-22222 a733b22b-9a4e-47ee-aec8-8cd69f5e8e0e` 
 
-Sau đó dùng lệnh `openstack port list` xem danh sách các interface 
+- Dùng lệnh `openstack port list` xem danh sách các interface 
 
-Dùng lệnh `openstack port delete <port ID>` để xóa interface hoặc xóa subnet `openstack subnet delete <subnet ID>`
+- Xóa  port, subnet : Dùng lệnh `openstack port delete <port ID>` để xóa interface (trong trường hợp port đang sử dụng thì mới phải detach interface rồi mới xóa) hoặc xóa subnet `openstack subnet delete <subnet ID>`
 
 Sau khi xóa các resource như bên trên thì ta mới có thể xóa network được : `openstack network list` để xem danh sách các network và `openstack netowrk delete <network ID>` để xóa network đó đi
 
