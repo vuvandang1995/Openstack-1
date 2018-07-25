@@ -2,9 +2,9 @@
 
 Khi tạo 1 volume trống để sử dụng attach cho máy ảo,
 
-- Cần phân vùng
+- Tạo partition cần phân vùng
 - Tạo LVM
-- format LVM
+- format định dạng
 - mount vào 
 - không thể umount do đang gắn với máy ảo, chỉ có thể detach
 
