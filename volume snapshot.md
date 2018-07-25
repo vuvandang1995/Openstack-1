@@ -6,7 +6,7 @@ Khi tạo 1 volume trống để sử dụng attach cho máy ảo,
 - Tạo LVM
 - format định dạng
 - mount vào 
-- không thể umount do đang gắn với máy ảo, chỉ có thể detach
+ -có thể detach volume này sang máy ảo khác và sử dụng được luôn , dữ liệu cũ bên trong volume vẫn còn nguyên
 
 
 ---------------
