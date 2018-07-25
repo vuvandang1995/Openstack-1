@@ -19,3 +19,6 @@ Khi tạo 1 volume trống để sử dụng attach cho máy ảo,
 # Vấn đề network
 
 - Ta có thể tạo fixed ip bằng cách click vào network mà ta đã tạo -> port -> tạo port tương ứng với ip fixed, sau đó detach interface và attach interface vào máy ảo là máy ảo có ip fixed
+
+
+- Khi xóa máy ảo và ip tạo bằng dhcp thì port sẽ bị mất nhưng nếu tạo ip bằng fixed sẽ không mất
