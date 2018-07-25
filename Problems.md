@@ -9,6 +9,8 @@ Khi tạo 1 volume trống để sử dụng attach cho máy ảo,
  -có thể detach volume từ máy ảo này và attach sang máy ảo khác và sử dụng được luôn , dữ liệu cũ bên trong volume vẫn còn nguyên
 
 
+#### Muốn extend volume ( máy ảo boot từ volume ) ta cần phải vào tab admin chọn volume -> chọn update volume status -> chuyển từ trạng thái in-use sang trạng thái avalible , sau đó start volume sẽ chuyển lại trạng thái in-use
+
 ---------------
 # Vấn đề snapshot
 
