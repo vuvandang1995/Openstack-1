@@ -129,3 +129,5 @@ Khi ssh từ compute2 sang nova của compute1 mà ko bắt hỏi mật khẩu l
 chown nova:nova /etc/nova/migration/identity
 
 ## resize máy ảo làm tương tự như cold migrate
+
+**note**: Với các compute cpu đã được ảo hóa  (mặc định là 1/16 tức 1 core vật lý máy thật sẽ tạo ra 16 vcpu ảo) cho nên thi tạo máy ảo và resize chú ý số core vật lý của compute. Ví dụ muốn tạo máy ảo 3 core thì phải tạo compute 3 core hoặc resize máy ảo từ 1 core sang 3 core thì phải tạo compute 3 core!
