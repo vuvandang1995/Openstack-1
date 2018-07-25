@@ -1,4 +1,6 @@
-# Vấn đề về volume
+# Tổng hợp các vấn đề liên quan trong quản trị openstack
+
+## Vấn đề về volume
 
 Khi tạo 1 volume trống  sử dụng attach cho máy ảo ta attach volume vào máy ảo nhưng chưa sử dụng được cần truy cập vào máy ảo và làm các bước sau:
 
@@ -24,13 +26,13 @@ Thay đổi trạng thái volume sang available `openstack volume set <volume ID
 EXtend volume `openstack volume set <volume ID> --size <dung lượng muốn mở rộng tính bằng GB>`
 
 ---------------
-# Vấn đề snapshot
+## Vấn đề snapshot
 
 - Khi snapshot máy ảo có volume attach nó chỉ snapshot image
 
 --------------
 
-# Vấn đề network
+## Vấn đề network
 
 - Ta có thể tạo fixed ip bằng cách click vào network mà ta đã tạo -> port -> tạo port tương ứng với ip fixed, sau đó detach interface và attach interface vào máy ảo là máy ảo có ip fixed
 
