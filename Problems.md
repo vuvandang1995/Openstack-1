@@ -1,6 +1,6 @@
 # Vấn đề về volume
 
-Khi tạo 1 volume trống để sử dụng attach cho máy ảo,
+Khi tạo 1 volume trống  sử dụng attach cho máy ảo ta attach volume vào máy ảo nhưng chưa sử dụng được cần truy cập vào máy ảo và làm các bước sau:
 
 - Tạo partition cần phân vùng
 - Tạo LVM
