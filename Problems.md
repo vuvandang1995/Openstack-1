@@ -24,7 +24,14 @@ Khi tạo 1 volume trống để sử dụng attach cho máy ảo,
 - Khi xóa máy ảo và ip tạo bằng dhcp thì port sẽ bị mất nhưng nếu tạo ip bằng fixed sẽ không mất
 
 
+#### Cách xóa network
+
+- Hiển thị máy ảo 
+
+`nova list`
+
 - Detach interface 
+
 `nova interface-list <tên máy ảo>`
 
 <img src="https://i.imgur.com/HhNfoio.png">
