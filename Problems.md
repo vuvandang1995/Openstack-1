@@ -39,11 +39,11 @@ Ta có thể tạo fixed ip bằng cách click vào network mà ta đã tạo ->
 Tạo fixed ip:
 
 ```
-openstack network create local
+openstack network create localll
 
-openstack subnet create subnets --network local --subnet-range 10.10.10.0/24
+openstack subnet create subnettt --network local --subnet-range 10.10.10.0/24
 
-openstack port create --network local --fixed-ip subnet=subnets,ip-address=10.10.10.10 port1
+openstack port create --network localll --fixed-ip subnet=subnettt,ip-address=10.10.10.10 port1
 ```
 
 
