@@ -15,6 +15,14 @@ Khi tạo 1 volume trống để sử dụng attach cho máy ảo,
 
 - Extend volume (các volume attach riêng):  làm tương tự vào mục admin -> update volume status -> chuyển từ trạng thái in-use sang available -> quay trở lại mục project -> volume -> extend -> restart instance
 
+- Dùng lệnh
+
+xem danh sách và trạng thái volume: `openstack volume list`
+
+Thay đổi trạng thái volume sang available `openstack volume set <volume ID> --status available`
+
+EXtend volume `openstack volume set <volume ID> --size <dung lượng muốn mở rộng tính bằng GB>`
+
 ---------------
 # Vấn đề snapshot
 
