@@ -1,4 +1,4 @@
-# vấn đề về volume
+# Vấn đề về volume
 
 Khi tạo 1 volume trống để sử dụng attach cho máy ảo,
 
@@ -10,6 +10,12 @@ Khi tạo 1 volume trống để sử dụng attach cho máy ảo,
 
 
 ---------------
-
+# Vấn đề snapshot
 
 - Khi snapshot máy ảo có volume attach nó chỉ snapshot image
+
+--------------
+
+# Vấn đề network
+
+- Ta có thể tạo fixed ip bằng cách click vào network mà ta đã tạo -> port -> tạo port tương ứng với ip fixed, sau đó detach interface và attach interface vào máy ảo là máy ảo có ip fixed
