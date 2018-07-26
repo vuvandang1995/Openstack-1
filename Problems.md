@@ -74,5 +74,16 @@ Cần xóa các resource như router, port, subnet... liên quan đến network 
 Sau khi xóa các resource như bên trên thì ta mới có thể xóa network được : `openstack network list` để xem danh sách các network và `openstack netowrk delete <network ID>` để xóa network đó đi
 
 -----------------
-
+## Vấn đề về Resize máy ảo
 Resize máy ảo boot từ local chỉ resize được flavor có root disk lớn hơn không resize được root disk nhỏ hơn
+
+
+-----------------
+
+## Vấn đề về snapshot 
+
+- Snapshot máy ảo boot từ volume sẽ chụp lại 1 file image lưu tại /var/lib/glance/images với dung lượng 0 Kb là file đường dẫn tới file cấu hình của máy ảo ban đầu (volume,image) volume lưu ở /var/lib/cinder
+
+- Snapshot máy ảo boot từ volume và có volume đính kèm tương tự như snapshot máy ảo boot từ volume nhưng volume attach cũng được tạo ra lưu ở /var/lib/cinder
+
+- Snapshot máy ảo boot từ local sẽ tạo ra 1 file image giống hệt 
