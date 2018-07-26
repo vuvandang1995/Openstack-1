@@ -75,7 +75,8 @@ Sau khi xóa các resource như bên trên thì ta mới có thể xóa network 
 
 -----------------
 ## Vấn đề về Resize máy ảo
-Resize máy ảo boot từ local chỉ resize được flavor có root disk lớn hơn không resize được root disk nhỏ hơn
+
+Resize máy ảo boot từ local ta  chỉ resize được flavor có root disk lớn hơn không resize được root disk nhỏ hơn
 
 
 -----------------
