@@ -73,3 +73,6 @@ Cần xóa các resource như router, port, subnet... liên quan đến network 
 
 Sau khi xóa các resource như bên trên thì ta mới có thể xóa network được : `openstack network list` để xem danh sách các network và `openstack netowrk delete <network ID>` để xóa network đó đi
 
+-----------------
+
+Resize máy ảo boot từ local chỉ resize được flavor có root disk lớn hơn không resize được root disk nhỏ hơn
