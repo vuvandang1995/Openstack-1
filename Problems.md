@@ -86,4 +86,5 @@ Resize máy ảo boot từ local chỉ resize được flavor có root disk lớ
 
 - Snapshot máy ảo boot từ volume và có volume đính kèm tương tự như snapshot máy ảo boot từ volume nhưng volume attach cũng được tạo ra lưu ở /var/lib/cinder
 
-- Snapshot máy ảo boot từ local sẽ tạo ra 1 file image giống hệt 
+- Snapshot máy ảo boot từ local sẽ tạo ra 1 file image giống hệt và lưu tại /var/lib/glance/images
+
