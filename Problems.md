@@ -11,7 +11,7 @@ Khi tạo 1 volume trống  sử dụng attach cho máy ảo ta attach volume v�
  -có thể detach volume từ máy ảo này và attach sang máy ảo khác và sử dụng được luôn , dữ liệu cũ bên trong volume vẫn còn nguyên
 
 
-#### Extend volume
+### Extend volume
 
 - Extend volume ( máy ảo boot từ volume ): Ta cần phải vào tab admin chọn volume -> chọn update volume status -> chuyển từ trạng thái in-use sang trạng thái available (không cần shutdown máy ảo) , sau đó quay lại mục Project -> volume và có thể extend được , sau đó start volume sẽ chuyển lại trạng thái in-use
 
@@ -49,7 +49,7 @@ openstack port create --network localll --fixed-ip subnet=subnettt,ip-address=10
 
 Khi xóa máy ảo và ip tạo bằng dhcp thì port sẽ bị mất nhưng nếu tạo ip bằng fixed sẽ không mất
 
-#### Attach port ID
+### Attach port ( thêm ip vào máy ảo)
 
 `nova interface-attach --port-id <port ID> <ID máy ảo>` (với lệnh này thì trạng thái của port phải là DOWN mới dùng được, những port được tạo ra bởi DHCP kể cả khi xóa máy ảo cũng sẽ ở trạng thái ACTIVE nên ta cần xóa port đó đi, còn các port được tạo bởi ip fixed khi xóa máy ảo sẽ chuyển từ trạng thái ACTIVE về trạng thái DOWN)
  
@@ -62,7 +62,7 @@ Khi xóa máy ảo và ip tạo bằng dhcp thì port sẽ bị mất nhưng n�
      iface eth1 inet dhcp
  
  
-#### Cách xóa network
+### Cách xóa network
 
 Cần xóa các resource như router, port, subnet... liên quan đến network mới có thể xóa được
 
