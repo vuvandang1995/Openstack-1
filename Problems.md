@@ -51,7 +51,7 @@ Khi xóa máy ảo và ip tạo bằng dhcp thì port sẽ bị mất nhưng n�
 
 #### Attach port ID
 
-`nova interface-attach --port-id <port ID> <ID máy ảo>` (với lệnh này thì trạng thái của port phải là DOWN mới dùng được)
+`nova interface-attach --port-id <port ID> <ID máy ảo>` (với lệnh này thì trạng thái của port phải là DOWN mới dùng được, những port được tạo ra bởi DHCP kể cả khi xóa máy ảo cũng sẽ ở trạng thái ACTIVE nên ta cần xóa port đó đi, còn các port được tạo bởi ip fixed khi xóa máy ảo sẽ chuyển từ trạng thái ACTIVE về trạng thái DOWN)
  
 - Sau khi add ta cần vào máy ảo cấu hình thêm card mạng để máy ảo nhận thêm IP mới
  
