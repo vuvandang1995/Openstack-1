@@ -51,7 +51,16 @@ Khi xóa máy ảo và ip tạo bằng dhcp thì port sẽ bị mất nhưng n�
 
 #### Attach port ID
 
-nova interface-attach --port-id <port ID> <ID máy ảo>
+`nova interface-attach --port-id <port ID> <ID máy ảo>`
+ 
+- Sau khi add ta cần vào máy ảo cấu hình thêm card mạng để máy ảo nhận thêm IP mới
+ 
+ sudo chmod 777 /etc/network/interfaces
+ vi /etc/network/interfaces
+  
+     auto eth1
+     iface eth1 inet dhcp
+ 
  
 #### Cách xóa network
 
