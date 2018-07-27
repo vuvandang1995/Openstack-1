@@ -134,14 +134,14 @@ Resize máy ảo boot từ local ta  chỉ resize được flavor có root disk 
     --flavor 2 \
     --image f03724d0-62de-4e5b-9350-2dcefdb09732 \
     --nic net-id=8a9683d2-f755-48b3-b216-33333adc56fa \
-    --block-device-mapping id=2d079a2f-7889-44be-b52d-021998f27714 \
+    --block-device-mapping id=2d079a2f-7889-44be-b52d-021998f27714 \ (id ở đây là id của volume trống đã tạo)
     newvm2
 ````
 
 - Boot máy ảo từ image đồng thời tạo volume
 ```
     nova boot --flavor m1.tiny \
-    --block-device source=image,id=f03724d0-62de-4e5b-9350-2dcefdb09732,dest=volume,size=1,shutdown=remove,bootindex=0 \
+    --block-device source=image,id=f03724d0-62de-4e5b-9350-2dcefdb09732,dest=volume,size=1,shutdown=remove,bootindex=0 \ (id ở đây là id của image)
     --nic net-id=83714bed-d295-4539-b519-045732de3502 \
     --availability-zone nova \
     newvmm
