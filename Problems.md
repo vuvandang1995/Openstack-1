@@ -49,7 +49,10 @@ openstack port create --network localll --fixed-ip subnet=subnettt,ip-address=10
 
 Khi xóa máy ảo và ip tạo bằng dhcp thì port sẽ bị mất nhưng nếu tạo ip bằng fixed sẽ không mất
 
+#### Attach port ID
 
+nova interface-attach --port-id <port ID> <ID máy ảo>
+ 
 #### Cách xóa network
 
 Cần xóa các resource như router, port, subnet... liên quan đến network mới có thể xóa được
