@@ -107,3 +107,11 @@ Resize máy ảo boot từ local ta  chỉ resize được flavor có root disk 
     --nic net-id=8a9683d2-f755-48b3-b216-33333adc56fa \
     newvm
 ```
+- Tạo volume trống
+```
+    openstack volume create \
+    --size 20 \
+    --type iscsi \
+    --availability-zone nova \
+    newvolume2
+```
