@@ -128,7 +128,7 @@ Resize máy ảo boot từ local ta  chỉ resize được flavor có root disk 
     --availability-zone nova \
     newvolume2
 ```
-- Cài máy ảo từ image đồng thời sử dụng volume trống
+- Cài máy ảo từ image đồng thời sử dụng volume trống đã tạo
 ```
     openstack server create \
     --flavor 2 \
