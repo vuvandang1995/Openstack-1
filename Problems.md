@@ -91,16 +91,19 @@ Resize máy ảo boot từ local ta  chỉ resize được flavor có root disk 
 
 ---------------
 - Tạo volume boot từ image
+```
     openstack volume create \
     --image f03724d0-62de-4e5b-9350-2dcefdb09732 \
     --size 20 \
     --type iscsi \
     --availability-zone nova \
     newvolume
-
-- Tạo máy ảo boot từ volume
+```
+- Tạo máy ảo boot từ volume (*lưu ý: khi có thêm option --security group có thể báo lỗi attach volume cold not found*)
+```
     openstack server create \
     --volume 82a1c5e8-605d-4c57-b088-7410fd284bdc \
     --flavor 2 \
     --nic net-id=8a9683d2-f755-48b3-b216-33333adc56fa \
     newvm
+```
