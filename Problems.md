@@ -115,3 +115,12 @@ Resize máy ảo boot từ local ta  chỉ resize được flavor có root disk 
     --availability-zone nova \
     newvolume2
 ```
+-Cài máy ảo từ image đồng thời sử dụng volume trống
+```
+    openstack server create \
+    --flavor 2 \
+    --image f03724d0-62de-4e5b-9350-2dcefdb09732 \
+    --nic net-id=8a9683d2-f755-48b3-b216-33333adc56fa \
+    --block-device-mapping id=2d079a2f-7889-44be-b52d-021998f27714 \
+    newvm2
+````
