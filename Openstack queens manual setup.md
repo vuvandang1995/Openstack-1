@@ -333,6 +333,8 @@ MS Name/IP address         Stratum Poll Reach LastRx Last sample
 
 Thực hiện các bước cài đặt tương tự với node compute2 và block.
 
+----------------------------------
+
 ## <a name="keystone">3. Cài đặt và cấu hình Keystone </a>
 
 **Lưu ý:** Dịch vụ này chạy trên controller mode, Phiển bản Queens này sẽ không cần sử dụng port 35357 so với các phiên bản trước đó port 35357 dùng cho admin quản trị dịch vụ khác, port 5000 sử dụng quản trị các project người dùng, với phiên bản Queens đã cải tiến  chỉ cần sử dụng port 5000.
@@ -544,3 +546,134 @@ Kiểm tra script
 
 openstack token issue
 ```
+
+-------------------------------------
+
+## 4. Cài đặt image service - glance
+
+**Lưu ý:** Dịch vụ này thường chạy trên controller node và sử dụng file system làm backend lưu images.
+
+Tạo database
+
+``` sh
+mysql -u root -pducnm37
+CREATE DATABASE glance;
+GRANT ALL PRIVILEGES ON glance.* TO 'glance'@'localhost' IDENTIFIED BY 'ducnm37';
+GRANT ALL PRIVILEGES ON glance.* TO 'glance'@'%' IDENTIFIED BY 'ducnm37';
+exit
+```
+
+Tạo glance user
+
+``` sh
+. admin-openrc
+openstack user create glance --domain default --password ducnm37
+```
+
+Gán role admin cho user và service glance
+
+`openstack role add --project service --user glance admin`
+
+Tạo glance service entity
+
+`openstack service create --name glance --description "OpenStack Image" image`
+
+Tạo API endpoints cho Image service
+
+``` sh
+openstack endpoint create --region RegionOne image public http://192.168.40.61:9292
+openstack endpoint create --region RegionOne image internal http://192.168.40.61:9292
+openstack endpoint create --region RegionOne image admin http://192.168.40.61:9292
+```
+
+Cài đặt package
+
+`yum install openstack-glance -y`
+
+Sao lưu cấu hình file config glance-api
+
+`cp /etc/glance/glance-api.conf /etc/glance/glance-api.conf.origin`
+
+Chỉnh sửa file config glance-api
+
+``` sh
+[database]
+connection = mysql+pymysql://glance:ducnm37@192.168.40.61/glance
+
+[keystone_authtoken]
+auth_uri = http://192.168.40.61:5000
+auth_url = http://192.168.40.61:5000
+memcached_servers = 192.168.40.61:11211
+auth_type = password
+project_domain_name = Default
+user_domain_name = Default
+project_name = service
+username = glance
+password = ducnm37
+
+[paste_deploy]
+flavor = keystone
+
+[glance_store]
+stores = file,http
+default_store = file
+filesystem_store_datadir = /var/lib/glance/images/
+```
+
+Sao lưu file config glance-registry
+
+`cp /etc/glance/glance-registry.conf /etc/glance/glance-registry.conf.origin`
+
+Chỉnh sửa file config glance-registry
+
+``` sh
+[database]
+connection = mysql+pymysql://glance:ducnm37@192.168.40.61/glance
+
+[keystone_authtoken]
+auth_uri = http://192.168.40.61:5000
+auth_url = http://192.168.40.61:5000
+memcached_servers = 192.168.40.61:11211
+auth_type = password
+project_domain_name = Default
+user_domain_name = Default
+project_name = service
+username = glance
+password = ducnm37
+
+[paste_deploy]
+flavor = keystone
+```
+
+Đồng bộ glance database
+
+`su -s /bin/sh -c "glance-manage db_sync" glance`
+
+Start dịch vụ glance-api và glance-registry, cho phép khởi động dịch vụ cùng hệ thống
+
+``` sh
+systemctl enable openstack-glance-api.service openstack-glance-registry.service
+systemctl start openstack-glance-api.service openstack-glance-registry.service
+```
+
+Kiểm tra lại cài đặt. Tải image
+
+``` sh
+. admin-openrc
+wget http://download.cirros-cloud.net/0.3.4/cirros-0.3.4-x86_64-disk.img
+```
+
+Upload image
+
+``` sh
+openstack image create "cirros" \
+  --file cirros-0.3.4-x86_64-disk.img \
+  --disk-format qcow2 --container-format bare \
+  --public
+```
+
+Kiểm tra lại image vừa upload
+
+`openstack image list`
+
+<a name="nova"></a>
