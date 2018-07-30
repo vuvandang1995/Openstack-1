@@ -767,6 +767,10 @@ Tạo user nova
 ``` sh
 . admin-openrc
 openstack user create --domain default --password-prompt nova
+
+User Password:ducnm37
+Repeat User Password:ducnm37
+
 ```
 
 Gán role admin cho user nova
