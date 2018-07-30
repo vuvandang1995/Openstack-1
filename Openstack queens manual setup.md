@@ -750,12 +750,15 @@ Tạo database cho nova
 
 ``` sh
 mysql -u root -pducnm37
-CREATE DATABASE nova_api;
-CREATE DATABASE nova;
+CREATE DATABASE nova_api; (sử dụng để request từ các compute với nhau, compute với database, giữa các project với nova, máy ảo với compute)
+CREATE DATABASE nova; (sử dụng để thống kê xem các máy ảo thuộc compute nào)
+CREATE DATABASE nova_cell0; (thống kê tài nguyên còn lại của các compute)
 GRANT ALL PRIVILEGES ON nova_api.* TO 'nova'@'localhost' IDENTIFIED BY 'ducnm37';
 GRANT ALL PRIVILEGES ON nova_api.* TO 'nova'@'%' IDENTIFIED BY 'ducnm37';
 GRANT ALL PRIVILEGES ON nova.* TO 'nova'@'localhost' IDENTIFIED BY 'ducnm37';
 GRANT ALL PRIVILEGES ON nova.* TO 'nova'@'%' IDENTIFIED BY 'ducnm37';
+GRANT ALL PRIVILEGES ON nova_cell0.* TO 'nova'@'localhost' IDENTIFIED BY 'ducnm37';
+GRANT ALL PRIVILEGES ON nova_cell0.* TO 'nova'@'%' IDENTIFIED BY 'ducnm37';
 exit
 ```
 
@@ -782,10 +785,33 @@ openstack endpoint create --region RegionOne compute internal http://192.168.40.
 openstack endpoint create --region RegionOne compute admin http://192.168.40.61:8774/v2.1/%\(tenant_id\)s
 ```
 
+Tạo người dụng Placement
+```
+openstack user create --domain default --password-prompt placement
+
+User Password:ducnm37
+Repeat User Password:ducnm37
+```
+Thêm placement user tới service project với admin role:
+`openstack role add --project service --user placement admin`
+
+Tạo đối tượng placement API trong service catalog:
+
+`openstack service create --name placement --description "Placement API" placement`
+
+Tạo Placement API service endpoints:
+
+```
+openstack endpoint create --region RegionOne placement public http://192.168.40.61:8778
+openstack endpoint create --region RegionOne placement internal http://192.168.40.61:8778
+openstack endpoint create --region RegionOne placement admin http://192.168.40.61:8778
+```
+
+
 Cài đặt các packages
 
-``` sh
-yum install openstack-nova-api openstack-nova-conductor openstack-nova-console openstack-nova-novncproxy openstack-nova-scheduler -y
+``` 
+yum install openstack-nova-api openstack-nova-conductor openstack-nova-console openstack-nova-novncproxy openstack-nova-scheduler openstack-nova-placement-api -y
 ```
 
 Sao lưu file cấu hình
@@ -796,46 +822,116 @@ Chỉnh sửa file cấu hình `/etc/nova/nova.conf`
 
 ``` sh
 [DEFAULT]
-auth_strategy = keystone
+# ...
 enabled_apis = osapi_compute,metadata
-transport_url = rabbit://openstack:ducnm37@controller
-my_ip = 192.168.40.61
-use_neutron = True
-firewall_driver = nova.virt.firewall.NoopFirewallDriver
 
 [api_database]
+# ...
 connection = mysql+pymysql://nova:ducnm37@192.168.40.61/nova_api
 
 [database]
+# ...
 connection = mysql+pymysql://nova:ducnm37@192.168.40.61/nova
 
+[DEFAULT]
+# ...
+transport_url = rabbit://openstack:ducnm37@192.168.40.61
+
+[api]
+# ...
+auth_strategy = keystone
+
 [keystone_authtoken]
-auth_uri = http://192.168.40.61:5000
-auth_url = http://192.168.40.61:5000
+# ...
+auth_url = http://192.168.40.61:5000/v3
 memcached_servers = 192.168.40.61:11211
 auth_type = password
-project_domain_name = Default
-user_domain_name = Default
+project_domain_name = default
+user_domain_name = default
 project_name = service
 username = nova
 password = ducnm37
 
+[DEFAULT]
+# ...
+my_ip = 192.168.40.61
+
+[DEFAULT]
+# ...
+use_neutron = True
+firewall_driver = nova.virt.firewall.NoopFirewallDriver
+
 [vnc]
-vncserver_listen = $my_ip
-vncserver_proxyclient_address = $my_ip
+enabled = true
+# ...
+server_listen = 192.168.40.61
+server_proxyclient_address = 192.168.40.61
 
 [glance]
+# ...
 api_servers = http://192.168.40.61:9292
 
 [oslo_concurrency]
+# ...
 lock_path = /var/lib/nova/tmp
+
+[placement]
+# ...
+os_region_name = RegionOne
+project_domain_name = Default
+project_name = service
+auth_type = password
+user_domain_name = Default
+auth_url = http://192.168.40.61:5000/v3
+username = placement
+password = ducnm37
+
 ```
+Thêm cấu hình /etc/httpd/conf.d/00-nova-placement-api.conf
+
+```
+vi /etc/httpd/conf.d/00-nova-placement-api.conf
+
+<Directory /usr/bin>
+   <IfVersion >= 2.4>
+      Require all granted
+   </IfVersion>
+   <IfVersion < 2.4>
+      Order allow,deny
+      Allow from all
+   </IfVersion>
+</Directory>
+```
+Khởi động lại dịch vụ httpd
+
+`systemctl restart httpd`
 
 Đồng bộ database
 
-``` sh
-su -s /bin/sh -c "nova-manage api_db sync" nova
-su -s /bin/sh -c "nova-manage db sync" nova
+`su -s /bin/sh -c "nova-manage api_db sync" nova`
+
+Đăng ký cơ sở dữ liệu cell0 
+
+`su -s /bin/sh -c "nova-manage cell_v2 map_cell0" nova`
+
+Tạo cell1 
+
+`su -s /bin/sh -c "nova-manage cell_v2 create_cell --name=cell1 --verbose" nova`
+
+Đồng bộ nova database
+
+`su -s /bin/sh -c "nova-manage db sync" nova`
+
+Kiểm tra nova cell0 và cell1 đã được đăng ký chính xác:
+
+```
+# nova-manage cell_v2 list_cells
++-------+--------------------------------------+
+| Name  | UUID                                 |
++-------+--------------------------------------+
+| cell1 | 109e1d4b-536a-40d0-83c6-5f121b82b650 |
+| cell0 | 00000000-0000-0000-0000-000000000000 |
++-------+--------------------------------------+
 ```
 
 Start các service nova và cho phép khởi động dịch vụ cùng hệ thống
