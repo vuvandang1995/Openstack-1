@@ -180,7 +180,7 @@ Thực hiện security cho mysql, thực hiện theo các bước sau :
 ```sh
 mysql_secure_installation
 
-Enter current password for root (enter for none): [enter]
+Enter current password for root (enter for none): [enter] (ban đầu thì pass sẽ không có gì)
 Change the root password? [Y/n]: y
 Set root password? [Y/n] y
 New password:ducnm37
