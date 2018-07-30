@@ -955,7 +955,7 @@ Chỉnh sửa file cấu hình
 auth_strategy = keystone
 transport_url = rabbit://openstack:ducnm37@192.168.40.61
 enabled_apis = osapi_compute,metadata
-my_ip = 192.168.40.62
+my_ip = 192.168.40.61
 use_neutron = True
 firewall_driver = nova.virt.firewall.NoopFirewallDriver
 
@@ -982,6 +982,17 @@ api_servers = http://192.168.40.61:9292
 
 [oslo_concurrency]
 lock_path = /var/lib/nova/tmp
+
+[placement]
+# ...
+os_region_name = RegionOne
+project_domain_name = Default
+project_name = service
+auth_type = password
+user_domain_name = Default
+auth_url = http://192.168.40.61:5000/v3
+username = placement
+password = ducnm37
 ```
 
 Chạy câu lệnh sau để xem phần cứng của bạn có hỗ trợ ảo hóa hay không:
@@ -991,7 +1002,7 @@ Chạy câu lệnh sau để xem phần cứng của bạn có hỗ trợ ảo h
 Nếu giá trị là 1 hoặc lớn hơn thì phần cứng của bạn đã hỗ trợ ảo hóa.
 Nếu giá trị là 0 thì bạn buộc phải cấu hình libvirt sửa dụng QEMU thay vì KVM.
 
-Chỉnh sửa lại section `[libvirt]` trong file `/etc/nova/nova.conf`
+Chỉnh sửa lại section `[libvirt]` trong file `vi /etc/nova/nova.conf`
 
 ``` sh
 [libvirt]
@@ -1021,4 +1032,37 @@ systemctl start libvirtd.service openstack-nova-compute.service
 ``` sh
 . admin-openrc
 openstack compute service list
+```
+
+Thêm compute node tới cell database
+Thực hiện tại node controller
+
+Khởi tạo biến môi trường Admin CLI
+```
+. admin-openrc
+openstack compute service list --service nova-compute
+```
+
+VD:
+```
+[root@controller1 ~]# openstack compute service list --service nova-compute
++----+--------------+----------+------+---------+-------+----------------------------+
+| ID | Binary       | Host     | Zone | Status  | State | Updated At                 |
++----+--------------+----------+------+---------+-------+----------------------------+
+|  6 | nova-compute | compute1 | nova | enabled | up    | 2018-07-09T07:48:45.000000 |
++----+--------------+----------+------+---------+-------+----------------------------+
+```
+
+Discover các compute host:
+
+`su -s /bin/sh -c "nova-manage cell_v2 discover_hosts --verbose" nova`
+
+KQ:
+```
+Found 2 cell mappings.
+Skipping cell0 since it does not contain hosts.
+Getting computes from cell 'cell1': e0512d74-aff1-4734-94f5-0538305d5383
+Checking host mapping for compute host 'compute1': dbd4d559-a783-4162-a932-aa2cfd74a083
+Creating host mapping for compute host 'compute1': dbd4d559-a783-4162-a932-aa2cfd74a083
+Found 1 unmapped computes in cell: e0512d74-aff1-4734-94f5-0538305d5383
 ```
