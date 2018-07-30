@@ -940,6 +940,8 @@ systemctl start openstack-nova-api.service openstack-nova-consoleauth.service op
 <a name="5.2"></a>
 ### 5.2 Cấu hình trên node Compute
 
+**Node compute1**
+
 Cài đặt packages
 
 `yum install openstack-nova-compute -y`
@@ -1010,11 +1012,133 @@ virt_type = qemu
 cpu_mode = none
 ```
 
+Tiếp tục tiến hành start các service nova và cho phép khởi động dịch vụ cùng hệ thống.
+
+``` sh
+systemctl enable libvirtd.service openstack-nova-compute.service
+systemctl start libvirtd.service openstack-nova-compute.service
+```
+
 **Lưu ý:**
 
-- Nếu bạn dựng máy ảo trên KVM hoặc VMWare, bạn **buộc** phải thay cấu hình cho libvirt sử dụng QEMU.
+- Nếu nova-compute không thể khởi động, check `/var/log/nova/nova-compute.log` và thấy `AMQP server on controller:5672 is unreachable` thì firewall trên controller đang ngăn cản truy cập tới port 5672. Tiến hành mở port và khởi động lại dịch vụ.
 
-Sau đó tiếp tục tiến hành start các service nova và cho phép khởi động dịch vụ cùng hệ thống.
+- Node compute còn lại tiến hành cấu hình tương tự.
+
+- Sau khi cấu hình xong quay trở lại node controller và kiểm tra các service đã lên hay chưa.
+
+``` sh
+. admin-openrc
+openstack compute service list
+```
+
+Thêm compute node tới cell database
+Thực hiện tại node controller
+
+Khởi tạo biến môi trường Admin CLI
+```
+. admin-openrc
+openstack compute service list --service nova-compute
+```
+
+VD:
+```
+[root@controller1 ~]# openstack compute service list --service nova-compute
++----+--------------+----------+------+---------+-------+----------------------------+
+| ID | Binary       | Host     | Zone | Status  | State | Updated At                 |
++----+--------------+----------+------+---------+-------+----------------------------+
+|  6 | nova-compute | compute1 | nova | enabled | up    | 2018-07-09T07:48:45.000000 |
++----+--------------+----------+------+---------+-------+----------------------------+
+```
+
+Discover các compute host:
+
+`su -s /bin/sh -c "nova-manage cell_v2 discover_hosts --verbose" nova`
+
+KQ:
+```
+Found 2 cell mappings.
+Skipping cell0 since it does not contain hosts.
+Getting computes from cell 'cell1': ddf7293f-05af-49ac-984a-25a71b3383c3
+Checking host mapping for compute host 'compute': 39681a59-dbdc-4137-9bc9-52f71c0a684c
+Creating host mapping for compute host 'compute': 39681a59-dbdc-4137-9bc9-52f71c0a684c
+Found 1 unmapped computes in cell: ddf7293f-05af-49ac-984a-25a71b3383c3
+
+```
+
+**Node compute2**
+
+Cài đặt packages
+
+`yum install openstack-nova-compute -y`
+
+Sao lưu file cấu hình
+
+`cp /etc/nova/nova.conf /etc/nova/nova.conf.origin`
+
+Chỉnh sửa file cấu hình
+
+``` sh
+[DEFAULT]
+auth_strategy = keystone
+transport_url = rabbit://openstack:ducnm37@192.168.40.61
+enabled_apis = osapi_compute,metadata
+my_ip = 192.168.40.63
+use_neutron = True
+firewall_driver = nova.virt.firewall.NoopFirewallDriver
+
+[keystone_authtoken]
+...
+auth_uri = http://192.168.40.61:5000
+auth_url = http://192.168.40.61:5000
+memcached_servers = 192.168.40.61:11211
+auth_type = password
+project_domain_name = Default
+user_domain_name = Default
+project_name = service
+username = nova
+password = ducnm37
+
+[vnc]
+enabled = True
+vncserver_listen = 0.0.0.0
+vncserver_proxyclient_address = $my_ip
+novncproxy_base_url = http://192.168.40.61:6080/vnc_auto.html
+
+[glance]
+api_servers = http://192.168.40.61:9292
+
+[oslo_concurrency]
+lock_path = /var/lib/nova/tmp
+
+[placement]
+# ...
+os_region_name = RegionOne
+project_domain_name = Default
+project_name = service
+auth_type = password
+user_domain_name = Default
+auth_url = http://192.168.40.61:5000/v3
+username = placement
+password = ducnm37
+```
+
+Chạy câu lệnh sau để xem phần cứng của bạn có hỗ trợ ảo hóa hay không:
+
+`egrep -c '(vmx|svm)' /proc/cpuinfo`
+
+Nếu giá trị là 1 hoặc lớn hơn thì phần cứng của bạn đã hỗ trợ ảo hóa.
+Nếu giá trị là 0 thì bạn buộc phải cấu hình libvirt sử dụng QEMU thay vì KVM.
+
+Chỉnh sửa lại section `[libvirt]` trong file `vi /etc/nova/nova.conf`
+
+``` sh
+[libvirt]
+virt_type = qemu
+cpu_mode = none
+```
+
+Tiếp tục tiến hành start các service nova và cho phép khởi động dịch vụ cùng hệ thống.
 
 ``` sh
 systemctl enable libvirtd.service openstack-nova-compute.service
@@ -1066,3 +1190,4 @@ Checking host mapping for compute host 'compute1': dbd4d559-a783-4162-a932-aa2cf
 Creating host mapping for compute host 'compute1': dbd4d559-a783-4162-a932-aa2cfd74a083
 Found 1 unmapped computes in cell: e0512d74-aff1-4734-94f5-0538305d5383
 ```
+
