@@ -940,7 +940,7 @@ systemctl start openstack-nova-api.service openstack-nova-consoleauth.service op
 <a name="5.2"></a>
 ### 5.2 Cấu hình trên node Compute
 
-**Node compute1**
+**Node compute**
 
 Cài đặt packages
 
