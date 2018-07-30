@@ -836,12 +836,12 @@ firewall_driver = nova.virt.firewall.NoopFirewallDriver
 [api_database]
 connection = mysql+pymysql://nova:ducnm37@192.168.40.61/nova_api
 
-[database]
-connection = mysql+pymysql://nova:ducnm37@192.168.40.61/nova
-
 [api]
 # ...
 auth_strategy = keystone
+
+[database]
+connection = mysql+pymysql://nova:ducnm37@192.168.40.61/nova
 
 [keystone_authtoken]
 # ...
