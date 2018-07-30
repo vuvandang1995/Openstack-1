@@ -468,19 +468,11 @@ Sao lưu file `/etc/keystone/keystone-paste.ini`
 
 `cp /etc/keystone/keystone-paste.ini /etc/keystone/keystone-paste.ini.origin`
 
-Xóa các admin_token_auth khỏi các section sau:
 
-```
-[pipeline:public_api]
-
-[pipeline:admin_api]
-
-[pipeline:api_v3]
-```
 
 Unset biến
 
-`unset OS_AUTH_URL ducnm37`
+`unset OS_AUTH_URL `
 
 Request authentication token cho admin user
 ```
