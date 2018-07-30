@@ -641,6 +641,8 @@ Sao lưu cấu hình file config glance-api
 Chỉnh sửa file config glance-api
 
 ``` sh
+vi /etc/glance/glance-api.conf
+
 [database]
 connection = mysql+pymysql://glance:ducnm37@192.168.40.61/glance
 
