@@ -63,10 +63,10 @@ vi /etc/hosts
 
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
-192.168.100.197    controller
-192.168.100.198    compute
-192.168.100.199    compute2
-192.168.100.200    block
+192.168.40.61    controller
+192.168.40.62    compute
+192.168.40.63    compute2
+192.168.40.64    block
 ```
 
 ``` sh
@@ -160,7 +160,7 @@ vi /etc/my.cnf.d/openstack.cnf
 
 [mysqld]
 
-bind-address = 192.168.100.197
+bind-address = 192.168.40.61
 default-storage-engine = innodb
 innodb_file_per_table
 max_connections = 4096
@@ -228,7 +228,7 @@ Sao lưu cấu hình memcache
 
 Chính sửa cấu hình memcache
 
-`sed -i 's/OPTIONS=\"-l 127.0.0.1,::1\"/OPTIONS=\"-l 192.168.100.197,::1\"/g' /etc/sysconfig/memcached`
+`sed -i 's/OPTIONS=\"-l 127.0.0.1,::1\"/OPTIONS=\"-l 192.168.40.61,::1\"/g' /etc/sysconfig/memcached`
 
 Start dịch vụ và cấu hình khởi động cùng hệ thống
 
@@ -247,10 +247,10 @@ vi /etc/hosts
 
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
-192.168.100.197    controller
-192.168.100.198    compute
-192.168.100.199    compute2
-192.168.100.200    block
+192.168.40.61    controller
+192.168.40.62    compute
+192.168.40.63    compute2
+192.168.40.64    block
 ```
 
 ``` sh
@@ -363,7 +363,7 @@ Chỉnh sửa file cấu hình keystone
 ```
 [database]
 ...
-connection = mysql+pymysql://keystone:Welcome123@192.168.100.197/keystone
+connection = mysql+pymysql://keystone:Welcome123@192.168.40.61/keystone
 
 [token]
 ...
@@ -740,3 +740,194 @@ Kiểm tra lại image vừa upload
 `openstack image list`
 
 <a name="nova"></a>
+
+## 5. Cài đặt compute service - nova
+
+<a name="5.1"></a>
+### 5.1 Cài đặt trên node controller
+
+Tạo database cho nova
+
+``` sh
+mysql -u root -pducnm37
+CREATE DATABASE nova_api;
+CREATE DATABASE nova;
+GRANT ALL PRIVILEGES ON nova_api.* TO 'nova'@'localhost' IDENTIFIED BY 'ducnm37';
+GRANT ALL PRIVILEGES ON nova_api.* TO 'nova'@'%' IDENTIFIED BY 'ducnm37';
+GRANT ALL PRIVILEGES ON nova.* TO 'nova'@'localhost' IDENTIFIED BY 'ducnm37';
+GRANT ALL PRIVILEGES ON nova.* TO 'nova'@'%' IDENTIFIED BY 'ducnm37';
+exit
+```
+
+Tạo user nova
+
+``` sh
+. admin-openrc
+openstack user create --domain default --password-prompt nova
+```
+
+Gán role admin cho user nova
+
+`openstack role add --project service --user nova admin`
+
+Tạo nova service
+
+`openstack service create --name nova --description "OpenStack Compute" compute`
+
+Tạo API endpoint cho Compute service
+
+``` sh
+openstack endpoint create --region RegionOne compute public http://192.168.40.61:8774/v2.1/%\(tenant_id\)s
+openstack endpoint create --region RegionOne compute internal http://192.168.40.61:8774/v2.1/%\(tenant_id\)s
+openstack endpoint create --region RegionOne compute admin http://192.168.40.61:8774/v2.1/%\(tenant_id\)s
+```
+
+Cài đặt các packages
+
+``` sh
+yum install openstack-nova-api openstack-nova-conductor openstack-nova-console openstack-nova-novncproxy openstack-nova-scheduler -y
+```
+
+Sao lưu file cấu hình
+
+`cp /etc/nova/nova.conf /etc/nova/nova.conf.origin`
+
+Chỉnh sửa file cấu hình `/etc/nova/nova.conf`
+
+``` sh
+[DEFAULT]
+auth_strategy = keystone
+enabled_apis = osapi_compute,metadata
+transport_url = rabbit://openstack:ducnm37@controller
+my_ip = 192.168.40.61
+use_neutron = True
+firewall_driver = nova.virt.firewall.NoopFirewallDriver
+
+[api_database]
+connection = mysql+pymysql://nova:ducnm37@192.168.40.61/nova_api
+
+[database]
+connection = mysql+pymysql://nova:ducnm37@192.168.40.61/nova
+
+[keystone_authtoken]
+auth_uri = http://192.168.40.61:5000
+auth_url = http://192.168.40.61:5000
+memcached_servers = 192.168.40.61:11211
+auth_type = password
+project_domain_name = Default
+user_domain_name = Default
+project_name = service
+username = nova
+password = ducnm37
+
+[vnc]
+vncserver_listen = $my_ip
+vncserver_proxyclient_address = $my_ip
+
+[glance]
+api_servers = http://192.168.40.61:9292
+
+[oslo_concurrency]
+lock_path = /var/lib/nova/tmp
+```
+
+Đồng bộ database
+
+``` sh
+su -s /bin/sh -c "nova-manage api_db sync" nova
+su -s /bin/sh -c "nova-manage db sync" nova
+```
+
+Start các service nova và cho phép khởi động dịch vụ cùng hệ thống
+
+``` sh
+systemctl enable openstack-nova-api.service openstack-nova-consoleauth.service openstack-nova-scheduler.service openstack-nova-conductor.service openstack-nova-novncproxy.service
+
+systemctl start openstack-nova-api.service openstack-nova-consoleauth.service openstack-nova-scheduler.service openstack-nova-conductor.service openstack-nova-novncproxy.service
+```
+
+<a name="5.2"></a>
+### 5.2 Cấu hình trên node Compute
+
+Cài đặt packages
+
+`yum install openstack-nova-compute -y`
+
+Sao lưu file cấu hình
+
+`cp /etc/nova/nova.conf /etc/nova/nova.conf.origin`
+
+Chỉnh sửa file cấu hình
+
+``` sh
+[DEFAULT]
+auth_strategy = keystone
+transport_url = rabbit://openstack:ducnm37@192.168.40.61
+enabled_apis = osapi_compute,metadata
+my_ip = 192.168.40.62
+use_neutron = True
+firewall_driver = nova.virt.firewall.NoopFirewallDriver
+
+[keystone_authtoken]
+...
+auth_uri = http://192.168.40.61:5000
+auth_url = http://192.168.40.61:5000
+memcached_servers = 192.168.40.61:11211
+auth_type = password
+project_domain_name = Default
+user_domain_name = Default
+project_name = service
+username = nova
+password = ducnm37
+
+[vnc]
+enabled = True
+vncserver_listen = 0.0.0.0
+vncserver_proxyclient_address = $my_ip
+novncproxy_base_url = http://192.168.40.61:6080/vnc_auto.html
+
+[glance]
+api_servers = http://192.168.40.61:9292
+
+[oslo_concurrency]
+lock_path = /var/lib/nova/tmp
+```
+
+Chạy câu lệnh sau để xem phần cứng của bạn có hỗ trợ ảo hóa hay không:
+
+`egrep -c '(vmx|svm)' /proc/cpuinfo`
+
+Nếu giá trị là 1 hoặc lớn hơn thì phần cứng của bạn đã hỗ trợ ảo hóa.
+Nếu giá trị là 0 thì bạn buộc phải cấu hình libvirt sửa dụng QEMU thay vì KVM.
+
+Chỉnh sửa lại section `[libvirt]` trong file `/etc/nova/nova.conf`
+
+``` sh
+[libvirt]
+virt_type = qemu
+cpu_mode = none
+```
+
+**Lưu ý:**
+
+- Nếu bạn dựng máy ảo trên KVM hoặc VMWare, bạn **buộc** phải thay cấu hình cho libvirt sử dụng QEMU.
+
+Sau đó tiếp tục tiến hành start các service nova và cho phép khởi động dịch vụ cùng hệ thống.
+
+``` sh
+systemctl enable libvirtd.service openstack-nova-compute.service
+systemctl start libvirtd.service openstack-nova-compute.service
+```
+
+**Lưu ý:**
+
+- Nếu nova-compute không thể khởi động, check `/var/log/nova/nova-compute.log` và thấy `AMQP server on controller:5672 is unreachable` thì firewall trên controller đang ngăn cản truy cập tới port 5672. Tiến hành mở port và khởi động lại dịch vụ.
+
+- Node compute còn lại tiến hành cấu hình tương tự.
+
+- Sau khi cấu hình xong quay trở lại node controller và kiểm tra các service đã lên hay chưa.
+
+``` sh
+. admin-openrc
+openstack compute service list
+```
