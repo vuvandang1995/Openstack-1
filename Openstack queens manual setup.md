@@ -647,15 +647,24 @@ vi /etc/glance/glance-api.conf
 connection = mysql+pymysql://glance:ducnm37@192.168.40.61/glance
 
 [keystone_authtoken]
-auth_uri = http://192.168.40.61:5000
-auth_url = http://192.168.40.61:5000
-memcached_servers = 192.168.40.61:11211
-auth_type = password
+
+auth_url = http://192.168.40.61:5000  (do ở mục keystone_authtoken đoạn này không có các option này nên ta thêm trực tiếp vào )
 project_domain_name = Default
 user_domain_name = Default
 project_name = service
 username = glance
 password = ducnm37
+
+...
+
+auth_uri = http://192.168.40.61:5000
+
+...
+memcached_servers = 192.168.40.61:11211
+
+...
+auth_type = password
+
 
 [paste_deploy]
 flavor = keystone
@@ -677,15 +686,23 @@ Chỉnh sửa file config glance-registry
 connection = mysql+pymysql://glance:ducnm37@192.168.40.61/glance
 
 [keystone_authtoken]
-auth_uri = http://192.168.40.61:5000
-auth_url = http://192.168.40.61:5000
-memcached_servers = 192.168.40.61:11211
-auth_type = password
+
+
+auth_url = http://192.168.40.61:5000  (do ở mục keystone_authtoken đoạn này không có các option này nên ta thêm trực tiếp vào )
 project_domain_name = Default
 user_domain_name = Default
 project_name = service
 username = glance
 password = ducnm37
+
+...
+auth_uri = http://192.168.40.61:5000
+
+...
+memcached_servers = 192.168.40.61:11211
+
+...
+auth_type = password
 
 [paste_deploy]
 flavor = keystone
