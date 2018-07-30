@@ -435,8 +435,8 @@ Tạo demo user
 ```
 openstack user create --domain default --password-prompt demo
 
-User Password:
-Repeat User Password:
+User Password: ducnm37
+Repeat User Password: ducnm37
 +---------------------+----------------------------------+
 | Field               | Value                            |
 +---------------------+----------------------------------+
