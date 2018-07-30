@@ -582,8 +582,52 @@ Tạo API endpoints cho Image service
 
 ``` sh
 openstack endpoint create --region RegionOne image public http://192.168.40.61:9292
++--------------+----------------------------------+
+| Field        | Value                            |
++--------------+----------------------------------+
+| enabled      | True                             |
+| id           | b34c3317e72545f89782ae0e917412f9 |
+| interface    | public                           |
+| region       | RegionOne                        |
+| region_id    | RegionOne                        |
+| service_id   | d966b23fd6344790a811034e801341cd |
+| service_name | glance                           |
+| service_type | image                            |
+| url          | http://192.168.40.61:9292        |
++--------------+----------------------------------+
+
+
 openstack endpoint create --region RegionOne image internal http://192.168.40.61:9292
++--------------+----------------------------------+
+| Field        | Value                            |
++--------------+----------------------------------+
+| enabled      | True                             |
+| id           | b1ce94efa98349c3994a5e6792be73c6 |
+| interface    | internal                         |
+| region       | RegionOne                        |
+| region_id    | RegionOne                        |
+| service_id   | d966b23fd6344790a811034e801341cd |
+| service_name | glance                           |
+| service_type | image                            |
+| url          | http://192.168.40.61:9292        |
++--------------+----------------------------------+
+
+
 openstack endpoint create --region RegionOne image admin http://192.168.40.61:9292
++--------------+----------------------------------+
+| Field        | Value                            |
++--------------+----------------------------------+
+| enabled      | True                             |
+| id           | 875f5c0b7176422db7af775e96adfcb2 |
+| interface    | admin                            |
+| region       | RegionOne                        |
+| region_id    | RegionOne                        |
+| service_id   | d966b23fd6344790a811034e801341cd |
+| service_name | glance                           |
+| service_type | image                            |
+| url          | http://192.168.40.61:9292        |
++--------------+----------------------------------+
+
 ```
 
 Cài đặt package
