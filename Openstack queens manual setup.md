@@ -898,6 +898,13 @@ Khởi động lại dịch vụ httpd
 
 `su -s /bin/sh -c "nova-manage api_db sync" nova`
 
+**Lưu ý** bỏ qua log warnning
+```
+[root@controller ~]# su -s /bin/sh -c "nova-manage api_db sync" nova
+/usr/lib/python2.7/site-packages/oslo_db/sqlalchemy/enginefacade.py:332: NotSupportedWarning: Configuration option(s) ['use_tpool'] not supported
+  exception.NotSupportedWarning
+```
+
 Đăng ký cơ sở dữ liệu cell0 
 
 `su -s /bin/sh -c "nova-manage cell_v2 map_cell0" nova`
