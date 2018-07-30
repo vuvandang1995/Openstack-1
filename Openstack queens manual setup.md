@@ -335,7 +335,7 @@ Thực hiện các bước cài đặt tương tự với node compute2 và bloc
 
 ## <a name="keystone">3. Cài đặt và cấu hình Keystone </a>
 
-**Lưu ý:** Dịch vụ này chạy trên controller mode
+**Lưu ý:** Dịch vụ này chạy trên controller mode, Phiển bản Queens này sẽ không cần sử dụng port 35357 so với các phiên bản trước đó port 35357 dùng cho admin quản trị dịch vụ khác, port 5000 sử dụng quản trị các project người dùng, với phiên bản Queens đã cải tiến  chỉ cần sử dụng port 5000.
 
 Tạo database cho keystone
 
