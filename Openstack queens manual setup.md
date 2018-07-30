@@ -826,20 +826,18 @@ Chỉnh sửa file cấu hình `/etc/nova/nova.conf`
 
 ``` sh
 [DEFAULT]
-# ...
+auth_strategy = keystone
 enabled_apis = osapi_compute,metadata
+transport_url = rabbit://openstack:ducnm37@192.168.40.61
+my_ip = 192.168.40.61
+use_neutron = True
+firewall_driver = nova.virt.firewall.NoopFirewallDriver
 
 [api_database]
-# ...
 connection = mysql+pymysql://nova:ducnm37@192.168.40.61/nova_api
 
 [database]
-# ...
 connection = mysql+pymysql://nova:ducnm37@192.168.40.61/nova
-
-[DEFAULT]
-# ...
-transport_url = rabbit://openstack:ducnm37@192.168.40.61
 
 [api]
 # ...
@@ -856,27 +854,14 @@ project_name = service
 username = nova
 password = ducnm37
 
-[DEFAULT]
-# ...
-my_ip = 192.168.40.61
-
-[DEFAULT]
-# ...
-use_neutron = True
-firewall_driver = nova.virt.firewall.NoopFirewallDriver
-
 [vnc]
-enabled = true
-# ...
-server_listen = 192.168.40.61
-server_proxyclient_address = 192.168.40.61
+vncserver_listen = $my_ip
+vncserver_proxyclient_address = $my_ip
 
 [glance]
-# ...
 api_servers = http://192.168.40.61:9292
 
 [oslo_concurrency]
-# ...
 lock_path = /var/lib/nova/tmp
 
 [placement]
@@ -889,7 +874,6 @@ user_domain_name = Default
 auth_url = http://192.168.40.61:5000/v3
 username = placement
 password = ducnm37
-
 ```
 Thêm cấu hình /etc/httpd/conf.d/00-nova-placement-api.conf
 
