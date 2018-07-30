@@ -340,7 +340,7 @@ Thực hiện các bước cài đặt tương tự với node compute2 và bloc
 Tạo database cho keystone
 
 ``` sh
-mysql -u root -pWelcome123
+mysql -u root -pducnm37
 CREATE DATABASE keystone;
 GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'localhost' IDENTIFIED BY 'ducnm37';
 GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'%' IDENTIFIED BY 'ducnm37';
