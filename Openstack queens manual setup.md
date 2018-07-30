@@ -1000,7 +1000,7 @@ Chạy câu lệnh sau để xem phần cứng của bạn có hỗ trợ ảo h
 `egrep -c '(vmx|svm)' /proc/cpuinfo`
 
 Nếu giá trị là 1 hoặc lớn hơn thì phần cứng của bạn đã hỗ trợ ảo hóa.
-Nếu giá trị là 0 thì bạn buộc phải cấu hình libvirt sửa dụng QEMU thay vì KVM.
+Nếu giá trị là 0 thì bạn buộc phải cấu hình libvirt sử dụng QEMU thay vì KVM.
 
 Chỉnh sửa lại section `[libvirt]` trong file `vi /etc/nova/nova.conf`
 
