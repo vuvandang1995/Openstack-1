@@ -391,13 +391,13 @@ keystone-manage bootstrap --bootstrap-password ducnm37 \
 
 Cấu hình Apache HTTP server
 
-Sao lưu file `/etc/httpd/conf/httpd.conf`
+Sao lưu file  `/etc/httpd/conf/httpd.conf `
 
 `cp /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.origin`
 
-Chỉnh sửa file `/etc/httpd/conf/httpd.conf`
+Chỉnh sửa file `/etc/httpd/conf/httpd.conf `
 ```
-vi /etc/httpd/conf/httpd.conf`
+vi /etc/httpd/conf/httpd.conf
 
 ...
 ServerName controller
