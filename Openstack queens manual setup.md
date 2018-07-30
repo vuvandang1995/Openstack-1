@@ -183,8 +183,8 @@ mysql_secure_installation
 Enter current password for root (enter for none): [enter]
 Change the root password? [Y/n]: y
 Set root password? [Y/n] y
-New password:Welcome123
-Re-enter new password:Welcome123
+New password:ducnm37
+Re-enter new password:ducnm37
 Remove anonymous users? [Y/n]: y
 Disallow root login remotely? [Y/n]: y
 Remove test database and access to it? [Y/n]: y
@@ -207,7 +207,7 @@ systemctl start rabbitmq-server.service
 Thêm user `openstack`
 
 ``` sh
-rabbitmqctl add_user openstack Welcome123
+rabbitmqctl add_user openstack ducnm37
 
 Creating user "openstack" ...
 ```
@@ -342,7 +342,7 @@ Tạo database cho keystone
 ``` sh
 mysql -u root -pWelcome123
 CREATE DATABASE keystone;
-GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'localhost' IDENTIFIED BY 'Welcome123';
-GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'%' IDENTIFIED BY 'Welcome123';
+GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'localhost' IDENTIFIED BY 'ducnm37';
+GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'%' IDENTIFIED BY 'ducnm37';
 exit
 ```
