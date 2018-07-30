@@ -346,3 +346,12 @@ GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'localhost' IDENTIFIED BY 'ducn
 GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'%' IDENTIFIED BY 'ducnm37';
 exit
 ```
+Cài đặt keystone
+
+`yum install -y openstack-keystone httpd mod_wsgi`
+
+Sao lưu file cấu hình keystone
+
+`cp /etc/keystone/keystone.conf /etc/keystone/keystone.conf.origin`
+
+Chỉnh sửa file cấu hình keystone
