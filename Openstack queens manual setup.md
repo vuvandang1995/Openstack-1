@@ -41,7 +41,7 @@
 
 **Môi trường lab:** KVM
 
-**Mô hình**
+### Mô hình
 
 
 **Controller: Ram = 6Gb, CPU = 2, Disk = 100Gb**
