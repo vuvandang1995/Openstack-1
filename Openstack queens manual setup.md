@@ -1,4 +1,4 @@
-# Cài đặt openstack phiên bản queens thủ công
+# Cài đặt thủ công openstack phiên bản queens sử dụng linux bridge
 
 ## Mục lục
 
