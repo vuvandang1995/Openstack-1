@@ -1949,4 +1949,7 @@ Khởi động lại dịch vụ:
 
 `systemctl restart httpd.service memcached.service`
 
+Truy cập Dashboard.
+Truy cập thông qua http://192.168.40.61/dashboard.
 
+Mật khẩu mặc đinh admin hoặc demo user
