@@ -1190,4 +1190,24 @@ Checking host mapping for compute host 'compute1': dbd4d559-a783-4162-a932-aa2cf
 Creating host mapping for compute host 'compute1': dbd4d559-a783-4162-a932-aa2cfd74a083
 Found 1 unmapped computes in cell: e0512d74-aff1-4734-94f5-0538305d5383
 ```
+<a name="nova"></a>
+
+## 6. Cài đặt networking service - neutron
+
+<a name="6.1"></a>
+### 6.1 Cài đặt trên node controller
+
+Từ các node, test truy cập Internet:
+
+`ping -c 4 openstack.org`
+
+Tại các node, kiểm tra ping:
+
+```
+yum install fping -y
+fping 172.16.4.200 172.16.4.201 172.16.4.202
+fping 10.0.3.10 10.0.3.11 10.0.3.12
+fping 172.16.9.10 172.16.9.11 172.16.9.12
+fping controller1 compute1 compute2
+```
 
