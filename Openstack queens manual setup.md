@@ -23,16 +23,14 @@
   - [6.1 Cài đặt trên node controller](#6.1)
   - [6.2 Cài đặt trên node compute](#6.2)
 
-[7. Cài đặt self-service network](#self-service)
+[7. Cài đặt dashboard - horizon](#horizon)
 
-[8. Cài đặt dashboard - horizon](#horizon)
+[8. Cài đặt block storage service - cinder](#cinder)
 
-[9. Cài đặt block storage service - cinder](#cinder)
+  - [8.1 Cài đặt trên node controller](#8.1)
+  - [8.2 Cài đặt trên node storage](#8.2)
 
-  - [9.1 Cài đặt trên node controller](#8.1)
-  - [9.2 Cài đặt trên node storage](#8.2)
-
-[10. Launch máy ảo](#launch)
+[9. Launch máy ảo](#launch)
 
 
 --------
@@ -1564,5 +1562,9 @@ systemctl enable neutron-linuxbridge-agent.service
 systemctl start neutron-linuxbridge-agent.service
 ```
 
+<a name="horizon"></a>
 
+## 7. Cài đặt dashboard - horizon
+
+### Cài đặt trên node controller
 
