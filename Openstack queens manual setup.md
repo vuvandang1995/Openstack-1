@@ -1210,4 +1210,271 @@ fping 10.0.3.10 10.0.3.11 10.0.3.12
 fping 172.16.9.10 172.16.9.11 172.16.9.12
 fping controller1 compute1 compute2
 ```
+Tạo database:
+
+mysql -u root -pducnm37
+
+CREATE DATABASE neutron;
+GRANT ALL PRIVILEGES ON neutron.* TO 'neutron'@'localhost' IDENTIFIED BY 'ducnm37';
+GRANT ALL PRIVILEGES ON neutron.* TO 'neutron'@'%' IDENTIFIED BY 'ducnm37';
+exit
+
+Khởi tạo biến môi trường admin, thực hiện CLI:
+
+`. admin-openrc`
+
+Tạo chứng thực service:
+
+- Tạo neutron user:
+```
+openstack user create --domain default --password-prompt neutron
+
+User Password:ducnm37
+Repeat User Password:ducnm37
++---------------------+----------------------------------+
+| Field               | Value                            |
++---------------------+----------------------------------+
+| domain_id           | default                          |
+| enabled             | True                             |
+| id                  | fdb0f541e28141719b6a43c8944bf1fb |
+| name                | neutron                          |
+| options             | {}                               |
+| password_expires_at | None                             |
++---------------------+----------------------------------+
+```
+- Tạo admin role tới neutron user:
+
+`openstack role add --project service --user neutron admin`
+
+- Tạo đối tượng neutron service:
+
+`openstack service create --name neutron --description "OpenStack Networking" network`
+
++-------------+----------------------------------+
+| Field       | Value                            |
++-------------+----------------------------------+
+| description | OpenStack Networking             |
+| enabled     | True                             |
+| id          | f71529314dab4a4d8eca427e701d209e |
+| name        | neutron                          |
+| type        | network                          |
++-------------+----------------------------------+
+
+Tạo Networking service API endpoints:
+```
+openstack endpoint create --region RegionOne network public http://192.168.40.61:9696
+
++--------------+----------------------------------+
+| Field        | Value                            |
++--------------+----------------------------------+
+| enabled      | True                             |
+| id           | 85d80a6d02fc4b7683f611d7fc1493a3 |
+| interface    | public                           |
+| region       | RegionOne                        |
+| region_id    | RegionOne                        |
+| service_id   | f71529314dab4a4d8eca427e701d209e |
+| service_name | neutron                          |
+| service_type | network                          |
+| url          | http://controller:9696           |
++--------------+----------------------------------+
+
+openstack endpoint create --region RegionOne network internal http://192.168.40.61:9696
+
++--------------+----------------------------------+
+| Field        | Value                            |
++--------------+----------------------------------+
+| enabled      | True                             |
+| id           | 09753b537ac74422a68d2d791cf3714f |
+| interface    | internal                         |
+| region       | RegionOne                        |
+| region_id    | RegionOne                        |
+| service_id   | f71529314dab4a4d8eca427e701d209e |
+| service_name | neutron                          |
+| service_type | network                          |
+| url          | http://controller:9696           |
++--------------+----------------------------------+
+
+openstack endpoint create --region RegionOne network admin http://192.168.40.61:9696
+
++--------------+----------------------------------+
+| Field        | Value                            |
++--------------+----------------------------------+
+| enabled      | True                             |
+| id           | 1ee14289c9374dffb5db92a5c112fc4e |
+| interface    | admin                            |
+| region       | RegionOne                        |
+| region_id    | RegionOne                        |
+| service_id   | f71529314dab4a4d8eca427e701d209e |
+| service_name | neutron                          |
+| service_type | network                          |
+| url          | http://controller:9696           |
++--------------+----------------------------------+
+```
+
+#### Cấu hình: Provider network
+
+Cài đặt các thành phần
+
+`yum install openstack-neutron openstack-neutron-ml2 openstack-neutron-linuxbridge ebtables -y`
+
+Cấu hình Chỉnh sửa file `/etc/neutron/neutron.conf`:
+
+```
+vi /etc/neutron/neutron.conf
+
+[DEFAULT]
+core_plugin = ml2
+service_plugins =
+transport_url = rabbit://openstack:ducnm37@192.168.40.61
+auth_strategy = keystone
+notify_nova_on_port_status_changes = true
+notify_nova_on_port_data_changes = true
+
+[database]
+connection = mysql+pymysql://neutron:ducnm37@192.168.40.61/neutron
+
+[keystone_authtoken]
+auth_uri = http://192.168.40.61:5000
+auth_url = http://192.168.40.61:35357
+memcached_servers = 192.168.40.61:11211
+auth_type = password
+project_domain_name = default
+user_domain_name = default
+project_name = service
+username = neutron
+password = ducnm37
+
+[nova]
+auth_url = http://192.168.40.61:35357
+auth_type = password
+project_domain_name = default
+user_domain_name = default
+region_name = RegionOne
+project_name = service
+username = nova
+password = ducnm37
+
+[oslo_concurrency]
+lock_path = /var/lib/neutron/tmp
+```
+**Cấu hình Modular Layer 2 (ML2) plug-in** (*ML2 plug-in sử dụng cho kỹ thuật Linux brigde, xây dựng virtual network layer-2 (bridging and switching) sử dụng cho instance*)
+
+Cấu hình file /etc/neutron/plugins/ml2/ml2_conf.ini:
+
+```
+vi /etc/neutron/plugins/ml2/ml2_conf.ini
+
+[ml2]
+type_drivers = flat,vlan
+tenant_network_types = 
+mechanism_drivers = linuxbridge
+extension_drivers = port_security
+
+[ml2_type_flat]
+flat_networks = provider
+
+[securitygroup]
+enable_ipset = true
+```
+
+**Cấu hình Linux bridge agent** (*Linux bridge agent xây dựng layer-2 (bridging and switching) virtual networking infrastructure cho instances xử lý các security group*)
+
+Chỉnh sửa `/etc/neutron/plugins/ml2/linuxbridge_agent.ini`
+
+```
+
+vi /etc/neutron/plugins/ml2/linuxbridge_agent.ini
+
+
+
+[linux_bridge]
+...
+physical_interface_mappings = provider:eth0
+
+
+[vxlan]
+...
+enable_vxlan = false
+
+
+[securitygroup]
+...
+enable_security_group = true
+firewall_driver = neutron.agent.linux.iptables_firewall.IptablesFirewallDriver
+```
+
+**Cấu hình DHCP agent** (*DHCP agent cung cấp dịch vụ DHCP cho virtual network*)
+
+Sao lưu file cấu hình DHCP agent:
+
+Chỉnh sửa `/etc/neutron/dhcp_agent.ini`
+
+```
+vi /etc/neutron/dhcp_agent.ini
+
+
+[DEFAULT]
+interface_driver = linuxbridge
+dhcp_driver = neutron.agent.linux.dhcp.Dnsmasq
+enable_isolated_metadata = true
+```
+
+**Cấu hình metadata agent** (*Metadata agent cung cấp thông tin cấu hình cho instance (như chứng thực instance)*)
+
+Chỉnh sửa `/etc/neutron/neutron.conf`
+
+```
+vi /etc/neutron/neutron.conf
+
+[DEFAULT]
+# ...
+nova_metadata_host = 192.168.40.61
+metadata_proxy_shared_secret = ducnm37
+```
+
+**Cấu hình Compute service sử dụng the Networking service** (Tại Controller)
+
+Chỉnh sửa `/etc/nova/nova.conf`
+```
+vi /etc/nova/nova.conf
+
+[neutron]
+# ...
+url = http://192.168.40.61:9696
+auth_url = http://192.168.40.61:35357
+auth_type = password
+project_domain_name = default
+user_domain_name = default
+region_name = RegionOne
+project_name = service
+username = neutron
+password = ducnm37
+service_metadata_proxy = true
+metadata_proxy_shared_secret = ducnm37
+```
+
+**Khởi tạo dịch vụ***
+
+Các Networking service initialization script yêu cầu symbolic link `/etc/neutron/plugin.ini` tới ML2 plug-in config file `/etc/neutron/plugins/ml2/ml2_conf.ini`
+
+- Nếu Symbolic link không tồn tại, tạo cmd:
+
+`ln -s /etc/neutron/plugins/ml2/ml2_conf.ini /etc/neutron/plugin.ini`
+
+- Đồng bộ database:
+
+`su -s /bin/sh -c "neutron-db-manage --config-file /etc/neutron/neutron.conf --config-file /etc/neutron/plugins/ml2/ml2_conf.ini upgrade head" neutron`
+
+- Khởi động lại Compute API service:
+
+`systemctl restart openstack-nova-api.service`
+
+Chạy Networking services:
+
+```
+systemctl enable neutron-server.service neutron-linuxbridge-agent.service neutron-dhcp-agent.service neutron-metadata-agent.service
+
+systemctl start neutron-server.service neutron-linuxbridge-agent.service neutron-dhcp-agent.service neutron-metadata-agent.service
+```
+
 
