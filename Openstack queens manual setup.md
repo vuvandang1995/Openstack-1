@@ -43,7 +43,7 @@
 
 **Mô hình**
 
-<img src="http://i.imgur.com/RNQ3tW9.png">
+<img src="https://i.imgur.com/N7l5868.png">
 
 **IP Planning**
 
@@ -64,7 +64,7 @@ vi /etc/hosts
 192.168.40.61    controller
 192.168.40.62    compute
 192.168.40.63    compute2
-192.168.40.64    block
+
 ```
 
 ``` sh
@@ -248,7 +248,7 @@ vi /etc/hosts
 192.168.40.61    controller
 192.168.40.62    compute
 192.168.40.63    compute2
-192.168.40.64    block
+
 ```
 
 ``` sh
@@ -329,7 +329,7 @@ MS Name/IP address         Stratum Poll Reach LastRx Last sample
 
 **Lưu ý**
 
-Thực hiện các bước cài đặt tương tự với node compute2 và block.
+Thực hiện các bước cài đặt tương tự với node compute2
 
 ----------------------------------
 
