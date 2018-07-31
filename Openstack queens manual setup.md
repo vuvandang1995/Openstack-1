@@ -1857,7 +1857,7 @@ my_ip = 192.168.40.61
 
 [keystone_authtoken]
 auth_uri = http://192.168.40.61:5000
-auth_url = http://192.168.40.61:35357
+auth_url = http://192.168.40.61:5000
 memcached_servers = 192.168.40.61:11211
 auth_type = password
 project_domain_id = default
