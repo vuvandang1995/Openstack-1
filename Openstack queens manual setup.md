@@ -43,6 +43,10 @@
 
 **Mô hình**
 
+Controller: Ram = 6Gb, CPU = 2, Disk = 100Gb
+Compute   : Ram = 6Gb, CPU = 2, Disk = 100Gb
+Compute 2 : Ram = 6Gb, CPU = 2, Disk = 100Gb
+
 <img src="https://i.imgur.com/N7l5868.png">
 
 
