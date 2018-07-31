@@ -1885,3 +1885,68 @@ Chạy Block Storage services:
 systemctl enable openstack-cinder-api.service openstack-cinder-scheduler.service
 systemctl start openstack-cinder-api.service openstack-cinder-scheduler.service
 ```
+
+<a name="horizon"></a>
+
+## 8. Cài đặt dashboard - horizon
+
+Cài đặt gói:
+
+`yum install openstack-dashboard -y`
+
+Chỉnh sửa `/etc/openstack-dashboard/local_settings`
+
+```
+vi /etc/openstack-dashboard/local_settings
+
+
+OPENSTACK_HOST = "192.168.40.61"
+
+ALLOWED_HOSTS = ['*','localhost'] 
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '192.168.40.61:11211',
+    }
+}
+
+OPENSTACK_KEYSTONE_URL = "http://%s:5000/v3" % OPENSTACK_HOST
+
+OPENSTACK_KEYSTONE_MULTIDOMAIN_SUPPORT = True
+
+OPENSTACK_API_VERSIONS = {
+    "identity": 3,
+    "image": 2,
+    "volume": 2,
+}
+
+OPENSTACK_KEYSTONE_DEFAULT_DOMAIN = "Default"
+
+OPENSTACK_KEYSTONE_DEFAULT_ROLE = "user"
+
+OPENSTACK_NEUTRON_NETWORK = {
+    ...
+    'enable_router': False,
+    'enable_quotas': False,
+    'enable_ipv6': False,
+    'enable_distributed_router': False,
+    'enable_ha_router': False,
+    'enable_lb': False,
+    'enable_firewall': False,
+    'enable_vpn': False,
+    'enable_fip_topology_check': False,
+}
+```
+
+Tạo và thêm `WSGIApplicationGroup %{GLOBAL}`  nếu trong `/etc/httpd/conf.d/openstack-dashboard.conf` không có:
+
+`echo "WSGIApplicationGroup %{GLOBAL}" >> /etc/httpd/conf.d/openstack-dashboard.conf`
+
+Khởi động lại dịch vụ:
+
+`systemctl restart httpd.service memcached.service`
+
+
