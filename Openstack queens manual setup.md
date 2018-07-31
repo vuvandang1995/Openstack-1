@@ -45,9 +45,7 @@
 
 <img src="https://i.imgur.com/N7l5868.png">
 
-**IP Planning**
 
-<img src="http://i.imgur.com/izdpCT2.png">
 
 ## <a name="setup">2. Setup môi trường cài đặt </a>
 
