@@ -1333,7 +1333,7 @@ connection = mysql+pymysql://neutron:ducnm37@192.168.40.61/neutron
 
 [keystone_authtoken]
 auth_uri = http://192.168.40.61:5000
-auth_url = http://192.168.40.61:35357
+auth_url = http://192.168.40.61:5000
 memcached_servers = 192.168.40.61:11211
 auth_type = password
 project_domain_name = default
@@ -1343,7 +1343,7 @@ username = neutron
 password = ducnm37
 
 [nova]
-auth_url = http://192.168.40.61:35357
+auth_url = http://192.168.40.61:5000
 auth_type = password
 project_domain_name = default
 user_domain_name = default
@@ -1439,7 +1439,7 @@ vi /etc/nova/nova.conf
 [neutron]
 # ...
 url = http://192.168.40.61:9696
-auth_url = http://192.168.40.61:35357
+auth_url = http://192.168.40.61:5000
 auth_type = password
 project_domain_name = default
 user_domain_name = default
@@ -1539,7 +1539,7 @@ vi /etc/nova/nova.conf
 [neutron]
 ...
 url = http://192.168.40.61:9696
-auth_url = http://192.168.40.61:35357
+auth_url = http://192.168.40.61:5000
 auth_type = password
 project_domain_name = default
 user_domain_name = default
@@ -1646,7 +1646,7 @@ connection = mysql+pymysql://cinder:ducnm37@192.168.40.61/cinder
 
 [keystone_authtoken]
 auth_uri = http://192.168.40.61:5000
-auth_url = http://192.168.40.61:35357
+auth_url = http://192.168.40.61:5000
 memcached_servers = 192.168.40.61:11211
 auth_type = password
 project_domain_id = default
