@@ -25,8 +25,8 @@
 
 [7. Cài đặt block storage service - cinder](#cinder)
 
-  - [7.1 Cài đặt trên node controller](#7.1)
-  - [7.2 Cài đặt trên node storage](#7.2)
+  - [7.1 Cài đặt trên node storage](#7.1)
+  - [7.2 Cài đặt trên node controller](#7.2)
 
 [8. Cài đặt dashboard - horizon](#horizon)
 
@@ -1566,8 +1566,8 @@ systemctl start neutron-linuxbridge-agent.service
 
 ## 7. Cài đặt block storage service - cinder
 
-<a name="6.1"></a>
-### 7.1 Cài đặt trên node controller
+<a name="7.1"></a>
+### 7.1 Cài đặt trên node storage
 
 Với bài viết này, Storage node và Controller sẽ cấu hình 2 thành phần này chồng lên nhau
 ```
@@ -1634,10 +1634,6 @@ Chỉnh sửa: `/etc/cinder/cinder.conf`
 ```
 vi /etc/cinder/cinder.conf
 
-
-[database]
-connection = mysql+pymysql://cinder:ducnm37@192.168.40.61/cinder
-
 [DEFAULT]
 transport_url = rabbit://openstack:ducnm37@192.168.40.61
 auth_strategy = keystone
@@ -1645,6 +1641,8 @@ enabled_backends = lvm
 glance_api_servers = http://192.168.40.61:9292
 my_ip = 192.168.40.61
 
+[database]
+connection = mysql+pymysql://cinder:ducnm37@192.168.40.61/cinder
 
 [keystone_authtoken]
 auth_uri = http://192.168.40.61:5000
@@ -1657,7 +1655,7 @@ project_name = service
 username = cinder
 password = ducnm37
 
-# Nếu ko có thì tạo mới
+(tạo mới mục này)
 [lvm] 
 volume_driver = cinder.volume.drivers.lvm.LVMVolumeDriver
 volume_group = cinder-volumes
@@ -1667,12 +1665,14 @@ iscsi_helper = lioadm
 [oslo_concurrency]
 lock_path = /var/lib/cinder/tmp
 ```
+
 Khởi tạo dịch vụ
 ```
 systemctl enable openstack-cinder-volume.service target.service
 systemctl start openstack-cinder-volume.service target.service
 ```
 
-
+<a name="7.2"></a>
+### 7.2 Cài đặt trên node controller
 
 
