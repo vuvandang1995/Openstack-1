@@ -1476,5 +1476,93 @@ systemctl enable neutron-server.service neutron-linuxbridge-agent.service neutro
 
 systemctl start neutron-server.service neutron-linuxbridge-agent.service neutron-dhcp-agent.service neutron-metadata-agent.service
 ```
+<a name="6.2"></a>
+### 6.2 Cài đặt trên node compute
+
+Cài đặt các thành phần
+
+`yum install openstack-neutron-linuxbridge ebtables ipset -y`
+
+Cấu hình các thành phần bao gồm authentication mechanism, message queue, plug-in:
+
+Cấu hình `/etc/neutron/neutron.conf`
+
+```
+vi /etc/neutron/neutron.conf
+
+[DEFAULT]
+transport_url = rabbit://openstack:ducnm37@192.168.40.61
+auth_strategy = keystone
+
+[keystone_authtoken]
+auth_uri = http://192.168.40.61:5000
+auth_url = http://192.168.40.61:5000
+memcached_servers = 192.168.40.61:11211
+auth_type = password
+project_domain_name = default
+user_domain_name = default
+project_name = service
+username = neutron
+password = ducnm37
+
+[oslo_concurrency]
+lock_path = /var/lib/neutron/tmp
+```
+
+**Cấu hình Provider network**
+
+Cấu hình Linux bridge agent (*Linux bridge agent xây dựng layer-2 (bridging và switching) virtual networking infrastructure cho instances và xử lý các security group*)
+
+Chỉnh sửa `/etc/neutron/plugins/ml2/linuxbridge_agent.ini`
+
+```
+vi /etc/neutron/plugins/ml2/linuxbridge_agent.ini
+
+
+[linux_bridge]
+physical_interface_mappings = provider:eth0
+
+[vxlan]
+enable_vxlan = false
+
+[securitygroup]
+enable_security_group = true
+firewall_driver = neutron.agent.linux.iptables_firewall.IptablesFirewallDriver
+```
+
+**Cấu hình Compute service sử dụng Networking service**
+
+Cấu hình file `/etc/nova/nova.conf`:
+
+```
+vi /etc/nova/nova.conf
+
+
+[neutron]
+...
+url = http://192.168.40.61:9696
+auth_url = http://192.168.40.61:35357
+auth_type = password
+project_domain_name = default
+user_domain_name = default
+region_name = RegionOne
+project_name = service
+username = neutron
+password = ducnm37
+```
+
+**Khởi tạo dịch vụ**
+
+Khởi động lại Compute service:
+
+`systemctl restart openstack-nova-compute.service`
+
+Chạy Linux bridge agent:
+
+```
+systemctl enable neutron-linuxbridge-agent.service
+systemctl start neutron-linuxbridge-agent.service
+```
+
 
 
