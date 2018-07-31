@@ -1952,4 +1952,4 @@ Khởi động lại dịch vụ:
 Truy cập Dashboard.
 Truy cập thông qua http://192.168.40.61/dashboard.
 
-Mật khẩu mặc đinh admin hoặc demo user
+Mật khẩu mặc đinh `admin` hoặc `demo` user domain `default`
