@@ -23,12 +23,12 @@
   - [6.1 Cài đặt trên node controller](#6.1)
   - [6.2 Cài đặt trên node compute](#6.2)
 
-[7. Cài đặt dashboard - horizon](#horizon)
+[7. Cài đặt block storage service - cinder](#cinder)
 
-[8. Cài đặt block storage service - cinder](#cinder)
+  - [7.1 Cài đặt trên node controller](#7.1)
+  - [7.2 Cài đặt trên node storage](#7.2)
 
-  - [8.1 Cài đặt trên node controller](#8.1)
-  - [8.2 Cài đặt trên node storage](#8.2)
+[8. Cài đặt dashboard - horizon](#horizon)
 
 [9. Launch máy ảo](#launch)
 
@@ -1562,9 +1562,117 @@ systemctl enable neutron-linuxbridge-agent.service
 systemctl start neutron-linuxbridge-agent.service
 ```
 
-<a name="horizon"></a>
+<a name="cinder"></a>
 
-## 7. Cài đặt dashboard - horizon
+## 7. Cài đặt block storage service - cinder
 
-### Cài đặt trên node controller
+<a name="6.1"></a>
+### 7.1 Cài đặt trên node controller
+
+Với bài viết này, Storage node và Controller sẽ cấu hình 2 thành phần này chồng lên nhau
+```
+Cấu hình trên controller (yêu cầu 2 ổ, 1 cho cinder volume vì thế ta cần add thêm ổ cứng cho controller)
+
+có thể tách riêng Storage node ra node riêng
+```
+
+Cài đặt gói
+
+`yum install lvm2 device-mapper-persistent-data -y`
+
+Chạy LVM metadata service:
+
+```
+systemctl enable lvm2-lvmetad.service
+systemctl start lvm2-lvmetad.service
+```
+
+ Để sử dụng trước tiên tạo phân vùng partion trên ổ cứng mới gắn 
+ 
+ ```
+fdisk /dev/vdb
+
+Tiếp theo chọn m -> n -> enter(default) -> enter(default) ->enter(default)-> enter(default) -> m -> w (lưu lại)
+
+Sau đó ta sẽ được kết quả là phân vùng vdb1 mới tạo ra 
+
+[root@controller ~]# lsblk
+NAME            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sr0              11:0    1  792M  0 rom
+vda             252:0    0  100G  0 disk
+├─vda1          252:1    0    1G  0 part /boot
+└─vda2          252:2    0   99G  0 part
+  ├─centos-root 253:0    0   50G  0 lvm  /
+  ├─centos-swap 253:1    0  5.9G  0 lvm  [SWAP]
+  └─centos-home 253:2    0 43.1G  0 lvm  /home
+vdb             252:16   0   80G  0 disk
+└─vdb1          252:17   0   80G  0 part
+
+```
+
+Tạo LVM volume /dev/vdb:
+
+```
+pvcreate /dev/vdb1
+vgcreate cinder-volumes /dev/vdb1
+```
+Chỉnh sửa file `/etc/lvm/lvm.conf:`
+
+```
+vi /etc/lvm/lvm.conf
+
+devices {
+...
+filter = [ "a/vdb1/", "r/.*/"]
+```
+
+Cài đặt gói
+
+`yum install openstack-cinder targetcli python-keystone -y`
+
+Chỉnh sửa: `/etc/cinder/cinder.conf`
+```
+vi /etc/cinder/cinder.conf
+
+
+[database]
+connection = mysql+pymysql://cinder:ducnm37@192.168.40.61/cinder
+
+[DEFAULT]
+transport_url = rabbit://openstack:ducnm37@192.168.40.61
+auth_strategy = keystone
+enabled_backends = lvm
+glance_api_servers = http://192.168.40.61:9292
+my_ip = 192.168.40.61
+
+
+[keystone_authtoken]
+auth_uri = http://192.168.40.61:5000
+auth_url = http://192.168.40.61:35357
+memcached_servers = 192.168.40.61:11211
+auth_type = password
+project_domain_id = default
+user_domain_id = default
+project_name = service
+username = cinder
+password = ducnm37
+
+# Nếu ko có thì tạo mới
+[lvm] 
+volume_driver = cinder.volume.drivers.lvm.LVMVolumeDriver
+volume_group = cinder-volumes
+iscsi_protocol = iscsi
+iscsi_helper = lioadm
+
+[oslo_concurrency]
+lock_path = /var/lib/cinder/tmp
+```
+Khởi tạo dịch vụ
+```
+systemctl enable openstack-cinder-volume.service target.service
+systemctl start openstack-cinder-volume.service target.service
+```
+
+
+
 
