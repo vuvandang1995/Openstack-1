@@ -1675,4 +1675,213 @@ systemctl start openstack-cinder-volume.service target.service
 <a name="7.2"></a>
 ### 7.2 Cài đặt trên node controller
 
+Tạo database:
+```
+mysql -u root -pducnm37
+CREATE DATABASE cinder;
+GRANT ALL PRIVILEGES ON cinder.* TO 'cinder'@'localhost' IDENTIFIED BY 'ducnm37';
+GRANT ALL PRIVILEGES ON cinder.* TO 'cinder'@'%' IDENTIFIED BY 'ducnm37';
+exit
+```
 
+Khởi tạo biến môi trường admin:
+
+`. admin-openrc`
+
+Tạo xác thực user cinder
+
+- Tạo cinder user:
+```
+openstack user create --domain default --password-prompt cinder
+
+User Password:ducnm37
+Repeat User Password:ducnm37
++---------------------+----------------------------------+
+| Field               | Value                            |
++---------------------+----------------------------------+
+| domain_id           | default                          |
+| enabled             | True                             |
+| id                  | 977c28b771c341a687e7f29268357a8c |
+| name                | cinder                           |
+| options             | {}                               |
+| password_expires_at | None                             |
++---------------------+----------------------------------+
+```
+- Tạo admin role cho cinder user:
+
+`openstack role add --project service --user cinder admin`
+
+- Tạo đối tượng cinderv2 và cinderv3 service:
+```
+openstack service create --name cinderv2 --description "OpenStack Block Storage" volumev2
+
++-------------+----------------------------------+
+| Field       | Value                            |
++-------------+----------------------------------+
+| description | OpenStack Block Storage          |
+| enabled     | True                             |
+| id          | 0e90c83bafea49af8a6f7f9588dec40d |
+| name        | cinderv2                         |
+| type        | volumev2                         |
++-------------+----------------------------------+
+
+openstack service create --name cinderv3 --description "OpenStack Block Storage" volumev3
+
++-------------+----------------------------------+
+| Field       | Value                            |
++-------------+----------------------------------+
+| description | OpenStack Block Storage          |
+| enabled     | True                             |
+| id          | a2fc267a6c3640bb8f51026751cb6cb4 |
+| name        | cinderv3                         |
+| type        | volumev3                         |
++-------------+----------------------------------+
+
+```
+
+- Tạo Block Storage service API endpoints:
+```
+openstack endpoint create --region RegionOne volumev2 public http://192.168.40.61:8776/v2/%\(project_id\)s
++--------------+---------------------------------------------+
+| Field        | Value                                       |
++--------------+---------------------------------------------+
+| enabled      | True                                        |
+| id           | bcb01e7391d14bc8bd674b48e4dfef45            |
+| interface    | public                                      |
+| region       | RegionOne                                   |
+| region_id    | RegionOne                                   |
+| service_id   | 0e90c83bafea49af8a6f7f9588dec40d            |
+| service_name | cinderv2                                    |
+| service_type | volumev2                                    |
+| url          | http://192.168.40.61:8776/v2/%(project_id)s |
++--------------+---------------------------------------------+
+
+
+openstack endpoint create --region RegionOne volumev2 internal http://192.168.40.61:8776/v2/%\(project_id\)s
++--------------+---------------------------------------------+
+| Field        | Value                                       |
++--------------+---------------------------------------------+
+| enabled      | True                                        |
+| id           | 825398bfcc92415f8c24a85c48aa4dc3            |
+| interface    | internal                                    |
+| region       | RegionOne                                   |
+| region_id    | RegionOne                                   |
+| service_id   | 0e90c83bafea49af8a6f7f9588dec40d            |
+| service_name | cinderv2                                    |
+| service_type | volumev2                                    |
+| url          | http://192.168.40.61:8776/v2/%(project_id)s |
++--------------+---------------------------------------------+
+
+
+openstack endpoint create --region RegionOne volumev2 admin http://192.168.40.61:8776/v2/%\(project_id\)s
++--------------+---------------------------------------------+
+| Field        | Value                                       |
++--------------+---------------------------------------------+
+| enabled      | True                                        |
+| id           | f3d24770a4f040afabfe3dda9d6b5041            |
+| interface    | admin                                       |
+| region       | RegionOne                                   |
+| region_id    | RegionOne                                   |
+| service_id   | 0e90c83bafea49af8a6f7f9588dec40d            |
+| service_name | cinderv2                                    |
+| service_type | volumev2                                    |
+| url          | http://192.168.40.61:8776/v2/%(project_id)s |
++--------------+---------------------------------------------+
+
+
+openstack endpoint create --region RegionOne volumev3 public http://192.168.40.61:8776/v3/%\(project_id\)s
++--------------+---------------------------------------------+
+| Field        | Value                                       |
++--------------+---------------------------------------------+
+| enabled      | True                                        |
+| id           | 61351db1a454466284ddbc3f823d8f40            |
+| interface    | public                                      |
+| region       | RegionOne                                   |
+| region_id    | RegionOne                                   |
+| service_id   | a2fc267a6c3640bb8f51026751cb6cb4            |
+| service_name | cinderv3                                    |
+| service_type | volumev3                                    |
+| url          | http://192.168.40.61:8776/v3/%(project_id)s |
++--------------+---------------------------------------------+
+
+
+openstack endpoint create --region RegionOne volumev3 internal http://192.168.40.61:8776/v3/%\(project_id\)s
++--------------+---------------------------------------------+
+| Field        | Value                                       |
++--------------+---------------------------------------------+
+| enabled      | True                                        |
+| id           | bde009ee88de49bb9b35fc2ebbdcaa1d            |
+| interface    | internal                                    |
+| region       | RegionOne                                   |
+| region_id    | RegionOne                                   |
+| service_id   | a2fc267a6c3640bb8f51026751cb6cb4            |
+| service_name | cinderv3                                    |
+| service_type | volumev3                                    |
+| url          | http://192.168.40.61:8776/v3/%(project_id)s |
++--------------+---------------------------------------------+
+
+
+openstack endpoint create --region RegionOne volumev3 admin http://192.168.40.61:8776/v3/%\(project_id\)s
++--------------+---------------------------------------------+
+| Field        | Value                                       |
++--------------+---------------------------------------------+
+| enabled      | True                                        |
+| id           | 227a9e46643740a18caf39c0adf0b2a7            |
+| interface    | admin                                       |
+| region       | RegionOne                                   |
+| region_id    | RegionOne                                   |
+| service_id   | a2fc267a6c3640bb8f51026751cb6cb4            |
+| service_name | cinderv3                                    |
+| service_type | volumev3                                    |
+| url          | http://192.168.40.61:8776/v3/%(project_id)s |
++--------------+---------------------------------------------+
+
+
+```
+
+Cài đặt gói:
+
+`yum install openstack-cinder -y`
+
+Chỉnh sửa file cấu hình `/etc/cinder/cinder.conf`
+```
+vi /etc/cinder/cinder.conf
+
+[database]
+connection = mysql+pymysql://cinder:ducnm37@192.168.40.61/cinder
+
+[DEFAULT]
+transport_url = rabbit://openstack:ducnm37@192.168.40.61
+auth_strategy = keystone
+my_ip = 192.168.40.61
+
+[keystone_authtoken]
+auth_uri = http://192.168.40.61:5000
+auth_url = http://192.168.40.61:35357
+memcached_servers = 192.168.40.61:11211
+auth_type = password
+project_domain_id = default
+user_domain_id = default
+project_name = service
+username = cinder
+password = ducnm37
+
+[oslo_concurrency]
+lock_path = /var/lib/cinder/tmp
+```
+
+Đồng bộ Block Storage database:
+
+`su -s /bin/sh -c "cinder-manage db sync" cinder` (*Bỏ qua thông báo Option "logdir" from group "DEFAULT" is deprecated. Use option "log-dir" from group "DEFAULT"*)
+
+**Khởi tạo dịch vụ**
+
+Khởi động lại Compute API service:
+
+`systemctl restart openstack-nova-api.service`
+
+Chạy Block Storage services:
+```
+systemctl enable openstack-cinder-api.service openstack-cinder-scheduler.service
+systemctl start openstack-cinder-api.service openstack-cinder-scheduler.service
+```
