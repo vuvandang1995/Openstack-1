@@ -13,7 +13,7 @@ Ví dụ ở đây ta muốn migrate vm từ node compute1 (192.168.40.62) tới
 
 - Thực hiện tạo key pair trên các node compute nguồn cho user nova
 
-``` sh
+```
 su nova
 ssh-keygen
 echo 'StrictHostKeyChecking no' >> /var/lib/nova/.ssh/config
@@ -22,13 +22,13 @@ exit
 
 - Thực hiện với quyền root, scp key pair tới compute node. Nhập mật khẩu khi được yêu cầu.
 
-``` sh
+``` 
 scp /var/lib/nova/.ssh/id_rsa.pub root@compute2:/root/
 ```
 
 - Trên node đích, thay đổi quyền của key pair cho user nova và add key pair đó vào SSH.
 
-``` sh
+``` 
 mkdir -p /var/lib/nova/.ssh
 cat /root/id_rsa.pub >> /var/lib/nova/.ssh/authorized_keys
 echo 'StrictHostKeyChecking no' >> /var/lib/nova/.ssh/config
