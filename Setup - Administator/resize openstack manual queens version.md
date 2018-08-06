@@ -1,4 +1,4 @@
-# cấu hình resize trong bản openstack manual setup
+# cấu hình cold migrate (= resize) trong bản openstack manual setup
 
 Hướng dẫn cấu hình cold migrate trong OpenStack
 
@@ -48,3 +48,32 @@ su nova
 ssh 192.168.40.62
 exit
 ```
+------------------------
+
+# Cấu hình live migration
+
+```
+sed -i 's/#listen_tls = 0/listen_tls = 0/g' /etc/libvirt/libvirtd.conf
+sed -i 's/#listen_tcp = 1/listen_tcp = 1/g' /etc/libvirt/libvirtd.conf
+sed -i 's/#auth_tcp = "sasl"/auth_tcp = "none"/g' /etc/libvirt/libvirtd.conf
+sed -i 's/#LIBVIRTD_ARGS="--listen"/LIBVIRTD_ARGS="--listen"/g' /etc/sysconfig/libvirtd
+```
+
+- Restart lại dịch vụ:
+
+``` sh
+systemctl restart libvirtd
+systemctl restart openstack-nova-compute.service
+```
+
+- Nếu sử dụng block live migration cho các VMs boot từ local thì sửa file `nova.conf` rồi restart lại dịch vụ nova-compute :
+
+``` sh
+
+[libvirt]
+.......
+block_migration_flag=VIR_MIGRATE_UNDEFINE_SOURCE, VIR_MIGRATE_PEER2PEER, VIR_MIGRATE_LIVE, VIR_MIGRATE_NON_SHARED_INC
+......
+```
+
+`systemctl restart openstack-nova-compute.service`
