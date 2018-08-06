@@ -1,0 +1,50 @@
+# cấu hình resize trong bản openstack manual setup
+
+Hướng dẫn cấu hình cold migrate trong OpenStack
+
+- Sử dụng với SSH tunneling để migrate máy ảo hoặc resize máy ảo ở node mới.
+
+**Các bước cấu hình SSH Tunneling giữa các Nodes compute**
+
+- Cho phép user nova có thể login (thực hiện trên tất cả các node compute).
+Ví dụ ở đây ta muốn migrate vm từ node compute1 (192.168.40.62) tới node compute2 (192.168.40.63).
+
+`usermod -s /bin/bash nova`
+
+- Thực hiện tạo key pair trên các node compute nguồn cho user nova
+
+``` sh
+su nova
+ssh-keygen
+echo 'StrictHostKeyChecking no' >> /var/lib/nova/.ssh/config
+exit
+```
+
+- Thực hiện với quyền root, scp key pair tới compute node. Nhập mật khẩu khi được yêu cầu.
+
+``` sh
+scp /var/lib/nova/.ssh/id_rsa.pub root@compute2:/root/
+```
+
+- Trên node đích, thay đổi quyền của key pair cho user nova và add key pair đó vào SSH.
+
+``` sh
+mkdir -p /var/lib/nova/.ssh
+cat /root/id_rsa.pub >> /var/lib/nova/.ssh/authorized_keys
+echo 'StrictHostKeyChecking no' >> /var/lib/nova/.ssh/config
+chown -R nova:nova /var/lib/nova/.ssh
+```
+
+- Từ node compute1 kiểm tra để chắc chắn rằng user `nova` có thể login được vào node compute2 còn lại mà không cần sử dụng password
+``` 
+su nova
+ssh 192.168.40.63
+exit
+```
+- Từ node compute2 kiểm tra để chắc chắn rằng user `nova` có thể login được vào node compute1 còn lại mà không cần sử dụng password
+
+``` 
+su nova
+ssh 192.168.40.62
+exit
+```
