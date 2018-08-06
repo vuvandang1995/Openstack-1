@@ -51,7 +51,12 @@ exit
 ------------------------
 
 # Cấu hình live migration
+Yêu cầu chung:
+- Cả hai node nguồn và đích đều phải được đặt trên cùng subnet và có cùng loại CPU.
+- Cả controller và compute đều phải phân giải được tên miền của nhau.
+- Compute node buộc phải sử dụng KVM với libvirt.
 
+Trên 2 compute
 ```
 sed -i 's/#listen_tls = 0/listen_tls = 0/g' /etc/libvirt/libvirtd.conf
 sed -i 's/#listen_tcp = 1/listen_tcp = 1/g' /etc/libvirt/libvirtd.conf
