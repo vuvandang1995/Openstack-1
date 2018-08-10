@@ -74,7 +74,7 @@ So sánh giữa hai giá trị là:
 
 `"value1 : value2"`
 
-Các giá trị được phép ở đay bao gồm:
+Các giá trị được phép ở đây bao gồm:
 
 - Strings, numbers, true, false
 - API attributes (`project_id, user_id, domain_id`)
