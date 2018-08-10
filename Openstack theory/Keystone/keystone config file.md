@@ -102,6 +102,7 @@ Lúc này ta cần config file policy.json để user thaonv thực hiện 1 s�
 Ở đây sửa thành "identity:create_domain": "rule:admin_required or role:ducnm37",.
 
 Để test, ta tiến hành thiết lập các biến môi trường:
+```
 export OS_PROJECT_DOMAIN_NAME=Default
 export OS_USER_DOMAIN_NAME=Default
 export OS_PROJECT_NAME=admin
@@ -109,3 +110,4 @@ export OS_USERNAME=duc
 export OS_PASSWORD=123456
 export OS_AUTH_URL=http://controller:5000/v3
 export OS_IDENTITY_API_VERSION=3
+```
