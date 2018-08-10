@@ -91,7 +91,7 @@ Alias là tên ngắn gọn của những rule phức tạp hoặc khó hiểu. 
 
 Tạo role:
 
-`openstack role create admin`
+`openstack role create ducnm37`
 
 Gán role ducnm37 cho user duc vào project admin
 
