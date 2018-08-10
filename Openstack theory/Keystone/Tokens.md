@@ -6,7 +6,7 @@ Trong nỗ lực kiếm tìm một loại token mới để khắc phục nhữn
 
 Điều này buộc Keystone team phải đưa ra một loại mới và đó là Fernet token. Fernet token khá nhỏ (255 kí tự) tuy nhiên nó lại chưa đủ thông tin để ủy quyền. Bên cạnh đó, việc nó chứa đủ thông tin cũng không khiến token database phải lưu dữ liệu token nữa (vấn đề này xảy ra ở UUID) Các nhà vận hành thường phải dọn dẹp Keystone token database để hệ thống của họ hoạt động ổn định. Mặc dù vậy, Fernet token có nhược điểm đó là symmetric keys được dùng để tạo ra token cần được phân phối và xoay vòng. Các nhà vận hành cần phải giải quyết vấn đề này, tuy nhiên họ có vẻ thích thú với việc này hơn là sử dụng những loại token khác.
 
-2. UUID Tokens
+## 1. UUID Tokens
 
 - Là một chuỗi UUID gồm 32 kí tự được generate random được xác thực bởi identity service Phương thức hexdigest() được sử dụng để tạo ra chuỗi kí tự hexa. Điều này khiến token URL trở nên an toàn và dễ dàng trong việc vận chuyển đến các môi trường khác
  
@@ -61,7 +61,7 @@ Nếu token đã bị thu hồi (tương ứng với 1 event trong bảng revoca
 
 UUID Token không hỗ trợ xác thực và ủy quyền trong trường hợp multiple data centers bởi token được lưu dưới dạng persistent (cố định và không thể thay đổi). Như ví dụ mô tả ở hình trên, một hệ thống cloud triển khai trên hai datacenter ở hai nơi khác nhau. Khi xác thực với keystone trên datacenter US-West và sử dụng token trả về để request tạo một máy ảo với Nova, yêu cầu hoàn toàn hợp lệ và khởi tạo máy ảo thành công. Trong khi nếu mang token đó sang datacenter US-East yêu cầu tạo máy ảo thì sẽ không được xác nhận do token trong backend database US-West không có bản sao bên US-East.
 
-### <a name="fernet"> 4. Fernet Tokens </a>
+## 2. Fernet Tokens 
 
 Đây là loại token mới nhất, nó được tạo ra để khắc phục những hạn chế của các loại token trước đó. Thứ nhất, nó khá nhỏ với khoảng 255 kí tự, lớn hơn UUID nhưng nhỏ hơn rất nhiều so với PKI. Token này cũng chứa vừa đủ thông tin để cho phép nó không cần phải được lưu trên database.
 
@@ -158,9 +158,9 @@ Với key và message nhận được, quá trình tạo fernet token như sau:
 
 Vì Fernet key không cần phải được lưu vào database nên nó có thể hỗ trợ multiple data center. Tuy nhiên keys sẽ phải được phân phối tới tất cả các regions.
 
-### <a name="horizon"> 5. Horizon và token </a>
 
-#### 5.1 Cách Horizon dùng token
+
+## 3 Cách Horizon dùng token
 
 - Tokens được sử dụng cho mỗi lần log in của user
 - Horizon lấy unscoped token cho user và sau dựa vào các request để cung cấp các project scoped token.
