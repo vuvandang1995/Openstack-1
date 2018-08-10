@@ -1,4 +1,4 @@
-# Các file cấu hình của keystone
+
 
 
 `less /etc/keystone/default_catalog.templates` file catalog trong keystone, là nơi chứa Chứa URLs và endpoints của các services khác nhau , đường dẫn cho phép các tenants (project) biết nơi nào có thể gửi yêu cầu tạo máy ảo hoặc lưu trữ dữ liệu.  
@@ -7,7 +7,7 @@
 
 
 
-# 1. Giới thiệu và ví dụ về file policy.json 
+## 1. Giới thiệu và ví dụ về file policy.json 
 
 `/etc/openstack-dashboard` là nơi chứa các file .json là các file chứa các (role) bao gồm các targets và rules tương ứng cho các user được cấu hình
 
@@ -39,7 +39,7 @@ Có một vài APIs chỉ có thể được gọi bởi admin, nó được di�
 
 Rules cũng có thể dùng với các câu lệnh boolean như `not` hay `and`, `or`.
 
-# 2. Cấu trúc 
+## 2. Cấu trúc 
 
 File `policy.json` bao gồm các policies và alias theo form `target:rule` hoặc `alias:definition`, ngăn cách nhau bởi dấu phẩy:
 
@@ -87,3 +87,25 @@ Target object attributes là các fields từ object description trong database.
 
 Alias là tên ngắn gọn của những rule phức tạp hoặc khó hiểu. Nó được define giống với policy, một khi đã được định nghĩa, người dùng có thể dùng keyword `rule` để sử dụng nó trong file policy.
 
+# 3. Các câu lệnh để quản lí role trong keystone
+
+Tạo role:
+
+`openstack role create admin`
+
+Gán role ducnm37 cho user duc vào project admin
+
+`openstack role add --user duc --user-domain default --project admin --project-domain default ducnm37`
+
+Lúc này ta cần config file policy.json để user thaonv thực hiện 1 số quyền, ở đây mình muốn tạo được domain mới. Đầu tiên tìm tới file /etc/keystone/policy.json, tìm đến dòng "identity:create_domain": "rule:admin_required",.
+
+Ở đây sửa thành "identity:create_domain": "rule:admin_required or role:ducnm37",.
+
+Để test, ta tiến hành thiết lập các biến môi trường:
+export OS_PROJECT_DOMAIN_NAME=Default
+export OS_USER_DOMAIN_NAME=Default
+export OS_PROJECT_NAME=admin
+export OS_USERNAME=duc
+export OS_PASSWORD=123456
+export OS_AUTH_URL=http://controller:5000/v3
+export OS_IDENTITY_API_VERSION=3
