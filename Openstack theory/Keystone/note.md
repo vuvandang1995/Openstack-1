@@ -136,9 +136,9 @@ Nếu token đã bị thu hồi (tương ứng với 1 event trong bảng revoca
 
 -----------------------
 
-**Quá trình tạo PKI token**
+**PKI token**
 
-**Token Generation Workflow**
+**Quá trình tạo Token**
 
 <img src="http://i.imgur.com/pi0xOpi.png">
 
@@ -149,13 +149,13 @@ Nếu token đã bị thu hồi (tương ứng với 1 event trong bảng revoca
 - Bước tiếp theo, nếu muốn đóng gói token định dạng PKI thì convert payload sang UTF-8, convert token sang một URL định dạng an toàn. Nếu muốn token đóng gói dưới định dang PKIz, thì phải nén token sử dụng zlib, tiến hành mã hóa base64 token tạo ra URL an toàn, convert sang UTF-8 và chèn thêm tiếp đầu ngữ "PKIZ"
 - Lưu thông tin token vào Backend (SQL/KVS)
 
-**Token Validation Workflow**
+**Quá trình xác thực Token**
 
 <img src="http://i.imgur.com/b4G7u0R.png">
 
 Vì id được generate bằng hàm hash của token nên quá trình validate token sẽ bắt đầu bằng việc sử dụng hàm hash để "băm" PKI toekn. Các bước sau đó (validate trong backend...) hoàn toàn giống với uuid.
 
-**Token Revocation Workflow**
+**Quá trình thu hồi Token**
 
 Hoàn toàn tương tự như tiến trình thu hồi UUID token
 
