@@ -25,6 +25,75 @@ def _get_token_id(self, token_data):
 </ul>
 </ul>
 
+**PKI Tokens**: Khắc phục được việc thiếu thông tin để thực hiện ủy quyền của UUID, Chứa một lượng khá lớn thông tin ví dụ như: thời gian nó được tạo, thời gian nó hết hiệu lực, thông tin nhận diện người dùng, project, domain, thông tin về role cho user, danh mục dịch vụ,... Tất cả các thông tin này được lưu ở trog phần payload của file định dạng JSON. Cách sinh ra PKI token:
+```
+def _get_token_id(self, token_data):
+    try:
+         token_json = jsonutils.dumps(token_data, cls=utils.PKIEncoder)
+         token_id = str(cms.cms_sign_token(token_json,
+                                           CONF.signing.certfile,
+                                           CONF.signing.keyfile))
+         return token_id
+     except environment.subprocess.CalledProcessError:
+         LOG.exception(_LE('Unable to sign token'))
+         raise exception.UnexpectedError(_('Unable to sign token.'))
+```
+
+- Ưu điểm: 
+<ul>
+<ul>
+ <li> Token này chứa đủ thông tin để xác thực và ủy quyền và đồng thời nó cũng chứa cả danh mục dịch vụ./li>
+ <li> PKI token được gán vào và các dịch vụ có thể cache lại nó để dử dụng cho đến khi nó hết hiệu lực hoặc bị hủy. Loại token này vì thế cũng khiến lượng traffic tới Keystone server ít hơn </li>
+</ul>
+</ul>
+
+- Nhược điểm:
+<ul>
+<ul>
+ <li> Kích cỡ của token khá lớn, nếu có 1 endpoints trong danh mục dịch vụ đã rơi vào khoảng 1700 bytes, Với những hệ thống lớn, kích cỡ của nó sẽ vượt mức cho phép của HTTP header (8KB). Ngay cả khi được nén lại trong PKIz format thì vấn đề cũng không được giải quyết khi mà nó chỉ làm kích thước token nhỏ đi khoảng 10%.</li>
+ <li> kích thước lớn của nó cũng ảnh hưởng đến các service khác và rất khó khi sử dụng với cURL. Ngoài ra, keystone cũng phải lưu những token này trong backend vì thế người dùng vẫn sẽ phải dọn dẹp token database thường xuyên.</li>
+</ul>
+</ul>
+
+**Fernet Token**: Cứa một lượng nhỏ dữ liệu ví dụ như thông tin để nhận diện người dùng, project, thời gian hết hiệu lực,...Nó được sign bởi symmetric key để ngăn ngừa việc giả mạo. Cơ chế hoạt động của loại token này giống với UUID vì thế nó cũng phải được validate bởi Keystone.
+
+
+
+- Ưu điểm: 
+<ul>
+<ul>
+ <li> Khá nhỏ (255 kí tự) tuy nhiên nó lại chứa đủ thông tin để ủy quyền.</li>
+ <li> Không cần database phải lưu dữ liệu token.</li>
+  <li>
+</ul>
+</ul>
+
+- Nhược điểm:
+<ul>
+<ul>
+ <li> Dùng symmetric key để mã hóa token và các keys này buộc phải được phân phối lên tất cả các vùng của OpenStack. Thêm vào đó, keys cũng cần được xoay vòng </li>
+</ul>
+</ul>
+
+File fernet key `/etc/keystone/fernet-keys => 0 1 2 3 4`
+
+Các loại fernet keys:
+
+- Loại 1: Primary key
+  - Dùng để mã hóa và giải mã
+  - file name có số index cao nhất
+
+- Loại 2: Secondary key
+  - Chỉ được dùng để giải mã
+  - file name có số index nằm giữa private key và staged key.
+
+- Loại 3: Staged key
+  - Giải mã và chuẩn bị để chuyển thành primary key
+  - file name nhỏ nhất (0)
+
+
+----------------
+
 **Quá trình tạo UUID token:**
 
 <img src="http://i.imgur.com/C36awEz.png">
