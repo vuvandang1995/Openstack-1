@@ -2,7 +2,9 @@
 
 có 3 loại :
 
-**uuid**:  là loại token gồm 32 kí tự được dùng để xác thực và ủy quyền. Phương pháp dùng để sinh ra UUID token:
+## uuid:  là loại token gồm 32 kí tự được dùng để xác thực và ủy quyền. 
+
+**Phương pháp dùng để sinh ra UUID token:**
 ```
 def _get_token_id(self, token_data):
  return uuid.uuid4().hex
@@ -25,7 +27,9 @@ def _get_token_id(self, token_data):
 </ul>
 </ul>
 
-**PKI Tokens**: Khắc phục được việc thiếu thông tin để thực hiện ủy quyền của UUID, Chứa một lượng khá lớn thông tin ví dụ như: thời gian nó được tạo, thời gian nó hết hiệu lực, thông tin nhận diện người dùng, project, domain, thông tin về role cho user, danh mục dịch vụ,... Tất cả các thông tin này được lưu ở trog phần payload của file định dạng JSON. Cách sinh ra PKI token:
+## PKI Tokens: Khắc phục được việc thiếu thông tin để thực hiện ủy quyền của UUID, Chứa một lượng khá lớn thông tin ví dụ như: thời gian nó được tạo, thời gian nó hết hiệu lực, thông tin nhận diện người dùng, project, domain, thông tin về role cho user, danh mục dịch vụ,... Tất cả các thông tin này được lưu ở trog phần payload của file định dạng JSON. 
+
+**Cách sinh ra PKI token:**
 ```
 def _get_token_id(self, token_data):
     try:
@@ -55,7 +59,7 @@ def _get_token_id(self, token_data):
 </ul>
 </ul>
 
-**Fernet Token**: Cứa một lượng nhỏ dữ liệu ví dụ như thông tin để nhận diện người dùng, project, thời gian hết hiệu lực,...Nó được sign bởi symmetric key để ngăn ngừa việc giả mạo. Cơ chế hoạt động của loại token này giống với UUID vì thế nó cũng phải được validate bởi Keystone.
+## Fernet Token: Cứa một lượng nhỏ dữ liệu ví dụ như thông tin để nhận diện người dùng, project, thời gian hết hiệu lực,...Nó được sign bởi symmetric key để ngăn ngừa việc giả mạo. Cơ chế hoạt động của loại token này giống với UUID vì thế nó cũng phải được validate bởi Keystone.
 
 
 
