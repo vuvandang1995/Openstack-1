@@ -38,7 +38,7 @@ def _get_token_id(self, token_data):
 - Lưu thông tin của Token vào SQL/KVS backend với các thông tin: TokenID, Expiration, Valid, UserID, Extra
 
 
-**Quá trình xác thực Token  **
+**Quá trình xác thực Token**
 
 <img src="http://i.imgur.com/U85Kpgq.png">
 
