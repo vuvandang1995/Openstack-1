@@ -133,3 +133,34 @@ Nếu token đã bị thu hồi (tương ứng với 1 event trong bảng revoca
 - Nếu tạo sự kiện thu hồi token với token expired, các thông tin cần thiết cập nhật vào revocation_event table của keystone database gồm: user_id, project_id, revoke_at, issued_before, token_expired.
 - Loại bỏ các sự kiện của các token đã expired từ bảng revocation_event của database "keystone"
 - Cập nhật vào token database, thiết lập lại trường "valid" thành false (0)
+
+-----------------------
+
+**Quá trình tạo PKI token**
+
+**Token Generation Workflow**
+
+<img src="http://i.imgur.com/pi0xOpi.png">
+
+- Người dùng gửi yêu cầu tạo token với các thông tin: User Name, Password, Project Name
+- Keystone sẽ chứng thực các thông tin về Identity, Resource và Asssignment (định danh, tài nguyên, assignment)
+- Tạo token payload định dạng JSON
+- Sign JSON payload với Signing Key và Signing Certificate , sau đó được đóng gói lại dưới định dang CMS (cryptographic message syntax - cú pháp thông điệp mật mã)
+- Bước tiếp theo, nếu muốn đóng gói token định dạng PKI thì convert payload sang UTF-8, convert token sang một URL định dạng an toàn. Nếu muốn token đóng gói dưới định dang PKIz, thì phải nén token sử dụng zlib, tiến hành mã hóa base64 token tạo ra URL an toàn, convert sang UTF-8 và chèn thêm tiếp đầu ngữ "PKIZ"
+- Lưu thông tin token vào Backend (SQL/KVS)
+
+**Token Validation Workflow**
+
+<img src="http://i.imgur.com/b4G7u0R.png">
+
+Vì id được generate bằng hàm hash của token nên quá trình validate token sẽ bắt đầu bằng việc sử dụng hàm hash để "băm" PKI toekn. Các bước sau đó (validate trong backend...) hoàn toàn giống với uuid.
+
+**Token Revocation Workflow**
+
+Hoàn toàn tương tự như tiến trình thu hồi UUID token
+
+**Multiple Data Centers**
+
+<img src="http://i.imgur.com/ky753ou.png">
+
+PKI và PKIz không thực sự support mutiple data centers. Các backend database ở hai datacenter phải có quá trình đồng bộ hoặc tạo bản sao các PKI/PKIz token thì mới thực hiện xác thực và ủy quyền được.
