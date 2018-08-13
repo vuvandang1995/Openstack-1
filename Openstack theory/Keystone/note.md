@@ -108,8 +108,19 @@ Các loại fernet keys:
 - Lấy ra Roles từ Backend trên Project hoặc Domain tương ứng trả về cho user, nếu user không có bất kỳ roles nào thì trả về Failure(dịch vụ Assignment)
 - Thu thập các Services và các Endpoints của các service đó (dịch vụ Catalog)
 - Tổng hợp các thông tin về Identity, Resources, Assignment, Catalog ở trên đưa vào Token payload, tạo ra token sử dụng hàm uuid.uuid4().hex
-- Lưu thông tin của Token vào SQL/KVS backend với các thông tin: TokenID, Expiration, Valid, UserID, Extra
+- Lưu thông tin của Token vào SQL/KVS backend với các thông tin: ID, Expiration, Valid, UserID, Extra, trust_id
 
+ID : 
+
+Expiration :
+
+Valid :
+
+UserID :
+
+Extra :
+
+trust_id :
 
 **Quá trình xác thực Token**
 
