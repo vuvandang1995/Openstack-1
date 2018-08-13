@@ -1,4 +1,4 @@
-**unscopes** token không chứa project, uername, service... mà nó chỉ sử dụng để xác minh danh tính cho việc sau này tạo scoped tokens mà không cần lặp lại các thông tin ban đầu
+**unscoped token** không chứa project, uername, service... mà nó chỉ sử dụng để xác minh danh tính cho việc sau này tạo `scoped token` mà không cần lặp lại việc khai báo các thông tin ban đầu
 
 Để có thế có được unscopes token cần:
 
@@ -6,4 +6,4 @@
 
 - Nhận dạng của bạn không được có "default project" liên quan đến nó
 
-**Scopes** token chứa service, catalog, roles.... đã được ủy quyền. Scopes token chỉ sử dụng trong 1 miền duy nhất cho phép vận hành với quyền cao hơn mức người dùng trong 1 miền cụ thể
+**Scoped token** chứa service, catalog, roles.... đã được ủy quyền. Scopes token chỉ sử dụng trong 1 miền duy nhất cho phép vận hành với quyền cao hơn mức người dùng trong 1 miền cụ thể
