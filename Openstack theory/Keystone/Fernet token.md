@@ -48,7 +48,7 @@ $ ls /etc/keystone/fernet-keys/
 0  2  3
 ```
 
-- Sẽ sinh ra khóa số "3" và khóa số 1 sẽ bị xóa, nguyên nhân khóa 1 bị xóa là do cấu hình hiện tại cho phép mặc định là 3 khóa hoạt động (ta có thể cấu hình nhiều khóa hoạt động bằng việc sửa `max_active_keys` ở mục `fernet_tokens` trong file `/etc/keystone/keystone.conf` nhiều lên 
+- Sẽ sinh ra khóa số "3" và khóa số 1 sẽ bị xóa, mọi thứ được mã hóa bằng khóa 1 sẽ không được xác minh vì khóa được sử dụng để mã hóa thông tin đó đã bị xóa, nguyên nhân khóa 1 bị xóa là do cấu hình hiện tại cho phép mặc định là 3 khóa hoạt động (ta có thể cấu hình nhiều khóa hoạt động bằng việc sửa `max_active_keys` ở mục `fernet_tokens` trong file `/etc/keystone/keystone.conf` nhiều lên 
 
 ```
 [fernet_tokens]
