@@ -6,4 +6,9 @@
 
 - Nhận dạng của bạn không được có "default project" liên quan đến nó
 
-**Scoped token** chứa service, catalog, roles.... đã được ủy quyền. Scopes token chỉ sử dụng trong 1 miền duy nhất cho phép vận hành với quyền cao hơn mức người dùng trong 1 miền cụ thể
+**Scoped token** chứa service catalog, roles, chi tiết về project mà ta có thể ủy quyền. 
+
+- Project Scoped token sử dụng cho  việc phân quyền trong 1 project
+
+- Domain Scoped token sử dụng cho việc phân quyền trong 1 domain
+
