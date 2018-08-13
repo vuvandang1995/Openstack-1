@@ -2,7 +2,7 @@ Lệnh sử dụng để rotate key `keystone-manage fernet_rotate`
 
 Khóa chính sẽ có số index cao nhất = 1
 
-khóa phụ (staged key) có số index = 0 nó giống như 1 khóa thứ 2,nó có khả năng giải mã thông tin, secondary key là khóa tiếp theo sẽ trở thành khóa chính
+khóa tổ chức (staged key) là khóa phục có số index = 0 có chức năng tạo ra khóa mới secondary key để trở thành primary key, nó có khả năng giải mã thông tin, secondary key là khóa tiếp theo sẽ trở thành khóa chính
 
 Sau khi chạy lệnh `keystone-manage fernet_setup`
 
@@ -33,7 +33,7 @@ $ keystone-manage fernet_rotate
 $ ls /etc/keystone/fernet-keys/
 0  1  2
 ```
-- sẽ sinh ra khóa số "2" và với khóa có số index cao nhất là primary key là file "1", staged key là file "0", sau khi hết 1 khoảng thời gian khóa chính "1" sẽ xuống và khóa secondary "2" sẽ trở thành primary key, và được sử dụng để mã hóa thông tin còn khóa "1" dùng để giải mã. khóa staged key "0" sử dụng sau khi chạy lệnh `keystone-manage fernet_rotate` để tạo ra khóa số "2"
+- sẽ sinh ra khóa số "2" và với khóa có số index cao nhất là primary key là file "1", staged key là file "0", sau khi hết 1 khoảng thời gian khóa chính "1" sẽ xuống và khóa secondary "2" sẽ trở thành primary key, và được sử dụng để mã hóa thông tin còn khóa "1" dùng để giải mã. khóa staged key "0" sử dụng sau khi chạy lệnh `keystone-manage fernet_rotate` để tạo ra khóa số "2" secondary key và sau đó khóa số 2 sẽ lên làm primary key
 
 Nếu tiếp tục chạy lệnh `keystone-manage fernet_rotate`
 ```
@@ -65,7 +65,7 @@ $ ls /etc/keystone/fernet-keys/
 # keystone will maintain one staged key, one primary key, and one secondary
 # key. Increasing this value means that additional secondary keys will be kept
 # in the rotation. (integer value)
-#max_active_keys = 3
+# max_active_keys = 3
 ```
 
 Ví dụ: nếu định xoay vòng khóa chính sau mỗi 30 phút và mỗi mã thông báo Keystone có tuổi thọ là sáu giờ, thì max_active_keys phải được đặt thành 12 (30x12=360) hoặc nhiều hơn.
