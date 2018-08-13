@@ -13,3 +13,8 @@
 
 - Domain Scoped token sử dụng cho việc phân quyền cho domain
 
+Các scoped token sau khi được tạo ra sẽ được đưa vào payload tạo ra file .json, từ file .json này 
+
+- uuid sẽ sử dụng hàm uuid.uuid4().hex để mã hóa tạo ra ID token 
+
+- fernet sẽ sử dụng các key để mã hóa tạo ra ID token (nhưng khi giải mã sẽ chỉ giải mã tạo ra file .jon chỉ đủ để xác thực chứ không tạo ra hoàn chỉnh như ban đầu.
