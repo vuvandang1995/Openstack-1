@@ -2,7 +2,9 @@ Lệnh sử dụng để rotate key `keystone-manage fernet_rotate`
 
 Khóa chính sẽ có số index cao nhất = 1
 
-khóa tổ chức (staged key) là khóa phục có số index = 0 có chức năng tạo ra khóa mới secondary key để trở thành primary key, nó có khả năng giải mã thông tin, secondary key là khóa tiếp theo sẽ trở thành khóa chính
+khóa tổ chức (staged key) là khóa phục có số index = 0 có chức năng tạo ra khóa mới để trở thành primary key tiếp theo khi roted, và  primary key cũ sẽ chuyển về secondary key, còn secondary key cũ nhất sẽ bị xóa.
+
+**Ví dụ bên dưới sẽ chỉ ra rằng, trước khi rotated sẽ có 2 key 0 và 1. Sau khi rotated sẽ tạo ra key mới chính ra key số 0, và key số 0 cũ sẽ trở thành key 2 và là primary key còn key số 1 ban đầu vẫn dữ nguyên trở thành secondary key. Rotated lần 2 sẽ tạo ra key 0 1 2 3, nhưng cấu hình chỉ cho phép 3 key, nên key số 1 sẽ bị xóa, key số 0 cũ sẽ trở thành số 3 và là primary key, key số 2 cũ chuyển thành primary key. Cách tính số key tối thiểu: `số key tối thiểu = (thời gian hết hạn của token)/(thời gian rotated key) + 2`**
 
 Sau khi chạy lệnh `keystone-manage fernet_setup`
 
@@ -33,7 +35,7 @@ $ keystone-manage fernet_rotate
 $ ls /etc/keystone/fernet-keys/
 0  1  2
 ```
-- sẽ sinh ra khóa số "2" và với khóa có số index cao nhất là primary key là file "1", staged key là file "0", sau khi hết 1 khoảng thời gian khóa chính "1" sẽ xuống và khóa secondary "2" sẽ trở thành primary key, và được sử dụng để mã hóa thông tin còn khóa "1" dùng để giải mã. khóa staged key "0" sử dụng sau khi chạy lệnh `keystone-manage fernet_rotate` để tạo ra khóa số "2" secondary key và sau đó khóa số 2 sẽ lên làm primary key
+
 
 Nếu tiếp tục chạy lệnh `keystone-manage fernet_rotate`
 ```
@@ -48,7 +50,7 @@ $ ls /etc/keystone/fernet-keys/
 0  2  3
 ```
 
-- Sẽ sinh ra khóa số "3" và khóa số 1 sẽ bị xóa, mọi thứ được mã hóa bằng khóa 1 sẽ không được xác minh vì khóa được sử dụng để mã hóa thông tin đó đã bị xóa, nguyên nhân khóa 1 bị xóa là do cấu hình hiện tại cho phép mặc định là 3 khóa hoạt động (ta có thể cấu hình nhiều khóa hoạt động bằng việc sửa `max_active_keys` ở mục `fernet_tokens` trong file `/etc/keystone/keystone.conf` nhiều lên 
+- key 1 bị xóa, mọi thứ được mã hóa bằng key 1 sẽ không được xác minh vì khóa được sử dụng để mã hóa thông tin đó đã bị xóa, nguyên nhân key 1 bị xóa là do cấu hình hiện tại cho phép mặc định là 3 khóa hoạt động ta có thể cấu hình nhiều khóa hoạt động bằng việc sửa `max_active_keys` ở mục `fernet_tokens` trong file `/etc/keystone/keystone.conf` nhiều lên 
 
 ```
 [fernet_tokens]
