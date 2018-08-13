@@ -1,4 +1,4 @@
-**unscoped token** không chứa project, uername, service... mà nó chỉ sử dụng để khai báo các danh tính của user (ví dụ như neutron, nova,...) cho việc sau này tạo `scoped token` để phân quyền mà không cần lặp lại việc khai báo các thông tin ban đầu
+**unscoped token** không chứa project, uername, service... mà nó chỉ sử dụng để khai báo các  user, project... (ví dụ như neutron, nova,...) cho việc sau này tạo `scoped token` để phân quyền mà không cần lặp lại việc khai báo các thông tin ban đầu
 
 Để có thế có được unscopes token cần:
 
@@ -6,9 +6,10 @@
 
 - Nhận dạng của bạn không được có "default project" liên quan đến nó
 
-**Scoped token** chứa service catalog, roles, chi tiết về project mà ta có thể ủy quyền. 
+**Scoped token** Sử dụng unscoped để lấy thông tin về service catalog,  user/pass, role, domain, project... để thực hiện việc phân quyền
 
-- Project Scoped token sử dụng cho  việc phân quyền trong 1 project
 
-- Domain Scoped token sử dụng cho việc phân quyền trong 1 domain
+- Project Scoped token sử dụng cho  việc phân quyền cho project
+
+- Domain Scoped token sử dụng cho việc phân quyền cho domain
 
