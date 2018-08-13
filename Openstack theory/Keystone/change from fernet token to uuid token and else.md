@@ -1,3 +1,5 @@
+# Hướng dẫn chuyển fernet token sang uuid token hoặc ngược lại
+
 ## Một số vấn đề lưu ý khi sử dụng UUID token
 - Thông thường, database keystone có khoảng 300,000 token với thời gian tồn tại 1 ngày
 - Để có thể kiểm soát được kích thước database, chúng ta phải chạy lệnh token_flush mỗi giờ để giảm số lượng token trong database
