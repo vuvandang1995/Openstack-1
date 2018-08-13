@@ -1,4 +1,4 @@
-**unscoped token** không chứa project, uername, service... mà nó chỉ sử dụng để xác minh danh tính cho việc sau này tạo `scoped token` mà không cần lặp lại việc khai báo các thông tin ban đầu
+**unscoped token** không chứa project, uername, service... mà nó chỉ sử dụng để khai báo các danh tính của user (ví dụ như neutron, nova,...) cho việc sau này tạo `scoped token` để phân quyền mà không cần lặp lại việc khai báo các thông tin ban đầu
 
 Để có thế có được unscopes token cần:
 
