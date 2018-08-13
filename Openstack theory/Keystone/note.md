@@ -110,17 +110,17 @@ Các loại fernet keys:
 - Tổng hợp các thông tin về Identity, Resources, Assignment, Catalog ở trên đưa vào Token payload, tạo ra token sử dụng hàm uuid.uuid4().hex
 - Lưu thông tin của Token vào SQL/KVS backend với các thông tin: ID, Expiration, Valid, UserID, Extra, trust_id
 
-ID : 
+ID : token ID sinh ra khi có 1 yêu cầu cần xác minh và lưu vào databases
 
-Expiration :
+Expiration : Chứa thời gian hết hạn của token sẽ được lưu vào database
 
-Valid :
+Valid : chứa giá trị 0 và 1 để biết khi nào token hết hạn, 1 vẫn còn , 0 hết hạn
 
-UserID :
+UserID : user id
 
-Extra :
+Extra : Chứa các Curl sử dụng cho việc xác thực, nơi mà các user biết gửi yêu cầu đến đâu
 
-trust_id :
+trust_id : ID của user được tin cậy cho việc xác thực
 
 **Quá trình xác thực Token**
 
