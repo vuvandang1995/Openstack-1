@@ -70,3 +70,4 @@ $ ls /etc/keystone/fernet-keys/
 
 Ví dụ: nếu định xoay vòng khóa chính sau mỗi 30 phút và mỗi mã thông báo Keystone có tuổi thọ là sáu giờ, thì max_active_keys phải được đặt thành 12 (30x12=360) hoặc nhiều hơn.
 
+<img src="http://i.imgur.com/kXZGhUZ.png">
