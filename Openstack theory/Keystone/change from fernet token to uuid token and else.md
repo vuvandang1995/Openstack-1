@@ -248,4 +248,6 @@
   1 row in set (0.00 sec)
   ```
   
+  - restart lại server
+  
 - Như vậy chúng ta đã thực hiện thành công chuyển từ việc sử dụng fernet-token sang UUID token.
