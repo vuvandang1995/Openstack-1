@@ -87,6 +87,8 @@ Target object attributes là các fields từ object description trong database.
 
 Alias là tên ngắn gọn của những rule phức tạp hoặc khó hiểu. Nó được define giống với policy, một khi đã được định nghĩa, người dùng có thể dùng keyword `rule` để sử dụng nó trong file policy.
 
+Generate file json bằng lệnh `oslopolicy-sample-generator --format json --namespace nova --output-file polic-nova.json`
+
 # 3. Các câu lệnh để quản lí role trong keystone
 
 Tạo role:
