@@ -1,3 +1,26 @@
+[I. Sử dụng command line để thực hiện những tác vụ quản trị cơ bản trong Keystone](#command)
+
+- [1. Lấy Token](#token)
+- [2. Liệt kê danh sách users](#user)
+- [3. Liệt kê danh sách projects](#project)
+- [4. Liệt kê danh sách groups](#group)
+- [5. Liệt kê danh sách roles](#role)
+- [6. Liệt kê danh sách domains](#domain-list)
+- [7. Tạo domains](#domain-create)
+- [8. Tạo project với domain](#create-project)
+- [9. Tạo user với domain](#create-user)
+- [10. Gán role cho user vào project](#add-user)
+- [11. Xác thực user mới](#auth-user)
+
+[II. Sử dụng dashboard để thực hiện những tác vụ quản trị cơ bản trong Keystone](#dashboard)
+
+- [1. Những tác vụ có thể thực hiện được của Keystone thông qua dashboard](#task)
+- [2. Truy cập trên dashboard](#access)
+- [3. Liệt kê, thiết lập, xóa, tạo, xem project](#project-dashboard)
+- [4. Liệt kê, thiết lập, xóa, tạo, xem user](#user-dashboard)
+
+----------
+
 ### <a name="command"> I. Sử dụng command line để thực hiện những tác vụ quản trị cơ bản trong Keystone </a>
 
 Tại phần này chúng ta sẽ sử dụng OpenStackClient để thực hiện những tác vụ quản trị cơ bản với Keystone như xác thực, liệt kê danh sách, tạo mới users, domains, projects,...
