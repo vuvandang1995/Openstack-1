@@ -18,9 +18,8 @@
 [II. Sử dụng dashboard để thực hiện những tác vụ quản trị cơ bản trong Keystone](#dashboard)
 
 - [1. Những tác vụ có thể thực hiện được của Keystone thông qua dashboard](#task)
-- [2. Truy cập trên dashboard](#access)
-- [3. Liệt kê, thiết lập, xóa, tạo, xem project](#project-dashboard)
-- [4. Liệt kê, thiết lập, xóa, tạo, xem user](#user-dashboard)
+- [2. Liệt kê, thiết lập, xóa, tạo, xem project](#project-dashboard)
+- [3. Liệt kê, thiết lập, xóa, tạo, xem user](#user-dashboard)
 
 ----------
 
@@ -699,16 +698,11 @@ Content-Type: application/json
 
 Tùy thuộc vào phiên bản được sử dụng trong file config của Horizon. Nếu là Identity API v2 thì chỉ có phần quản lí cho User và Project. Nếu là v3 thì sẽ có thêm Group, Domain, và Role.
 
-#### <a name="access"> 2. Truy cập trên dashboard
 
-Phần quản trị Identity nằm ở menu bên trái màn hình:
+#### <a name="project-dashboard"> 2. Liệt kê, thiết lập, xóa, tạo, xem project
 
-<img src="http://i.imgur.com/UPUzn3s.png">
+<img src="https://i.imgur.com/PI1MZIB.png">
 
-#### <a name="project-dashboard"> 3. Liệt kê, thiết lập, xóa, tạo, xem project
+#### <a name="user-dashboard"> 3. Liệt kê, thiết lập, xóa, tạo, xem user
 
-<img src="http://i.imgur.com/Uve804Z.png">
-
-#### <a name="user-dashboard"> 4. Liệt kê, thiết lập, xóa, tạo, xem user
-
-<img src="http://i.imgur.com/ec00oJ0.png">
+<img src="https://i.imgur.com/i1vrc8Z.png">
