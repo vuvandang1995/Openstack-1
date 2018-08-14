@@ -6,7 +6,7 @@ khóa tổ chức (staged key) là khóa phục có số index = 0 có chức n�
 
 **Ví dụ bên dưới sẽ chỉ ra rằng, trước khi rotated sẽ có 2 key 0 và 1. Sau khi rotated sẽ tạo ra key mới chính ra key số 0, và key số 0 cũ sẽ trở thành key 2 và là primary key còn key số 1 ban đầu vẫn dữ nguyên trở thành secondary key. Rotated lần 2 sẽ tạo ra key 0 1 2 3, nhưng cấu hình chỉ cho phép 3 key, nên key số 1 sẽ bị xóa, key số 0 cũ sẽ trở thành số 3 và là primary key, key số 2 cũ chuyển thành primary key. Cách tính số key tối thiểu: `số key tối thiểu = (thời gian hết hạn của token)/(thời gian rotated key) + 2`**
 
-Sau khi chạy lệnh `keystone-manage fernet_setup`
+Sau khi chạy lệnh keystone-manage fernet_setup (`keystone-manage fernet_setup --keystone-user keystone --keystone-group keystone`)
 
 ```
 $ keystone-manage fernet_setup
@@ -22,7 +22,7 @@ $ ls /etc/keystone/fernet-keys/
 0  1
 ```
 
-Sau khi chạy lệnh `keystone-manage fernet_rotate`
+Sau khi chạy lệnh keystone-manage fernet_rotate (`keystone-manage fernet_rotate --keystone-user keystone --keystone-group keystone`)
 
 ```
 $ keystone-manage fernet_rotate
@@ -37,7 +37,7 @@ $ ls /etc/keystone/fernet-keys/
 ```
 
 
-Nếu tiếp tục chạy lệnh `keystone-manage fernet_rotate`
+Nếu tiếp tục chạy lệnh keystone-manage fernet_rotate (`keystone-manage fernet_rotate --keystone-user keystone --keystone-group keystone`)
 ```
 $ keystone-manage fernet_rotate
 2698 INFO keystone.token.providers.fernet.utils [-] Starting key rotation with 3 key files: ['/etc/keystone/fernet-keys/0', '/etc/keystone/fernet-keys/1', '/etc/keystone/fernet-keys/2']
