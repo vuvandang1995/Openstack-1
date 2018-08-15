@@ -99,16 +99,20 @@ Container Formats mô tả định dạng files và chứa các thông tin metad
 Glance status flow cho biết trạng thái của image trong quá trình tải lên. Khi tạo một image, bước đầu tiên là queuing, image được đưa vào hàng đợi và được nhận diện trong một khoảng thời gian ngắn, được bảo vệ và sẵn sàng để tải lên. Sau khi queuing image chuyển sang trạng thái Saving nghĩa là quá trình tải lên chưa hoàn thành. Một khi image được tải lên hoàn toàn, trạng thái image chuyển sang Active. Khi quá trình tải lên thất bại nó sẽ chuyển sang trạng thái bị hủy hoặc bị xóa. Ta có thể deactive và reactive các image đã upload thành công bằng cách sử dụng command.
 Glance status flow được mô tả theo hình sau:
 
-<img src="http://i.imgur.com/ZNddPJV.jpg">
+<img src="https://i.imgur.com/kWVwWQv.png">
 
 Các trạng thái của image:
 
 - **queued** : Định danh của image được bảo vệ trong Glance registry. Không có dữ liệu nào của image được tải lên Glance và kích thước của image không được thiết lập về zero khi khởi tạo.
-- **saving** : Biểu thị rằng dữ liệu của image đang được upload lên glance. Khi một image đăng ký với một call đến POST /image và có một x-image-meta-location header, image đó sẽ không bao giờ được trong tình trạng saving (dữ liệu Image đã có sẵn ở vị trí khác).
+- **saving** : Biểu thị rằng dữ liệu của image đang được upload lên glance. Khi một image đã được đăng ký sẽ có một x-image-meta-location header, image đó sẽ không bao giờ được trong tình trạng saving (dữ liệu Image đã có sẵn ở vị trí khác).
+- **uploading**:Biểu thị rằng việc nhập dữ liệu đã được thực hiện. Trong khi ở trạng thái này, một cuộc gọi tới PUT / file không được phép.
+- **importing**:Biểu thị rằng việc nhập đã được thực hiện nhưng hình ảnh chưa sẵn sàng để sử dụng.
 - **active** : Biểu thị một image đó là hoàn toàn có sẵn trong Glane. Điều này xảy ra khi các dữ liệu image được tải lên.
 - **deactivated** : Trạng thái biểu thị việc không được phép truy cập vào dữ liệu của image với tài khoản không phải admin. Khi image ở trạng thái này, ta không thể tải xuống cũng như export hay clone image.
 - **killed** : Trạng thái biểu thị rằng có vấn đề xảy ra trong quá trình tải dữ liệu của image lên và image đó không thể đọc được
 - **deleted** : Trạng thái này biểu thị việc Glance vẫn giữ thông tin về image nhưng nó không còn sẵn sàng để sử dụng nữa. Image ở trạng thái này sẽ tự động bị gỡ bỏ vào ngày hôm sau.
+- **pending_delete**:Điều này tương tự như xóa, tuy nhiên, Glance vẫn chưa xóa dữ liệu hình ảnh. Hình ảnh trong trạng thái này không thể khôi phục được
+
 
 <a name ="config"></a>
 ### 6. Các file cấu hình của glance
