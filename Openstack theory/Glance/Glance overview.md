@@ -12,7 +12,7 @@
 
 [4. Các định dạng image của Glance](#image)
 
-[5. Glance Status Flow](#flow)
+[5. Image status](#status)
 
 [6. Các file cấu hình của glance](#config)
 
@@ -93,8 +93,8 @@ Container Formats mô tả định dạng files và chứa các thông tin metad
 | ova | Xác định lưu trữ trong Glance là file lưu trữ OVA |
 | docker | Xác định lưu trữ trong Glance và file lưu trữ Docker |
 
-<a name ="flow"></a>
-### 5. Glance Status Flow
+<a name ="status"></a>
+### 5. Image status
 
 Glance status flow cho biết trạng thái của image trong quá trình tải lên. Khi tạo một image, bước đầu tiên là queuing, image được đưa vào hàng đợi và được nhận diện trong một khoảng thời gian ngắn, được bảo vệ và sẵn sàng để tải lên. Sau khi queuing image chuyển sang trạng thái Saving nghĩa là quá trình tải lên chưa hoàn thành. Một khi image được tải lên hoàn toàn, trạng thái image chuyển sang Active. Khi quá trình tải lên thất bại nó sẽ chuyển sang trạng thái bị hủy hoặc bị xóa. Ta có thể deactive và reactive các image đã upload thành công bằng cách sử dụng command.
 Glance status flow được mô tả theo hình sau:
