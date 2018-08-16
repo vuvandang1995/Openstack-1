@@ -36,8 +36,8 @@ connection = mysql+pymysql://glance:GLANCE_DBPASS@controller/glance
 ``` 
 [keystone_authtoken]
 # ...
-auth_uri = http://controller:5000
-auth_url = http://controller:5000
+auth_uri = http://controller:5000 (xác thực user)
+auth_url = http://controller:5000 (xác thực service)
 memcached_servers = controller:11211 (bộ nhớ đệm đảm bảo tính nhất quán khi sử dụng các project)
 auth_type = password
 project_domain_name = default
@@ -48,7 +48,7 @@ password = GLANCE_PASS
 
 [paste_deploy]
 # ...
-flavor = keystone
+flavor = keystone (bật đường dẫn pipeline:glance-api-keystone)
 ```
 
 - Section [glance_store] chứa cấu hình về kiểu lưu trữ image cũng như nơi chưa image file.
