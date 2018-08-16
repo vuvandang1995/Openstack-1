@@ -1,5 +1,7 @@
 # chuyển đổi định dạng của image khi boot image vào volume
 
+(Khi tạo volume boot từ image thì image sẽ được lưu bên trong volume mới tạo ra lằm tại /dev/cinder-volumes
+
 
 `cinder reset-state --state available 16c1e5a7-9956-419a-9a81-e13a908d6166`
 
