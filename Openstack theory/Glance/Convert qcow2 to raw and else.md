@@ -13,5 +13,5 @@ Với 16c1e5a7-9956-419a-9a81-e13a908d6166 là ID của volume kiểm tra bằng
 Để chuyển đổi từ định dạng qcow2 sang raw, ta dùng câu lệnh: qemu-img convert -f qcow2 -O raw /var/lib/libvirt/images/VM.qcow2 /var/lib/libvirt/images/VM.raw
 ```
 
-Tạo volume boot từ image với image định dạng qcow2 sẽ nhanh hơn định dạng raw
+Tạo volume boot từ image với image định dạng qcow2 sẽ nhanh hơn định dạng raw do định dạng qcow2 chỉ chứa dung lượng đúng bằng dung lượng thật của dữ liệu, còn raw sẽ có dung lượng bằng dung lượng khi tạo ra file
 
