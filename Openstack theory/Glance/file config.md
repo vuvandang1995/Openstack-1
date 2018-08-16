@@ -38,7 +38,7 @@ connection = mysql+pymysql://glance:GLANCE_DBPASS@controller/glance
 # ...
 auth_uri = http://controller:5000
 auth_url = http://controller:5000
-memcached_servers = controller:11211
+memcached_servers = controller:11211 (bộ nhớ đệm đảm bảo tính nhất quán khi sử dụng các project)
 auth_type = password
 project_domain_name = default
 user_domain_name = default
@@ -58,7 +58,7 @@ flavor = keystone
 # ...
 stores = file,http
 default_store = file
-filesystem_store_datadir = /var/lib/glance/images/
+filesystem_store_datadir = /var/lib/glance/images/ (nơi lưu cái file image gốc)
 ```
 
 - Ở đây có 2 loại stores được sử dụng và mặc định sẽ sử dụng file system. Bạn có thể cấu hình để lưu trữ trên nhiều nơi khác nhau theo cấu trúc:
@@ -89,8 +89,8 @@ connection = mysql+pymysql://glance:GLANCE_DBPASS@controller/glance
 
 [keystone_authtoken]
 # ...
-auth_uri = http://controller:5000
-auth_url = http://controller:5000 (authen token)
+auth_uri = http://controller:5000 (xác thực user)
+auth_url = http://controller:5000 (xác thực service)
 memcached_servers = controller:11211 (bộ nhớ đệm đảm bảo tính nhất quán khi sử dụng các project)
 auth_type = password
 project_domain_name = default
