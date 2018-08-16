@@ -1,11 +1,10 @@
-# Các file cấu hình
+# Các file cấu hình Glance
 
 file image sẽ được lưu tại `/var/lib/glance/images/`
 
 
-# Tìm hiểu file cấu hình của glance
 
-## Mục lục
+
 
 [1. File glance-api.conf](#api)
 
@@ -24,7 +23,7 @@ Glance có 2 daemon chạy ẩn đó là glance-api và glance-registry.
 
 - Tại section [database], cấu hình để kết nối tới database:
 
-``` sh
+```
 [database]
 # ...
 connection = mysql+pymysql://glance:GLANCE_DBPASS@controller/glance
@@ -34,7 +33,7 @@ connection = mysql+pymysql://glance:GLANCE_DBPASS@controller/glance
 
 - Section [keystone_authtoken] và [paste_deploy] chứa các cấu hình để kết nối tới identity service:
 
-``` sh
+``` 
 [keystone_authtoken]
 # ...
 auth_uri = http://controller:5000
@@ -54,7 +53,7 @@ flavor = keystone
 
 - Section [glance_store] chứa cấu hình về kiểu lưu trữ image cũng như nơi chưa image file.
 
-``` sh
+``` 
 [glance_store]
 # ...
 stores = file,http
@@ -72,7 +71,7 @@ PATH là đường dẫn tới thư mục chứa image và PRIORITY là mức đ
 
 Ví dụ:
 
-``` sh
+```
 filesystem_store_datadirs = /var/glance/store
 filesystem_store_datadirs = /var/glance/store1:100
 filesystem_store_datadirs = /var/glance/store2:200
@@ -83,7 +82,7 @@ filesystem_store_datadirs = /var/glance/store2:200
 
 - Tương tự như file `glance-api.conf`, file `glance-registry.conf` cũng được lưu tại thư mục `/etc/glance`. Đồng thời nó cũng chứa cấu hình để access database cũng như identity service:
 
-``` sh
+``` 
 [database]
 # ...
 connection = mysql+pymysql://glance:GLANCE_DBPASS@controller/glance
@@ -91,8 +90,8 @@ connection = mysql+pymysql://glance:GLANCE_DBPASS@controller/glance
 [keystone_authtoken]
 # ...
 auth_uri = http://controller:5000
-auth_url = http://controller:5000
-memcached_servers = controller:11211
+auth_url = http://controller:5000 (authen token)
+memcached_servers = controller:11211 (bộ nhớ đệm đảm bảo tính nhất quán khi sử dụng các project)
 auth_type = password
 project_domain_name = default
 user_domain_name = default
@@ -102,17 +101,17 @@ password = GLANCE_PASS
 
 [paste_deploy]
 # ...
-flavor = keystone
+flavor = keystone  (bật đường dẫn pipeline:glance-api-keystone)
 ```
 
-**Lưu ý:** Trên đây chỉ là những cấu hình cơ bản tối thiểu mà người dùng cần thực hiện trong quá trình cài đặt glance, xem thêm về các tùy chọn cấu hình có thể thực hiện [tại đây](https://docs.openstack.org/developer/glance/configuring.html).
+Trên đây chỉ là những cấu hình cơ bản tối thiểu mà người dùng cần thực hiện trong quá trình cài đặt glance
 
 <a name="log"></a>
 ### 3. File log của glance
 
 - Section [DEFAULT] chứa đường dẫn tới file và thư mục log của glance:
 
-``` sh
+``` 
 [DEFAULT]
 log_file = /var/log/glance/api.log
 log_dir = /var/log/glance
