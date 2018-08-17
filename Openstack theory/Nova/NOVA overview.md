@@ -26,7 +26,7 @@ Nova cho phép bạn điều khiển các máy ảo và networks, bạn cũng c�
 
 Quá trình xử lí khá phức tạp, về cơ bản, daemon tiếp nhận các hành động từ hàng đợi và thực hiện một loạt các câu lệnh hệ thống để vận hành máy ảo như chạy máy ảo kvm và upsate trạng thái trong database.
 
-- nova-placement-api : Lần đầu xuất hiện tại bản Newton, placement api được dùng để theo dõi thống kê và muức độ sử dụng của mỗi một resource provider. Provider ở đây có thể là compute node, shared storage pool hoặc IP allocation pool. Ví dụ, một máy ảo có thể được khởi tạo và lấy RAM, CPU từ compute node, lấy disk từ storage bên ngoài và lấy địa chỉ IP từ pool resource bên ngoài.
+- nova-placement-api : Lần đầu xuất hiện tại bản Newton, placement api được dùng để theo dõi thống kê và mức độ sử dụng của mỗi một resource provider. Provider ở đây có thể là compute node, shared storage pool hoặc IP allocation pool. Ví dụ, một máy ảo có thể được khởi tạo và lấy RAM, CPU từ compute node, lấy disk từ storage bên ngoài và lấy địa chỉ IP từ pool resource bên ngoài.
 
 - nova-scheduler : Service này sẽ lấy các yêu cầu máy ảo đặt vào queue và xác định xem chúng được chạy trên compute server host nào.Nova-scheduler sẽ scan và nhận thông kê tài nguyên từ nova-placement-api để xác định tài compute trống nhiều tài nguyên nhất để khởi tạo máy ảo trên đó.
 
@@ -42,7 +42,7 @@ nova-conductor : Là module chịu trách nhiệm về các tương tác giữa 
 
 - The queue: Trung tâm giao tiếp giữa các daemons. Thường dùng RabbitMQ hoặc các AMQP message queue khác như ZeroMQ.
 
-- SQL database : Dùng để lưu các trạng thái của hạ tâng caloud bảo gồm:
+- SQL database : Dùng để lưu các trạng thái của hạ tầng caloud bảo gồm:
 <ul>
 <ul>
 <li>Các loại máy ảo có thể chạy</li>
