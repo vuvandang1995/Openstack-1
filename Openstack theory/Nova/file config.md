@@ -1,4 +1,4 @@
-# Tìm hiểu các main options trong file config của Nova
+# Tìm hiểu các options chính trong file config của Nova
 
 - Đặt tại /etc/nova/nova.conf
 
@@ -27,7 +27,7 @@ firewall_driver = nova.virt.firewall.NoopFirewallDriver`
 auth_strategy = keystone
 [keystone_authtoken]
 auth_uri = http:// 10.0.2.15:5000
-auth_url = http:// 10.0.2.15:35357
+auth_url = http:// 10.0.2.15:5000
 auth_type = password
 project_domain_name = default
 user_domain_name = default
@@ -38,8 +38,8 @@ password = openstack`
 - Kết nối tới Nova database
 
 `[api_database]
-connection=mysql+pymysql://nova_
-api:password@10.0.2.15/nova_api
+connection=mysql+pymysql://nova:password@10.0.2.15/nova_api
+
 [database]
 connection=mysql+pymysql://
 nova:password@10.0.2.15/nova`
@@ -48,6 +48,7 @@ nova:password@10.0.2.15/nova`
 
 `[DEFAULT]
 rpc_backend = rabbit
+
 [oslo_messaging_rabbit]
 rabbit_host = localhost
 rabbit_port = 5672
