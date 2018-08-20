@@ -42,7 +42,7 @@ nova-conductor : Là module chịu trách nhiệm về các tương tác giữa 
 
 - The queue: Trung tâm giao tiếp giữa các daemons. Thường dùng RabbitMQ hoặc các AMQP message queue khác như ZeroMQ.
 
-- SQL database : Dùng để lưu các trạng thái của hạ tầng caloud bảo gồm:
+- SQL database : Dùng để lưu các trạng thái của hạ tầng cloud bảo gồm:
 <ul>
 <ul>
 <li>Các loại máy ảo có thể chạy</li>
