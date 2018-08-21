@@ -83,9 +83,9 @@ Workflow khi khởi tạo máy ảo:
 
 2. Nếu quá trình xác thực thành công, client sẽ gửi request khởi chạy máy ảo tới nova-api. Giống câu lệnh `nova boot`.
 
-3. Nova service sẽ kiểm tra token và nhận lại header với roles và permissions từ keystone-api.
+3. Nova-api sẽ gửi token tới keystone-api để xác thực, nếu thành công keystone-api sẽ kiểm tra token và gửi lại header với roles và permissions cho nova-api.
 
-4. Nova kiểm tra trong database để xem có conflicts nào với tên những objects đã có sẵn không và tạo mới một entry cho máy ảo mới trong database.
+4. Nova-api kiểm tra trong database để xem có conflicts nào với tên những objects đã có sẵn không và tạo mới một entry cho máy ảo mới trong database.
 
 5. Nova-api gửi RPC tới nova-scheduler service để lên lịch cho máy ảo.
 
