@@ -105,4 +105,4 @@ Ngoài 24 thông số cơ bản trên còn một số các thông số như:
 - k en-us
 
 - device virtio-balloon-pci,id=balloon0,bus=pci.0,addr=0x5
-+ aa
+   - aa
