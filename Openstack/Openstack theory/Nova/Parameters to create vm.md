@@ -40,7 +40,7 @@ Trên một hệ thống Unix ta có thể dùng lệnh dmidecode để xem thô
 <img src="https://i.imgur.com/qUJaAfp.jpg">
 
 <li>Type 1 là thông tin hệ thống:</li>
-<img sr="https://i.imgur.com/3Yo2xDJ.jpg">
+<img src="https://i.imgur.com/3Yo2xDJ.jpg">
 
 <li>Type 2 là thông tin bo mạch chủ:</li>
 <img src="https://i.imgur.com/c3Op5VB.jpg">
