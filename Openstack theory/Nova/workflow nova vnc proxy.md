@@ -39,6 +39,6 @@
 - Nova-api trả về thông tin truy cập url trong file connect_info tới web http://172.24.1.1:6080/vnc_auto.html?token=7efaee3f-eada-4731-a87c-e173cbd25e98&title=helloworld(9169fdb2-5b74-46b1-9803 -60d2926bd97c), nhưng tiêu đề của console sẽ trở thành novnc thay vì tên và ID của máy ảo.
 - Web sẽ thử mở đường dẫn này.
 - Đường dẫn này sẽ gửi request tới nova-novncproxy.
-- Nova-novncproxy gọi tới hàm check_token của nova-consoleauth.
+- Nova-novncproxy gọi tới chức năng check_token của nova-consoleauth.
 - Nova-consoleauth sẽ xác thực token và trả về connect_info tương ứng tới instance này cho nova-novncproxy.
 - Nova-novncproxy khởi động proxy bằng kết nối VNC Server trên compute với host, port và các thông tin khác trong file connect_info.
