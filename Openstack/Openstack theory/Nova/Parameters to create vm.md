@@ -81,4 +81,25 @@ Ta cần cấu hình trong  image để ghi log vào console: /boot/grub/grub.cf
 
 **vnc 0.0.0.0:12**: Địac hỉ VNC và port tương ứng
 
+**chardev socket,id=charmonitor,path=/var/lib/libvirt/qemu/instance-00000024.monitor,server,nowait**
+
+**rtc base = utc, drift fix = slew**
+
+**device piix3-usb-uhci,id=usb,bus=pci.0,addr=0x1.0x2**
+
+Ngoài 24 thông số cơ bản trên còn một số các thông số như:
+
+-no-user-config
+
+-nodefaults
+
+-global kvm-pit.lost_tick_policy=discard
+
+-no-shutdown
+
+-boot strict=on
+
+-k en-us
+
+-device virtio-balloon-pci,id=balloon0,bus=pci.0,addr=0x5
 
