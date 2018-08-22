@@ -92,17 +92,17 @@ Ta cần cấu hình trong  image để ghi log vào console: /boot/grub/grub.cf
 
 Ngoài 24 thông số cơ bản trên còn một số các thông số như:
 
--no-user-config
+- no-user-config
 
--nodefaults
+- nodefaults
 
--global kvm-pit.lost_tick_policy=discard
+- global kvm-pit.lost_tick_policy=discard
 
--no-shutdown
+- no-shutdown
 
--boot strict=on
+- boot strict=on
 
--k en-us
+- k en-us
 
--device virtio-balloon-pci,id=balloon0,bus=pci.0,addr=0x5
-
+- device virtio-balloon-pci,id=balloon0,bus=pci.0,addr=0x5
++ aa
