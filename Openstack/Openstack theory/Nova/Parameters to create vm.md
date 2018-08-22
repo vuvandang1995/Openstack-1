@@ -37,7 +37,6 @@ Ví dụ: một máy ảo có 2 CPU, mỗi CPU có 4 core và 2 hyper-threading 
    <ul>
 <li>Trên một hệ thống Unix ta có thể dùng lệnh dmidecode để xem thông tin SMBIOS, thông tin sẽ được chia thành nhiều bảng và gọi là type (ở đây chọn type 1):</li>
 
-      
 <li>Type0 là thông tin BIOS:</li>
 <img src="https://i.imgur.com/qUJaAfp.jpg">
 
