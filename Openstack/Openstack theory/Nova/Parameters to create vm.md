@@ -18,13 +18,13 @@ qemu-system-x86_64
 
 <img src="https://i.imgur.com/dfxsm3o.jpg">
 
-Tuy nhiên phương pháp này cũng gây bất lợi cho các CPUs khi truy cập vào RAM thông qua các bus, lúc này các bus sẽ trở thành nút cổ chai khiến CPU truy cập vào RAM rất chậm. Để giải quyết vấn đề này kiến trúc NUMA được sử dụng, nó gọi là kiến trúc truy cập bộ nhớ không đồng nhất
+   - Tuy nhiên phương pháp này cũng gây bất lợi cho các CPUs khi truy cập vào RAM thông qua các bus, lúc này các bus sẽ trở thành nút cổ chai khiến CPU truy cập vào RAM rất chậm. Để giải quyết vấn đề này kiến trúc NUMA được sử dụng, nó gọi là kiến trúc truy cập bộ nhớ không đồng nhất
 
 <img src="https://i.imgur.com/EnPcFfo.jpg">
 
-Trong kiến trúc NUMA mỗi CPU có một bộ nhớ local trực tiếp, việc truy cập vào bộ nhớ local rất nhanh và nó không cần sử dụng bus hệ thống. Điều đó có thể làm tăng hiệu suất khi có nhiều CPU truy cập vào bộ nhớ. Kiến trúc NUMA có thể xem bằng lệnh numact
+   - Trong kiến trúc NUMA mỗi CPU có một bộ nhớ local trực tiếp, việc truy cập vào bộ nhớ local rất nhanh và nó không cần sử dụng bus hệ thống. Điều đó có thể làm tăng hiệu suất khi có nhiều CPU truy cập vào bộ nhớ. Kiến trúc NUMA có thể xem bằng lệnh numact
 
-Các thông số smp1, sockets=1(*số lượng khe cắm ở bo mạch chủ*), cores=1, threads=1. Mô phỏng bộ xử lý với 1 vcpu, 1 socket, 1 core và 1 threads (*số luồng xử lý trên mỗi core*).
+   - Các thông số smp1, sockets=1(*số lượng khe cắm ở bo mạch chủ*), cores=1, threads=1. Mô phỏng bộ xử lý với 1 vcpu, 1 socket, 1 core và 1 threads (*số luồng xử lý trên mỗi core*).
 
 Ví dụ: một máy ảo có 2 CPU, mỗi CPU có 4 core và 2 hyper-threading vậy số CPU sẽ là 2x4x2=16 CPU
 
@@ -34,13 +34,13 @@ Ví dụ: một máy ảo có 2 CPU, mỗi CPU có 4 core và 2 hyper-threading 
 
 Trên một hệ thống Unix ta có thể dùng lệnh dmidecode để xem thông tin SMBIOS, thông tin sẽ được chia thành nhiều bảng và gọi là type (ở đây chọn type 1):
 
-   Type0 là thông tin BIOS:
+   - Type0 là thông tin BIOS:
 <img src="https://i.imgur.com/qUJaAfp.jpg">
 
-   Type 1 là thông tin hệ thống:
+   - Type 1 là thông tin hệ thống:
 <img sr="https://i.imgur.com/3Yo2xDJ.jpg">
 
-   Type 2 là thông tin bo mạch chủ
+   - Type 2 là thông tin bo mạch chủ
 <img src="https://i.imgur.com/c3Op5VB.jpg">
 
 - **my chardev = charmonitor, id = monitor, mode = control**: Quản lý máy ảo chạy qemu bằng monitor, có 2 cách truy cập vào qemu monitor console:
@@ -76,7 +76,7 @@ Các virtio về lưu trữ là 1 paravirtualized driver
 
 - **device isa-serial, chardev=charserial0, id=serial0**: Log của guest
 
-Ta cần cấu hình trong  image để ghi log vào console: /boot/grub/grub.cfg has linux/boot/vmlinuz-3.2.0-49-virtual root=UUID=6d2231e4-0975-4f35-a94f-56738c1a8150 ro console=ttyS0
+Ta cần cấu hình trong  image để ghi log vào console: /boot/grub/grub.cfg has linux/boot/vmlinuz-3.2.0-49-virtual root=UUID=6d2231e4-  0975-4f35-a94f-56738c1a8150 ro console=ttyS0
 
 - **chardev pty, id=charserial1**:
 
@@ -90,7 +90,7 @@ Ta cần cấu hình trong  image để ghi log vào console: /boot/grub/grub.cf
 
 - **device piix3-usb-uhci,id=usb,bus=pci.0,addr=0x1.0x2**
 
-Ngoài 24 thông số cơ bản trên còn một số các thông số như:
+## Ngoài 24 thông số cơ bản trên còn một số các thông số như:
 
 - no-user-config
 
@@ -105,4 +105,4 @@ Ngoài 24 thông số cơ bản trên còn một số các thông số như:
 - k en-us
 
 - device virtio-balloon-pci,id=balloon0,bus=pci.0,addr=0x5
-   - aa
+
