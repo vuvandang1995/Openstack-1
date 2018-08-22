@@ -46,7 +46,6 @@ Ví dụ: một máy ảo có 2 CPU, mỗi CPU có 4 core và 2 hyper-threading 
 
 <li>Type 2 là thông tin bo mạch chủ:</li>
 <img src="https://i.imgur.com/c3Op5VB.jpg">
-
 </ul>
 </ul>
 
@@ -55,8 +54,8 @@ Ví dụ: một máy ảo có 2 CPU, mỗi CPU có 4 core và 2 hyper-threading 
   <ul>
     <li>Kết nối tới máy ảo với VNC, Ctrl+Alt+2 để enter, Ctrl+Alt+1 để trở về normal console</li>
 
-<li>Chỉ định tham số -monitor khi qemu khởi động (*ví dụ -monitor stdio sẽ cho  phép chuẩn đầu vào giống như 1 lệnh monitor*)</li>
-</ul>
+   <li>Chỉ định tham số -monitor khi qemu khởi động (*ví dụ -monitor stdio sẽ cho  phép chuẩn đầu vào giống như 1 lệnh monitor*)</li>
+  </ul>
 </ul>
 
 - **no-hpet**: Thời gian hệ thống xác định bởi -rtc -rtc[base = utc | localtime |date] [, clock = host | vm] [, driftfix =none | slew]
@@ -76,8 +75,9 @@ Ví dụ: một máy ảo có 2 CPU, mỗi CPU có 4 core và 2 hyper-threading 
 <ul>
   <ul>
      <li>Các virtio trên card mạng là 1 paravirtualized</li>
-</ul>
-  </ul>
+   </ul>
+   </ul>
+   
      
 - **drive file=/var/lib/nova/instances/1f8e6f7e-5a70-4780-89c1-464dc0e7f308/disk, if=none, id=drive-virtio-disk0, format=qcow2, cache=none**: thông số hard disk của host
 
@@ -85,8 +85,8 @@ Ví dụ: một máy ảo có 2 CPU, mỗi CPU có 4 core và 2 hyper-threading 
 <ul>
   <ul>
      <li>Các virtio về lưu trữ là 1 paravirtualized driver</li>
-</ul>
-  </ul>
+   </ul>
+   </ul>
      
 - **chardev file, id=charserial0, path=/var/lib/nova/instances/1f8e6f7e-5a70-4780-89c1-464dc0e7f308/console.log**: Log của host
 
@@ -94,8 +94,8 @@ Ví dụ: một máy ảo có 2 CPU, mỗi CPU có 4 core và 2 hyper-threading 
 <ul>
   <ul>
      <li>Ta cần cấu hình trong  image để ghi log vào console: /boot/grub/grub.cfg has linux/boot/vmlinuz-3.2.0-49-virtual root=UUID=6d2231e4-  0975-4f35-a94f-56738c1a8150 ro console=ttyS0</li>
-</ul>
-  </ul>
+   </ul>
+   </ul>
      
 - **chardev pty, id=charserial1**:
 
