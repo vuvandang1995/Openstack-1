@@ -1,20 +1,52 @@
 # Phần này sẽ giới thiệu về các tham số cần để tạo một máy ảo
 
-- qemu-system-x86_64
 
-- enable-kvm
 
-- name instance-00000024
+qemu-system-x86_64  
 
-- machine pc-i440fx-trusty, accel=kvm, usb=off
+**enable-kvm**: Bật ảo hóa hỗ trợ phần cứng
 
-- cpu SandyBridge,+erms, +smep, +fsgsbase, +pdpe1gb, +rdrand, +f16c, +osxsave, +dca, +pcid, +pdcm, +xtpr, +tm2, +est, +smx, +vmx, +ds_cpl, +monitor, +dtes64, +pbe, +tm, +ht, +ss, +acpi, +ds, +vme
+**name instance-00000024**: Tên máy ảo
 
-- m 2048 -realtime mlock=off
+**machine pc-i440fx-trusty, accel=kvm, usb=off**: Qemu sẽ mô phỏng một loạt các kiến trúc như 1 máy tính thông thường hoặc kiến trúc x86, 32-bit hoặc 64-bit, địa chỉ MAC, kiến trúc bộ tập lệnh RISC, kiến trúc hệ thống. Nếu KVM hỗ trợ phần cứng được sử dụng thì VD-T đã được bật trên BIOS , tham số accel=kvm. Nếu không sử dụng hỗ trợ phần cứng chỉ sử dụng mô phỏng thuần túy thì thông số accel = tcg, -no-kvm
 
-- smp 1, sockets=1, cores=1, threads=1
+**cpu SandyBridge,+erms, +smep, +fsgsbase, +pdpe1gb, +rdrand, +f16c, +osxsave, +dca, +pcid, +pdcm, +xtpr, +tm2, +est, +smx, +vmx, +ds_cpl, +monitor, +dtes64, +pbe, +tm, +ht, +ss, +acpi, +ds, +vme**: Đặt CPU, SandyBridge là bộ vi xử lý intel, cộng với việc thông số của cpu được thêm vào và hiển thị tại /proc/cpuinfo
 
-- uuid 1f8e6f7e-5a70-4780-89c1-464dc0e7f308
+**m 2048 -realtime mlock=off**: Thông số RAM, kích thước ram chạy trên máy ảo sẽ được điều chỉnh với MemoryBallooning -device virtio-balloon-pci, id=balloon0, bus=pci.0, addr=0x5
+
+**smp 1, sockets=1, cores=1, threads=1**: SMP là Symmetrical Multi-Processing (bộ đa xử lý đối xứng), nó đề cập đến một bộ vi xử lý nhiều CPUs trên 1 máy tính và nhiều CPU chia sẻ bộ nhớ thông qua bus hệ thống
+
+<img src="https://i.imgur.com/dfxsm3o.jpg">
+
+Tuy nhiên phương pháp này cũng gây bất lợi cho các CPUs khi truy cập vào RAM thông qua các bus, lúc này các bus sẽ trở thành nút cổ chai khiến CPU truy cập vào RAM rất chậm. Để giải quyết vấn đề này kiến trúc NUMA được sử dụng, nó gọi là kiến trúc truy cập bộ nhớ không đồng nhất
+
+<img src="https://i.imgur.com/EnPcFfo.jpg">
+
+Trong kiến trúc NUMA mỗi CPU có một bộ nhớ local trực tiếp, việc truy cập vào bộ nhớ local rất nhanh và nó không cần sử dụng bus hệ thống. Điều đó có thể làm tăng hiệu suất khi có nhiều CPU truy cập vào bộ nhớ. Kiến trúc NUMA có thể xem bằng lệnh numact
+
+Các thông số smp1, sockets=1(*số lượng khe cắm ở bo mạch chủ*), cores=1, threads=1. Mô phỏng bộ xử lý với 1 vcpu, 1 socket, 1 core và 1 threads (*số luồng xử lý trên mỗi core*).
+
+Ví dụ: một máy ảo có 2 CPU, mỗi CPU có 4 core và 2 hyper-threading vậy số CPU sẽ là 2x4x2=16 CPU
+
+**uuid 1f8e6f7e-5a70-4780-89c1-464dc0e7f308**: UUID máy ảo
+
+**smbios type=1, manufacturer=OpenStack Foundation, product=OpenStack Nova, version=2014.1, serial=80590690-87d2-e311-b1b0-a0481cabdfb4, uuid=1f8e6f7e-5a70-4780-89c1-464dc0e7f308**: smbios là System Management BIOS được sử dụng để biểu diễn thông tin kiến trúc x86
+
+Trên một hệ thống Unix ta có thể dùng lệnh dmidecode để xem thông tin SMBIOS, thông tin sẽ được chia thành nhiều bảng và gọi là type (ở đây chọn type 1):
+
+- Type0 là thông tin BIOS:
+<img src="https://i.imgur.com/qUJaAfp.jpg">
+
+- Type 1 là thông tin hệ thống:
+<img sr="https://i.imgur.com/3Yo2xDJ.jpg">
+
+- Type 2 là thông tin bo mạch chủ
+<img src="https://i.imgur.com/c3Op5VB.jpg">
+
+
+
+
+- 
 
 - smbios type=1, manufacturer=OpenStack Foundation, product=OpenStack Nova, version=2014.1, serial=80590690-87d2-e311-b1b0-a0481cabdfb4, uuid=1f8e6f7e-5a70-4780-89c1-464dc0e7f308
 
