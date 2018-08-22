@@ -18,13 +18,13 @@ qemu-system-x86_64
 
 <img src="https://i.imgur.com/dfxsm3o.jpg">
 
-   - Tuy nhiên phương pháp này cũng gây bất lợi cho các CPUs khi truy cập vào RAM thông qua các bus, lúc này các bus sẽ trở thành nút cổ chai khiến CPU truy cập vào RAM rất chậm. Để giải quyết vấn đề này kiến trúc NUMA được sử dụng, nó gọi là kiến trúc truy cập bộ nhớ không đồng nhất
+Tuy nhiên phương pháp này cũng gây bất lợi cho các CPUs khi truy cập vào RAM thông qua các bus, lúc này các bus sẽ trở thành nút cổ chai khiến CPU truy cập vào RAM rất chậm. Để giải quyết vấn đề này kiến trúc NUMA được sử dụng, nó gọi là kiến trúc truy cập bộ nhớ không đồng nhất
 
 <img src="https://i.imgur.com/EnPcFfo.jpg">
 
-   - Trong kiến trúc NUMA mỗi CPU có một bộ nhớ local trực tiếp, việc truy cập vào bộ nhớ local rất nhanh và nó không cần sử dụng bus hệ thống. Điều đó có thể làm tăng hiệu suất khi có nhiều CPU truy cập vào bộ nhớ. Kiến trúc NUMA có thể xem bằng lệnh numact
+Trong kiến trúc NUMA mỗi CPU có một bộ nhớ local trực tiếp, việc truy cập vào bộ nhớ local rất nhanh và nó không cần sử dụng bus hệ thống. Điều đó có thể làm tăng hiệu suất khi có nhiều CPU truy cập vào bộ nhớ. Kiến trúc NUMA có thể xem bằng lệnh numact
 
-   - Các thông số smp1, sockets=1(*số lượng khe cắm ở bo mạch chủ*), cores=1, threads=1. Mô phỏng bộ xử lý với 1 vcpu, 1 socket, 1 core và 1 threads (*số luồng xử lý trên mỗi core*).
+Các thông số smp1, sockets=1(*số lượng khe cắm ở bo mạch chủ*), cores=1, threads=1. Mô phỏng bộ xử lý với 1 vcpu, 1 socket, 1 core và 1 threads (*số luồng xử lý trên mỗi core*).
 
 Ví dụ: một máy ảo có 2 CPU, mỗi CPU có 4 core và 2 hyper-threading vậy số CPU sẽ là 2x4x2=16 CPU
 
@@ -33,15 +33,19 @@ Ví dụ: một máy ảo có 2 CPU, mỗi CPU có 4 core và 2 hyper-threading 
 - **smbios type=1, manufacturer=OpenStack Foundation, product=OpenStack Nova, version=2014.1, serial=80590690-87d2-e311-b1b0-a0481cabdfb4, uuid=1f8e6f7e-5a70-4780-89c1-464dc0e7f308**: smbios là System Management BIOS được sử dụng để biểu diễn thông tin kiến trúc x86
 
 Trên một hệ thống Unix ta có thể dùng lệnh dmidecode để xem thông tin SMBIOS, thông tin sẽ được chia thành nhiều bảng và gọi là type (ở đây chọn type 1):
-
-   - Type0 là thông tin BIOS:
+<ul>
+   <ul>
+      <li>Type0 là thông tin BIOS:</li>
 <img src="https://i.imgur.com/qUJaAfp.jpg">
 
-   - Type 1 là thông tin hệ thống:
+<li>Type 1 là thông tin hệ thống:</li>
 <img sr="https://i.imgur.com/3Yo2xDJ.jpg">
 
-   - Type 2 là thông tin bo mạch chủ
+<li>Type 2 là thông tin bo mạch chủ:</li>
 <img src="https://i.imgur.com/c3Op5VB.jpg">
+
+</ul>
+</ul>
 
 - **my chardev = charmonitor, id = monitor, mode = control**: Quản lý máy ảo chạy qemu bằng monitor, có 2 cách truy cập vào qemu monitor console:
 <ul>
