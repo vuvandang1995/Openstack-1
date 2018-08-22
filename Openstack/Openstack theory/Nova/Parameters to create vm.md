@@ -63,8 +63,9 @@ Ví dụ: một máy ảo có 2 CPU, mỗi CPU có 4 core và 2 hyper-threading 
 <ul>
   <ul>
      <li>HighPrecision Event Timer (HPET) là 1 cài đặt thời gian chính xác hơn</li>
-<ul>
-  <ul>
+  </ul>
+</ul>
+
 - **device usb-tablet, id=input0**: Mô phỏng bộ điều khiển PCI UHCI USB thông qua tablet, chuột có thể di chuyển tự do giữa các host và guest
 
 - **device cirrus-vga, id=video0, bus=pci.0, addr=0x2**: Mô phỏng VGA card
@@ -75,8 +76,8 @@ Ví dụ: một máy ảo có 2 CPU, mỗi CPU có 4 core và 2 hyper-threading 
 <ul>
   <ul>
      <li>Các virtio trên card mạng là 1 paravirtualized</li>
-<ul>
-  <ul>
+</ul>
+  </ul>
      
 - **drive file=/var/lib/nova/instances/1f8e6f7e-5a70-4780-89c1-464dc0e7f308/disk, if=none, id=drive-virtio-disk0, format=qcow2, cache=none**: thông số hard disk của host
 
@@ -84,8 +85,8 @@ Ví dụ: một máy ảo có 2 CPU, mỗi CPU có 4 core và 2 hyper-threading 
 <ul>
   <ul>
      <li>Các virtio về lưu trữ là 1 paravirtualized driver</li>
-<ul>
-  <ul>
+</ul>
+  </ul>
      
 - **chardev file, id=charserial0, path=/var/lib/nova/instances/1f8e6f7e-5a70-4780-89c1-464dc0e7f308/console.log**: Log của host
 
@@ -93,8 +94,8 @@ Ví dụ: một máy ảo có 2 CPU, mỗi CPU có 4 core và 2 hyper-threading 
 <ul>
   <ul>
      <li>Ta cần cấu hình trong  image để ghi log vào console: /boot/grub/grub.cfg has linux/boot/vmlinuz-3.2.0-49-virtual root=UUID=6d2231e4-  0975-4f35-a94f-56738c1a8150 ro console=ttyS0</li>
-<ul>
-  <ul>
+</ul>
+  </ul>
      
 - **chardev pty, id=charserial1**:
 
