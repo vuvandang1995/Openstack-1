@@ -67,7 +67,7 @@ instance_dir_resize)
 
 - Trong live-migrate, có 2 loại đó là True live migration và Block live migration. Hình dưới đây mô tả những loại storage mà 2 loại migration trên hỗ trợ:
 
-<img src="https://github.com/thaonguyenvan/meditech-thuctap/blob/master/ThaoNV/Tim%20hieu%20OpenStack/images/migrate2.png?raw=true">
+<img src="https://i.imgur.com/ccoPoFC.png">
 
 **Ngữ cảnh sử dụng:**
 
