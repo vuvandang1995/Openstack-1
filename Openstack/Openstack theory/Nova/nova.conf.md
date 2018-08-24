@@ -1,4 +1,4 @@
-# Phần này sẽ tìm hiểu file cấu hình của nova
+# Phần này sẽ tìm hiểu các option chính trong file cấu hình của nova
 
 -	Xác thực bằng keystone
 ```
