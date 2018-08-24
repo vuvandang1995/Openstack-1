@@ -1,6 +1,6 @@
 # Phần này sẽ tìm hiểu file cấu hình của nova
 
--	Xác thực keystone
+-	Xác thực bằng keystone
 ```
 [DEFAULT]
 auth_strategy = keystone
