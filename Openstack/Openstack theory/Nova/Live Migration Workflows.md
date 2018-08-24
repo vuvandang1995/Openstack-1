@@ -1,4 +1,48 @@
-# Quá trình live migrate trên compute
+# Quá trình migrate
+
+## 1. Giới thiệu về tính năng migrate trong OpenStack
+
+<img src="http://i.imgur.com/vFgXoEK.png">
+
+Migration là quá trình di chuyển máy ảo từ host vật lí này sang một host vật lí khác. Migration được sinh ra để làm nhiệm vụ bảo trì nâng cấp hệ thống. Ngày nay tính năng này đã được phát triển để thực hiện nhiều tác vụ hơn:
+
+- Cân bằng tải: Di chuyển VMs tới các host khác kh phát hiện host đang chạy có dấu hiệu quá tải.
+- Bảo trì, nâng cấp hệ thống: Di chuyển các VMs ra khỏi host trước khi tắt nó đi.
+- Khôi phục lại máy ảo khi host gặp lỗi: Restart máy ảo trên một host khác.
+
+Trong OpenStack, việc migrate được thực hiện giữa các node compute với nhau hoặc giữa các project trên cùng 1 node compute.
+
+## 2. Các kiểu migrate hiện có trong OPS và workflow của chúng
+
+OpenStack hỗ trợ 2 kiểu migration đó là:
+
+- Cold migration : Non-live migration
+- Live migration :
+  - True live migration (shared storage or volume-based)
+  - Block live migration
+
+**Workflow khi thực hiện cold migrate**
+
+- Tắt máy ảo (giống với virsh destroy) và ngắt kết nối với volume
+- Di chuyển thư mục hiện tại của máy ảo (instance_dir ->
+instance_dir_resize)
+- Nếu sử dụng QCOW2 với backing files (chế độ mặc định) thì image sẽ được convert thành dạng flat
+- Với shared storage, di chuyển thư mục chứa máy ảo. Nếu không, copy toàn bộ thông qua SCP.
+
+**Workflow khi thực hiện live migrate**
+
+- Kiểm tra lại xem  storage backend có phù hợp với loại migrate sử dụng không
+  - Thực hiện check shared storage với chế độ migrate thông thường
+  - Không check khi sử dụng block migrations
+  - Việc kiểm tra thực hiện trên cả 2 node gửi và nhận, chúng được điều phối bởi RPC call từ scheduler.
+- Đối với nơi nhận
+  - Tạo các kết nối càn thiết với volume.
+  - Nếu dùng block migration, tạo thêm thư mục chứa máy ảo, truyền vào đó những backing files còn thiếu từ Glance và tạo disk trống.
+- Tại nơi gửi, bắt đầu quá trình migration (qua url)
+- Khi hoàn thành, generate lại file XML và define lại nó ở nơi chứa máy ảo mới.
+
+
+## 3. Quá trình live migrate trên compute
 
 <img src="https://i.imgur.com/iQenkN6.png">
 
