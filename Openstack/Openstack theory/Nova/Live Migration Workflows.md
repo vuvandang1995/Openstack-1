@@ -20,7 +20,7 @@
 
 - Compute source chuyển thông tin network cho compute target
 
-- Sau khi Compute target nhận được thông tin về network của instance, Compute target sẽ gửi yêu cầu setup network cho instance tới neutron và neutron gửi thông tin bản ghi về thông tin network cho compute target (kết nối network tới ccompute target được thiết lập để compute target và compute source chuyển dữ liệu các thông số còn lại từ compute source sang compute target)
+- Sau khi Compute target nhận được thông tin về network của instance, Compute target sẽ gửi yêu cầu setup network cho instance tới neutron và neutron gửi thông tin bản ghi về thông tin network cho compute target (kết nối network tới compute target được thiết lập để compute target và compute source chuyển dữ liệu các thông số còn lại từ compute source sang compute target)
 
 - Compute target setup volumes cho instance
 
