@@ -41,8 +41,40 @@ instance_dir_resize)
 - Tại nơi gửi, bắt đầu quá trình migration (qua url)
 - Khi hoàn thành, generate lại file XML và define lại nó ở nơi chứa máy ảo mới.
 
+### 3. So sánh ưu nhược điểm giữa cold và live migrate
 
-## 3. Quá trình live migrate trên compute
+**Cold migrate**
+
+- Ưu điểm:
+  - Đơn giản, dễ thực hiện
+  - Thực hiện được với mọi loại máy ảo
+- Hạn chế:
+  - Thời gian downtime lớn
+  - Không thể chọn được host muốn migrate tới.
+  - Quá trình migrate có thể mất một khoảng thời gian dài
+
+**Live migrate**
+
+- Ưu điểm:
+  - Có thể chọn host muốn migrate
+  - Tiết kiệm chi phí, tăng sự linh hoạt trong khâu quản lí và vận hành.
+  - Giảm thời gian downtime và gia tăng thêm khả năng "cứu hộ" khi gặp sự cố
+- Nhược điểm:
+  - Dù chọn được host nhưng vẫn có những giới hạn nhất định
+  - Quá trình migrate có thể fails nếu host bạn chọn không có đủ tài nguyên.
+  - Bạn không được can thiệp vào bất cứ tiến trình nào trong quá trình live migrate.
+  - Khó migrate với những máy ảo có dung lượng bộ nhớ lớn và trường hợp hai host khác CPU.
+
+- Trong live-migrate, có 2 loại đó là True live migration và Block live migration. Hình dưới đây mô tả những loại storage mà 2 loại migration trên hỗ trợ:
+
+<img src="https://github.com/thaonguyenvan/meditech-thuctap/blob/master/ThaoNV/Tim%20hieu%20OpenStack/images/migrate2.png?raw=true">
+
+**Ngữ cảnh sử dụng:**
+
+- Nếu bạn buộc phải chọn host và giảm tối da thời gian downtime của server thì bạn nên chọn live-migrate (tùy vào loại storage sử dụng mà chọn true hoặc block migration)
+- Nếu bạn không muốn chọn host hoặc đã kích hoạt configdrive (một dạng ổ lưu trữ metadata của máy ảo, thường được dùng để cung cấp cấu hình network khi không sử dụng DHCP) thì hãy lựa chọn cold migrate.
+
+## 4. Quá trình live migrate trên compute
 
 <img src="https://i.imgur.com/iQenkN6.png">
 
