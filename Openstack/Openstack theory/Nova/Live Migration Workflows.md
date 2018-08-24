@@ -1,5 +1,8 @@
 # Quá trình live migrate trên compute
 
+<img src="https://i.imgur.com/iQenkN6.png">
+
+
 - User sẽ gửi yêu cầu migrate 1 instance đến API
 
 - API sẽ các thực instance, user, admin policies...
@@ -8,7 +11,7 @@
 
 - Sau khi lấy thông tin của instance API sẽ chuyển yếu cầu live migrate instance đến Scheduler
 
-- Scheduler sẽ kiểm tra các compute target và tìm ra 1 compute phù hợp đáp ứng các tiêu chí để migrate ( Nếu không có host nào đáp ứng được yêu cầu thì Scheduler sẽ hủy tiến trình migrate)
+- Scheduler sẽ kiểm tra các compute target và tìm ra 1 compute phù hợp đáp ứng các tiêu chí để migrate (*Nếu không có host nào đáp ứng được yêu cầu thì Scheduler sẽ hủy tiến trình migrate*)
 
 - Sau khi tìm được host phù hợp Scheduler sẽ gửi yêu cầu migrate đến compute source
 
@@ -20,7 +23,7 @@
 
 - Compute source chuyển thông tin network cho compute target
 
-- Sau khi Compute target nhận được thông tin về network của instance, Compute target sẽ gửi yêu cầu setup network cho instance tới neutron và neutron gửi thông tin bản ghi về thông tin network cho compute target (kết nối network tới compute target được thiết lập để compute target và compute source chuyển dữ liệu các thông số còn lại từ compute source sang compute target)
+- Sau khi Compute target nhận được thông tin về network của instance, Compute target sẽ gửi yêu cầu setup network cho instance tới neutron và neutron gửi thông tin bản ghi về thông tin network cho compute target (*Kết nối network tới compute target được thiết lập để compute target và compute source chuyển dữ liệu các thông số còn lại từ compute source sang compute target*)
 
 - Compute target setup volumes cho instance
 
