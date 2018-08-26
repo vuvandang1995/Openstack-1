@@ -1,0 +1,1 @@
+# Distro linux, ubuntu, vmware
