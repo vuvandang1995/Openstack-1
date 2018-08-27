@@ -129,7 +129,7 @@ L3 agent là một phần của package openstack-neutron. Nó được xem như
 - **DHCP Agent:** OpenStack Networking DHCP agent chịu trách nhiệm cấp phát các địa chỉ IP cho các máy ảo chạy trên network. Nếu agent được kích hoạt và đang hoạt động khi một subnet được tạo, subnet đó mặc định sẽ được kích hoạt DHCP.
 - **Plugin Agent:** Nhiều networking plug-ins được sử dụng cho agent của chúng, bao gồm OVS và Linux bridge. Các plug-in chỉ định agent chạy trên các node đang quản lý lưu lượng mạng, bao gồm các compute node, cũng như các nodes chạy các agent
 
-### < name ="content"> 3. Cấu trúc thành phần và dịch vụ </a>
+### 3. Cấu trúc thành phần và dịch vụ 
 
 #### 3.1 Server
 
