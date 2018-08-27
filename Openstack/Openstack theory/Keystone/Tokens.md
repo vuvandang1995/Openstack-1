@@ -6,7 +6,17 @@ Trong nỗ lực kiếm tìm một loại token mới để khắc phục nhữn
 
 Điều này buộc Keystone team phải đưa ra một loại mới và đó là Fernet token. Fernet token khá nhỏ (255 kí tự) tuy nhiên nó lại chưa đủ thông tin để ủy quyền. Bên cạnh đó, việc nó chứa đủ thông tin cũng không khiến token database phải lưu dữ liệu token nữa (vấn đề này xảy ra ở UUID) Các nhà vận hành thường phải dọn dẹp Keystone token database để hệ thống của họ hoạt động ổn định. Mặc dù vậy, Fernet token có nhược điểm đó là symmetric keys được dùng để tạo ra token cần được phân phối và xoay vòng. Các nhà vận hành cần phải giải quyết vấn đề này, tuy nhiên họ có vẻ thích thú với việc này hơn là sử dụng những loại token khác.
 
-## 1. UUID Tokens
+
+[1. UUID Tokens](#uuid)
+
+[2. PKI Tokens](#pki)
+
+[3. Fernet Tokens](#fernet)
+
+[4. Cách Horizon dùng token](#horizon)
+
+<a name="UUID Tokens">
+## 1. UUID Tokens </a>
 
 <img src="https://i.imgur.com/rB3Ferh.png">
 
@@ -63,7 +73,8 @@ Nếu token đã bị thu hồi (tương ứng với 1 event trong bảng revoca
 
 UUID Token không hỗ trợ xác thực và ủy quyền trong trường hợp multiple data centers bởi token được lưu dưới dạng persistent (cố định và không thể thay đổi). Như ví dụ mô tả ở hình trên, một hệ thống cloud triển khai trên hai datacenter ở hai nơi khác nhau. Khi xác thực với keystone trên datacenter US-West và sử dụng token trả về để request tạo một máy ảo với Nova, yêu cầu hoàn toàn hợp lệ và khởi tạo máy ảo thành công. Trong khi nếu mang token đó sang datacenter US-East yêu cầu tạo máy ảo thì sẽ không được xác nhận do token trong backend database US-West không có bản sao bên US-East.
 
-## 2. Fernet Tokens 
+<a name="Fernet Tokens">
+## 2. Fernet Tokens</a>
 
 <img src="https://i.imgur.com/rB3Ferh.png">
 
@@ -162,7 +173,8 @@ Với key và message nhận được, quá trình tạo fernet token như sau:
 
 Vì Fernet key không cần phải được lưu vào database nên nó có thể hỗ trợ multiple data center. Tuy nhiên keys sẽ phải được phân phối tới tất cả các regions.
 
-## 3. PKI, PKIz token
+<a name="PKI, PKIz token">
+## 3. PKI, PKIz token</a>
 
 **PKI**
 <img src="http://7xp2eu.com1.z0.glb.clouddn.com/pki.png">
@@ -297,7 +309,8 @@ Hoàn toàn tương tự như tiến trình thu hồi UUID token
 
 PKI và PKIz không thực sự support mutiple data centers. Các backend database ở hai datacenter phải có quá trình đồng bộ hoặc tạo bản sao các PKI/PKIz token thì mới thực hiện xác thực và ủy quyền được.
 
-## 4. Cách Horizon dùng token
+<a name="Cách Horizon dùng token">
+## 4. Cách Horizon dùng token</a>
 
 - Tokens được sử dụng cho mỗi lần log in của user
 - Horizon lấy unscoped token cho user và sau dựa vào các request để cung cấp các project scoped token.
