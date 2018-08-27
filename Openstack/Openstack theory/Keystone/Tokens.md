@@ -8,6 +8,8 @@ Trong nỗ lực kiếm tìm một loại token mới để khắc phục nhữn
 
 ## 1. UUID Tokens
 
+<img src="https://i.imgur.com/rB3Ferh.png">
+
 - Là một chuỗi UUID gồm 32 kí tự được generate random được xác thực bởi identity service Phương thức hexdigest() được sử dụng để tạo ra chuỗi kí tự hexa. Điều này khiến token URL trở nên an toàn và dễ dàng trong việc vận chuyển đến các môi trường khác
  
 - UUID token bược phải được lưu lại trong một backend (thường là database). Nó cũng có thể được loại bỏ bằng các sử dụng DELETE request với token id. Tuy nhiên nó sẽ không thực sự bị loại bỏ khỏi backend mà chỉ được đánh dấu là đã được loại bỏ. Vì nó chỉ có 32 bytes nên kích thước của nó trong HTTP header cũng sẽ là 32 bytes.
@@ -62,6 +64,8 @@ Nếu token đã bị thu hồi (tương ứng với 1 event trong bảng revoca
 UUID Token không hỗ trợ xác thực và ủy quyền trong trường hợp multiple data centers bởi token được lưu dưới dạng persistent (cố định và không thể thay đổi). Như ví dụ mô tả ở hình trên, một hệ thống cloud triển khai trên hai datacenter ở hai nơi khác nhau. Khi xác thực với keystone trên datacenter US-West và sử dụng token trả về để request tạo một máy ảo với Nova, yêu cầu hoàn toàn hợp lệ và khởi tạo máy ảo thành công. Trong khi nếu mang token đó sang datacenter US-East yêu cầu tạo máy ảo thì sẽ không được xác nhận do token trong backend database US-West không có bản sao bên US-East.
 
 ## 2. Fernet Tokens 
+
+<img src="https://i.imgur.com/rB3Ferh.png">
 
 Đây là loại token mới nhất, nó được tạo ra để khắc phục những hạn chế của các loại token trước đó. Thứ nhất, nó khá nhỏ với khoảng 255 kí tự, lớn hơn UUID nhưng nhỏ hơn rất nhiều so với PKI. Token này cũng chứa vừa đủ thông tin để cho phép nó không cần phải được lưu trên database.
 
@@ -158,9 +162,18 @@ Với key và message nhận được, quá trình tạo fernet token như sau:
 
 Vì Fernet key không cần phải được lưu vào database nên nó có thể hỗ trợ multiple data center. Tuy nhiên keys sẽ phải được phân phối tới tất cả các regions.
 
+## 3 PKI, PKIz token
 
+**PKI**
+<img src="http://7xp2eu.com1.z0.glb.clouddn.com/pki.png">
+**PKIz**
+<img src="http://7xp2eu.com1.z0.glb.clouddn.com/pkiz.png">
 
-## 3 Cách Horizon dùng token
+- Token sẽ chứa toàn bộ các validation response của keystone. Do đó token sẽ chứa một lượng lớn các thông tin như nó được issue lúc nào, hết hạn lúc nào, thuộc về user nào, thông tin project, domain, role, thông tin về user, service cataloge. v.v... Các thông tin được mô tả trong một cấu trúc JSON và được ký bằng một CMS(Cryptographic Message syntax). Với PKIz thì các thông tin được nén sử dụng zlib để nén. Khi sử dụng token này thì không cần phải quay lại về keystone để verify lại nữa.
+- Để có thể truyền token qua giao thức HTTP cần phải mã hóa nó dưới dạng base64. Với một yêu cầu đơn giản, một endpoint và catalog, kích cỡ xấp xỉ của nó có thể lên đến 1700bytes. Với một hệ thống lớn với nhiều endpoint, PKI token có thể lớn tới cỡ 8KB, ngay cả khi được nén lại (PKIz) nó vẫn thường không thể vừa với các HTTP header của các webserver thông thường. 
+- Mặc dù PKI và PKIz token có thể cached nhưng nó cũng có những nhược điểm như khó có thể config keystone để sử dụng loại token này vì nó phải sử dụng certificate được tạo từ nhà cung cấp certificate tin cậy, và kích thước nó quá lớn sẽ gây ảnh hưởng đến các openstack service khác về hiệu năng. Keystone vẫn phải lưu trữ PKI ở backend nhằm mục đích ví dụ như tạo danh sách các revoked token  
+
+## 4 Cách Horizon dùng token
 
 - Tokens được sử dụng cho mỗi lần log in của user
 - Horizon lấy unscoped token cho user và sau dựa vào các request để cung cấp các project scoped token.
