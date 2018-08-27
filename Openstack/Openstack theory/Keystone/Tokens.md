@@ -16,6 +16,7 @@ Trong nỗ lực kiếm tìm một loại token mới để khắc phục nhữn
 [4. Cách Horizon dùng token](#horizon)
 
 <a name="uuid">
+ 
 ## 1. UUID Tokens </a>
 
 <img src="https://i.imgur.com/rB3Ferh.png">
@@ -74,6 +75,7 @@ Nếu token đã bị thu hồi (tương ứng với 1 event trong bảng revoca
 UUID Token không hỗ trợ xác thực và ủy quyền trong trường hợp multiple data centers bởi token được lưu dưới dạng persistent (cố định và không thể thay đổi). Như ví dụ mô tả ở hình trên, một hệ thống cloud triển khai trên hai datacenter ở hai nơi khác nhau. Khi xác thực với keystone trên datacenter US-West và sử dụng token trả về để request tạo một máy ảo với Nova, yêu cầu hoàn toàn hợp lệ và khởi tạo máy ảo thành công. Trong khi nếu mang token đó sang datacenter US-East yêu cầu tạo máy ảo thì sẽ không được xác nhận do token trong backend database US-West không có bản sao bên US-East.
 
 <a name="fernet">
+ 
 ## 2. Fernet Tokens</a>
 
 <img src="https://i.imgur.com/rB3Ferh.png">
@@ -174,6 +176,7 @@ Với key và message nhận được, quá trình tạo fernet token như sau:
 Vì Fernet key không cần phải được lưu vào database nên nó có thể hỗ trợ multiple data center. Tuy nhiên keys sẽ phải được phân phối tới tất cả các regions.
 
 <a name="pki">
+ 
 ## 3. PKI, PKIz token</a>
 
 **PKI**
@@ -310,6 +313,7 @@ Hoàn toàn tương tự như tiến trình thu hồi UUID token
 PKI và PKIz không thực sự support mutiple data centers. Các backend database ở hai datacenter phải có quá trình đồng bộ hoặc tạo bản sao các PKI/PKIz token thì mới thực hiện xác thực và ủy quyền được.
 
 <a name="horizon">
+ 
 ## 4. Cách Horizon dùng token</a>
 
 - Tokens được sử dụng cho mỗi lần log in của user
