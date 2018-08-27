@@ -162,7 +162,7 @@ Với key và message nhận được, quá trình tạo fernet token như sau:
 
 Vì Fernet key không cần phải được lưu vào database nên nó có thể hỗ trợ multiple data center. Tuy nhiên keys sẽ phải được phân phối tới tất cả các regions.
 
-## 3 PKI, PKIz token
+## 3. PKI, PKIz token
 
 **PKI**
 <img src="http://7xp2eu.com1.z0.glb.clouddn.com/pki.png">
@@ -297,7 +297,7 @@ Hoàn toàn tương tự như tiến trình thu hồi UUID token
 
 PKI và PKIz không thực sự support mutiple data centers. Các backend database ở hai datacenter phải có quá trình đồng bộ hoặc tạo bản sao các PKI/PKIz token thì mới thực hiện xác thực và ủy quyền được.
 
-## 4 Cách Horizon dùng token
+## 4. Cách Horizon dùng token
 
 - Tokens được sử dụng cho mỗi lần log in của user
 - Horizon lấy unscoped token cho user và sau dựa vào các request để cung cấp các project scoped token.
