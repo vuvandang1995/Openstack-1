@@ -169,6 +169,71 @@ Vì Fernet key không cần phải được lưu vào database nên nó có th�
 **PKIz**
 <img src="http://7xp2eu.com1.z0.glb.clouddn.com/pkiz.png">
 
+oken này chứa một lượng khá lớn thông tin ví dụ như: thời gian nó được tạo, thời gian nó hết hiệu lực, thông tin nhận diện người dùng, project, domain, thông tin về role cho user, danh mục dịch vụ,... Tất cả các thông tin này được lưu ở trog phần payload của file định dạng JSON. Phần payload được "signed" theo chuẩn X509 và đóng gói dưới dạng cryptographic message syntax (CMS). Với PKIz thì phần payload được nén sử dụng `zlib`.
+
+Dưới đây là một ví dụ về JSON token payload:
+
+``` sh
+{
+    "token": {
+      "domain": {
+          "id": "default",
+          "name": "Default"
+        },
+        "methods": [
+        "password"
+        ],
+        "roles": [
+            {
+              "id": "c703057be878458588961ce9a0ce686b",
+              "name": "admin"
+            }
+        ],
+        "expires_at": "2014-06-10T21:52:58.852167Z",
+        "catalog": [
+            {
+                "endpoints": [
+                    {
+                         "url": "http://localhost:35357/v2.0",
+                         "region": "RegionOne",
+                         "interface": "admin",
+                         "id": "29beb2f1567642eb810b042b6719ea88"
+                    },
+                    {
+                         "url": "http://localhost:5000/v2.0",
+                         "region": "RegionOne",
+                         "interface": "internal",
+                         "id": "87057e3735d4415c97ae231b4841eb1c"
+                    },
+                    {
+                         "url": "http://localhost:5000/v2.0",
+                         "region": "RegionOne",
+                         "interface": "public",
+                         "id": "ef303187fc8d41668f25199c298396a5"
+                    }
+                ],
+                "type": "identity",
+                "id": "bd7397d2c0e14fb69bae8ff76e112a90",
+                "name": "keystone"
+              }
+        ],
+        "extras": {},
+        "user": {
+            "domain": {
+                "id": "default",
+                "name": "Default"
+              },
+                "id": "3ec3164f750146be97f21559ee4d9c51",
+                "name": "admin"
+              },
+              "audit_ids": [
+                  "Xpa6Uyn-T9S6mTREudUH3w"
+              ],
+              "issued_at": "2014-06-10T20:52:58.852194Z"
+           }
+        }
+```
+
 Muốn gửi token qua HTTP, JSON token payload phải được mã hóa base64 với 1 số chỉnh sửa nhỏ. Cụ thể, Format=CMS+[zlib] + base64. Ban đầu JSON payload phải được ký sử dụng một khóa bất đối xứng(private key), sau đó được đóng gói trong CMS (cryptographic message syntax - cú pháp thông điệp mật mã). Với PKIz format, sau khi đóng dấu, payload được nén lại sử dụng trình nén zlib. Tiếp đó PKI token được mã hóa base64 và tạo ra một URL an toàn để gửi token đi.. Dưới đây là ví dụ của token được dùng để vận chuyển:
 
 ``` sh
@@ -180,6 +245,57 @@ EOMAwGA1UEChM7r0iosFscpnfCuc8jGMobyfApz/dZqJnsk4lt1ahlNTpXQeVFxNK/ydKL+tzEjg
 Kích cỡ của token nếu có 1 endpoints trong danh mục dịch vụ đã rơi vào khoảng 1700 bytes. Với những hệ thống lớn, kích cỡ của nó sẽ vượt mức cho phép của HTTP header (8KB). Ngay cả khi được nén lại trong PKIz format thì vấn đề cũng không được giải quyết khi mà nó chỉ làm kích thước token nhỏ đi khoảng 10%.
 
 Mặc dù PKI và PKIz token có thể được cache, nó vẫn có một vài khuyết điểm. Sẽ là khá khó để cấu hình keystone sử dụng loại token này. Thêm vào đó, kích thước lớn của nó cũng ảnh hưởng đến các service khác và rất khó khi sử dụng với cURL. Ngoài ra, keystone cũng phải lưu những token này trong backend vì thế người dùng vẫn sẽ phải flushing the Keystone token database thường xuyên.
+
+Dưới đây là method để sinh ra PKI token:
+
+``` sh
+def _get_token_id(self, token_data):
+    try:
+         token_json = jsonutils.dumps(token_data, cls=utils.PKIEncoder)
+         token_id = str(cms.cms_sign_token(token_json,
+                                           CONF.signing.certfile,
+                                           CONF.signing.keyfile))
+         return token_id
+     except environment.subprocess.CalledProcessError:
+         LOG.exception(_LE('Unable to sign token'))
+         raise exception.UnexpectedError(_('Unable to sign token.'))
+```
+
+Để config PKI token, chúng ta cần sử dụng 3 loại certificates:
+
+- Signing Key tạo ra private key dưới định dạng PEM
+- Signing Certificates
+  - Sử dụng Signing Key để tạo ra CSR (Certificate Signing Request)
+  - Submit CSR tới CA (Certificate Authority)
+  - Nhận lại chứng chỉ xác thực (cetificate) từ CA (certificate authority)
+- Certificate Authority Certificate
+
+**Token Generation Workflow**
+
+<img src="http://i.imgur.com/pi0xOpi.png">
+
+- Người dùng gửi yêu cầu tạo token với các thông tin: User Name, Password, Project Name
+- Keystone sẽ chứng thực các thông tin về Identity, Resource và Asssignment (định danh, tài nguyên, assignment)
+- Tạo token payload định dạng JSON
+- Sign JSON payload với Signing Key và Signing Certificate , sau đó được đóng gói lại dưới định dang CMS (cryptographic message syntax - cú pháp thông điệp mật mã)
+- Bước tiếp theo, nếu muốn đóng gói token định dạng PKI thì convert payload sang UTF-8, convert token sang một URL định dạng an toàn. Nếu muốn token đóng gói dưới định dang PKIz, thì phải nén token sử dụng zlib, tiến hành mã hóa base64 token tạo ra URL an toàn, convert sang UTF-8 và chèn thêm tiếp đầu ngữ "PKIZ"
+- Lưu thông tin token vào Backend (SQL/KVS)
+
+**Token Validation Workflow**
+
+<img src="http://i.imgur.com/b4G7u0R.png">
+
+Vì id được generate bằng hàm hash của token nên quá trình validate token sẽ bắt đầu bằng việc sử dụng hàm hash để "băm" PKI toekn. Các bước sau đó (validate trong backend...) hoàn toàn giống với uuid.
+
+**Token Revocation Workflow**
+
+Hoàn toàn tương tự như tiến trình thu hồi UUID token
+
+**Multiple Data Centers**
+
+<img src="http://i.imgur.com/ky753ou.png">
+
+PKI và PKIz không thực sự support mutiple data centers. Các backend database ở hai datacenter phải có quá trình đồng bộ hoặc tạo bản sao các PKI/PKIz token thì mới thực hiện xác thực và ủy quyền được.
 
 ## 4 Cách Horizon dùng token
 
