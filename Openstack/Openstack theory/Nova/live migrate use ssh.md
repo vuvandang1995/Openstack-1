@@ -1,4 +1,4 @@
-# cấu hình live migrate sử dụng ssh
+# cấu hình live migrate sử dụng ssh (Tunneling versus direct transport used a encrypted SSH)
 
 Cấu hình live migrate file nova.conf trên 2 compute
 
