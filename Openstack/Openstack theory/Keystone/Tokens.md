@@ -9,9 +9,9 @@ Trong nỗ lực kiếm tìm một loại token mới để khắc phục nhữn
 
 [1. UUID Tokens](#uuid)
 
-[2. PKI Tokens](#pki)
+[2. Fernet Tokens](#fernet)
 
-[3. Fernet Tokens](#fernet)
+[3. PKI Tokens](#pki)
 
 [4. Cách Horizon dùng token](#horizon)
 
