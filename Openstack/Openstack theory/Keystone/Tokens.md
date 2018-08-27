@@ -169,9 +169,17 @@ Vì Fernet key không cần phải được lưu vào database nên nó có th�
 **PKIz**
 <img src="http://7xp2eu.com1.z0.glb.clouddn.com/pkiz.png">
 
-- Token sẽ chứa toàn bộ các validation response của keystone. Do đó token sẽ chứa một lượng lớn các thông tin như nó được issue lúc nào, hết hạn lúc nào, thuộc về user nào, thông tin project, domain, role, thông tin về user, service cataloge. v.v... Các thông tin được mô tả trong một cấu trúc JSON và được ký bằng một CMS(Cryptographic Message syntax). Với PKIz thì các thông tin được nén sử dụng zlib để nén. Khi sử dụng token này thì không cần phải quay lại về keystone để verify lại nữa.
-- Để có thể truyền token qua giao thức HTTP cần phải mã hóa nó dưới dạng base64. Với một yêu cầu đơn giản, một endpoint và catalog, kích cỡ xấp xỉ của nó có thể lên đến 1700bytes. Với một hệ thống lớn với nhiều endpoint, PKI token có thể lớn tới cỡ 8KB, ngay cả khi được nén lại (PKIz) nó vẫn thường không thể vừa với các HTTP header của các webserver thông thường. 
-- Mặc dù PKI và PKIz token có thể cached nhưng nó cũng có những nhược điểm như khó có thể config keystone để sử dụng loại token này vì nó phải sử dụng certificate được tạo từ nhà cung cấp certificate tin cậy, và kích thước nó quá lớn sẽ gây ảnh hưởng đến các openstack service khác về hiệu năng. Keystone vẫn phải lưu trữ PKI ở backend nhằm mục đích ví dụ như tạo danh sách các revoked token  
+Muốn gửi token qua HTTP, JSON token payload phải được mã hóa base64 với 1 số chỉnh sửa nhỏ. Cụ thể, Format=CMS+[zlib] + base64. Ban đầu JSON payload phải được ký sử dụng một khóa bất đối xứng(private key), sau đó được đóng gói trong CMS (cryptographic message syntax - cú pháp thông điệp mật mã). Với PKIz format, sau khi đóng dấu, payload được nén lại sử dụng trình nén zlib. Tiếp đó PKI token được mã hóa base64 và tạo ra một URL an toàn để gửi token đi.. Dưới đây là ví dụ của token được dùng để vận chuyển:
+
+``` sh
+MIIDsAYCCAokGCSqGSIb3DQEHAaCCAnoEggJ2ew0KICAgICJhY2QogICAgICAgI...EBMFwwVzELMAkGA
+1UEBhMCVVMxDjAMBgNVBAgTBVVuc2V0MCoIIDoTCCA50CAQExCTAHBgUrDgMQ4wDAYDVQQHEwVVbnNldD
+EOMAwGA1UEChM7r0iosFscpnfCuc8jGMobyfApz/dZqJnsk4lt1ahlNTpXQeVFxNK/ydKL+tzEjg
+```
+
+Kích cỡ của token nếu có 1 endpoints trong danh mục dịch vụ đã rơi vào khoảng 1700 bytes. Với những hệ thống lớn, kích cỡ của nó sẽ vượt mức cho phép của HTTP header (8KB). Ngay cả khi được nén lại trong PKIz format thì vấn đề cũng không được giải quyết khi mà nó chỉ làm kích thước token nhỏ đi khoảng 10%.
+
+Mặc dù PKI và PKIz token có thể được cache, nó vẫn có một vài khuyết điểm. Sẽ là khá khó để cấu hình keystone sử dụng loại token này. Thêm vào đó, kích thước lớn của nó cũng ảnh hưởng đến các service khác và rất khó khi sử dụng với cURL. Ngoài ra, keystone cũng phải lưu những token này trong backend vì thế người dùng vẫn sẽ phải flushing the Keystone token database thường xuyên.
 
 ## 4 Cách Horizon dùng token
 
