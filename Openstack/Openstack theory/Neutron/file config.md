@@ -1,6 +1,6 @@
 # File cấu hình config neutron
 
-- Cấu hình metadata:
+- Cấu hình metadata: khai báo host và mật khẩu để lấy API cung cấp metadata
 ```
 /etc/neutron/metadata_agent.ini
 
@@ -16,19 +16,19 @@ metadata_proxy_shared_secret = METADATA_SECRET
 
 [DEFAULT]
 # ...
-core_plugin = ml2
-service_plugins = router
-allow_overlapping_ips = true
-transport_url = rabbit://openstack:RABBIT_PASS@controller
-auth_strategy = keystone
-notify_nova_on_port_status_changes = true
-notify_nova_on_port_data_changes = true
+core_plugin = ml2 (bật tính năng plug-in ml2 để quản lý network layer 2)
+service_plugins = router (bật tính năng plug-in router)
+allow_overlapping_ips = true (cho phép overlap ip)
+transport_url = rabbit://openstack:RABBIT_PASS@controller (cấu hình truy cập queue RabbitMQ)
+auth_strategy = keystone (cấu hình xác thực bằng keystone)
+notify_nova_on_port_status_changes = true (thông báo tới compute khi network topologies có sự thay đổi về status)
+notify_nova_on_port_data_changes = true (thông báo tới compute khi network topologies có sự thay đổi về data)
 
 [database]
 # ...
-connection = mysql+pymysql://neutron:NEUTRON_DBPASS@controller/neutron
+connection = mysql+pymysql://neutron:NEUTRON_DBPASS@controller/neutron (khai báo truy cập database)
 
-[keystone_authtoken]
+[keystone_authtoken] (cấu hình truy cập service định danh cho neutron qua keystone)
 # ...
 auth_uri = http://controller:5000
 auth_url = http://controller:35357
@@ -40,7 +40,7 @@ project_name = service
 username = neutron
 password = NEUTRON_PASS
 
-[nova]
+[nova] (cấu hình cho phép nova kết nối tới neutron)
 # ...
 auth_url = http://controller:35357
 auth_type = password
@@ -51,11 +51,11 @@ project_name = service
 username = nova
 password = NOVA_PASS
 
-[oslo_concurrency]
+[oslo_concurrency] 
 # ...
-lock_path = /var/lib/neutron/tmp
+lock_path = /var/lib/neutron/tmp (cấu hình lock path)
 
-[neutron]
+[neutron] (cấu hình lấy các parameter, bật tính năng metadata proxy và mật khẩu để user neutron truy cập)
 # ...
 url = http://controller:9696
 auth_url = http://controller:35357
@@ -76,12 +76,12 @@ metadata_proxy_shared_secret = METADATA_SECRET
 
 [ml2]
 # ...
-type_drivers = flat,vlan,vxlan
-tenant_network_types = vxlan
-mechanism_drivers = linuxbridge,l2population
-extension_drivers = port_security
-flat_networks = provider
-enable_ipset = true
+type_drivers = flat,vlan,vxlan (bật service flat, vlan, vxlan network)
+tenant_network_types = vxlan (self-service sử dụng vxlan)
+mechanism_drivers = linuxbridge,l2population (bật cơ chế Linux bridge và layer-2 population )
+extension_drivers = port_security (port bảo vệ)
+flat_networks = provider (provider sử dụng cơ chế flat)
+enable_ipset = true (bật ipset để tăng tính hiệu quả của sercurity group)
 ```
 
 - Cấu hình Linux bridge agent, xây dựng hạ tầng mạng ảo lớp 2 cho các instances và xử lý các sercurity group:
@@ -89,14 +89,14 @@ enable_ipset = true
 /etc/neutron/plugins/ml2/linuxbridge_agent.ini
 
 [linux_bridge]
-physical_interface_mappings = provider:PROVIDER_INTERFACE_NAME
+physical_interface_mappings = provider:eth0 (cấu hình ánh xạ mạng ảo vào card mạng vật lý)
 
 [vxlan]
-enable_vxlan = True
-local_ip = OVERLAY_INTERFACE_IP_ADDRESS
-l2_population = true
+enable_vxlan = True (bật tính lớp mạng vxlan)
+local_ip = 10.10.10.61 (ip sử dụng để quản lý trong local trên controller) 
+l2_population = true 
 
-[securitygroup]
+[securitygroup] (cấu hình security groups, Linux bridge, iptables, firewall)
 # ...
 enable_security_group = true
 firewall_driver = neutron.agent.linux.iptables_firewall.IptablesFirewallDriver
@@ -106,18 +106,18 @@ firewall_driver = neutron.agent.linux.iptables_firewall.IptablesFirewallDriver
 ```
 /etc/neutron/dhcp_agent.ini
 
-[DEFAULT]
+[DEFAULT] (cấu hình sử dụng linux bridge, DHCP, cho phép các instance truy cập metadata thông qua provider network)
 # ...
 interface_driver = linuxbridge
 dhcp_driver = neutron.agent.linux.dhcp.Dnsmasq
-enable_isolated_metadata = true
+enable_isolated_metadata = true (bật tính năng cô lập metadata với việc cấp ip dhcp)
 ```
 
 - Cấu hình layer-3 agent, định tuyến và NAT cho self-service
 ```
 /etc/neutron/l3_agent.ini
 
-[DEFAULT]
+[DEFAULT] (cấu hình routing và NAT cho self-service sử dụng liluxbridge)
 # ...
 interface_driver = linuxbridge
 ```
