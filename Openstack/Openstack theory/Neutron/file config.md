@@ -6,8 +6,8 @@
 
 [DEFAULT]
 # ...
-nova_metadata_host = controller
-metadata_proxy_shared_secret = METADATA_SECRET
+nova_metadata_host = 192.168.40.61
+metadata_proxy_shared_secret = ducnm37
 ```
 
 - Cấu hình network service:
@@ -19,37 +19,37 @@ metadata_proxy_shared_secret = METADATA_SECRET
 core_plugin = ml2 (bật tính năng plug-in ml2 để quản lý network layer 2)
 service_plugins = router (bật tính năng plug-in router)
 allow_overlapping_ips = true (cho phép overlap ip)
-transport_url = rabbit://openstack:RABBIT_PASS@controller (cấu hình truy cập queue RabbitMQ)
+transport_url = rabbit://openstack:ducnm37@192.168.40.61 (cấu hình truy cập queue RabbitMQ)
 auth_strategy = keystone (cấu hình xác thực bằng keystone)
 notify_nova_on_port_status_changes = true (thông báo tới compute khi network topologies có sự thay đổi về status)
 notify_nova_on_port_data_changes = true (thông báo tới compute khi network topologies có sự thay đổi về data)
 
 [database]
 # ...
-connection = mysql+pymysql://neutron:NEUTRON_DBPASS@controller/neutron (khai báo truy cập database)
+connection = mysql+pymysql://nova:ducnm37@192.168.40.61/nova (khai báo truy cập database)
 
 [keystone_authtoken] (cấu hình truy cập service định danh cho neutron qua keystone)
 # ...
 auth_uri = http://controller:5000
-auth_url = http://controller:35357
+auth_url = http://controller:5000
 memcached_servers = controller:11211
 auth_type = password
 project_domain_name = default
 user_domain_name = default
 project_name = service
 username = neutron
-password = NEUTRON_PASS
+password = ducnm37
 
 [nova] (cấu hình cho phép nova kết nối tới neutron)
 # ...
-auth_url = http://controller:35357
+auth_url = http://controller:5000
 auth_type = password
 project_domain_name = default
 user_domain_name = default
 region_name = RegionOne
 project_name = service
 username = nova
-password = NOVA_PASS
+password = ducnm37
 
 [oslo_concurrency] 
 # ...
@@ -58,16 +58,16 @@ lock_path = /var/lib/neutron/tmp (cấu hình lock path)
 [neutron] (cấu hình lấy các parameter, bật tính năng metadata proxy và mật khẩu để user neutron truy cập)
 # ...
 url = http://controller:9696
-auth_url = http://controller:35357
+auth_url = http://controller:500
 auth_type = password
 project_domain_name = default
 user_domain_name = default
 region_name = RegionOne
 project_name = service
 username = neutron
-password = NEUTRON_PASS
+password = ducnm37
 service_metadata_proxy = true
-metadata_proxy_shared_secret = METADATA_SECRET
+metadata_proxy_shared_secret = ducnm37
 ```
 
 - Cấu hình ml2 plug-in (Modular Layer 2 plug-in) xây dựng hạ tầng lớp 2 cho các instances:
@@ -80,7 +80,13 @@ type_drivers = flat,vlan,vxlan (bật service flat, vlan, vxlan network)
 tenant_network_types = vxlan (self-service sử dụng vxlan)
 mechanism_drivers = linuxbridge,l2population (bật cơ chế Linux bridge và layer-2 population )
 extension_drivers = port_security (port bảo vệ)
+
+[ml2_type_flat]
+# ...
 flat_networks = provider (provider sử dụng cơ chế flat)
+
+[securitygroup]
+# ...
 enable_ipset = true (bật ipset để tăng tính hiệu quả của sercurity group)
 ```
 
