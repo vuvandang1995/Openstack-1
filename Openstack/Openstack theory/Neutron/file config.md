@@ -1,4 +1,4 @@
-# File cấu hình config neutron
+# File cấu hình của neutron
 
 - Cấu hình metadata: khai báo host và mật khẩu để lấy API cung cấp metadata
 ```
