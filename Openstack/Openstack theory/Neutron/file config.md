@@ -1,9 +1,14 @@
 # File cấu hình config neutron
 
-`/etc/neutron/metadata_agent.ini`: Cấu hình metadata
+- Cấu hình metadata:
+```
+/etc/neutron/metadata_agent.ini
 
-------------
-Cấu hình Network Provider
+[DEFAULT]
+# ...
+nova_metadata_host = controller
+metadata_proxy_shared_secret = METADATA_SECRET
+```
 
 - Cấu hình network service:
 ```
@@ -49,6 +54,20 @@ password = NOVA_PASS
 [oslo_concurrency]
 # ...
 lock_path = /var/lib/neutron/tmp
+
+[neutron]
+# ...
+url = http://controller:9696
+auth_url = http://controller:35357
+auth_type = password
+project_domain_name = default
+user_domain_name = default
+region_name = RegionOne
+project_name = service
+username = neutron
+password = NEUTRON_PASS
+service_metadata_proxy = true
+metadata_proxy_shared_secret = METADATA_SECRET
 ```
 
 - Cấu hình ml2 plug-in (Modular Layer 2 plug-in) xây dựng hạ tầng lớp 2 cho các instances:
@@ -94,3 +113,11 @@ dhcp_driver = neutron.agent.linux.dhcp.Dnsmasq
 enable_isolated_metadata = true
 ```
 
+- Cấu hình layer-3 agent, định tuyến và NAT cho self-service
+```
+/etc/neutron/l3_agent.ini
+
+[DEFAULT]
+# ...
+interface_driver = linuxbridge
+```
