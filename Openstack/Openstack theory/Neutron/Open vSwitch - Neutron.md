@@ -39,3 +39,8 @@ Tunnel này sử dụng bảng định tuyến trên host để trao đổi gói
 **DHCP Router on Controller**
 
 DHCP server thường được chạy trên node controller hoặc compute. Nó là một instance của dnsmasq chạy trong một network namespace. Network namespace là một Linux kernel facility cho phép thực hiện một loạt các tiến trình tạo ra network stack (interfaces, routing tables, iptables rules).
+
+**Router on Controller**
+
+Router cũng là một network namespace với một loạt các routing rules và iptables rules để thực hiện việc định tuyến giữa các subnets.
+Chúng ta cũng có thể xem cấu hình của router với câu lệnh ip netns exec. Mỗi router sẽ có 2 interface, một cổng sẽ kết nối tới gateway (được tạo bởi câu lệnh router-gateway-set), một cổng sẽ nối tới integration bridge.
