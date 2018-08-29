@@ -55,4 +55,15 @@ Chúng ta cũng có thể xem cấu hình của router với câu lệnh ip netn
 
 <img src="https://i.imgur.com/Y4tMrF8.png">
 
-- Instance forward packet tới 
+- Instance forward packet tới security group bridge `port tap` (2) thông qua đường veth 
+- Các Security group rules trên security group bridge (3) sẽ sử dụng firewall và kiểm tra kết nối các packet 
+- security group bridge OVS port (4) forward packet tới OVS integration bridge security group port (5) qua đường veth
+- OVS integration bridge gắn 1 vlan internal cho packet 
+- OVS integration bridge `br-int` (6) forward packet trên đường internal vlan tới OVS provider bridge `br-provider`
+- OVS provider bridge đổi tag internal vlan thành vlan 101 để đi ra ngoài
+- OVS provider bridge `provider network port` (8) forward packet tới physical network interface
+- physical network interface forward packet tới switch (10)
+- switch bỏ tag vlan 101 và forward tới router 
+- router định tuyến packet từ provider network (12) tới external network (13) và forward packet tới switch (14)
+- switch forward packet tới external network (15)
+- external network (16) nhận packet
