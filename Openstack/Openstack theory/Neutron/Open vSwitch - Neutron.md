@@ -55,3 +55,4 @@ Chúng ta cũng có thể xem cấu hình của router với câu lệnh ip netn
 
 <img src="https://i.imgur.com/Y4tMrF8.png">
 
+- Instance forward packet tới 
