@@ -27,3 +27,11 @@ Bridge này sẽ được gán với interface external để đi ra ngoài inte
 ## 2. Self-service
 
 <img src="https://i.imgur.com/WX9u8Qs.png">
+
+Tunnel Bridge
+
+Traffic tới từ node compute sẽ được chuyển tới node controller thông qua GRE/VXLAN tunnel trên bridge tunnel (br-tun). Nếu sử dụng VLAN thì nó sẽ chuyển đổi VLAN-tagged traffic từ intergration bridge sang GRE/VXLAN tunnels. Việc chuyển đỏi qua lại giữa VLAN IDs và tunnel IDs được thực hiện bởi OpenFlow rules trên br-tun.
+
+Đối với GRE hoặc VXLAN-based network truyền tới từ patch-tun của br-int sang patch-int của br-tun. Bridge này sẽ chứa 1 port cho tunnel có tên "vxlan-..."
+
+Tunnel này sử dụng bảng định tuyến trên host để trao đổi gói tin vì thế ko cần bất cứ yêu cầu nào đối với hai endpoints hai bên, khác với khi sử dụng VLAN. Tất cả các interface trên br-tun được coi là internal đối với Open vSwitch. Vì thế nó sẽ không thể nhìn thấy từ bên ngoài, để giám sát traffic, bạn phải tạo ra mirror port cho patch-tun trên br-int bridge.
