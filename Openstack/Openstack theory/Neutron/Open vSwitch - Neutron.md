@@ -67,3 +67,7 @@ Chúng ta cũng có thể xem cấu hình của router với câu lệnh ip netn
 - router định tuyến packet từ provider network (12) tới external network (13) và forward packet tới switch (14)
 - switch forward packet tới external network (15)
 - external network (16) nhận packet
+
+**East/West**
+
+<img src="https://i.imgur.com/fs6lFRC.png">
