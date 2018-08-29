@@ -44,3 +44,14 @@ DHCP server thường được chạy trên node controller hoặc compute. Nó 
 
 Router cũng là một network namespace với một loạt các routing rules và iptables rules để thực hiện việc định tuyến giữa các subnets.
 Chúng ta cũng có thể xem cấu hình của router với câu lệnh ip netns exec. Mỗi router sẽ có 2 interface, một cổng sẽ kết nối tới gateway (được tạo bởi câu lệnh router-gateway-set), một cổng sẽ nối tới integration bridge.
+
+## 3. Traffic flow
+
+### 3.1. Linux bridge
+
+#### 3.1.1 Provider
+
+**North-South**:
+
+<img src="https://i.imgur.com/nnPtoRc.png">
+
