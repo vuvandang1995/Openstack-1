@@ -25,3 +25,5 @@ Port qvo... là điểm đến của qvb... và nó sẽ chịu trách nhiệm v
 Bridge này sẽ được gán với interface external để đi ra ngoài internet (có thể dùng bond hoặc không).
 
 ## 2. Self-service
+
+<img src="https://i.imgur.com/WX9u8Qs.png">
