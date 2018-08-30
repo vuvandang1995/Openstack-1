@@ -27,3 +27,8 @@ Mô hình kiến trúc network - self-service
 - instance interface (1) forward packet tới provider bridge instance interface (2) qua đường veth
 - Security group rules (3) trên provider bridge lọc packet và kiểm tra kết nối cho packet
 - Vlan sub-interface port (4) trên provider bridge forward packet tới physical network interface (5)
+- Physical network interface (5) tag vlan 101 cho packet và forward packet tới switch trên hạ tầng physical network
+- Switch untag vlan 101 và forward tới router (7)
+- router định tuyến packet từ provider network (8) tới external network (9) và forward packet tới switch (10)
+- switch forward packet tới external network (11)
+- external network (12) tiếp nhận packet
