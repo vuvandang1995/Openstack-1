@@ -50,7 +50,9 @@ Chúng ta cũng có thể xem cấu hình của router với câu lệnh ip netn
 ### 3.1. Linux bridge
 
 #### 3.1.1 Provider
-
+ 
+##### Trường hợp cùng subnet
+ 
 **North-South**:
 
 <img src="https://i.imgur.com/Y4tMrF8.png">
@@ -87,3 +89,5 @@ Chúng ta cũng có thể xem cấu hình của router với câu lệnh ip netn
 - OVS integration bridge `security group port` (16) forward packet tới `security group` bridge OVS port (17)
 - security group rules (18) trên security group bridge sẽ lọc packet qua firewall và kiểm tra kết nối cho packet 
 - security group bridge instance port  (19) forward packet tới instance 2 interface qua đường veth
+
+
