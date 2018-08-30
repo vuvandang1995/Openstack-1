@@ -16,3 +16,8 @@ Mô hình kiến trúc network - self-service
 
 <img src="https://i.imgur.com/ydsas3H.png">
 
+## 3. Network workflow
+
+### 3.1 Provider
+
+**North-south with a fixed IP address**
