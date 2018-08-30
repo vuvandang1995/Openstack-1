@@ -47,7 +47,7 @@ Chúng ta cũng có thể xem cấu hình của router với câu lệnh ip netn
 
 ## 3. Traffic flow
 
-### 3.1. Linux bridge
+### 3.1. OpenvSwitch
 
 #### 3.1.1 Provider
  
@@ -112,3 +112,5 @@ Chúng ta cũng có thể xem cấu hình của router với câu lệnh ip netn
 - OVS integration bridge security group port (20) untag internal vlan và forward packet tới security group bridge OVS port (21)
 - Security group rules (22) trên security group bridge sẽ lọc packet bằng firewall và kiểm tra kết nối cho packet
 - Security group bridge instance port (23) forward packet tới instance 2 interface bằng đường veth
+
+#### 3.1.2 Self-service
