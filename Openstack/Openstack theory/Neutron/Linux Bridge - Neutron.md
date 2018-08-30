@@ -24,3 +24,6 @@ Mô hình kiến trúc network - self-service
 
 <img src="https://i.imgur.com/xZq92ub.png">
 
+- instance interface (1) forward packet tới provider bridge instance interface (2) qua đường veth
+- Security group rules (3) trên provider bridge lọc packet và kiểm tra kết nối cho packet
+- Vlan sub-interface port (4) trên provider bridge forward packet tới physical network interface (5)
