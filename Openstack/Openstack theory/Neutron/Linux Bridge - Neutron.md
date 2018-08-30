@@ -46,7 +46,7 @@ Mô hình kiến trúc network - self-service
 - Security group rules (10) trên provider bridge lọc packet bằng firewall và kiểm tra kết nối cho packet 
 - provider bridge instance port (11) forward packet tới instance 2 (12) qua đường veth
 
-**East-west* khác network (subnet)
+**East-west** khác network (subnet)
 
 <img src="https://i.imgur.com/ELdoso2.png">
 
