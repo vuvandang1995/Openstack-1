@@ -117,7 +117,7 @@ Chúng ta cũng có thể xem cấu hình của router với câu lệnh ip netn
 
 **North/South with a fixed IP**
 
-<img src="http://i.imgur.com/ZAi4x7n.png">
+<img src="http://i.imgur.com/jYh6Pph.png">
 
 - instance interface (1) forward packet đến security group bridge instance port (2) bằng đường veth
 - Security group rules (3) trên security group bridge lọc packet bằng firewall và kiểm tra kết nối cho packet
@@ -141,12 +141,12 @@ Chúng ta cũng có thể xem cấu hình của router với câu lệnh ip netn
 
 **North/South with a floating IPv4 address**
 
-<img src="http://i.imgur.com/nd51B20.png">
+<img src="http://i.imgur.com/hPYriI7.png">
 
 **East/West: Instance on the same network**
 
-<img src="http://i.imgur.com/07iaI8w.png">
+<img src="http://i.imgur.com/EFLr4D2.png">
 
 **East/West: Instance on different network**
 
-<img src="http://i.imgur.com/RGMbYgj.png">
+<img src="http://i.imgur.com/RPUN0Ii.png">
