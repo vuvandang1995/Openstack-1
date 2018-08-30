@@ -51,7 +51,7 @@ Chúng ta cũng có thể xem cấu hình của router với câu lệnh ip netn
 
 #### 3.1.1 Provider
  
-#### Trường hợp cùng subnet, cùng giải mạng
+#### - Trường hợp cùng subnet, cùng giải mạng
  
 **North-South**:
 
