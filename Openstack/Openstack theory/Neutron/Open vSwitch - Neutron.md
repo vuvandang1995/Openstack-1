@@ -1,4 +1,4 @@
-# Phần này sẽ giới thiệu về các kiến trúc và thành phần để xây dựng network trong neutron
+# Phần này sẽ giới thiệu về các thành phần kiến trúc xây dựng network sử dụng openvswitch trong neutron
 
 ## 1. Provider
 
