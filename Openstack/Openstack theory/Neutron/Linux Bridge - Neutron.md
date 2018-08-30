@@ -35,6 +35,8 @@ Mô hình kiến trúc network - self-service
 
 **East-west** cùng subnet
 
+<img src="https://i.imgur.com/4z31ua8.png">
+
 - instance 1 interface (1) forward packet tới provider bridge instance port (2) qua đường veth
 - Security group rules (3) trên provider bridge lọc packet và kiểm tra kết nối cho packet
 - Vlan sub-interface port (4) trên provider bridge forward packet tới physical network interface (5)
