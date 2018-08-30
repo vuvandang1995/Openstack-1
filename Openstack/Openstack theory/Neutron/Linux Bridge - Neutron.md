@@ -21,3 +21,6 @@ Mô hình kiến trúc network - self-service
 ### 3.1 Provider
 
 **North-south with a fixed IP address**
+
+<img src="https://i.imgur.com/xZq92ub.png">
+
