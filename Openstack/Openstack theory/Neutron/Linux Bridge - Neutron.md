@@ -45,3 +45,6 @@ Mô hình kiến trúc network - self-service
 - Physical network interface (8) untag vlan 101 từ packet và forward tới Vlan sub-interface port (9) trên provider bridge
 - Security group rules (10) trên provider bridge lọc packet bằng firewall và kiểm tra kết nối cho packet 
 - provider bridge instance port (11) forward packet tới instance 2 (12) qua đường veth
+
+
+<img src="https://i.imgur.com/ELdoso2.png">
