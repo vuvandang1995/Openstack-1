@@ -4,4 +4,4 @@
 
 Mô hình kiến trúc network - provider sử dụng linux bridge
 
-<img src="https://imgur.com/a/9T7KgnY">
+<img src="https://i.imgur.com/4muye9u.png">
