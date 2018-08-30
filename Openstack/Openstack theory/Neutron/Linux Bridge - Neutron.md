@@ -15,3 +15,4 @@ Trên đây chứa các rules dùng cho security group. Nó có 1 đầu là `ta
 Mô hình kiến trúc network - self-service 
 
 <img src="https://i.imgur.com/ydsas3H.png">
+
