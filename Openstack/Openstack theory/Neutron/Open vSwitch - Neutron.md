@@ -115,4 +115,26 @@ Chúng ta cũng có thể xem cấu hình của router với câu lệnh ip netn
 
 #### 3.1.2 Self-service
 
+**North/South with a fixed IP**
 
+<img src="http://i.imgur.com/ZAi4x7n.png">
+
+- instance interface (1) forward packet đến security group bridge instance port (2) bằng đường veth
+- Security group rules (3) trên security group bridge lọc packet bằng firewall và kiểm tra kết nối cho packet
+- Security group bridge OVS port (4) forward packet tới OVS integration bridge security group port (5) bằng đường veth
+- OVS integration bridge tag vlan internal cho packet
+- OVS integration bridge untag internal vlan, và tag 1 internal tunnel ID
+- OVS integration bridge (6) forward packet tới OVS tunnel bridge (7)
+- OVS tunnel bridge (8) đóng gói packet sử dụng VNI 101 (VXLAN Network Identifier) 
+- overlay network đưới lớp physical network forward packet tới network node thông qua đường overlay network (10)
+- Overlay network (11) forward packet tới OVS tunnel bridge (12)
+- OVS tunnel bridge gỡ VNI 101 và thêm vào packet 1 internal tunnel ID
+- OVS tunnel bridge patch port (13) forward packet tới OVS integration bridge patch port (14)
+- OVS integration bridge port của self-service (15) untag internal vlan và forward packet tới self-service network trên router namespace
+- router dùng SNAT packet thay đổi source IP packet thành IP router trên provider network và gửi nó tới gateway của provider network (17)
+- router forward packet tới OVS integration bridge port bằng đường provider network (18)
+- OVS integration bridge tag 1 internal vlan cho packet
+- OVS integration bridge `int-br-provider` (19) forward packet tới OVS provider bridge `phy-br-provide` (20)
+- OVS provider bridge untag internal vlan và tag vlan 101 là vlan được cấu hình trên hạ tâng network physical
+- OVS provider bridge provider network port (21) forward packet tới physical network (22)
+- physical network forward packet ra internet bằng hạ tầng physical network
