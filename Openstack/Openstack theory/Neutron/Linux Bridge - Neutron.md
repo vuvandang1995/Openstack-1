@@ -61,3 +61,6 @@ Mô hình kiến trúc network - self-service
 - physical network interface (12) untag vlan 102 từ packet và forward tới Vlan sub-interface port (13) trên provider bridge
 - Security group rules (14) trên provider bridge lọc packet qua firewall và kiểm tra kết nối cho packet
 - provider bridge instance port (15) forward packet tới instance 2 interface (16) qua đường veth
+
+### 3.2 Self-service
+
