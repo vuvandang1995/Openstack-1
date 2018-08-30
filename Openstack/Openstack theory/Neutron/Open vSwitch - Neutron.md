@@ -114,3 +114,5 @@ Chúng ta cũng có thể xem cấu hình của router với câu lệnh ip netn
 - Security group bridge instance port (23) forward packet tới instance 2 interface bằng đường veth
 
 #### 3.1.2 Self-service
+
+
