@@ -60,7 +60,7 @@ Chúng ta cũng có thể xem cấu hình của router với câu lệnh ip netn
 - security group bridge OVS port (4) forward packet tới OVS integration bridge `security group port` (5) qua đường veth
 - OVS integration bridge gắn 1 vlan internal cho packet 
 - OVS integration bridge `br-int` (6) forward packet trên đường internal vlan tới OVS provider bridge `br-provider`
-- OVS provider bridge đổi tag internal vlan thành vlan 101 để đi ra ngoài
+- OVS provider bridge đổi tag internal vlan thành vlan 101 là vlan cấu hình với switch bên ngoài
 - OVS provider bridge `provider network port` (8) forward packet tới physical network interface
 - physical network interface forward packet tới switch (10)
 - switch bỏ tag vlan 101 và forward tới router 
@@ -71,3 +71,19 @@ Chúng ta cũng có thể xem cấu hình của router với câu lệnh ip netn
 **East/West**
 
 <img src="https://i.imgur.com/fs6lFRC.png">
+
+- instance 1 (1) forward packet tới security group `instance bridge port` (2) qua đường veth
+- security group rules (3) trên security group bridge sẽ lọc packet qua firewall và kiểm tra kết nối cho packet
+- security group bridge OVS port (4) forward packet tới OVS intergratetion bridge `security group port` (5) qua đường veth
+- OVS intergration bridge sẽ tag 1 internal vlan cho packet
+- OVS intergration `bridge int-br-provider` (6) sẽ forward packet tới OVS provider bridge `phy-br-provider` (7)
+- OVS provider bridge đổi tag internal vlan thành vlan 101 là vlan cấu hình vơi switch bên ngoài
+- OVS provider bridge provider network port (8) forward packet tới physical network interface (9)
+- physical network interface forward packet tới switch (10) trong hạ tầng physical network
+- switch forward packet từ compute 1 tới compute2 (11) qua đường vlan 101
+- physical network interface (12) forward packet tới OVS provider bridge `provider network port` (13)
+- OVS provider bridge phy-br-provider (14) forward packet tới OVS integration bridge `int-br-provider` (15)
+- OVS integration bridge đổi tag vlan 101 thành internal vlan
+- OVS integration bridge `security group port` (16) forward packet tới `security group` bridge OVS port (17)
+- security group rules (18) trên security group bridge sẽ lọc packet qua firewall và kiểm tra kết nối cho packet 
+- security group bridge instance port  (19) forward packet tới instance 2 interface qua đường veth
