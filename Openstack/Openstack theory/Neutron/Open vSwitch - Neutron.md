@@ -138,3 +138,15 @@ Chúng ta cũng có thể xem cấu hình của router với câu lệnh ip netn
 - OVS provider bridge untag internal vlan và tag vlan 101 là vlan được cấu hình trên hạ tâng network physical
 - OVS provider bridge provider network port (21) forward packet tới physical network (22)
 - physical network forward packet ra internet bằng hạ tầng physical network
+
+**North/South with a floating IPv4 address**
+
+<img src="http://i.imgur.com/nd51B20.png">
+
+**East/West: Instance on the same network**
+
+<img src="http://i.imgur.com/07iaI8w.png">
+
+**East/West: Instance on different network**
+
+<img src="http://i.imgur.com/RGMbYgj.png">
