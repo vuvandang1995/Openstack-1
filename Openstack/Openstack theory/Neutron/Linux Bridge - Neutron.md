@@ -33,7 +33,7 @@ Mô hình kiến trúc network - self-service
 - switch forward packet tới external network (11)
 - external network (12) tiếp nhận packet
 
-**East-west** cùng subnet
+**East-west** cùng network (subnet)
 
 <img src="https://i.imgur.com/4z31ua8.png">
 
@@ -46,5 +46,18 @@ Mô hình kiến trúc network - self-service
 - Security group rules (10) trên provider bridge lọc packet bằng firewall và kiểm tra kết nối cho packet 
 - provider bridge instance port (11) forward packet tới instance 2 (12) qua đường veth
 
+**East-west* khác network (subnet)
 
 <img src="https://i.imgur.com/ELdoso2.png">
+
+- instance 1 interface (1) forward packet tới provider bridge instance port (2) qua đường veth
+- Security group rules (3) trên provider bridge lọc gói tin qua firewall và kiểm tra kết nối cho packet
+- Vlan sub-interface port (4) trên provider bridge forward packet tới physical network interface (5)
+- Physical network interface (5) tag vlan 101 cho packet và forward tới switch (6) trên hạ tầng physical network 
+- switch untag vlan 101 và forward packet tới router (7)
+- router định tuyến packet từ provider network 1 (8) tới provider network 2 (9)
+- router forward packet tới switch (10)
+- switch tag vlan 102 tới packet và forward tới compute 1 (11)
+- physical network interface (12) untag vlan 102 từ packet và forward tới Vlan sub-interface port (13) trên provider bridge
+- Security group rules (14) trên provider bridge lọc packet qua firewall và kiểm tra kết nối cho packet
+- provider bridge instance port (15) forward packet tới instance 2 interface (16) qua đường veth
