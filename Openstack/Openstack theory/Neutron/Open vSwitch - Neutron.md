@@ -150,3 +150,7 @@ Chúng ta cũng có thể xem cấu hình của router với câu lệnh ip netn
 **East/West: Instance on different network**
 
 <img src="http://i.imgur.com/RPUN0Ii.png">
+
+### 3.2. Linux Bridge
+
+#### 3.2.1 Provider
