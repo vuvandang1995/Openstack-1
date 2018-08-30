@@ -5,3 +5,7 @@
 Mô hình kiến trúc network - provider sử dụng linux bridge
 
 <img src="https://i.imgur.com/4muye9u.png">
+
+**Linux bridge**
+
+Trên đây chứa các rules dùng cho security group. Nó có 1 đầu là `tap` interface có địa chỉ MAC trùng với địa chỉ MAC của card mạng trên máy ảo và một đầu là `qvb...` được nối với `qvo...` trên integration bridge.
