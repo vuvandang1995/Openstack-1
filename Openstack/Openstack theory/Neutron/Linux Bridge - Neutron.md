@@ -64,3 +64,16 @@ Mô hình kiến trúc network - self-service
 
 ### 3.2 Self-service
 
+**North-south** fixed IP
+<img src="https://i.imgur.com/VyQ6Oy6.png">
+
+- instance interface (1) forward packet tới self-service bridge instance port (2) qua đường veth
+- Security group rules (3) trên self-service bridge sẽ lọc gói tin bằng firewall và kiểm tra kết nối cho packet
+- self-service bridge forward packet tới VXLAN interface (4) và đóng gói packet sử dụng VNI 101
+- Packet được truyền bởi VXLAN interface (5) dưới lớp giao diện vật lý forward packet tới network node bằng đường overlay network (6)
+- VXLAN interface (7) forward packet tới  VXLAN interface (8) và được bóc lớp VNI 101 đi chỉ còn lại packet 
+- Self-service bridge router port (9) forward packet tới self-service network interface (10) trên router
+- Router sử dụng SNAT thay đổi source IP của gói tin bằng ip provider network sau đó gửi tới gateway provider network (11)
+- Router forward packet tới provider bridge router port (12)
+- VLAN sub-interface port (13) provider bridge forward packet tới provider physical network interface (14)
+- Provider physical network interface (14) tag vlan 101 cho packet và forward ra Internet thông qua hạ tầng physical network (15)
