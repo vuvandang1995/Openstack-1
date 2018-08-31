@@ -65,6 +65,7 @@ Mô hình kiến trúc network - self-service
 ### 3.2 Self-service
 
 **North-south** fixed IP
+
 <img src="https://i.imgur.com/VyQ6Oy6.png">
 
 - instance interface (1) forward packet tới self-service bridge instance port (2) qua đường veth
@@ -77,3 +78,28 @@ Mô hình kiến trúc network - self-service
 - Router forward packet tới provider bridge router port (12)
 - VLAN sub-interface port (13) provider bridge forward packet tới provider physical network interface (14)
 - Provider physical network interface (14) tag vlan 101 cho packet và forward ra Internet thông qua hạ tầng physical network (15)
+
+**North-south** floating IPv4
+
+- Hạ tầng physical network forward packet tới provider physical network interface (2)
+- Provider physical network interface bỏ tag vlan 101 và forward packet tới VLAN sub-interface trên provider bridge
+- Provider bridge forward packet self-service router gateway port trên provider network (5)
+- Router sử dụng DNAT thay đổi địa chỉ đích của packet thành IP của dải self-service network và gửi packet tới gateway của self-service network bằng self-service interface (6)
+- Router forward packet tới self-service bridge router port (7)
+- Self-service bridge forward packet tới VXLAN interface (8) và đóng gói packet sử dụng using VNI 101
+- VXLAN interface (9) truyền packet tới network node bằng overlay network (10)
+- VXLAN interface (11) forward packet tới VXLAN interface (12) và bóc lớp VNI 101 đi chỉ còn lại packet
+- Security group rules (13) trên self-service bridge lọc gói tin bằng firewall và kiểm tra kết nối cho packet
+- Self-service bridge instance port (14) forward packet tới instance interface (15) thông qua đường veth
+
+**East-west** cùng network (subnet)
+
+<img src="https://i.imgur.com/LofAl9a.png">
+
+- Instance 1 interface (1) forward packet tới self-service bridge instance port (2) theo đường veth
+- Security group rules (3) trên self-service bridge lọc packet bằng firewall và kiểm tra kết nối cho packet
+- Self-service bridge forward packet tới VXLAN interface (4) và đóng gói packet sử dụng VNI 101
+- VXLAN interface (5) forward packet tới compute 2 bằng đường overlay network (6)
+- VXLAN interface (7) forward packet tới VXLAN interface (8) và bóc lớp VNI 101 chỉ còn lại packet
+- Security group rules (9) trên self-service bridge lọc packet bằng firewall và kiểm tra kết nối cho packet
+- Self-service bridge instance port (10) forward packet tới instance 1 interface (11) thông qua đường veth
