@@ -81,6 +81,8 @@ Mô hình kiến trúc network - self-service
 
 **North-south** floating IPv4
 
+<img src="https://i.imgur.com/LofAl9a.png">
+
 - Hạ tầng physical network forward packet tới provider physical network interface (2)
 - Provider physical network interface bỏ tag vlan 101 và forward packet tới VLAN sub-interface trên provider bridge
 - Provider bridge forward packet self-service router gateway port trên provider network (5)
@@ -103,3 +105,21 @@ Mô hình kiến trúc network - self-service
 - VXLAN interface (7) forward packet tới VXLAN interface (8) và bóc lớp VNI 101 chỉ còn lại packet
 - Security group rules (9) trên self-service bridge lọc packet bằng firewall và kiểm tra kết nối cho packet
 - Self-service bridge instance port (10) forward packet tới instance 1 interface (11) thông qua đường veth
+
+**East-west** khác network (subnet)
+
+<img src="https://i.imgur.com/0PEtMbl.png">
+
+- Instance 1 interface (1) forward packet tới self-service bridge instance port (2) thông qua đường veth
+- Security group rules (3) trên self-service bridge lọc packet và kiểm tra kết nối cho packet
+- Self-service bridge forward packet tới VXLAN interface (4) và đóng gói packet sử dụng VNI 101
+- VXLAN interface (5) forward packet tới network node bằng đường overlay network (6)
+- VXLAN interface (7) foward packet tới VXLAN interface (8) và bóc lớp VNI 101 khỏi packet
+- Self-service bridge router port (9) forward packet tới self-service network 1 interface (10) trong router namespace
+- Router gửi packet tới next-hop IP là gateway của self-service network 2 thông qua đường self-service network 2 interface (11)
+- Router forward packet tới self-service network 2 bridge router port (12)
+- Self-service network 2 bridge forward packet tới VXLAN interface (13) và đóng gói sử dụng VNI 102 
+- VXLAN interface (14) gửi packet tới compute node thông qua đường overlay network (15)
+- VXLAN interface (16) gửi packet tới VXLAN interface (17) 
+- Security group rules (18)
+- Self-service bridge instance port (19) forward packet tới instance 2 interface (20) thông qua đường veth
