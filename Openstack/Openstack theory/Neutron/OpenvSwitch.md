@@ -54,7 +54,7 @@ Một thiết bị OpenFlow bao gồm ít nhất 3 thành phần:
 <img src="http://i.imgur.com/t4SOR63.png">
 
 
-## 2. Giới thiệu OpenvSwitch
+## <a name="b"> 2. Giới thiệu OpenvSwitch</b>
 
 Open vSwitch là switch ảo mã nguồn mở theo giao thức OpenFlow. Nó là một multilayer software được viết bằng ngôn ngữ C cung cấp cho người dùng các chức năng quản lí network interface.
 
@@ -72,7 +72,7 @@ Các chức năng của Open vSwitch:
 - Transactional configuration database with C and Python bindings
 - High-performance forwarding using a Linux kernel module
 
-## 3. Những hạn chế khi sử dụng Linux Bridge - So sánh OpenvSwitch và Linux Bridge
+## <a name="c">3. Những hạn chế khi sử dụng Linux Bridge - So sánh OpenvSwitch và Linux Bridge</c>
 
 **Hạn chế của Linux Bridge**
 
@@ -110,7 +110,7 @@ Less moving parts: được hiểu như LB hoạt động 1 cách đơn giản, 
 không có được sự linh hoạt
 
 
-## 4. Các thành phần và kiến trúc của Open vSwitch (
+## <a name="d">4. Các thành phần và kiến trúc của Open vSwitch </d>
 
 Các thành phần chính của Open vSwitch:
 
