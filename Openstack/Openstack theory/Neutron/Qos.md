@@ -125,6 +125,7 @@ Tuy nhiên câu lệnh này cũng không thể áp dụng với các bản OPS c
 **Cài đặt nuttcp**
 
 Đối với CentOS
+
 `yum install epel-release`
 
 `yum install nuttcp`
