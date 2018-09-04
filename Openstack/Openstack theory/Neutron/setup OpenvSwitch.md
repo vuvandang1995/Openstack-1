@@ -15,7 +15,7 @@ yum install wget openssl-devel  python-sphinx gcc make python-devel openssl-deve
 ```
 
 
-```
+
 
 - Cài Open vSwitch rpm
 ```
