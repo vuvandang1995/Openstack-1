@@ -71,7 +71,7 @@ Complied Apr 19 2018
 ```
 [root@compute02 ~]# ovs-vsctl add-br ovs-br0
 ```
-- Gán i cho interface
+- Flush ip cho interface eth2
 ```
 [root@compute02 ~]# ip addr flush dev eth2
 ```
