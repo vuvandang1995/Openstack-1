@@ -1,4 +1,4 @@
-# cài đặt openvswitch cho kvm trên centos7
+# Cài đặt openvswitch cho kvm trên centos7
 
 ### Cài KVM
 
