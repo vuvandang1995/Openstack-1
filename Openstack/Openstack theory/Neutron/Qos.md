@@ -147,7 +147,7 @@ Client
 Câu lệnh này sử dụng phương thức test mặc định đó là gửi các gói tin tcp trong vòng 10 giây
 
 ``` sh
-[root@thaonv ~]# nuttcp 172.16.69.239
+nuttcp 172.16.69.239
  1986.7500 MB /  10.00 sec = 1666.2098 Mbps 59 %TX 55 %RX 0 retrans 1.13 msRTT
 ```
 
@@ -176,7 +176,7 @@ Client
 Thường sử dụng để test số lượng packet bị mất. Câu lệnh trên sẽ truyền trong 10 giây các gói tin udp với tốc độ 50 Mbps. Nó sẽ trả về 1 report mỗi giây.
 
 ``` sh
-[root@thaonv ~]# nuttcp -u -i -Ri50m 172.16.69.239
+nuttcp -u -i -Ri50m 172.16.69.239
     5.8740 MB /   1.00 sec =   49.2634 Mbps     0 /  6015 ~drop/pkt  0.00 ~%loss
     5.8672 MB /   1.00 sec =   49.2243 Mbps     0 /  6008 ~drop/pkt  0.00 ~%loss
     5.7988 MB /   1.00 sec =   48.6393 Mbps    40 /  5978 ~drop/pkt  0.67 ~%loss
@@ -197,6 +197,6 @@ Client
 Dùng để test tốc độ bên trong của host.
 
 ``` sh
-[root@thaonv ~]# nuttcp -w1m 127.0.0.1
+nuttcp -w1m 127.0.0.1
 21836.0000 MB /  10.00 sec = 18317.4542 Mbps 98 %TX 92 %RX 0 retrans 0.18 msRTT
 ```
