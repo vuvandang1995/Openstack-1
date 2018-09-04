@@ -14,9 +14,6 @@ yum install wget openssl-devel  python-sphinx gcc make python-devel openssl-deve
 [ovs@compute02 ~]$
 ```
 
-
-
-
 - Cài Open vSwitch rpm
 ```
 [root@compute02 ~]#wget http://mirror.centos.org/centos/7/os/x86_64/Packages/openvswitch-2.0.0-7.el7.x86_64.rpm
@@ -27,7 +24,7 @@ yum install wget openssl-devel  python-sphinx gcc make python-devel openssl-deve
 ```
 [root@compute02 ~]# systemctl start openvswitch.service
 [root@compute02 ~]# systemctl enable openvswitch.service
-Created symlink from /etc/systemd/system/multi-user.target.wants/openvswitch.service to /usr/lib/systemd/system/openvswitch.service.
+
 [root@compute02 ~]# systemctl status openvswitch.service
 ● openvswitch.service - Open vSwitch
 Loaded: loaded (/usr/lib/systemd/system/openvswitch.service; enabled; vendor preset: disabled)
@@ -35,7 +32,11 @@ Active: active (exited) since Sun 2018-08-05 10:16:12 EDT; 17s ago
 Main PID: 73958 (code=exited, status=0/SUCCESS)
 Aug 05 10:16:12 compute02 systemd[1]: Starting Open vSwitch...
 Aug 05 10:16:12 compute02 systemd[1]: Started Open vSwitch.
-[root@compute02 ~]#
+
+```
+- Upgrade lại hệ thống
+```
+yum install upgrade -y
 ```
 -Kiểm tra OVS version
 ```
