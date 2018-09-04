@@ -138,11 +138,11 @@ Tuy nhiên câu lệnh này cũng không thể áp dụng với các bản OPS c
 
 Server
 
-`nuttcp -S`
+`nuttcp -S -p12345  (*dùng trên port 12345,nếu ko có p12345 mặc định nuttcp sử dụng port 5000)`
 
 Client
 
-`nuttcp <serverhost>`
+`nuttcp -p12345 <serverhost>  (dùng trên port 12345,nếu ko có p12345 mặc định nuttcp sử dụng port 5000)` 
 
 Câu lệnh này sử dụng phương thức test mặc định đó là gửi các gói tin tcp trong vòng 10 giây
 
