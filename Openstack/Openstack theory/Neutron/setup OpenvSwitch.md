@@ -45,5 +45,97 @@ Complied Apr 19 2018
 [root@compute02 ~]#
 ```
 
+**Bước 4** Tạo OVS bridge và thêm interface vào nó
+- Tạo ovs bridge
+```
+[root@compute02 ~]# ovs-vsctl add-br ovs-br0
+```
+- Gán i cho interface
+```
+[root@compute02 ~]# ip addr flush dev eth2
+```
+- Đăt địa chỉ IP
+```
+[root@compute02 ~]# ip addr add 192.168.1.4/24 dev ovs-br0
+```
+- Gán interface vào port của ovs-br0
+```
+[root@compute02 ~]# ovs-vsctl add-port ovs-br0 eth2
+```
+- Cho phép link kết nối tới ovs-br0 hoạt động
+```
+[root@compute02 ~]# ip link set dev ovs-br0 up
+```
 
-
+- Setup trên card mạng eth2
+```
+[root@compute02 ~]# cd /etc/sysconfig/network-scripts/
+[root@compute02 network-scripts]# cp eth2 ifcfg-ovs-br0
+[root@compute02 network-scripts]#
+[root@compute02 network-scripts]# vi ifcfg-eth2
+DEVICE=eth2
+HWADDR="00:0c:29:c1:c3:4e"
+TYPE=OVSPort
+DEVICETYPE=ovs
+OVS_BRIDGE=ovs-br0
+ONBOOT=yes
+```
+- Setup trên card mạng ovs-br0
+```
+[root@compute02 network-scripts]# vi ifcfg-ovs-br0
+DEVICE=ovs-br0
+DEVICETYPE=ovs
+TYPE=OVSBridge
+BOOTPROTO=static
+IPADDR=192.168.1.4
+NETMASK=255.255.255.0
+GATEWAY=192.168.1.1
+ONBOOT=yes
+```
+- Khởi động lại network
+```
+[root@compute02 ~]#Service network restart
+```
+- Kiểm tra lại 
+```
+[root@compute02 ~]# ovs-vsctl show
+8dc5f8e7-0e54-4d9d-ba7a-cd6b9b94f470
+    Bridge "ovs-br0"
+        Port "ovs-br0"
+            Interface "ovs-br0"
+                type: internal
+        Port "eth2"
+            Interface "eth2"
+    ovs_version: "2.9.2"
+[root@compute02 ~]#
+```
+**Bước 5** Define ovs network
+- Tạo file template
+```
+[root@compute02 ~]# vi /tmp/ovs-network.xml
+<network>
+<name>ovs-network</name>
+<forward mode='bridge'/>
+<bridge name='ovs-br0'/>
+<virtualport type='openvswitch'/>
+</network>
+```
+- Define network bằng libvirt
+```
+[root@compute02 ~]# virsh net-define /tmp/ovs-network.xml
+Network ovs-network defined from /tmp/ovs-network.xml
+[root@compute02 ~]# virsh net-start ovs-network
+Network ovs-network started
+[root@compute02 ~]# virsh net-autostart ovs-network
+Network ovs-network marked as autostarted
+[root@compute02 ~]#
+```
+- Kiểm tra lại
+```
+[root@compute02 ~]# virsh net-list
+ Name                 State      Autostart     Persistent
+----------------------------------------------------------
+ default              active     yes           yes
+ ovs-network          active     yes           yes
+[root@compute02 ~]#
+```
