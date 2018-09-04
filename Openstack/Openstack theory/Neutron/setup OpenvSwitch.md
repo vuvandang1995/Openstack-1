@@ -38,8 +38,12 @@ Aug 05 10:16:12 compute02 systemd[1]: Started Open vSwitch.
 [root@compute02 ~]#
 ```
 -Kiểm tra OVS version
+```
 [root@compute02 ~]# ovs-vsctl -V
 ovs-vsctl (Open vSwitch) 2.0.0
 Complied Apr 19 2018
 [root@compute02 ~]#
+```
+
+
 
