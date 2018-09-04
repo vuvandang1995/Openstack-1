@@ -1,5 +1,21 @@
 # cài đặt openvswitch cho kvm trên centos7
 
+- Đầu tiên cần cài KVM
+```
+yum -y install qemu-kvm libvirt bridge-utils virt-manager virt-install
+```
+- Khởi động lại libvirt
+```
+systemctl start libvirtd
+systemctl enable libvirtd
+```
+- Tải image
+```
+yum install wget -y
+cd /var/lib/libvirt/images
+wget https://sourceforge.mirrorservice.org/g/gn/gns-3/Qemu%20Appliances/linux-microcore-6.4.img
+```
+
 **Bước 1** Cài các gói sau
 ```
 yum install wget openssl-devel  python-sphinx gcc make python-devel openssl-devel kernel-devel graphviz kernel-debug-devel autoconf automake rpm-build redhat-rpm-config libtool python-twisted-core python-zope-interface PyQt4 desktop-file-utils libcap-ng-devel groff checkpolicy selinux-policy-devel -y
