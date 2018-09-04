@@ -140,3 +140,36 @@ Network ovs-network marked as autostarted
  ovs-network          active     yes           yes
 [root@compute02 ~]#
 ```
+**Bước 6** Tạo máy ảo và kiểm tra lại
+- Tạo máy ảo
+```
+virt-install \
+ --name vm1 \
+ --memory 512 \
+ --disk path=/var/lib/libvirt/images/pac2.qcow2,size=8,format=qcow2,bus=ide,cache=none \
+ --vcpus 1 \
+ --network network:ovs-network \
+ --os-type=Linux \
+ --os-variant=Generic \
+ --hvm --virt-type kvm \
+ --vnc --noautoconsole \
+ --import
+```
+- Kiểm tra 
+```
+[root@localhost images]# ovs-vsctl show
+8dc5f8e7-0e54-4d9d-ba7a-cd6b9b94f470
+    Bridge "ovs-br0"
+        Port "ovs-br0"
+            Interface "ovs-br0"
+                type: internal
+        Port "eth2"
+            Interface "eth2"
+    ovs_version: "2.0.0"
+```
+- Hiển thị các port đang kết nối
+```
+[root@compute02 ~]# ovs-vsctl list-ports ovs-br0
+eth2
+vnet0
+```
