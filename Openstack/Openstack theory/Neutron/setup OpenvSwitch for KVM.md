@@ -130,37 +130,8 @@ ONBOOT=yes
     ovs_version: "2.9.2"
 [root@compute02 ~]#
 ```
-**Bước 5** Define ovs network
-- Tạo file template
-```
-[root@compute02 ~]# vi /tmp/ovs-network.xml
-<network>
-<name>ovs-network</name>
-<forward mode='bridge'/>
-<bridge name='ovs-br0'/>
-<virtualport type='openvswitch'/>
-</network>
-```
-- Define network bằng libvirt
-```
-[root@compute02 ~]# virsh net-define /tmp/ovs-network.xml
-Network ovs-network defined from /tmp/ovs-network.xml
-[root@compute02 ~]# virsh net-start ovs-network
-Network ovs-network started
-[root@compute02 ~]# virsh net-autostart ovs-network
-Network ovs-network marked as autostarted
-[root@compute02 ~]#
-```
-- Kiểm tra lại
-```
-[root@compute02 ~]# virsh net-list
- Name                 State      Autostart     Persistent
-----------------------------------------------------------
- default              active     yes           yes
- ovs-network          active     yes           yes
-[root@compute02 ~]#
-```
-**Bước 6** Tạo máy ảo và kiểm tra lại
+
+**Bước 5** Tạo máy ảo và kiểm tra lại
 - Tạo máy ảo
 ```
 virt-install \
