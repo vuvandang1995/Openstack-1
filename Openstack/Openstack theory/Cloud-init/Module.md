@@ -220,6 +220,16 @@ chpasswd:
         - user4:$6$rL..$ej...
 ```
 
+Ví dụ:
+
+```
+#cloud-config
+password: 123456
+ssh_pwauth: True
+chpasswd:
+  expire: false
+```
+
 <a name="9"></a>
 ## 9. SSH
 
