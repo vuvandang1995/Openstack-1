@@ -386,4 +386,4 @@ power_state:
 
 **Link tham khảo:**
 
-https://cloudinit.readthedocs.io/en/latest/topics/modules.html
+https://cloudinit.readthedocs.io/en/latest/topics/modules.html#
