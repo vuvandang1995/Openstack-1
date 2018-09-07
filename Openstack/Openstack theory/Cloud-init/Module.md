@@ -30,7 +30,7 @@
 
 ---------------
 
-<a name=""></a>
+<a name="1"></a>
 ## 1. Bootcmd
 
 Chạy câu lệnh ở ngay lúc quá trình boot mới diễn ra. Nó nên chỉ được dùng cho những phần sẽ không làm được ở giai đoạn sau của quá trình boot.
@@ -45,7 +45,7 @@ bootcmd:
     - [ cloud-init-per, once, mymkfs, mkfs, /dev/vdb ]
 ```
 
-<a name=""></a>
+<a name="2"></a>
 ## 2. Disk Setup
 
 Cấu hình partions và filesystems.
