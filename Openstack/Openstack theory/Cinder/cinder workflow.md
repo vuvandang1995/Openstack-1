@@ -13,4 +13,4 @@
 
 # 2 Workflow của Cinder khi tạo mới volume <a name="2"> </a>
 
-<img src="../images/6.png" />
+<img src="https://i.imgur.com/foE7pok.png">
