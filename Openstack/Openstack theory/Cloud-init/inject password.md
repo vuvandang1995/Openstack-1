@@ -26,9 +26,9 @@ vi /etc/nova/nova.conf
 
 
 [libvirt]
-virttype = kvm
-injectpassword=True
-injectkey=True
-injectpartition=-1
-enableinstancepassword=True
+virttype = qemu
+inject_password=True
+inject_key=True
+inject_partition=-1
+
 ```
