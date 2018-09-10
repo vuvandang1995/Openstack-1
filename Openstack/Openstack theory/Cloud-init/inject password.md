@@ -20,7 +20,7 @@ vi /etc/nova/nova.conf
 inject_password=true
 ```
 
-## Cấu hình trên nova compute:
+## Cấu hình trên compute:
 ```
 vi /etc/nova/nova.conf
 
