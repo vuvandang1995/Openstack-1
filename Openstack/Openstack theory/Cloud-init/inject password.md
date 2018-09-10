@@ -1,4 +1,4 @@
-# Phần này giới thiệu về inject pass sử dụng để tạo ra 1 random password cho user admin khi tạo máy ảo trên commandline
+# Phần này giới thiệu về inject pass sử dụng để tạo ra 1 random password cho user admin khi tạo máy ảo trên commandline (Hiện tại đang fail trên bản Queens)
 
 ## Cấu hình trên controller:
 - Cấu hình file dashboard:
