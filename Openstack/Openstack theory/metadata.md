@@ -237,8 +237,8 @@ instance -> neutron-ns-metadata-proxy -> neutron-metadata-agent -> nova-api-meta
 <a name="5"></a>
 ## 5. Tóm tắt flow lấy metadata
 
-VM lấy IP thông qua DHCP agent thông qua đường provider hoặc nếu có thể đặt luôn DHCP agent trên compute , DHCP agent chứa ip 169.254.169.254 mặc định để lấy metadata và route IP của vm tới 169.254.169.254, DHCP agent truyền IP và ID instance của VM cho metadataproxy, metadataproxy truyền request tới neutron-metadata-agent, neutron-metadata-agent request tới nova-metadata-api thông qua đường mngt, nova-metadata-api trỏ tới database lấy metadata bằng conductor.
+`VM` lấy IP thông qua `DHCP agent` thông qua đường provider hoặc nếu có thể đặt luôn `DHCP agent` trên compute , `DHCP agent` chứa ip 169.254.169.254 mặc định để lấy metadata và route IP của `VM` tới 169.254.169.254, `DHCP agent` truyền IP và ID instance của `VM` cho `metadataproxy`, `metadataproxy` truyền request tới `neutron-metadata-agent`, `neutron-metadata-agent` request tới `nova-metadata-api` thông qua đường mngt, `nova-metadata-api` trỏ tới database lấy metadata bằng `conductor`.
 
-Trường hợp đặt DHCP agent, và neutron-metadata-agent trên compute thì sẽ ko cần đường provider và neutron-metadata-agent giao tiếp với nova-metadata-api qua mngt . Mô hình dùng cho trường hợp nhiều controller backup khi 1 controller chết thì sẽ chuyển sang nova-metadata-api của controller khác để lấy metadata
+Trường hợp đặt `DHCP agent`, và `neutron-metadata-agent` trên compute thì sẽ ko cần đường provider và `neutron-metadata-agent` giao tiếp với `nova-metadata-api` qua mngt . Mô hình dùng cho trường hợp nhiều controller backup khi 1 controller chết thì sẽ chuyển sang `nova-metadata-api` của controller khác để lấy metadata
 
 
