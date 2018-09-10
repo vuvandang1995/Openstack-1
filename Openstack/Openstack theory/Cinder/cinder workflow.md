@@ -11,7 +11,7 @@
 |Cinder-volume|Cinder-volume chấp nhận các yêu cầu từ các quy trình CInder khác đóng vai trò là thùng chứa hoạt động cho các trình điều khiển Cinder. Quá trình này là đa luồng và thường có một luồng thực hiện trên mỗi Cinder back-end giống như định nghĩa trong tập tin cấu hình Cinder.|
 |Cinder-backup|Xử lý tương tác với các mục tiêu sao có khả năng sao lưu (Ví dụ như OpenStack Object Storage Service - Swift). Khi một máy client yêu cầu sao lưu volume được tạo ra hoặc quản lý.|
 
-# 2. Workflow của Cinder khi tạo mới volume <a name="2"> </a>
+# 2. Workflow khi tạo mới volume <a name="2"> </a>
 
 <img src="https://i.imgur.com/foE7pok.png">
 
@@ -25,7 +25,7 @@
 8. cinder-api đọc message trả lời từ queue và trả lời client.
 9. Client nhận được thông tin bao gồm trạng thái của yêu cầu tạo volume: volume UUID, etc.
 
-# 3. Workflow của cinder khi attach volume
+# 3. Workflow khi attach volume
 
 <img src="https://i.imgur.com/h780XRb.png">
 
