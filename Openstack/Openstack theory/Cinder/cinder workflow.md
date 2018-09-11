@@ -20,7 +20,7 @@
 3. cinder-volume xử lý message của queue, gửi message cho cinder-scheduler để xác định backend cung cấp cho volume.
 4. cinder-scheduler xử lý message của queue, sinh ra danh sách các ứng viên (node storage) dựa trên trạng thái hiện tại và yêu cầu tiêu chí về volume criteria (size, availability zone, volume type (including extra specs)).
 5. cinder-volume đọc thông tin trả lời cinder-scheduler từ queue, lặp lại danh sách ứng viên bằng phương thức backend driver cho đến khi thành công.
-6. Cinder driver tạo yêu volume được yêu cầu thông qua tương tác với hệ thống con storage ( phụ thuộc vào cấu hình và giao thức)
+6. Cinder driver tạo volume được yêu cầu thông qua tương tác với hệ thống con storage ( phụ thuộc vào cấu hình và giao thức)
 7. cinder-volume tập hợp volume metadata từ queue và kết nối thông tin và chuyển message trả lời đến AMQP queue.
 8. cinder-api đọc message trả lời từ queue và trả lời client.
 9. Client nhận được thông tin bao gồm trạng thái của yêu cầu tạo volume: volume UUID, etc.
