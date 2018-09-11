@@ -16,7 +16,7 @@
 <img src="https://i.imgur.com/foE7pok.png">
 
 1. Client yêu cầu tạo volume thông qua REST API của cinder ( client sử dụng python-cinderclient hoặc thông qua dashboard)
-2. cinder-api xác thực yêu cầu hợp lệ ko?, thông tin user. Mội khi được xác thực, put messagelên AMQP queue để xử lý.
+2. cinder-api xác thực yêu cầu hợp lệ ko?, thông tin user. Mội khi được xác thực, put message lên AMQP queue để xử lý.
 3. cinder-volume xử lý message của queue, gửi message cho cinder-scheduler để xác định backend cung cấp cho volume.
 4. cinder-scheduler xử lý message của queue, sinh ra danh sách các ứng viên (node storage) dựa trên trạng thái hiện tại và yêu cầu tiêu chí về volume criteria (size, availability zone, volume type (including extra specs)).
 5. cinder-volume đọc thông tin trả lời cinder-scheduler từ queue, lặp lại danh sách ứng viên bằng phương thức backend driver cho đến khi thành công.
