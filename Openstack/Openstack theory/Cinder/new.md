@@ -13,20 +13,6 @@ volume_driver = cinder.volume.drivers.lvm.LVMISCSIDriver
 - Sử dụng giao thức iSCSI để kết nối các volumes tới các compute nodes.
 - Không có nhà cung cấp cụ thể.
 
-`Cinder Attach Flow` 
-
-![cinder-attach-flow](/images/cinder-attach-flow.png)
-
-- Cinder gọi Cinder qua APi của cinder, truyền thông tin kết nối.
-  - Ví vụ :  Host name, iSCSI initiator name, FC WWPNs
-- Cinder-API chuyển thông điệp đến Cinder-volume.
-- Sau đó trình kiểm tra lỗi đầu vào sẽ làm việc và gọi đến volume driver.
-- Volume Driver sẽ chuẩn bị các yếu tố cần thiết để cho phép kết nối.
-  - Ví dụ : Cho phép máy chủ NOVA có thể truy cập vào Volume.
-- Volume driver trả về thông tin kết nối, được truyền cho NOVA.
-  - Ví dụ : iSCSI iqn and portal, FC WWPN.
-- NOVA tạo kết nối đến storage sử dụng thông tin được trả về.
-- NOVA chuyển volume device/file tới hypervisor.
 
 
 ### 6. Cinder Status.
