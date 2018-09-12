@@ -274,6 +274,15 @@ echo "/dev/vdb1 /mnt xfs defaults 0 0" >> /etc/fstab
 root@controller:~# . admin-openrc
 root@controller:~# cinder service-list
 
+[root@controller ~]# cinder service-list
++------------------+----------------+------+---------+-------+----------------------------+-----------------+
+| Binary           | Host           | Zone | Status  | State | Updated_at                 | Disabled Reason |
++------------------+----------------+------+---------+-------+----------------------------+-----------------+
+| cinder-scheduler | controller     | nova | enabled | up    | 2018-09-12T10:24:51.000000 | -               |
+| cinder-volume    | controller@lvm | nova | enabled | up    | 2018-09-12T10:24:50.000000 | -               |
+| cinder-volume    | controller@nfs | nova | enabled | up    | 2018-09-12T10:24:53.000000 | -               |
++------------------+----------------+------+---------+-------+----------------------------+-----------------+
+```
 
 
 
