@@ -90,7 +90,6 @@ vi /etc/hosts
 192.168.239.192 compute2
 192.168.239.193 compute3
 192.168.239.194 cinder
-192.168.239.195	gfs-client
 192.168.239.196	gfs
 192.168.239.197	gfs1
 192.168.239.198	nfs
@@ -161,4 +160,56 @@ hoặc tắt firewalld `systemctl stop firewalld`
 
 - Tạo 1 pool storage với Server gfs:
 `gluster peer probe gfs`
+
+- Kiểm tra trạng thái gluster pool
+```
+[root@gfs1 glusterd]# gluster peer status
+Number of Peers: 1
+
+Hostname: gfs
+Uuid: ef498eae-f12b-4e30-9705-871b4f934147
+State: Peer in Cluster (Connected)
+```
+- Khởi tạo volume : Lưu ý sẽ không khởi tạo được testvol2 nếu mục /mnt/brick1 lằm trên root system, mà bắt buộc phải nằm trên phân vùng mới vdb
+
+```gluster  volume create testvol2 replica 2 transport tcp  gfs:/mnt/brick1  gfs1:/mnt/brick1```
+
+- Start volume
+```
+gluster volume start testvol2
+```
+
+## 4. Cài đặt NFS
+
+- Chỉnh sửa file hosts:
+
+```
+vi /etc/hosts
+
+192.168.239.190 controller
+192.168.239.191 compute1
+192.168.239.192 compute2
+192.168.239.193 compute3
+192.168.239.194 cinder
+192.168.239.196	gfs
+192.168.239.197	gfs1
+192.168.239.198	nfs 
+```
+
+Thực hiện phân vùng ổ cứng :
+```
+fdisk /dev/vdb
+
+root@lvm:~# fdisk /dev/sdb
+Command (m for help): n
+Partition type:
+p   primary (0 primary, 0 extended, 4 free)
+e   extended
+Select (default p): p
+Partition number (1-4, default 1):
+Using default value 1
+First sector (2048-62914559, default 2048):
+Using default value 2048
+Last sector, +sectors or +size{K,M,G} (2048-62914559, default 62914559): +10G
+```
 
