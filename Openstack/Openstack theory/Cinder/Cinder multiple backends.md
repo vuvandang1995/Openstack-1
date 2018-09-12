@@ -266,6 +266,11 @@ Thực hiện lệnh để hệ thống tự động mount vào thư mục khi r
 ```
 echo "/dev/vdb1 /mnt xfs defaults 0 0" >> /etc/fstab
 ```
+## 6. Kiểm tra
+
+```
+root@controller:~# . admin-openrc
+root@controller:~# cinder service-list
 
 
 
