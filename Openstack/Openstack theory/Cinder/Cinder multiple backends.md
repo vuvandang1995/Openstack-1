@@ -5,7 +5,7 @@
 <h3>2.Cài đặt </h3>
 <ul>
 <li>
-<p>Lưu ý : Trên mô hình phải được cài đặt sẵn OpenStack và Cinder, nếu chưa có tham khảo tại <a href="https://github.com/congto/OpenStack-Mitaka-Scripts/tree/master/OPS-Mitaka-LB-Ubuntu">đây</a></p>
+<p>Lưu ý : Trên mô hình phải được cài đặt sẵn OpenStack và Cinder, nếu chưa có tham khảo tại <a href="https://github.com/Ducnm37/All/blob/master/Openstack/Setup%20-%20Administator/4.%20Openstack%20queens%20manual%20-%20OpenvSwitch.md#7.1">đây</a></p>
 </li>
 <li>
 <p>Với mô hình trên LVM đã được cài đặt và thiết lập trước đó, ở bài này chỉ giới thiệu về glusterfs và nfs.</p>
