@@ -24,7 +24,7 @@ enabled_backends = lvm,nfs,glusterfs
 volume_driver = cinder.volume.drivers.nfs.NfsDriver
 volume_backend_name = NFS
 nfs_shares_config = /etc/cinder/nfs_shares
-nfs_mount_point_base = (đường dẫn muốn mout vào)
+nfs_mount_point_base = (đường dẫn muốn mout vào nếu không nó sẽ tự động chọn đường dẫn để mout)
 
 [glusterfs]
 volume_driver = cinder.volume.drivers.glusterfs.GlusterfsDriver
@@ -282,6 +282,20 @@ root@controller:~# cinder service-list
 | cinder-volume    | controller@lvm | nova | enabled | up    | 2018-09-12T10:24:50.000000 | -               |
 | cinder-volume    | controller@nfs | nova | enabled | up    | 2018-09-12T10:24:53.000000 | -               |
 +------------------+----------------+------+---------+-------+----------------------------+-----------------+
+```
+Hoặc xem đã được mout đến nfs-server chưa bằng lệnh `df -h`
+```
+[root@controller ~]# df -h
+Filesystem               Size  Used Avail Use% Mounted on
+/dev/mapper/centos-root   50G  4.2G   46G   9% /
+devtmpfs                 2.9G     0  2.9G   0% /dev
+tmpfs                    2.9G     0  2.9G   0% /dev/shm
+tmpfs                    2.9G  8.8M  2.9G   1% /run
+tmpfs                    2.9G     0  2.9G   0% /sys/fs/cgroup
+/dev/mapper/centos-home   44G   33M   44G   1% /home
+/dev/vda1               1014M  180M  835M  18% /boot
+tmpfs                    581M     0  581M   0% /run/user/0
+192.168.239/198:/mnt/nfs    60G   33M   60G   1% /var/lib/cinder/mnt/88bcb50137425c193680158748900ff0
 ```
 
 
