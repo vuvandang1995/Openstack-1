@@ -27,7 +27,7 @@ backup_share=HOST:EXPORT_PATH
 
 Trong đó `HOST:EXPORT_PATH` là địa chỉ của đường dẫn đã được thêm vào file `/etc/exports` ở bên nfs server
 
-Ví dụ: `192.168.100.34:/mnt/nfs`
+Ví dụ: `192.168.239.198:/mnt/nfs`
 
 Khởi động dịch vụ cinder backup
 
