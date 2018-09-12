@@ -60,8 +60,7 @@ systemctl restart openstack-cinder-volume.service target.service
 
 ## 2. Trên node compute
 
-- Cài đặt các gói nfs-common và glusterfs-client : Đầu tiên phải cài gói release sau đó mới cài được
-
+- Cài đặt các gói release, nfs-common và glusterfs-client :
 ```
 yum install centos-release-gluster
 
@@ -81,6 +80,7 @@ volume_api_class = nova.volume.cinder.API
 - restart lại nova compute: `systemctl start openstack-nova-compute.service`
 
 ## 3. Trên Node gfs và gfs1
+
 
 ```
 vi /etc/hosts
@@ -127,8 +127,12 @@ Command (m for help): w
 - Mount partition vào thư mục /mnt và tạo thư mục /mnt/brick1
 `mount /dev/sdb1 /mnt && mkdir -p /mnt/brick1`
 
-- Cài đặt gói glusterfs-server
-`yum -y install glusterfs-server`
+
+- Cài đặt gói glusterfs-server, trước tiên cần cài centos-release-gluster sau đó mới cài được gluster-server
+```
+yum install centos-release-gluster -y
+yum -y install glusterfs-server
+```
 
 - Start dịch vụ
 ```
@@ -138,8 +142,23 @@ systemctl enable glusterd
 
 - Tắt selinux
 ```
+vi /etc/sysconfig/selinux 
+
+SELINUX=disabled
+```
+
+Kiểm tra lại `sestatus`
+
 ### Tiếp tục thực hiện trên gfs1
 
-Để có thể
+- Để có thể tạo pool trên storage với server gfs ta cần mở port cho glustered
+```
+firewall-cmd --add-service=glusterfs --permanent 
+firewall-cmd --reload
+```
+hoặc tắt firewalld `systemctl stop firewalld`
+
+
 - Tạo 1 pool storage với Server gfs:
 `gluster peer probe gfs`
+
