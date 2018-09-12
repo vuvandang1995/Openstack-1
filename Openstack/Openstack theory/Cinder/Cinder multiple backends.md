@@ -266,7 +266,7 @@ service nfs-server restart
 
 Thực hiện lệnh để hệ thống tự động mount vào thư mục khi restart hệ thống. :
 ```
-echo "/dev/vdb1 /mnt xfs defaults 0 0" >> /etc/fstab
+echo "/dev/vdb1 /mnt xfs defaults 0 0" >> /etc/fstab  (cấu hình cho file /etc/fstab để mout cứng, lưu ý là cinder phải tách khỏi controller nếu không khi restart system sẽ được load từ file mout chứ ko phải file root của hệ điều hành)
 ```
 ## 6. Kiểm tra
 
