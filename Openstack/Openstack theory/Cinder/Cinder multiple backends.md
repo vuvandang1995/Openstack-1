@@ -62,7 +62,7 @@ systemctl restart openstack-cinder-volume.service target.service
 
 - Cài đặt các gói release, nfs-common và glusterfs-client :
 ```
-yum install centos-release-gluster
+yum install centos-release-gluster -y
 
 yum -y install nfs-common glusterfs-client 
 
