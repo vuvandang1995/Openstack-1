@@ -249,7 +249,7 @@ systemctl start nfs-server.service
 
 - Thực hiện lệnh cho phép mount thư mục /mnt/nfs đến dải 192.168.239.0/24
 ```
-echo "/mnt/nfs 192.168.239.196/24(rw,no_root_squash)" >> /ect/exports
+echo "/mnt/nfs 192.168.239.196/24(rw,no_root_squash)" >> /etc/exports
 ```
 - Thực hiện lệnh để hệ thống tự động mount vào thư mục khi restart hệ thống. :
 ```
