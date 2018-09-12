@@ -77,7 +77,7 @@ vi /etc/nova/nova.conf
 osapi_volume_listen = 0.0.0.0
 volume_api_class = nova.volume.cinder.API
 ```
-- restart lại nova compute: `systemctl start openstack-nova-compute.service`
+- restart lại nova compute: `systemctl restart openstack-nova-compute.service`
 
 ## 3. Trên Node gfs và gfs1
 
