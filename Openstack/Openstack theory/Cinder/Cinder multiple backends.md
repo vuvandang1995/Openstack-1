@@ -41,7 +41,7 @@ vi /etc/cinder/glusterfs_shares
 192.168.239.196:/testvol2
 
 
-# testvol2 là trên của volume mà chúng ta sẽ tạo tạo GFS server.
+# testvol2 là trên của volume mà chúng ta sẽ tạo GFS server.
 ```
 
 - Tạo file:
