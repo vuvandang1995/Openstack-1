@@ -24,13 +24,13 @@ enabled_backends = lvm,nfs,glusterfs
 volume_driver = cinder.volume.drivers.nfs.NfsDriver
 volume_backend_name = NFS
 nfs_shares_config = /etc/cinder/nfs_shares
-nfs_mount_point_base = $state_path/mnt_nfs 
+nfs_mount_point_base = (đường dẫn muốn mout vào)
 
 [glusterfs]
 volume_driver = cinder.volume.drivers.glusterfs.GlusterfsDriver
 volume_backend_name = GlusterFS
 glusterfs_shares_config = /etc/cinder/glusterfs_shares
-glusterfs_mount_point_base = $state_path/mnt_glusterfs
+glusterfs_mount_point_base = (đường dẫn muốn mout vào)
 ```
 
 - Tạo file: 
@@ -48,8 +48,8 @@ vi /etc/cinder/glusterfs_shares
 ```
 vi /etc/cinder/nfs_shares
 
-192.168.239.198:/nfsshare
-# /nfsshare là thư mục mà chúng ta sẽ share khi cấu hình NFS.
+192.168.239.198:/mnt/nfs/
+# /mnt/nfs/ là thư mục mà chúng ta sẽ share khi cấu hình NFS.
 ```
 - Thực hiện phân quyền và restart lại dịch vụ :
 ```
@@ -180,6 +180,8 @@ gluster volume start testvol2
 ```
 
 ## 4. Cài đặt NFS
+
+
 
 - Chỉnh sửa file hosts:
 
