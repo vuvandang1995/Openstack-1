@@ -211,5 +211,70 @@ Using default value 1
 First sector (2048-62914559, default 2048):
 Using default value 2048
 Last sector, +sectors or +size{K,M,G} (2048-62914559, default 62914559): +10G
+
+Command (m for help): w
 ```
+- Tải gói định dạng xfs :
+```
+yum install xfsprogs -y
+```
+- Format phân vùng vừa tạo với định dạng xfs :
+```
+mkfs.xfs /dev/vdb1
+```
+- Mount partition vào thư mục /mnt :
+```
+mount /dev/vdb1 /mnt
+```
+- Tạo thư mục /mnt/nfs :
+```
+mkdir -p /mnt/nfs
+```
+- Cài đặt gói nfs-kernel-server :
+```
+yum -y install nfs-utils
+```
+
+- Mở port cho nfs hoặc tắt firewalld
+```
+firewall-cmd --permanent --zone=public --add-service=nfs
+firewall-cmd --reload
+```
+
+- Bật nfs-server:
+```
+systemctl enable nfs-server.service
+systemctl start nfs-server.service
+```
+
+- Thực hiện lệnh cho phép mount thư mục /mnt/nfs đến dải 192.168.239.0/24
+```
+echo "/mnt/nfs 192.168.239.196/24(rw,no_root_squash)" >> /ect/exports
+```
+- Thực hiện lệnh để hệ thống tự động mount vào thư mục khi restart hệ thống. :
+```
+echo "/dev/vdb1 /mnt xfs defaults 0 0" >> /etc/fstab
+```
+- Restart dịch vụ:
+```
+service nfs-server restart
+```
+
+## 5. Cài đặt trên node Cinder
+
+Thực hiện lệnh để hệ thống tự động mount vào thư mục khi restart hệ thống. :
+```
+echo "/dev/vdb1 /mnt xfs defaults 0 0" >> /etc/fstab
+```
+
+
+
+
+
+
+
+
+
+
+
 
