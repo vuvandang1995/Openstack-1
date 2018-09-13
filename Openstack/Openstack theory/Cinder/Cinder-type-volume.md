@@ -3,7 +3,7 @@
 Việc tạo type cho volume giúp ta có thể lựa chọn việc lưu volume ở backend chỉ định muốn lưu, việc chọn type chỉ sử dụng được khi tạo volume trước khi tạo máy ảo. Nếu mặc định không chọn type thì cinder sẽ dựa vào `filter và `weight` để chọn ra backend thích hợp nhất để tạo volume trên đó.
 
 
-**Ví dụ**: Bên dưới ta đã cấu hình backend LVM và nfs, ta sẽ cấu hình 2 type backend là LVN và nfs dùng để lưu volume.
+**Ví dụ**: Bên dưới ta đã cấu hình backend lvm và nfs, ta sẽ cấu hình 2 type backend là LVN và nfs dùng để lưu volume.
 
 ```
 cinder type-create nfs
@@ -14,7 +14,7 @@ cinder type-create nfs
 +--------------------------------------+------+-------------+-----------+
 ```
 ```
-cinder type-key nfs set volume_backend_name=NFS
+cinder type-key nfs set volume_backend_name=nfs
 ```
 ```
 cinder extra-specs-list
@@ -25,6 +25,8 @@ cinder extra-specs-list
 +--------------------------------------+------+--------------------------------+
 ```
 
+```
 cinder type-create lvm
 cinder type-key lvm set volume_backend_name=LVM
 cinder extra-specs-list
+```
