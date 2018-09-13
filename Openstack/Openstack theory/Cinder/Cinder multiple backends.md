@@ -28,7 +28,7 @@ nfs_mount_point_base = (Lưu ý: đường dẫn muốn mount vào, nếu không
 
 [glusterfs]
 volume_driver = cinder.volume.drivers.glusterfs.GlusterfsDriver
-volume_backend_name = GlusterFS
+volume_backend_name = glusterfs
 glusterfs_shares_config = /etc/cinder/glusterfs_shares
 glusterfs_mount_point_base = (Lưu ý: đường dẫn muốn mount vào, nếu không chọn đường dẫn thì xóa dòng này đi thì system mới mount vào nơi khác được)
 ```
