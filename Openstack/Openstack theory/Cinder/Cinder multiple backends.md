@@ -124,7 +124,7 @@ Command (m for help): w
 `mkfs.xfs /dev/vdb1`
 
 - Mount partition vào thư mục /mnt và tạo thư mục /mnt/brick1
-`mount /dev/sdb1 /mnt && mkdir -p /mnt/brick1`
+`mount /dev/vdb1 /mnt && mkdir -p /mnt/brick1`
 
 
 - Cài đặt gói glusterfs-server, trước tiên cần cài centos-release-gluster sau đó mới cài được gluster-server
