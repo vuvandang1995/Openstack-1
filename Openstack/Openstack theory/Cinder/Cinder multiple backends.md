@@ -24,13 +24,13 @@ enabled_backends = lvm,nfs,glusterfs
 volume_driver = cinder.volume.drivers.nfs.NfsDriver
 volume_backend_name = NFS
 nfs_shares_config = /etc/cinder/nfs_shares
-nfs_mount_point_base = (đường dẫn muốn mout vào nếu không nó sẽ tự động chọn đường dẫn để mout)
+nfs_mount_point_base = (đường dẫn muốn mount vào, nếu không chọn đường dẫn thì xóa dòng này đi thì system mới mount vào nơi khác được)
 
 [glusterfs]
 volume_driver = cinder.volume.drivers.glusterfs.GlusterfsDriver
 volume_backend_name = GlusterFS
 glusterfs_shares_config = /etc/cinder/glusterfs_shares
-glusterfs_mount_point_base = (đường dẫn muốn mout vào)
+glusterfs_mount_point_base = (đường dẫn muốn mount vào, nếu không chọn đường dẫn thì xóa dòng này đi thì system mới mount vào nơi khác được)
 ```
 
 - Tạo file: 
