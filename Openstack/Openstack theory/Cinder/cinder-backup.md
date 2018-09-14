@@ -52,30 +52,4 @@ Kiểm tra tại node cinder xem đã được mount chưa bằng lệnh `df -h`
 
 Lưu ý: Để tạo được backup, volume phải ở trạng thái `available`. Do vậy nếu volume đang được attach vào máy ảo, cần phải gỡ nó ra.
 
-Xem danh sách volume
-
-`cinder list`
-
-Show trạng thái volume `ducnm`
-
-`cinder show ducnm`
-
-Xem danh sách các backup
-
-`cinder backup-list`
-
-Tạo backup cho volume `ducnm`
-
-`cinder backup-create --display-name thao_backup ducnm`
-
-Kiểm tra lại bằng lệnh `cinder backup-list`
-
-Sang phía nfs server để kiểm tra lại metadata file của backup được tạo ra.
-
-Để restore lại volume về trạng thái lúc tạo backup, sử dụng lệnh sau
-
-`cinder backup-restore --volume-id <volume-id> <backup-id>`
-
-Để xóa một backup
-
-`cinder backup-delete <backup-id>`
+`openstack volume backup create [--incremental] [--force] VOLUME`
