@@ -4,8 +4,7 @@ Cinder backup sử dụng để restore lại trạng thái của volume trướ
 
 - Full backup : Là tạo ra 1 bản sao đầy đủ của bản ban đầu
 
-- Incremental backup : Là bản back up cho bản full backup khi backup cho bản chính, và khi tạo backup cho bản chính nó sẽ tạo ra bản backup cho bản backup trước đó chứ ko tạo riêng 1 bản backup cho bản chính. Điều kiện để có thể tạo Incremental backup là cần có 1 bản full backup.
-
+- Incremental backup : là bản sao lưu trong đó các bản sao liên tiếp của dữ liệu chỉ chứa phần đã thay đổi kể từ khi bản sao lưu trước đó được thực hiện. Khi cần full backup, quá trình khôi phục sẽ cần bản full backup cuối cùng cộng với tất cả các bản incremental backup cho đến thời điểm phục hồi.
 
 
 
