@@ -2,11 +2,13 @@
 
 Cinder backup sử dụng để restore lại trạng thái của volume trước đó, vó 2 loại backup là `full backup` và `incremental backup`
 
-- Full backup : Là tạo ra 1 bản sao đầy đủ của bản ban đầu
+- Full backup : Là tạo ra 1 bản backup đầy đủ ban đầu cộng thêm thêm phần dữ liệu mới thay đổi, cứ như vậy sẽ gây ra hiện tượng kích thước bản backup sẽ ngày càng tăng.
+
+<img src="https://i.imgur.com/87MXhvJ.png">
 
 - Incremental backup : là bản sao lưu trong đó các bản sao liên tiếp của dữ liệu chỉ chứa phần đã thay đổi kể từ khi bản sao lưu trước đó được thực hiện. Khi cần full backup, quá trình khôi phục sẽ cần bản full backup cuối cùng cộng với tất cả các bản incremental backup cho đến thời điểm phục hồi.
 
-
+<img src="https://i.imgur.com/WcYhiW5.png">
 
 1. Cấu hình NFS server
 
