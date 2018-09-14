@@ -32,7 +32,7 @@ backup_driver=cinder.backup.drivers.nfs
 backup_share=HOST:EXPORT_PATH
 ```
 
-Trong đó `HOST:EXPORT_PATH` là địa chỉ của đường dẫn đã được thêm vào file `/etc/exports` ở bên nfs server, lưu ý là tạo 1 lvm mới sau đó mount vào 1 mục mới bên nfs server sau đó thêm đường dẫn vào file /etc/export, bên cinder chỉ cần cấu hình `backup_driver` và `backup_share` sau đó restart lại dịch vụ cinder `systemctl restart openstack-cinder-*`
+Trong đó `HOST:EXPORT_PATH` là địa chỉ của đường dẫn đã được thêm vào file `/etc/exports` ở bên nfs server, lưu ý là tạo 1 lvm mới sau đó mount vào 1 mục mới bên nfs server sau đó thêm đường dẫn và phân quyền thư mục vào file `/etc/export`, bên cinder chỉ cần cấu hình `backup_driver` và `backup_share` sau đó restart lại dịch vụ cinder `systemctl restart openstack-cinder-*`
 
 Ví dụ: `192.168.239.198:/mnh/nfs` (bên nfs server đã mount 1 ổ mới vào mục `/mnh`)
 
@@ -53,17 +53,17 @@ Xem danh sách volume
 
 `cinder list`
 
-Show trạng thái volume `thao`
+Show trạng thái volume `ducnm`
 
-`cinder show thao`
+`cinder show ducnm`
 
 Xem danh sách các backup
 
 `cinder backup-list`
 
-Tạo backup cho volume `thao`
+Tạo backup cho volume `ducnm`
 
-`cinder backup-create --display-name thao_backup thao`
+`cinder backup-create --display-name thao_backup ducnm`
 
 Kiểm tra lại bằng lệnh `cinder backup-list`
 
