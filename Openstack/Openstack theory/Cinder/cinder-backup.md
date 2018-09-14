@@ -10,6 +10,8 @@ Cinder backup sử dụng để restore lại trạng thái của volume trướ
 
 <img src="https://i.imgur.com/WcYhiW5.png">
 
+------------------------------------------
+
 1. Cấu hình NFS server
 
 2. Cấu hình cinder backup
