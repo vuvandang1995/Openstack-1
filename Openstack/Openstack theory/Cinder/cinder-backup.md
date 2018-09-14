@@ -4,7 +4,7 @@ Cinder backup sử dụng để restore lại trạng thái của volume trướ
 
 ### Có 2 loại backup là `full backup` và `incremental backup`
 
-- **Full backup** : Là tạo ra 1 bản backup đầy đủ ban đầu cộng thêm thêm phần dữ liệu mới thay đổi, cứ như vậy sẽ gây ra hiện tượng kích thước bản backup sẽ ngày càng tăng.
+- **Full backup** : Là tạo ra 1 bản backup đầy đủ ban đầu cộng thêm thêm phần dữ liệu mới thay đổi, cứ như vậy sẽ gây ra hiện tượng kích thước bản backup sẽ ngày càng tăng, ưu điểm là bản backup update sau sẽ không bị phụ thuộc vào bản backup trước đó
 
 <img src="https://i.imgur.com/87MXhvJ.png">
 
