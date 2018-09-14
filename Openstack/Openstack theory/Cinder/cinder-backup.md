@@ -1,6 +1,8 @@
 # Hướng dẫn cấu hình cinder backup với backend là NFS
 
-Cinder backup sử dụng để restore lại trạng thái của volume trước đó, vó 2 loại backup là `full backup` và `incremental backup`
+Cinder backup sử dụng để restore lại trạng thái của volume trước đó
+
+### Có 2 loại backup là `full backup` và `incremental backup`
 
 - **Full backup** : Là tạo ra 1 bản backup đầy đủ ban đầu cộng thêm thêm phần dữ liệu mới thay đổi, cứ như vậy sẽ gây ra hiện tượng kích thước bản backup sẽ ngày càng tăng.
 
