@@ -1,4 +1,4 @@
-# Phần này giới thiệu về quota trong openstack
+# Giới thiệu về quota trong openstack
 
 **Quota**: Được sử dụng để giới hạn tài nguyên của các service trong openstack
 
