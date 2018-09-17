@@ -72,10 +72,10 @@ Ví dụ: `nova quota-class-update --instances 3 default` (*update quota cho tr�
 
 ## Sử dụng trên dashboard
 
-- Truy cập vào Admin -> Defaults để xem các quota hiện có , và click vào Update Defaults để chỉnh sửa quota
+- Truy cập vào `Admin` -> `Defaults` để xem các quota hiện có , và click vào `Update Defaults` để chỉnh sửa quota
 
 <img src="https://i.imgur.com/l6oouNw.png">
 
-- Chỉnh sửa và click vào Update Default để cập nhật lại quota
+- Chỉnh sửa và click vào `Update Default` để cập nhật lại quota
 
 <img src="https://i.imgur.com/sdxyUJl.png">
