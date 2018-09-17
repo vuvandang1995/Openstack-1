@@ -66,5 +66,5 @@ Ví dụ: `openstack quota set --class --instances 5 default`  (*set cho trườ
 nova quota-class-update --'tên trường muốn update' 'số quota cần update' default
 ```
 
-Ví dụ: `nova quota-class-update --instances 3 default` (*updata quota cho trường instance với quota update thành 3 cho project default*)
+Ví dụ: `nova quota-class-update --instances 3 default` (*update quota cho trường instance với quota update thành 3 cho project default*)
 
