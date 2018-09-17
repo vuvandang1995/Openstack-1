@@ -6,6 +6,8 @@
 
 - Kiểm tra quota default của neutron `neutron quota-default-show`
 
+- Kiểm tra quota default của nova `nova  quota-defaults`
+
 - Set quota cho project:** 
 ```
 openstack quota set --class --'tên trường muốn set quota' 'số lượng quota muốn set' default
