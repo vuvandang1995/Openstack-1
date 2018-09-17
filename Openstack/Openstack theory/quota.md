@@ -10,7 +10,7 @@
 
 - Kiểm tra quota default của cinder: `cinder quota-defaults show`
 
-- Set quota cho project:** 
+- Set quota cho project:
 
 **Cú pháp set quota**
 ```
