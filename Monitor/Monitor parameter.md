@@ -145,3 +145,49 @@ L2 cache:              4096K
 NUMA node0 CPU(s):     0,1
 Flags:                 fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss syscall nx pdpe1gb rdtscp lm constant_tsc rep_good nopl eagerfpu pni pclmulqdq vmx ssse3 cx16 pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm tpr_shadow vnmi flexpriority ept vpid fsgsbase smep erms xsaveopt
 ```
+
+- Kiểm tra tốc độ đọc ghi của Disks:
+Cài đặt : `yum instal pcp-import-iostat2pcp.x86_64 -y`
+
+```
+[root@controller ~]# iostat
+
+Linux 3.10.0-862.11.6.el7.x86_64 (controller)   09/18/2018      _x86_64_        (2 CPU)
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+          12.06    0.00    2.33    1.24    0.01   84.36
+
+Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn
+vda               9.49         7.69       118.44     620207    9551366
+vdb               0.01         0.04         0.01       3548        504
+vdc               0.01         0.05         0.01       3812        620
+scd0              0.00         0.01         0.00       1028          0
+dm-0              7.86         7.33       118.39     591159    9547250
+dm-1              0.00         0.03         0.00       2532          0
+dm-2              0.00         0.01         0.03       1178       2048
+dm-3              0.00         0.00         0.00         76        264
+dm-4              0.00         0.00         0.00         76        316
+```
+
+- Kiểm tra tốc độ đọc ghi các I/O giám sát và hiển thị tiến trình và Disk I/O theo thời gian thực:
+
+Cài đặt : `yum install iotop -y`
+
+```
+[root@controller ~]# iotop
+Total DISK READ :       0.00 B/s | Total DISK WRITE :       0.00 B/s
+Actual DISK READ:       0.00 B/s | Actual DISK WRITE:       0.00 B/s
+  TID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN     IO>    COMMAND
+  TID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN     IO>    COMMAND
+ 1591 be/4 mysql       0.00 B/s    3.75 K/s  0.00 %  0.55 % mysqld --basedir=/usr
+ 1867 be/4 mysql       0.00 B/s    3.75 K/s  0.00 %  0.09 % mysqld --basedir=/usr
+ 2035 be/4 mysql       0.00 B/s    3.75 K/s  0.00 %  0.03 % mysqld --basedir=/usr
+ 2221 be/4 mysql       0.00 B/s    3.75 K/s  0.00 %  0.03 % mysqld --basedir=/usr
+ 2331 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.02 % [kworker/0:3]
+10831 be/4 cinder      0.00 B/s    3.75 K/s  0.00 %  0.00 % python2 /usr/bin/cinder-backup --config-file~er.conf --logfile /var/log/cinder/backup.log
+    1 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % systemd --switched-root --system --deserialize 22
+    2 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [kthreadd]
+    3 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [ksoftirqd/0]
+```
+
+
