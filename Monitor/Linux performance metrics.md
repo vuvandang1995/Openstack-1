@@ -26,4 +26,40 @@
 
 ## 2. Memory metrics
 
+- **Free memory** Số lượng Ram còn trống
 
+- **Swap usage** Số lượng ram ảo hay nói cách khác là dung lượng chuyển từ ram sang chạy trên ổ đĩa
+
+- **Buffer and cache**: là bộ nhớ đệm sử dụng cho việc truy xuất dữ liệu nhanh hơn. Được cấp phát dưới dạng file system hoặc block devide
+
+- **Slabs**: Mô tả việc sử dụng bộ nhớ kernel. Lưu ý các Kernel không thể được chạy trên ổ cứng.
+
+- **Active versus inactive memory**: Cung cấp thông tin về việc sử dụng bộ nhớ hệ thống đang hoạt động hay không hoạt động.
+
+## 3. Network interface metrics
+
+- **Packets received and sent**: Số lượng packet nhận và gửi
+
+- **Bytes received and sent**: Số lượng byte nhận và gửi cho 1 giao diện mạng
+
+- **Collisions per second**: Số va chạm của các packet trên 1 giây trên 1 giao diện mạng kết nối tới, nếu giá trị càng cao càng cho thấy tốc độ mạng bị chậm hoặc có thể bị treo.
+
+- **Packets dropped**: số packet bị mất
+
+- **Overruns**: Chỉ ra rằng vượt qua dung lượng bộ đệm trên giao diện mạng, khuyến cáo sử dụng kết hợp với drop để xác định nghẽn bộ đệm mạng.
+
+- **Errors**: số frames bị lỗi trên đường truyền
+
+## 4. Block device metrics
+
+- **Iowait**: Thời gian CPU sử dụng cho 1 I/O, giá trị càng cao càng gây nghẽn
+
+- **Average queue length**: Số lượng các I/O đang chờ xử lý, 1 disk có khoảng 2 đến 3 giá trị là tối ưu, giá trị cao quá cũng có thể gây nghẽn disk I/O 
+
+- **Average wait**: Thời gian chờ trung bình cho một xử lý yêu cầu cho 1 I/O
+
+- **Transfers per second**: Số lượng  I/O hoạt động trên 1 giây
+
+- **Blocks read/write per second**: Số lần đọc ghi mỗi giây cho block 1024 bytes
+
+- **Kilobytes per second read/write**: Dung lượng dữ liệu được đọc ghi truyền tới block device hoặc từ các block devide truyền đến
