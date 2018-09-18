@@ -51,9 +51,9 @@ RAM thường có 3 loại: DDR 1, 2, và 3
 
 <img src="https://i.imgur.com/01bPis1.jpg">
 
-- **Bộ điều khiển**: Là các vi xử lí có nhiệm vụ thông dịch các lệnh của chương trình và điều khiển hoạt động xử lí,được điều tiết chính xác bởi xung nhịp đồng hồ hệ thống. Mạch xung nhịp đồng hồ hệ thống dùng để đồng bộ các thao tác xử lí trong và ngoài CPU theo các khoảng thời gian không đổi.Khoảng thời gian chờ giữa hai xung gọi là chu kỳ xung nhịp.Tốc độ theo đó xung nhịp hệ thống tạo ra các xung tín hiệu chuẩn thời gian gọi là tốc độ xung nhịp – tốc độ đồng hồ tính bằng triệu đơn vị mỗi giây-Mhz. Thanh ghi là phần tử nhớ tạm trong bộ vi xử lý dùng lưu dữ liệu và địa chỉ nhớ trong máy khi đang thực hiện tác vụ với chúng.
+- **Bộ điều khiển**(CU-Control Unit): Là các vi xử lí có nhiệm vụ thông dịch các lệnh của chương trình và điều khiển hoạt động xử lí,được điều tiết chính xác bởi xung nhịp đồng hồ hệ thống. Mạch xung nhịp đồng hồ hệ thống dùng để đồng bộ các thao tác xử lí trong và ngoài CPU theo các khoảng thời gian không đổi.Khoảng thời gian chờ giữa hai xung gọi là chu kỳ xung nhịp.Tốc độ theo đó xung nhịp hệ thống tạo ra các xung tín hiệu chuẩn thời gian gọi là tốc độ xung nhịp – tốc độ đồng hồ tính bằng triệu đơn vị mỗi giây-Mhz. Thanh ghi là phần tử nhớ tạm trong bộ vi xử lý dùng lưu dữ liệu và địa chỉ nhớ trong máy khi đang thực hiện tác vụ với chúng.
 
-- **Bộ số học-logic**:  Các con số toán học và logic sẽ được tính toán kỹ càng và đưa ra kết quả cho các quá trình xử lý kế tiếp. Theo tên gọi,đơn vị này dùng để thực hiện các phép tính số học( +,-,/ )hay các phép tính logic (so sánh lớn hơn,nhỏ hơn…)
+- **Bộ số học-logic**(ALU-Arithmetic Logic Unit):  Các con số toán học và logic sẽ được tính toán kỹ càng và đưa ra kết quả cho các quá trình xử lý kế tiếp. Theo tên gọi,đơn vị này dùng để thực hiện các phép tính số học( +,-,/ )hay các phép tính logic (so sánh lớn hơn,nhỏ hơn…)
 
 - **Các thanh ghi**: Là các bộ nhớ có dung lượng nhỏ nhưng tốc độ truy cập rất cao, nằm ngay trong CPU, dùng để lưu trữ tạm thời các toán hạng, kết quả tính toán, địa chỉ các ô nhớ hoặc thông tin điều khiển. Mỗi thanh ghi có một chức năng cụ thể. Thanh ghi quan trọng nhất là bộ đếm chương trình (PC - Program Counter) chỉ đến lệnh sẽ thi hành tiếp theo.
 
