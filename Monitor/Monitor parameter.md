@@ -175,8 +175,8 @@ Cài đặt : `yum install iotop -y`
 
 ```
 [root@controller ~]# iotop
-Total DISK READ :       0.00 B/s | Total DISK WRITE :       0.00 B/s
-Actual DISK READ:       0.00 B/s | Actual DISK WRITE:       0.00 B/s
+Total DISK READ :       0.00 B/s | Total DISK WRITE :     182.36 K/s
+Actual DISK READ:       0.00 B/s | Actual DISK WRITE:     185.15 K/s
   TID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN     IO>    COMMAND
   TID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN     IO>    COMMAND
  1591 be/4 mysql       0.00 B/s    3.75 K/s  0.00 %  0.55 % mysqld --basedir=/usr
