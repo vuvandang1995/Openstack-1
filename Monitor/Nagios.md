@@ -94,11 +94,15 @@ Nagios có các plugins để theo dõi , nó kết nối vs apache được ki�
 **kiến trúc bên ngoài của Nagios**:
 <img src="https://i.imgur.com/0HZevtU.png">
 
-Plugins của nagios server kiểm tra csc dịch vụ của máy khác sử dụng plugins của nó.
-NRPE (sử dụng NRPE để gửi dữ liệu được mã hóa bằng SSL / TSL).
-SSH (chạy trực tiếp qua sercure shell).
-SNMP (sử dụng cho máy chủ và các thiết bị mạng).
-NSCA (Để phân phối tải lên máy chủ nagios).
+- Plugins của nagios server kiểm tra csc dịch vụ của máy khác sử dụng plugins của nó.
+
+- NRPE (sử dụng NRPE để gửi dữ liệu được mã hóa bằng SSL / TSL).
+
+- SSH (chạy trực tiếp qua sercure shell).
+
+- SNMP (sử dụng cho máy chủ và các thiết bị mạng).
+
+- NSCA (Để phân phối tải lên máy chủ nagios).
 
 
 ## 5. Cách thức hoạt động
