@@ -92,6 +92,7 @@ Nagios có các plugins để theo dõi , nó kết nối vs apache được ki�
 
 
 **kiến trúc bên ngoài của Nagios**:
+
 <img src="https://i.imgur.com/0HZevtU.png">
 
 - Plugins của nagios server kiểm tra csc dịch vụ của máy khác sử dụng plugins của nó.
