@@ -88,7 +88,7 @@ Nagios được xây dựng theo kiến trúc client/server . Nagios kiểm tra 
 
 Nagios có các plugins để theo dõi , nó kết nối vs apache được kiểm soát bởi CGI để hiển thị kết quả. Hơn nữa cơ sở dữ liệu kết nối với nagios để giữ một file log.
 
-## 5. Cơ chế hoạt động
+## 5. Cách thức hoạt động
 
 - Đối với các dịch vụ mạng có giao thức giao tiếp qua mạng như SMTP, HTTP, FTP,… Nagios có thể tiến hành kiểm tra trực tiếp một dịch vụ xem nó đang hoạt động hay không bằng cách gửi truy vấn kết nối dịch vụ đến server dịch vụ và đợi kết quả trả về. Các plugin phục vụ kiểm tra này được đặt ngay trên server Nagios.
 
