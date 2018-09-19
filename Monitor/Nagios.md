@@ -77,4 +77,10 @@ Plugin thực hiện kiểm tra, sau đó trả kết quả về cho Nagios Core
 
 <img src="https://i.imgur.com/1qYm2Vq.png">
 
-Nagios được xây dựng theo kiến trúc client/server
+Nagios được xây dựng theo kiến trúc client/server . Nagios kiểm tra các thông tin của máy chủ lưu trữ và các dịch vụ phụ thuộc vào chương trình bên ngoài (plugins) mà không có bất kỳ cơ chế nội bộ nào làm điều đó. Nagios server thường chạy trên một host và các plugins chạy trên các remote hosts cần được giám sát. Sau đó chúng sẽ gửi thông tin tới máy chủ để hiển thị trong một GUI:
+
+- Scheduler : 1 phần của Nagios server được sử dụng để kiểm tra các plugins và gửi thông báo theo kết quả.
+
+- GUI : Một giao diện của Nagios được sử dụng để hiển thị các trang web được tạo bở CGI . Nó có thể là các nút màu xanh lá cây hoặc đỏ âm thanh, đồ thị,.... Một nút màu xanh lá sẽ bị chuyển thành màu đỏ và phát ra một âm thanh khi một plugins trả về bị lỗi theo sau để gửi cảnh báo mềm. Khi cảnh báo mềm được nhắc đến nhiều lần (số lần có thể đượ cấu hình). Một cảnh báo khos có thể được nâng lên , sau đó nagios sẽ gửi thông báo cho quản tri viên.
+
+- Plugins : Chúng được sử dụng để kiểm tra một dịch vụ và trả về kết quả cho máy chủ Nagios. Ngoài ra, chúng được cấu hình bởi người dùng.
