@@ -84,3 +84,6 @@ Nagios được xây dựng theo kiến trúc client/server . Nagios kiểm tra 
 - GUI : Một giao diện của Nagios được sử dụng để hiển thị các trang web được tạo bở CGI . Nó có thể là các nút màu xanh lá cây hoặc đỏ âm thanh, đồ thị,.... Một nút màu xanh lá sẽ bị chuyển thành màu đỏ và phát ra một âm thanh khi một plugins trả về bị lỗi theo sau để gửi cảnh báo mềm. Khi cảnh báo mềm được nhắc đến nhiều lần (số lần có thể đượ cấu hình). Một cảnh báo khos có thể được nâng lên , sau đó nagios sẽ gửi thông báo cho quản tri viên.
 
 - Plugins : Chúng được sử dụng để kiểm tra một dịch vụ và trả về kết quả cho máy chủ Nagios. Ngoài ra, chúng được cấu hình bởi người dùng.
+
+
+Nagios có các plugins để theo dõi , nó kết nối vs apache được kiểm soát bởi CGI để hiển thị kết quả. Hơn nữa cơ sở dữ liệu kết nối với nagios để giữ một file log.
