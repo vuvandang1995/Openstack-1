@@ -375,7 +375,7 @@ service nagios restart
 <a name="3.1.4"></a>
 ##### 3.1.4 Kiểm tra trên Web UI của Nagios Server
 
-Lưu ý nếu có lỗi forbidden (lỗi ko có dữ liệu) thì cần tạo 1 file `/var/www/html/index.html` và comment trong đó 
+Lưu ý nếu có lỗi forbidden (lỗi ko có dữ liệu) thì cần tạo 1 file trên client `/var/www/html/index.html` và comment trong đó 
 ```
 vi /var/www/html/index.html
 
