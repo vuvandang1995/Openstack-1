@@ -47,6 +47,7 @@ Test Page
 
 <img src="https://i.imgur.com/Ahg6pBk.png">
 
+-------------
 
 - Cài đặt php
 ```
@@ -73,6 +74,7 @@ date.timezone = "Asia/Tokyo"
 
 <img src="https://i.imgur.com/G6bEWtU.png">
 
+--------------
 
 - Cài đặt Nagios server
 
@@ -116,6 +118,64 @@ success
 
 <img src="https://i.imgur.com/vbHQ6S5.png">
 
+--------------
+Đặt ngưỡng 
+
+- đặt ngưỡng cho việc sử dụng disk
+```
+[root@dlp ~]# vi /etc/nagios/objects/localhost.cfg
+# Define a service to check the disk space of the root partition
+# on the local machine.  Warning if > 20% free, critical if
+# > 10% free space on partition.
+
+# the thresholds are set as Warning if > 20% free, critical if 10% > 10% free
+# change these values if you'd like to change them
+define service{
+        use                       local-service
+        host_name                 localhost
+        service_description       Root Partition
+        check_command             check_local_disk!20%!10%!/
+        }
+
+[root@dlp ~]# systemctl restart nagios 
+```
+
+- Trường hợp add thêm plugin mới thì làm như sau (*ví dụ thêm plugin check_ntp_time)
+```
+# Hiển thị lựa chọn cho 1 plugin
+[root@dlp ~]# /usr/lib64/nagios/plugins/check_ntp_time -h 
+...
+...
+ -w, --warning=THRESHOLD
+    Offset to result in warning status (seconds)
+ -c, --critical=THRESHOLD
+...
+...
+
+# Tạo các command cho 1 plugin với các ngưỡng được cài đặt 
+[root@dlp ~]# vi /etc/nagios/objects/commands.cfg
+# add follows to the end
+define command{
+        command_name    check_ntp_time
+        command_line    $USER1$/check_ntp_time -H $ARG1$ -w $ARG2$ -c $ARG3$
+        }
+
+# Tạo các service tương ứng với các ngưỡng
+[root@dlp ~]# vi /etc/nagios/objects/localhost.cfg
+# add follows to the end ( Warning if it has 1 sec time difference, Critical if it has 2 sec )
+define service{
+        use                             local-service
+        host_name                       localhost
+        service_description             NTP_TIME
+        check_command                   check_ntp_time!ntp1.jst.mfeed.ad.jp!1!2
+        notifications_enabled           1
+        }
+
+[root@dlp ~]# systemctl restart nagios 
+```
+
+--------------
+
 - Thêm một số tính năng monitor khác:
 ```
 yum install -y nagios-plugins-all nagios-plugins-apt nagios-plugins-bdii nagios-plugins-bonding nagios-plugins-breeze nagios-plugins-ups nagios-plugins-users nagios-plugins-wave
@@ -143,6 +203,7 @@ define service{
 
 [root@dlp ~]# systemctl restart nagios 
 ```
+
 
 
 
