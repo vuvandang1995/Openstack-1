@@ -331,10 +331,10 @@ Sau khi cài đặt và cấu hình NRPE trên host mà chúng ta muốn giám s
 
 - **Bước 2**: Tạo file cấu hình cho host giám sát trên Nagios Server
 
-Trên Nagios Server, tạo file cấu hình cho mỗi host mà bạn muốn giám sát chúng ở folder `/usr/local/nagios/etc/servers/`. Trong trường hợp của tôi, tôi sẽ đặt tên cho nó là `test.cfg`
+Trên Nagios Server, tạo file cấu hình cho mỗi host mà bạn muốn giám sát chúng ở folder `/usr/local/nagios/etc/servers/`. Trong trường hợp của tôi, tôi sẽ đặt tên cho nó là `web01.cfg`
 
 ```
-vi /usr/local/nagios/etc/servers/test.cfg
+vi /usr/local/nagios/etc/servers/web01.cfg
 ```
 
 Thêm nội dung sau vào file, phần `host_name` để định nghĩa ra một host mới, `alias` là phần mô tả ngắn về host; `address` là địa chỉ IP của host cần giám sát.
@@ -342,7 +342,7 @@ Thêm nội dung sau vào file, phần `host_name` để định nghĩa ra một
 ```
 define host {
         use                             linux-server
-        host_name                       test  (chỗ này phải khác tên với client nếu không sẽ báo lỗi khi restart nagios)
+        host_name                       web01  (chỗ này phải khác tên với client nếu không sẽ báo lỗi khi restart nagios)
         alias                           My Apache server
         address                         192.168.100.199
         max_check_attempts              5
@@ -359,7 +359,7 @@ SSH:
 ```
 define service {
         use                             generic-service
-        host_name                       test
+        host_name                       web01
         service_description             SSHMonitor
         check_command                   check_nrpe!check_ssh
 }
@@ -370,7 +370,7 @@ HTTP:
 ```
 define service {
         use                             generic-service
-        host_name                       test
+        host_name                       web01
         service_description             HTTPMonitor
         check_command                   check_nrpe!check_http
         notifications_enabled           1
@@ -398,7 +398,7 @@ http://192.168.100.196/nagios
 
 - **Bước 1**: Bấm vào **Service**
 
-Chúng ta sẽ thấy một host mới có tên `test` được thêm mới và các dịch vụ đang ở trạng thái `PENDING`.
+Chúng ta sẽ thấy một host mới có tên `web01` được thêm mới và các dịch vụ đang ở trạng thái `PENDING`.
 
 <img src="https://i.imgur.com/vX0VGpe.png">
 
