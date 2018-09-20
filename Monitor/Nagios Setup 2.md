@@ -280,13 +280,20 @@ Trên 2 distro CentOS và Ubuntu, thư mục chứa các plugin trên client là
     
 Vì vậy, để thêm các lệnh check dịch vụ ở 2 distro cũng phải khai báo đúng đường dẫn trỏ tới thư mục chứa các plugin. Ở ví dụ này, tôi sẽ check 2 dịch vụ SSH và HTTP qua NRPE:
 
-- Với CentOS
+- Với CentOS, truy cập vào `vi /etc/nagios/nrpe.cfg`
+
+thêm vào check các service cần check ở mục `COMMAND DEFINITIONS`
+```
+...
+COMMAND DEFINITIONS
+...
+command[check_http]=/usr/lib64/nagios/plugins/check_http localhost (localhost ở đây là tên client)
+command[check_ssh]=/usr/lib64/nagios/plugins/check_ssh localhost
+```
 
 <img src="../../images/add-command-nrpe-c.png" />
 
-- Với Ubuntu
 
-<img src="../../images/add-command-nrpe-u.png" />
     
 Lưu lại file và thoát.
 
@@ -336,10 +343,10 @@ Sau khi cài đặt và cấu hình NRPE trên host mà chúng ta muốn giám s
 
 - **Bước 2**: Tạo file cấu hình cho host giám sát trên Nagios Server
 
-Trên Nagios Server, tạo file cấu hình cho mỗi host mà bạn muốn giám sát chúng ở folder `/usr/local/nagios/etc/servers/`. Trong trường hợp của tôi, tôi sẽ đặt tên cho nó là `web01.cfg`
+Trên Nagios Server, tạo file cấu hình cho mỗi host mà bạn muốn giám sát chúng ở folder `/usr/local/nagios/etc/servers/`. Trong trường hợp của tôi, tôi sẽ đặt tên cho nó là `test.cfg`
 
 ```
-vi /usr/local/nagios/etc/servers/web01.cfg
+vi /usr/local/nagios/etc/servers/test.cfg
 ```
 
 Thêm nội dung sau vào file, phần `host_name` để định nghĩa ra một host mới, `alias` là phần mô tả ngắn về host; `address` là địa chỉ IP của host cần giám sát.
@@ -347,7 +354,7 @@ Thêm nội dung sau vào file, phần `host_name` để định nghĩa ra một
 ```
 define host {
         use                             linux-server
-        host_name                       web01
+        host_name                       test  (chỗ này phải khác tên với client nếu không sẽ báo lỗi khi restart nagios)
         alias                           My Apache server
         address                         192.168.100.199
         max_check_attempts              5
@@ -364,7 +371,7 @@ SSH:
 ```
 define service {
         use                             generic-service
-        host_name                       web01
+        host_name                       test
         service_description             SSHMonitor
         check_command                   check_nrpe!check_ssh
 }
@@ -375,7 +382,7 @@ HTTP:
 ```
 define service {
         use                             generic-service
-        host_name                       web01
+        host_name                       test
         service_description             HTTPMonitor
         check_command                   check_nrpe!check_http
         notifications_enabled           1
@@ -387,34 +394,6 @@ define service {
 - `use generic-service`: Sử dụng templete có sẵn cho các dịch vụ
 - `notifications_enabled 1`: Bật cảnh báo khi dịch vụ thay đổi trạng thái, 0 để tắt.
 
-Đây là file `web01.cfg` hoàn chỉnh, theo dõi 2 dịch vụ HTTP và SSH qua NRPE:
-
-```
-define host {
-        use                             linux-server
-        host_name                       web01
-        alias                           My Apache server
-        address                         192.168.100.199
-        max_check_attempts              5
-        check_period                    24x7
-        notification_interval           30
-        notification_period             24x7
-}
-define service {
-        use                             generic-service
-        host_name                       web01
-        service_description             SSHMonitor
-        check_command                   check_nrpe!check_ssh
-}
-define service {
-        use                             generic-service
-        host_name                       web01
-        service_description             HTTPMonitor
-        check_command                   check_nrpe!check_http
-}
-```
-
-Sau khi sửa xong, chúng ta lưu lại file và khởi động lại nagios server.
 
 ```
 service nagios restart
