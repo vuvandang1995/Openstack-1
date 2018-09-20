@@ -48,3 +48,36 @@ Test Page
 <img src="https://i.imgur.com/Ahg6pBk.png">
 
 
+- Cài đặt php
+```
+[root@www ~]# yum -y install php php-mbstring php-pear
+[root@www ~]# vi /etc/php.ini
+
+date.timezone = "Asia/Tokyo"
+
+[root@www ~]# systemctl restart httpd 
+```
+- Tạo 1 PHP test page cho client truy cập
+```
+[root@www ~]# vi /var/www/html/index.php
+ <html>
+<body>
+<div style="width: 100%; font-size: 40px; font-weight: bold; text-align: center;">
+<?php
+   print Date("Y/m/d");
+?>
+</div>
+</body>
+</html>
+```
+
+<img src="https://i.imgur.com/G6bEWtU.png">
+
+
+- Cài đặt Nagios server
+
+Trước tiên cài đặt epel yum install epel-release -y
+
+Cài các plug-in : yum -y install nagios nagios-plugins-ping nagios-plugins-disk nagios-plugins-users nagios-plugins-procs nagios-plugins-load nagios-plugins-swap nagios-plugins-ssh nagios-plugins-http
+
+
