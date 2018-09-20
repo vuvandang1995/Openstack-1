@@ -4,17 +4,10 @@
 
 #### Mô hình cài đặt giám sát các host như sau:
 
-<img src="../../images/topo.png" />
+<img src="https://i.imgur.com/2XhD853.png">
 
 Trong bài hướng dẫn này, chúng tôi sẽ sử dụng 2 host. Host thứ nhất `nagios` dùng để cài Nagios Core làm server, host thứ 2 là `web01` làm client giám sát 2 dịch vụ `SSH` và `HTTP`.
 
-#### IP Planning
-
-<img src="../../images/IP-Planning.png" />
-
-Link docs: https://goo.gl/yOim1o
-
-<a name="2"></a>
 ### 2. Cài đặt Nagios trên Nagios Server
 
 <a name="2.1"></a>
@@ -152,7 +145,7 @@ service nagios restart
 http://192.168.100.196/nagios
 ```
 
-<img src="../../images/nagios-1.png" />
+<img src="https://i.imgur.com/VJ8XHM5.png" />
 
 <a name="3"></a>
 ### 3. Giám sát host/dịch vụ trên Linux
@@ -272,12 +265,10 @@ Trên 2 distro CentOS và Ubuntu, thư mục chứa các plugin trên client là
 
 - Với CentOS, thư mục chứa Plugin ở `/usr/lib64/nagios/plugins/`
 
-<img src="../../images/plugin-c-client.png" />
+<img src="https://i.imgur.com/dyqYznK.png">
 
-- Với Ubuntu, thư mục chứa Plugin ở `/usr/lib/nagios/plugins/` 
 
-<img src="../../images/plugin-u-client.png" />
-    
+
 Vì vậy, để thêm các lệnh check dịch vụ ở 2 distro cũng phải khai báo đúng đường dẫn trỏ tới thư mục chứa các plugin. Ở ví dụ này, tôi sẽ check 2 dịch vụ SSH và HTTP qua NRPE:
 
 - Với CentOS, truy cập vào `vi /etc/nagios/nrpe.cfg`
@@ -290,9 +281,6 @@ COMMAND DEFINITIONS
 command[check_http]=/usr/lib64/nagios/plugins/check_http localhost (localhost ở đây là tên client)
 command[check_ssh]=/usr/lib64/nagios/plugins/check_ssh localhost
 ```
-
-<img src="../../images/add-command-nrpe-c.png" />
-
 
     
 Lưu lại file và thoát.
@@ -410,37 +398,37 @@ http://192.168.100.196/nagios
 
 - **Bước 1**: Bấm vào **Service**
 
-Chúng ta sẽ thấy một host mới có tên `web01` được thêm mới và các dịch vụ đang ở trạng thái `PENDING`.
+Chúng ta sẽ thấy một host mới có tên `test` được thêm mới và các dịch vụ đang ở trạng thái `PENDING`.
 
-<img src="../../images/wlc1.png" />
+<img src="https://i.imgur.com/vX0VGpe.png">
 
 Mặc định khi mới thêm host, Nagios Server chưa check các dịch vụ. Để check xem dịch vụ trên host có chạy hay không? Chúng ta bấm vào dịch vụ cần check, ở đây tôi sẽ chọn dịch vụ `HTTP`.
 
-<img src="../../images/wlc-2.png" />
+<img src="https://i.imgur.com/0Til5HA.png">
 
 - **Bước 2**: Bấm vào **Re-schedule the next check of this service**
 
 Khi click vào, chúng ta thấy một thông báo "**This service has not yet been checked, so status information is not avaliable.**", Đừng lo lắng, hãy click vào phần tô đỏ **Re-schedule the next check of this service** để force lượt check tiếp theo.
 
-<img src="../../images/wlc-3.png" />
+<img src="https://i.imgur.com/DSX7AFW.png">
 
 - **Bước 3**: Click tiếp vào **Commit**.
 
-<img src="../../images/wlc-4.png" />
+<img src="https://i.imgur.com/in6CJA9.png">
 
 
 - **Bước 4**: Click tiếp vào **Done**.
 
-<img src="../../images/wlc-5.png" />
+<img src="https://i.imgur.com/X8LQY7M.png">
 
 - **Bước 5**: Thông tin dịch vụ đã được check sẽ hiện ra như sau:
 
-<img src="../../images/wlc-6.png" />
+<img src="https://i.imgur.com/csqY80W.png">
 
 Tương tự, nếu bạn muốn check dịch vụ khác. Với ví dụ, này là `SSH`, các bạn thao tác lại như với dịch vụ `HTTP` mà tôi vừa hướng dẫn bên trên.
 
 Sau khi Nagios Server check xong các dịch vụ, Dashboard sẽ hiển thị như sau:
 
-<img src="../../images/wlc-7.png" />
+<img src="https://i.imgur.com/1XGuPpp.png">
 
 Như vậy, 2 dịch vụ mà chúng ta giám sát trên host hoạt động bình thường.
