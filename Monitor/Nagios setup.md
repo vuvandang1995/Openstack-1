@@ -78,6 +78,27 @@ date.timezone = "Asia/Tokyo"
 
 Trước tiên cài đặt epel yum install epel-release -y
 
-Cài các plug-in : yum -y install nagios nagios-plugins-ping nagios-plugins-disk nagios-plugins-users nagios-plugins-procs nagios-plugins-load nagios-plugins-swap nagios-plugins-ssh nagios-plugins-http
+Cài các plug-in :
+```
+yum -y install nagios nagios-plugins-ping nagios-plugins-disk nagios-plugins-users nagios-plugins-procs nagios-plugins-load nagios-plugins-swap nagios-plugins-ssh nagios-plugins-http
+```
 
+- Cấu hình Nagios
+```
+[root@dlp ~]# vi /etc/httpd/conf.d/nagios.conf
+# line 24-26, change settings to set access permissionlike follows ( set for line 54-56, too )
+# Require all granted
+# Require local
+Require ip 127.0.0.1 10.0.0.0/24
+
+# add nagios admin user
+[root@dlp ~]# htpasswd /etc/nagios/passwd nagiosadmin 
+New password:     # set any password
+Re-type new password:
+Adding password for user nagiosadmin
+
+[root@dlp ~]# systemctl start nagios 
+[root@dlp ~]# systemctl enable nagios 
+[root@dlp ~]# systemctl restart httpd 
+```
 
