@@ -217,12 +217,7 @@ Trên host Linux cần giám sát, chúng ta cần thực hiện các bước sa
     yum install epel-release
     ```
     
-    - Đối với client sử dụng Ubuntu:
     
-    ```
-    apt-get update
-    ```
-  
 - **Bước 2**: Cài đặt NRPE và các Plugin trên host cần giám sát
 
     - Đối với client sử dụng CentOS, cài đặt repo `epel-release`:
@@ -230,16 +225,10 @@ Trên host Linux cần giám sát, chúng ta cần thực hiện các bước sa
     ```
     yum install nrpe nagios-plugins-all
     ```
-    
-    - Đối với client sử dụng Ubuntu:
-    
-    ```
-    apt-get install nagios-plugins nagios-nrpe-server
-    ```
+
     
 - **Bước 3**: Cấu hình NRPE trên host cần giám sát
 
-*Bước này có thể làm trên cả 2 distro CentOS và Ubuntu.*
 
 **Sửa file cấu hình NRPE**
 
@@ -296,11 +285,7 @@ Lưu lại file và thoát.
     systemctl enable nrpe.service
     ```
     
-    - Với host sử dụng Ubuntu
-    
-    ```
-    service nagios-nrpe-server restart
-    ```
+
 
 Sau khi cài đặt và cấu hình NRPE trên host mà chúng ta muốn giám sát, chúng ta cần phải thêm host đó vào cấu hình Nagios Server trước khi bắt đầu giám sát nó.
 
