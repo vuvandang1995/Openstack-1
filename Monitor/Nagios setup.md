@@ -102,5 +102,47 @@ Adding password for user nagiosadmin
 [root@dlp ~]# systemctl enable nagios 
 [root@dlp ~]# systemctl restart httpd 
 ```
+- Mở port http và https trên firewall
+```
+[root@dlp ~]# firewall-cmd --add-service={http,https} --permanent 
+success
+[root@dlp ~]# firewall-cmd --reload 
+success
+```
+- Truy cập web với user nagiosadmin và nhập password
+
+<img src="https://i.imgur.com/WBykj4d.png">
+
+
+<img src="https://i.imgur.com/vbHQ6S5.png">
+
+- Thêm một số tính năng monitor khác:
+```
+yum install -y nagios-plugins-all nagios-plugins-apt nagios-plugins-bdii nagios-plugins-bonding nagios-plugins-breeze nagios-plugins-ups nagios-plugins-users nagios-plugins-wave
+```
+
+- Thêm plugin check_NTP để theo dõi thời gian chênh lệch giữa ntp server và trong hệ thống
+```
+[root@dlp ~]# yum -y install nagios-plugins-ntp
+[root@dlp ~]# vi /etc/nagios/objects/commands.cfg
+# add follows to the end
+define command{
+        command_name    check_ntp_time
+        command_line    $USER1$/check_ntp_time -H $ARG1$ -w $ARG2$ -c $ARG3$
+        }
+
+[root@dlp ~]# vi /etc/nagios/objects/localhost.cfg
+# add follows to the end ( Warning if it has 1 sec time difference, Critical if it has 2 sec )
+define service{
+        use                             local-service
+        host_name                       localhost
+        service_description             NTP_TIME
+        check_command                   check_ntp_time!ntp1.jst.mfeed.ad.jp!1!2
+        notifications_enabled           1
+        }
+
+[root@dlp ~]# systemctl restart nagios 
+```
+
 
 
