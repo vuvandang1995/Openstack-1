@@ -5,18 +5,14 @@
 `Distributed Monitoring`: Gộp các server lại để monitor các host, giải pháp thực hiện việc giám sát tập trung nhiều `site` trên một máy chủ. Thay vì phải vào từng site (Slave) để theo dõi các host/service trên đó, chúng ta chỉ cần vào `site` chính (Master) để nắm bắt được toàn bộ các site slave. Điều này vô cùng tiện lợi khi chúng ta có nhiều Data Center cần phải giám sát.
 
 Để cấu hình được Distributed Monitoring, chúng ta cần thực hiện những yêu cầu tối thiểu sau.
-
+- 3 site phải ping được đến nhau
 - Các server đã cài đặt OMD - Check MK
 - Cùng 1 timezone và thời gian trùng khớp
 - Các site slave phải là site mới tạo
  
-#### Mô hình cài đặt
 
-<img src="../images/topo-dm.png" width="75%" />
 
-#### IP Planning
 
-<img src="../images/ip-dm.png" />
 
 Điều kiện đầu tiên, chúng ta phải cài đặt OMD trên các server. Quay lại những [bài viết trước](#0) để biết cách cài đặt OMD, thêm site, thêm dịch vụ giám sát,... Quy ước như sau, chúng ta gọi máy chủ `main` là *master* để quản lý, thu thập thông tin từ 2 máy *slave* chủ `site-hanoi` và `site-hcm`. 
 
@@ -127,7 +123,7 @@ Nếu sử dụng Firewalld, vui lòng làm theo bước [trên để mở port]
 <a name="23"></a>
 #### 2.3 Cấu hình trên server master
 
-- Quay trở lại Web UI của site `main` trên server Master, chúng ta chọn **WATO Configuration**, **Distributed Monitoring**, chọn **New Connection**, để tạo kết nối tới các slave.
+Quay trở lại Web UI của site `main` trên server Master, chúng ta chọn **WATO Configuration**, **Distributed Monitoring**, chọn **New Connection**, để tạo kết nối tới các slave.
 
 <img src="https://i.imgur.com/Unvd7Gb.png">
 
@@ -146,21 +142,21 @@ Nếu sử dụng Firewalld, vui lòng làm theo bước [trên để mở port]
 - 6 `WATO`: Tắt tính năng WATO trên slave, có thể bật. còn tùy thuộc nếu a muốn cho slave sử dụng WATO
 	
   
-- Kéo xuống bên dưới và bấm vào SAVE để lưu lại thông tin.
+Kéo xuống bên dưới và bấm vào SAVE để lưu lại thông tin.
 
 <img src="https://i.imgur.com/8TRBngz.png">
 
-- Bấm vào `Login` để đăng nhập vào site `hanoi`
+Bấm vào `Login` để đăng nhập vào site `hanoi`
 
 <img src="https://i.imgur.com/fxlG3wk.png">
 
 <img src="https://i.imgur.com/7R1D0In.png">
 
-- Thông báo đã login vào site `hanoi` thành công trên site `main`.
+Thông báo đã login vào site `hanoi` thành công trên site `main`.
 
 <img src="https://i.imgur.com/5DjzalE.png">
 
-- Click vào mục `changes` và active lên
+Click vào mục `changes` và active lên
 
 <img src="https://i.imgur.com/x9gNSzp.png">
 
@@ -177,30 +173,18 @@ Lúc này, ở trên site `main` - Master, chúng ta có thể thêm các host c
 
 Để thêm host giám sát, chúng ta làm như bình thường vào tab **WATO Configuration**, chọn **Hosts** và **New host**.
 
-<img src="../images/24-dm-ah-1.png" />
+<img src="https://i.imgur.com/JIFfcGY.png">
 
 Với ví dụ này, tôi sẽ thêm một host mới để check website ping YouTube trên site `hanoi`. Chúng ta cần chú ý 3 điểm tô đỏ trong hình.
 
-<img src="../images/24-dm-ah-2.png" />
+<img src="https://i.imgur.com/5n0eNAi.png">
 
 - 1 `Monitored on site`: Chọn site giám sát cho host
 - 2 `Agent type`: Chọn kiểu No Agent vì chúng ta không thể cài Agent cho YouTube
 - 3 `Save & Finish`: Lưu và thoát.
+- 4 Click vào `changes` và `activate` host
 
-Sau đó lưu lại thông tin:
-
-<img src="../images/24-dm-ah-3.png" />
-
-<img src="../images/24-dm-ah-4.png" />
-
-<img src="../images/24-dm-ah-5.png" />
 
 Kiểm tra lại, chúng ta sẽ vào tab **Views**, mục **Hosts**, **All hosts**
 
-<img src="../images/24-dm-ah-6.png" />
 
-Để kiểm chứng rõ ràng hơn, chúng ta đăng nhập vào Web UI của `hanoi` và **Views**, mục **Hosts**, **All hosts**
-
-<img src="../images/24-dm-ah-7.png" />
-
-<a name="3"></a>
