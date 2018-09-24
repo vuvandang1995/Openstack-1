@@ -175,12 +175,12 @@ Lúc này, ở trên site `main` - Master, chúng ta có thể thêm các host c
 
 <img src="https://i.imgur.com/JIFfcGY.png">
 
-Với ví dụ này, tôi sẽ thêm một host mới để check website ping YouTube trên site `hanoi`. Chúng ta cần chú ý 3 điểm tô đỏ trong hình.
+Với ví dụ này, tôi sẽ thêm một host mới để check website ping host2 trên site `hanoi`. 
 
 <img src="https://i.imgur.com/5n0eNAi.png">
 
 - 1 `Monitored on site`: Chọn site giám sát cho host
-- 2 `Agent type`: Chọn kiểu No Agent vì chúng ta không thể cài Agent cho YouTube
+- 2 `Agent type`: Chọn kiểu No Agent vì chúng ta không thể cài Agent cho host2
 - 3 `Save & Finish`: Lưu và thoát.
 - 4 Click vào `changes` và `activate` host
 
