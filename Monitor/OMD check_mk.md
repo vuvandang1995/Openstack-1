@@ -1,7 +1,7 @@
 ## 1. Tổng quan về OMD.
 <a name="1"></a>
 
-![omd](/images/1-omd-icon.png)
+<img src="https://i.imgur.com/jhWCjir.png">
 
 OMD - Open Monitoring Distribution là một project được phát triển từ năm 2010 bới Mathias Kettner. OMD sử dụng nhân là Nagios Core, kết hợp với các phần mềm mã nguồn mở khác để đóng gói thành một sản phẩm phục vụ cho nhu cầu **giám sát**, **cảnh báo** và **hiển thị**
 
@@ -107,14 +107,14 @@ OMD được xây dựng từ những đóng góp của cộng đồng về nh�
 
  Việc cài đặt trở nên vô cùng đơng giản. OMD được đóng gói hoàn chỉnh trong một package, việc cài đặt và cấu hình chỉ mất khoảng 10 phút với chỉ một câu lệnh
  
- <img src="http://i.imgur.com/lCErFAq.png">
+ <img src="https://i.imgur.com/jWNsHpB.png">
 
 <a name="21"></a>
 ### 2.1 Check_MK
 
 Check_MK ra đời để giải quyết bài toán về hiệu năng mà Nagios gặp phải trong quá khứ.Cơ chế mới của Check_MK cho phép việc mở rộng hệ thống trở nên dễ dàng hơn, có thể giám sát nhiều hệ thống chỉ từ một máy chủ Nagios server.
 
-<img src="http://i.imgur.com/YwAV7wG.gif">
+<img src="https://i.imgur.com/VwoR5KA.gif">
 
 Có 2 mô đun mà Check_MK sử dụng để cải thiện đáng kể hiệu năng là Livestatus và Livecheck
 
@@ -180,7 +180,7 @@ Với Nagios, mỗi khi cấu hình một host mới, hay cấu hình một cả
 
  - Thông số đo lường trực quan với Perf-O-Meter
 
-<img src="http://i.imgur.com/FFpVW9R.png">
+<img src="https://i.imgur.com/t7EdAcd.png">
 
 <a name="3"></a>
 ## 3. NOC với Dashboard (Nhờ vào PNP4Nagios & NagVis)
