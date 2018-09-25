@@ -24,17 +24,28 @@ ducnm37bot      (user name cho bot)
 <img src="https://i.imgur.com/FLJXkMW.png">
 
 Truy cập 
-`https://api.telegram.org/bot{your_token}/getUpdates                (thay token của bạn vào)`
+```
+https://api.telegram.org/bot{your_token}/getUpdates                (thay token của bạn vào)
+```
+
 ta sẽ thấy được các tin nhắn mà Bot nhận được và ID của Client. Ta sẽ lấy ID của client này để truyền vào `User` :
 
-![lay-id](/images/lay-id.png)
+<img src="https://i.imgur.com/YdAHXXp.png">
 
 # 3. Cấu hình check_mk .
 
-Tạo file `telegram.py` :
+Sử dụng script thông báo cho telegram trên check_mk ta tải file sau và chỉnh sửa thay token của bạn vào:
+
+```
+cd /omd/sites/hanoi/share/check_mk/notifications/                (chú ý  hanoi trong đường dẫn  đây là tên site bạn đặt)
+wget https://raw.githubusercontent.com/meditechopen/meditech-ghichep-omd/master/scripts/telegram.py
+
+```
+ 
+hoặc  Tạo file `telegram.py` và chỉnh sửa thay token của bạn vào trong đó
 
 ```sh
-vi /omd/sites/monitoring/share/check_mk/notifications/telegram.py
+vi /omd/sites/hanoi/share/check_mk/notifications/telegram.py     (chú ý  hanoi trong đường dẫn  đây là tên site bạn đặt)
 ```
 
 Nội dung file `telegram.py` như sau :
@@ -92,7 +103,7 @@ send_message(mess, os.environ['NOTIFY_CONTACT_TELEGRAM_CHAT_ID'])
 Phân quyền cho file `telegram.py` :
 
 ```sh
-chmod +x /omd/sites/monitoring/share/check_mk/notifications/telegram.py
+chmod +x /omd/sites/hanoi/share/check_mk/notifications/telegram.py
 ```
 
 Restart lại omd server :
@@ -105,24 +116,32 @@ omd restart
 
 Tạo một `Attributes User`.
 
-- Tại `WATO` chọn `User` => `Custom User Attributes`:
+- Tại `WATO` chọn `User` => `Custom Attributes`:
 
-![attb](/images/attb.png)
+**Chú ý** Đặt tên `Name` và `Title` phải đúng như trong hình vì đó là tên biến có trong script nếu điền sai check_mk sẽ ko thể gửi thông báo đến telegram bằng scrip
 
-- Tại `WATO` chọn `Users` => `New User` :
+<img src="https://i.imgur.com/1PwrgLN.png">
 
-![tao-user](/images/tao-user.png)
+- Tại `WATO` chọn `Users` => `New User` : Phần này ta cần lấy thêm ID telegram của con bot bạn đã tạo
+
+<img ssrc="https://i.imgur.com/y8q7oVk.png">
 
 - Tại `WATO` chọn `Notifications` => `New Rule` :
 
-![rule-notify](/images/rule-notify.png)
+<img src="https://i.imgur.com/GXwnNdd.png">
+
+<img src="https://i.imgur.com/HRa0g4B.png">
 
 # 5. Kiểm tra.
 
 - Gửi cảnh báo kiểm tra.
 
-![gui-canh-bao](/images/gui-canh-bao.png)
+<img src="https://i.imgur.com/GSJW9Py.png">
+
+<img src="https://i.imgur.com/jCvsFHE.png">
+
+<img src="https://i.imgur.com/iRkpsKD.png">
 
 - Kết quả :
 
-![kq-telegram](/images/kq-telegram.png)
+<img src="https://i.imgur.com/Lw7Nhff.png">
