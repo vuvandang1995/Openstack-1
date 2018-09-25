@@ -32,6 +32,8 @@ ta sẽ thấy được các tin nhắn mà Bot nhận được và ID của Cli
 
 <img src="https://i.imgur.com/YdAHXXp.png">
 
+chú ý: ID (454279153) ta ghi lại để phần setting `user` trên omd sẽ cần sử dụng
+
 # 3. Cấu hình check_mk .
 
 Sử dụng script thông báo cho telegram trên check_mk ta tải file sau và chỉnh sửa thay token của bạn vào:
