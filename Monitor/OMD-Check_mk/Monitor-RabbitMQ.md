@@ -76,6 +76,12 @@ tcp        0      0 0.0.0.0:15672           0.0.0.0:*               LISTEN
 	```
 	
 - **Bước 2**: Cài đặt Plugin trên OMD
+	- Tải git : 
+	```
+	yum install epel-release -y
+	yum install git -y
+	```
+	
 	- Tải plugin
 	
 	**Chú ý**: Thay thế `hanoi` trong đường dẫn phía dưới bằng tên site của bạn.
@@ -114,7 +120,7 @@ tcp        0      0 0.0.0.0:15672           0.0.0.0:*               LISTEN
 	./check_rabbitmq_aliveness -H node1 -u mon -p 1
 	```
 	
-	<img src="../images/25-rb-check-plugin.png" />
+	<img src="https://i.imgur.com/DTTdiWB.png">
 	
 	Như vậy, ta thấy script chạy khá ổn. Tiếp đến chúng ta sẽ thêm vào `check_mk`.
 
