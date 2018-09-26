@@ -133,45 +133,39 @@ tcp        0      0 0.0.0.0:15672           0.0.0.0:*               LISTEN
 
 <img src="../images/25-rb-ah1.png" />
 
-Trên Web UI, chúng ta tìm đến **WATO · Configuration** > **Host & Service Parameters** và chọn **Classical active and passive Monitoring checks**
+Trên Web UI, chúng ta tìm đến **WATO · Configuration** > **Host & Service Parameters** và chọn **Active checks** chọn **Classical active and passive Monitoring checks**
 
-<img src="../images/25-rb-ah2.png" />
-
-<img src="../images/25-rb-ah3.png" />
+<img src="https://i.imgur.com/yyUS8yL.png">
 
 Bấm vào **Create rule in folder:** để tạo thêm 1 rule mới
 
-<img src="../images/25-rb-ah4.png" />
 
 Điền thông tin của plugin:
 
-<img src="../images/25-rb-ah5.png" />
+<img src="https://i.imgur.com/aisR46x.png" />
+
+<img src="https://i.imgur.com/u5jZ1uD.png">
 
 - **Giải thích:**
 	- `1`: Mô tả plugin
 	- `2`: Tên hiển thị của plugin
-	- `3`: Câu lệnh sử dụng plugin. Biến **HOSTADDRESS** được sử dụng để gọi địa chỉ của host mà chúng ta khai báo ở bên trên là `node1`.
-	```
-	check_rabbitmq_aliveness -H **HOSTADDRESS** -u mon -p 1 --vhost / 
-	```
+	- `3`: Câu lệnh sử dụng plugin. Biến **$HOSTADDRESS$** được sử dụng để gọi địa chỉ của host mà chúng ta khai báo ở bên trên là `node1`. (trong trường hợp khác việc sử dụng biến **$HOSTADDRESS$** giúp ta monitor tất cả các ip của các host đều sẽ được gọi nếu như khai báo nhiều host trong phần `Explicit hosts`
+
 	- `4`: Cho phép OMD xử lý, phân tích dữ liệu thu thập được.
 	
-Tiếp theo, chúng ta kéo xuống bên dưới và chọn host `rabbitmq-01` vừa thêm:
-	
-<img src="../images/25-rb-ah6-2.png" />
 
-Lưu lại các thông tin vừa cấu hình:
+Lưu lại các thông tin vừa cấu hình và active site lên
 
-<img src="../images/25-rb-ah7.png" />
+Ta vào **Hosts** ->  click vào **rabbitmq-01** -> **Services** và fix service hoặc refresh
 
-<img src="../images/25-rb-ah8.png" />
+<img src="https://i.imgur.com/wk6XZyM.png">
 
-Kiểm tra thông tin, chúng ta chọn **Services > All services** trên tab **View** và chọn force check
+Vào **Services > All services** reschedule lại service rabbitmq
 
-<img src="../images/25-rb-ah9.png" />
+<img src="https://i.imgur.com/PtJrfQq.png" />
 
 Như vậy, chúng ta đã giám sát thành công trạng thái Aliveness của server RabbitMQ.
 
-<img src="../images/25-rb-ah10.png" />
+
 
 Để check các trạng thái khác của RabbitMQ, chúng ta thao tác như trên và thay thế câu lệnh ở bài viết [này](https://gist.github.com/hoangdh/c86dc9d081882ac116322b45399f0442).
