@@ -17,34 +17,56 @@ Thông tin host RabbitMQ
 
 ```
 OS: CentOS 7
-IP: 192.168.100.198
+IP: 192.168.40.64
 Hostname: node1
 Service: RabbitMQ
 ```
+Cài rabbitmq trên rabbitmq-server: 
+```
+yum install epel-release net-tools
+yum install -y rabbitmq-server
+```
+Start rabbitmq: `systemctl start rebbitmq-server`
 
-Đầu tiên, chúng ta phải tạo một user có chức năng `monitoring` trên RabbitMQ.
+Enable `rabbitmq_management`:  
+```
+rabbitmq-plugins enable rabbitmq_management
+systemctl restart rabbitmq-server
+```
+
+Ta tạo một user `mon` với password à `1` có chức năng `monitoring` trên RabbitMQ:
 
 ```
 rabbitmqctl add_user mon 1
 rabbitmqctl set_user_tags mon monitoring
 rabbitmqctl set_permissions -p / mon ".*" ".*" ".*" 
 ```
+Kiểm tra user rabbitmq: 
+```
+rabbitmqctl list-users
+
+[root@node1 ~]# rabbitmqctl list_users
+Listing users ...
+guest   [administrator]
+mon     [monitoring]
+...done.
+
+```
+
+Kiểm tra dịch vụ rabbitq có đang mở trên port 15672 không: 
+```
+[root@node1 ~]# netstat -autun | grep 15672
+tcp        0      0 0.0.0.0:15672           0.0.0.0:*               LISTEN
+
+```
+
+
 
 <a name="1.2" ></a>
 #### 1.2 Chuẩn bị trên server OMD
 
 - **Bước 1**: Cài đặt perl và gói `Monitoring::Plugins` trên OMD server
 
-	- Trên server OMD sử dụng OS Ubuntu
-
-	```sh
-	curl -L http://cpanmin.us | perl - --sudo App::cpanminus
-	perl -MCPAN -e 'install Monitoring::Plugin'
-	perl -MCPAN -e 'install Config::Tiny'
-	perl -MCPAN -e 'install JSON'
-	perl -MCPAN -e 'install Math::Calc::Units'
-	```
-	**Lưu ý**: Khi lần đầu chạy lệnh trên, CPAN sẽ yêu cầu một số thiết lập, bấm Enter để nhập mặc định.
 
 	- Trên server OMD sử dụng OS CentOS
 
@@ -56,17 +78,17 @@ rabbitmqctl set_permissions -p / mon ".*" ".*" ".*"
 - **Bước 2**: Cài đặt Plugin trên OMD
 	- Tải plugin
 	
-	**Chú ý**: Thay thế `monitoring` bằng tên site của bạn.
+	**Chú ý**: Thay thế `hanoi` trong đường dẫn phía dưới bằng tên site của bạn.
 	
 	```
 	git clone https://github.com/nagios-plugins-rabbitmq/nagios-plugins-rabbitmq.git
-	cp nagios-plugins-rabbitmq/scripts/* /opt/omd/sites/monitoring/lib/nagios/plugins
+	cp nagios-plugins-rabbitmq/scripts/* /opt/omd/sites/hanoi/lib/nagios/plugins
 	```
 	
 	- Phân quyền cho plugin
 	
 	```
-	cd /opt/omd/sites/monitoring/lib/nagios/plugins
+	cd /opt/omd/sites/hanoi/lib/nagios/plugins
 	chmod +x check_rabbitmq_*
 	```
 
