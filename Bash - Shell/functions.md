@@ -54,4 +54,50 @@ EOF
 fi
 ```
 
-## 
+## 4. Echo
+
+- Sử dụng in ra màn hình
+
+`echo "1234"`  in ra màn hình 1234
+
+# 5. Command
+
+- Dùng để thực hiện lệnh nào đó
+
+Ví dụ: `command touch abc.txt`  tạo ra file abc.txt
+
+# 6. Read
+
+- Dùng để lấy dữ liệu nhập từ bàn phím và lưu vào biến, lệnh read có thể dùng để đọc file. Nếu file chứa nhiều hơn 1 dòng thì chỉ có dòng thứ nhất được gán cho biến
+
+ví dụ: `read var=$test`  nhập giá trị cho biến `test`
+
+# 7. Sed
+
+- Dùng để tìm và thay thế văn bản trong file:
+
+Cú pháp: `Sed -i -e "nội dung biểu thức" 'file muốn thay thế nội dung'` 
+<ul>
+  <ul>
+    <li>Tùy chọn -e dùng để thay thế trực tiếp trên file.</li>
+    <li>Tùy chọn -i dùng để thay đổi nội dung file nhưng lưu ra 1 file mới.</li>
+</ul>
+  </ul>
+
+Ví dụ 2 :  Ta có file 123.txt với nội dung sau
+```
+foo 1
+fOo 2
+```
+`sed "s/foo/bar/g 123.txt` 
+
+kết quả sẽ được
+```
+bar 1
+fOo 2
+```
+- ở đây với tùy chọn /g sẽ phân biệt chữ hoa và chữ thường ta cũng có thể bỏ qua tùy chọn /g tác dụng vẫn như nhau (ở đây là chữ o giữ foo và fOo)
+- Nếu thay bằng tùy chọn /i thì sẽ không phân biệt chữ hoa và chữ thường
+
+Ví dụ 2: `sed -i ".xxx" -e "/s/foo/bar/g 123.txt` kết quả thay đổi file 123.txt sẽ lưu vào 1 file mới tạo ra là 123.txt.xxx
+
