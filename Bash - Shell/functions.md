@@ -17,7 +17,7 @@ sẽ chèn chữ `i love you` vào file 123.txt
 
 **Lưu ý**: Theo quy ước thì EOF không được viết thụt dòng nên bắt buộc phải đặt ở đầu dòng
 
-## 2. VÒng lặp for, do
+## 2. Vòng lặp for, do
 
 Cú pháp: `for (( i = x;i <= y; i++ )); do ` 
 
