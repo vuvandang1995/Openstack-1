@@ -58,7 +58,31 @@ fi
 
 - Sử dụng in ra màn hình
 
-`echo "1234"`  in ra màn hình 1234
+```
+echo [options] [string, variables...]
+```
+Các `option` trong câu lệnh :
+
+|Option|Ý nghĩa|
+|------|-------|
+|-i|in giá trị vào file|
+|-n|Không xuống dòng|
+|-e|Cho phép thực hiện các option với dấu \|
+|\a|Chuông cảnh báo|
+|\b|Xóa đi ký tự bên tay trái|
+|\c|Không xuống dòng đồng thời chặn toàn bộ các ký tự bên phải|
+|\n|Tạo 1 dòng mới|
+|\t|Tạo 1 khoảng cách|
+
+Ví dụ: `echo "1234"`  in ra màn hình 1234
+
+Ví dụ: 
+
+echo -e "If i die \a\t\tyou die\n"
+Giá trị trả về :
+```
+If i die                you die
+```
 
 # 5. Command
 
