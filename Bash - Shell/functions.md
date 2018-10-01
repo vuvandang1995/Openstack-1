@@ -1,4 +1,4 @@
-# Sử dụng để chèÒEn vào cuối của 1 file
+# Các hàm sử dụng trong shell
 ```
 cat <<EOF>> 'file'
 (nội dung muốn chèn)
