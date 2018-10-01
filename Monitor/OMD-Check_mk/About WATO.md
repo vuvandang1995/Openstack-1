@@ -32,7 +32,7 @@
 
 - **Business Intelligence**: Cho phép hiển thị Chỉ các site, thống số, service cần thiết hoặc quan trọng phục vụ cho việc monitor dễ dàng hơn
 
-- **Distributed Monitoring**: Cấu hình monitor cho nhiều site
+- **Distributed Monitoring**: Cấu hình gom các host từ các site khác nhau và chọn 1 site chính để monitor tất cả
 
 - **Backup**: Cấu hình backup cho các site
 
