@@ -4,7 +4,7 @@
 
 - **Main Menu**: Là mục tổng quan chứa các mục trong WATO
 
-- **Monitoring Agent**: Chứa các `package agent` và `agent-plugin`
+- **Monitoring Agent**: Chứa các package agent và agent-plugin
 
 - **Hosts**: Tạo, thêm, sửa, xóa, discover...Thao tác quản trị các host
 
