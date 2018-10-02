@@ -129,4 +129,4 @@ Ví dụ 2: `sed -i ".xxx" -e "/s/foo/bar/g 123.txt` kết quả thay đổi fil
 
 `stat $abc.txt -c %Y` in ra thời gian sửa đổi của file abc.txt lần cuối cùng tùy chọn %Y là đổi ra giây
 
-
+`date +%s` in ra thời gian hiện tại tính ra giây
