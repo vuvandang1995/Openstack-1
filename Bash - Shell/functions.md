@@ -125,3 +125,8 @@ fOo 2
 
 Ví dụ 2: `sed -i ".xxx" -e "/s/foo/bar/g 123.txt` kết quả thay đổi file 123.txt sẽ lưu vào 1 file mới tạo ra là 123.txt.xxx
 
+## 8. Lệnh đếm thời gian
+
+`stat $abc.txt -c %Y` in ra thời gian sửa đổi của file abc.txt lần cuối cùng tùy chọn %Y là đổi ra giây
+
+
