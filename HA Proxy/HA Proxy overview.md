@@ -84,4 +84,14 @@ rontend http bind *:80 mode http
 
 ### 3. Các thuật toán Cân bằng tải
 
+Các thuật toán cân bằng tải được dùng để chỉ ra rằng server nào trong 1 backend sẽ được chọn khi cân bằng tải. HAProxy đưa ra 1 vài lựa chọn cho các thuật toán, các server có thể được gán parameter `weight` để đánh giá server có được chọn thường xuyên không, so sánh với các server khác.
 
+Một vài thuật toán thông dụng:
+
+- **Round Robin** chọn server nào được quay. Đây là thuật toán mặc định.
+
+- **Leastconn** chọn server với số các kết nối ít nhất - được đề xuất với các session dài hạn. Các server trong cùng 1 backend được quay vòng với **round-robin**
+
+- **Source** chọn server dể dùng dựa vào source IP. Phương thức này đảm bảo user sẽ kết nối tới cùng 1 server.
+
+### 4. Sticky Session
