@@ -4,7 +4,7 @@ Galera : Là một Multimaster Cluster dựa trên cơ chế đồng bộ hóa.
 
 Galera Cluster tạo ra ưu thế khi có thể đọc ghi ở mọi node
 
-Cấu hình và cài đặt Galera Cluster</a>
+Cấu hình và cài đặt Galera Cluster
 
 + Bước 1: Thực hiện cài đặt MariaDB trên cả 3 node DB01, DB02 và DB03 như sau:
 
@@ -164,3 +164,14 @@ Cấu hình và cài đặt Galera Cluster</a>
 				+--------------------+-------+
 
 			Con số 3 chỉ số node đã join vào trong cụm galera.
+	- Cấp quyền truy cập database (yêu cầu trên load balancer đã được cài đặt maxscale):
+
+			# mysql -u root -p
+			Enter password: 
+
+	- Tạo người sử dụng:
+
+			CREATE USER 'maxscale'@'%' IDENTIFIED BY 'password';
+			GRANT SELECT ON mysql.db TO 'maxscale'@'%';
+			GRANT SELECT ON mysql.user TO 'maxscale'@'%';
+			GRANT SHOW DATABASES ON *.* TO 'maxscale'@'%';
