@@ -17,7 +17,7 @@
 
 Ví dụ: `acl url_blog path_beg /blog`
 
-ACL sẽ match nếu như phần request của user bắt đầu với /blog, nó sẽ match với request của http://yourdomain.com/blog/blog-entry-1
+ACL sẽ match nếu như phần request của user bắt đầu với /blog, nó sẽ match với request của `http://yourdomain.com/blog/blog-entry-1`
 
 ### 2.Backend
 
