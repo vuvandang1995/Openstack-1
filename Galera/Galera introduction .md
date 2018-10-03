@@ -24,7 +24,7 @@ Galera Cluster tạo ra ưu thế khi có thể đọc ghi ở mọi node
 
 wsrep (Write Set REPlication) là 1 API cho phép các node trong galera tái tạo dữ liệu đảm bảo đồng bộ với nhau
 
-Các version của wsrep và MariaDB Galera Cluster:
+Các version mới nhất của wsrep và MariaDB Galera Cluster:
 
 - Galera wsrep provider versions: 25.3.24
 
