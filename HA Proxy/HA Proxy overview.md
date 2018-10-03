@@ -17,7 +17,7 @@
 
 Ví dụ: `acl url_blog path_beg /blog`
 
-ACL sẽ match nếu như phần request của user bắt đầu với /blog, nó sẽ match với request của http://yoursite.com/blog/blog-entry
+ACL sẽ match nếu như phần request của user bắt đầu với /blog, nó sẽ match với request của http://yourdomain.com/blog/blog-entry-1
 
 ### 2.Backend
 
@@ -26,6 +26,20 @@ Backend là tập hợp của các server mà nhận được request. Các back
 Một backend có thể có một hoặc nhiều server trong nó, thêm nhiều server vào backend sẽ giúp việc cân bằng tải linh hoạt hơn
 
 Thuật toán sử dụng là `roundrobin`, `mode http` chỉ ra rằng layer 7 proxying đuợc dùng. option `check` chỉ ra rằng các check sẽ được thực hiện ở các server này.
+
+VD : Cấu hình 2 backend, web-backend và blog-backend với 2 web server :
+```
+backend web-backend
+	   balance roundrobin
+	   server web1 web1.yourdomain.com:80 check
+	   server web2 web2.yourdomain.com:80 check
+
+backend blog-backend
+	   balance roundrobin
+	   mode http
+	   server blog1 blog1.yourdomain.com:80 check
+	   server blog1 blog1.yourdomain.com:80 check
+```
 
 ### 3. Frontend
 
@@ -49,5 +63,25 @@ Cân bằng tải kiểu này sẽ chỏ user traffic dựa vào IP range và po
 User truy cập tới load balancer, request của user sẽ được chỏ tới `web-backend` group của các backend server. Bất kỳ backend server nào được chọn sẽ phản hồi trực tiếp tới request của user. Thông thường, tất cả các user trong `web-backend` nên có nội dung thống nhất, trong khi user nhận được nội dung không đồng nhất. Chú ý rằng các server kết nối tới cùng một database
 
 ### 2. Layer 7 Load Balancing
-  
+
+<img src="https://i.imgur.com/9FKaudn.png">
+
+Nếu người dùng request yourdomain.com/blog, chúng được chỏ tới `blog` backend - một set các server chạy 1 khối ứng dụng. Các request khác được chỏ tới `web-backend`, chạy ứng dụng khác. Cả 2 backend đều được chỏ tới cùng 1 database.. 
+VD :
+```
+rontend http bind *:80 mode http
+
+	  acl url_blog path_beg /blog
+	  use_backend blog-backend if url_blog
+	  default_backend web-backend
+```
+**Giải thích**:
+
+- `mode` là "http", kiểm soát tất cả incoming traffic trên port 80.
+- `acl url_blog path_beg /blog`: match với một request nếu như phần đầu của user bắt đầu với /blog.
+- `use_backend blog-backend if url_blog`: sử dụng ACLs để proxy traffic tới blog-backend.
+- `default_backend web-backend`: chỉ ra tất cả các traffic khác sẽ chỏ tới web-backend.
+
+### 3. Các thuật toán Cân bằng tải
+
 
