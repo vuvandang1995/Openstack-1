@@ -48,6 +48,6 @@ Cân bằng tải kiểu này sẽ chỏ user traffic dựa vào IP range và po
 
 User truy cập tới load balancer, request của user sẽ được chỏ tới `web-backend` group của các backend server. Bất kỳ backend server nào được chọn sẽ phản hồi trực tiếp tới request của user. Thông thường, tất cả các user trong `web-backend` nên có nội dung thống nhất, trong khi user nhận được nội dung không đồng nhất. Chú ý rằng các server kết nối tới cùng một database
 
-
+### 2. Layer 7 Load Balancing
   
 
