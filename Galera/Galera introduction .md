@@ -22,4 +22,4 @@ Galera Cluster tạo ra ưu thế khi có thể đọc ghi ở mọi node
 
 ## 3. Công nghệ sử dụng
 
-wsrep (Write Set REPlication) là 1 kĩ thuật cho phép các node trong galera tái tạo dữ liệu đảm bảo đồng bộ với nhau
+wsrep (Write Set REPlication) là 1 API cho phép các node trong galera tái tạo dữ liệu đảm bảo đồng bộ với nhau
