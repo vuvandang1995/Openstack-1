@@ -33,8 +33,21 @@ Thuật toán sử dụng là `roundrobin`, `mode http` chỉ ra rằng layer 7 
 
 - Set các IP và port (vd 10.1.1.7:80, * :443...).
 - ACLs.
-- Nó dùng để khai báo danh sách các sockets đang lắng nghe kết nối để cho phép client kết nối tới.
+- `use_backend` rules, định nghĩa ra các backend nào sẽ được dùng dựa vào điều kiện ACL được match, and/or một "default_backend" rule kiểm soát các case khác.
+- Tóm lại nó dùng để khai báo danh sách các sockets đang lắng nghe kết nối để cho phép client kết nối tới.
 
-- "use_backend" rules, định nghĩa ra các backend nào sẽ được dùng dựa vào điều kiện ACL được match, and/or một "default_backend" rule kiểm soát các case khác.
+Một frontend có thể được cấu hình theo nhiều kiểu của network traffic.
 
+## II. Các dạng của Load Balancing
+
+### 1. Layer 4 Load Balancing
+
+Cân bằng tải kiểu này sẽ chỏ user traffic dựa vào IP range và port (VD : 1 request tới từ http://yourdomain.com/anything, traffic sẽ được chỏ tới backend mà được kiểm soát bởi yourdomain.com trên port 80)
+
+<img src="https://i.imgur.com/xuXhdkH.png">
+
+User truy cập tới load balancer, request của user sẽ được chỏ tới `web-backend` group của các backend server. Bất kỳ backend server nào được chọn sẽ phản hồi trực tiếp tới request của user. Thông thường, tất cả các user trong `web-backend` nên có nội dung thống nhất, trong khi user nhận được nội dung không đồng nhất. Chú ý rằng các server kết nối tới cùng một database
+
+
+  
 
