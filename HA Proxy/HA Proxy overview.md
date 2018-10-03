@@ -69,11 +69,14 @@ User truy cập tới load balancer, request của user sẽ được chỏ tớ
 Nếu người dùng request yourdomain.com/blog, chúng được chỏ tới `blog` backend - một set các server chạy 1 khối ứng dụng. Các request khác được chỏ tới `web-backend`, chạy ứng dụng khác. Cả 2 backend đều được chỏ tới cùng 1 database.. 
 VD :
 ```
-rontend http bind *:80 mode http
-
-	  acl url_blog path_beg /blog
-	  use_backend blog-backend if url_blog
-	  default_backend web-backend
+frontend http 
+	bind *:80 
+	mode http
+	
+	acl url_blog path_beg /blog
+	use_backend blog-backend if url_blog
+	
+	default_backend web-backend
 ```
 **Giải thích**:
 
@@ -95,3 +98,11 @@ Một vài thuật toán thông dụng:
 - **Source** chọn server dể dùng dựa vào source IP. Phương thức này đảm bảo user sẽ kết nối tới cùng 1 server.
 
 ### 4. Sticky Session
+
+Một vài ứng dụng yêu cầu user tiếp tục kết nối tới cùng backend server. Điều này được thực hiện bởi sticky session, yêu cầu sử dụng appsession parameter ở trên backend.
+
+### 5. Health Check
+
+HAProxy sử dụng health checks để xác định nếu 1 backend server khả dụng cho quá trình request, nó sẽ tránh được việc nếu backend không còn khả dụng, thì việc remove server ra khỏi backend đó phải làm bằng tay. Mặc định thì health check sẽ cố gắng khởi tạo 1 kết nối TCP tới server, nó kiểm tra nếu backend server được lắng nghe trên IP và port được cấu hình.
+
+Nếu 1 server thất bại trong việc health check, vậy nên không thể tiếp nhận request, nó sẽ tự động tắt trong backend, traffic sẽ chỉ chỏ đến nó đến khi nó khả dụng trở lại. Nếu tất cả các server trong backend fail, service sẽ không khả dụng đến khi có ít nhất 1 trong các backend server khả dụng trở lại.
