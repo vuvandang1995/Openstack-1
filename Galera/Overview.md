@@ -25,7 +25,7 @@ Cấu hình và cài đặt Galera Cluster
 
 			thêm nội dung dưới đây vào file và sau đó lưu lại:
 
-				10.10.10.4 lb
+				192.168.40.61 lb
 				192.168.40.62 db2
 				192.168.40.63 db3
 				192.168.40.64 db4
