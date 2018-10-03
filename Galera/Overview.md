@@ -4,9 +4,14 @@ Galera : Là một Multimaster Cluster dựa trên cơ chế đồng bộ hóa.
 
 Galera Cluster tạo ra ưu thế khi có thể đọc ghi ở mọi node 
 
-Cấu hình và cài đặt Galera Cluster
+## Cấu hình và cài đặt Galera Cluster
 
-+ Bước 1: Thực hiện cài đặt MariaDB trên cả 3 node DB2, DB3 và DB4 như sau:
+### 3 node:
+db2: 192.168.40.62
+db3: 192.168.40.63
+db4: 192.168.40.64
+
++ Bước 1: Thực hiện cài đặt MariaDB trên cả 3 node db2, db3 và db4 như sau:
 
 			vi /etc/yum.repos.d/MariaDB.repo
 
@@ -25,7 +30,7 @@ Cấu hình và cài đặt Galera Cluster
 
 			thêm nội dung dưới đây vào file và sau đó lưu lại:
 
-				192.168.40.61 lb
+				
 				192.168.40.62 db2
 				192.168.40.63 db3
 				192.168.40.64 db4
