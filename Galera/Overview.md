@@ -163,4 +163,4 @@ Cấu hình và cài đặt Galera Cluster</a>
 				| wsrep_cluster_size | 3     |
 				+--------------------+-------+
 
-			Con số *3* chỉ số node đã join vào trong cụm galera.
+			Con số 3 chỉ số node đã join vào trong cụm galera.
