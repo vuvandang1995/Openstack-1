@@ -120,7 +120,7 @@ Cấu hình và cài đặt Galera Cluster</a>
 
 			wsrep_sst_method=rsync
 
-	+ Bước 3: Tắt SeLinux và thực hiện mở port cho 3 node db01, db02 và db03:
++ Bước 3: Tắt SeLinux và thực hiện mở port cho 3 node db01, db02 và db03:
 
 		- Mở các port cho phép thực hiện truy vấn database và liên hệ giữa các node trong cụm galera:
 
@@ -140,7 +140,7 @@ Cấu hình và cài đặt Galera Cluster</a>
 
 				firewall-cmd --reload
 
-	+ Bước 4: Khởi tạo galera cluster:
++ Bước 4: Khởi tạo galera cluster:
 
 		- Câu lệnh này chỉ thực hiện trên một node, giả sử ta chạy trên node db01:
 
