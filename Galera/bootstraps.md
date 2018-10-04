@@ -45,7 +45,7 @@ Bây giờ node mới sẽ kết nới tới các node trong cluster tạo thàn
 
 Galera từ phiên bản 3.19 sẽ có 1 trường là **safe_to_bootstrap** bên trong `grastate.dat`, nó là 1 trường điều kiện ngăn chặn các lựa chon không an toàn bằng cách theo dõi thứ tự các node đang tắt, node tắt cuối cùng sẽ được đánh dấu là **Safe-to-Bootstrap** và chỉ được bootstrap trên node đó, còn các node còn lại sẽ bị đánh dấu là không an toàn để bootstrap.
 
-File `grastate.dat`:
+- File `grastate.dat`:
 ```
 # GALERA saved state
 version: 2.1
@@ -53,14 +53,16 @@ uuid:    8bcf4a34-aedb-14e5-bcc3-d3e36277729f
 seqno:   2575
 safe_to_bootstrap: 0
 ```
-Khi bootstrap 1 cluster mới, Galera sẽ từ chối khởi động node đầu tiên được đánh dấu là không an toàn để bootstrap, ta sẽ thấy trong logs:
+- Khi bootstrap 1 cluster mới, Galera sẽ từ chối khởi động node đầu tiên được đánh dấu là không an toàn để bootstrap, ta sẽ thấy trong logs:
 ```
 “It may not be safe to bootstrap the cluster from this node. It was not the last one to leave the cluster and may not contain all the updates.
 
 To force cluster bootstrap with this node, edit the grastate.dat file manually and set safe_to_bootstrap to 1 .”
 ```
 
-Trong trường hợp sự cố các node bị tắt đột ngột hoặc ngoài ý muốn thì các node sẽ có trường **safe_to_bootstrap: 0**, và sẽ tham vấn bộ lưu trữ **InnoDB** mục đích để các node thực hiện những thao tác, giao dịch cuối cùng trong cluster. Điều này được thực hiện bằng cách thực hiện lệnh sau trên mỗi node: `mysqld --wsrep-recover`
+Trong trường hợp sự cố các node bị tắt đột ngột hoặc ngoài ý muốn thì các node sẽ có trường **safe_to_bootstrap: 0**, và sẽ tham vấn bộ lưu trữ **InnoDB** mục đích để các node thực hiện những thao tác, giao dịch cuối cùng trong cluster. 
+
+- Điều này được thực hiện bằng cách thực hiện lệnh sau trên mỗi node: `mysqld --wsrep-recover`
 ```
 $ mysqld --wsrep-recover
 ...
@@ -83,7 +85,7 @@ Sau đó ta có thể bootstrap trên node đã chọn
 
 Trong trường hợp các node bị tách khởi cluster bì một lý do ngoài ý muốn, lúc đó ta cần chọn 1 node và quảng bá nó để trở thành 1 primary.
 
-Để xác định nút nào cần được khởi động, hãy so sánh giá trị **wsrep_last_committed** cao nhất trên tất cả các nút DB:
+- Để xác định nút nào cần được khởi động, hãy so sánh giá trị **wsrep_last_committed** cao nhất trên tất cả các nút DB:
 ```
 node1> SHOW STATUS LIKE 'wsrep_%';
 +----------------------+-------------+
