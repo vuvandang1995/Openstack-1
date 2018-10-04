@@ -87,8 +87,11 @@ Sau đó ta có thể bootstrap trên node đã chọn
 
 Trong trường hợp các node bị tách khởi cluster bì một lý do ngoài ý muốn, lúc đó ta cần chọn 1 node và quảng bá nó để trở thành 1 primary.
 
-- Để xác định nút nào cần được khởi động, hãy so sánh giá trị **wsrep_last_committed** cao nhất trên tất cả các nút DB:
+- Để xác định nút nào cần được khởi động, hãy so sánh giá trị **wsrep_last_committed** cao nhất trên tất cả các nút DB, truy cập vào database:
+
 ```
+mysql -u root -p
+
 node1> SHOW STATUS LIKE 'wsrep_%';
 +----------------------+-------------+
 | Variable_name        | Value       |
