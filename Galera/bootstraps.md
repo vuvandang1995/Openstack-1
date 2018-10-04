@@ -1,3 +1,4 @@
+# Cơ chế hoạt động Bootstrap MySQL, MariaDB Galera Cluster
 
 Galera cần khởi động 1 node cluster giống như 1 điểm gốc trước khi các node còn lại có thể joint vào cụm cluster. Tiến trình như vậy gọi là cluster bootstrap. Bootstrao là bước đầu tiên để quảng bá 1 node primary database trước khi các node khác xem node gốc làm điểm tham chiếu để đồng bộ dữ liệu.
 
