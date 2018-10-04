@@ -3,4 +3,10 @@ Galera cần khởi động 1 node cluster giống như 1 điểm gốc trước
 
 Khi Galera khởi động bằng bootstrap trên 1 node, node được bootstrap đó sẽ đổi trạng thái thành primary (kiểm tra bằng lệnh wsrep_cluster_status). Các node còn lại sẽ chỉ cần start bằng lệnh bình thường và sẽ tự động  tìm kiếm các thành phần chính hiện có trong cluster và joint vào thành 1 cluster. Đồng bộ hóa dữ liệu sau đó sẽ thông qua IST ( incremental state transfer ) hoặc SST ( snapshot state transfer ).
 
+Chỉ nên sử dụng bootstrap cluster nếu muốn khởi động 1 cluster mới hoặc trong cluster không có node nào là primary state.
+Việc sử dụng bootstrap cần thận trọng nếu không các node trong cluster sẽ bị phân tách hoặc mất dữ liệu.
+
+<img src="https://i.imgur.com/1yfK6Nh.png">
+<img src="https://i.imgur.com/n0VgmuQ.png">
+
 
