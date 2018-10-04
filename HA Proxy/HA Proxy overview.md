@@ -112,7 +112,7 @@ Nếu 1 server thất bại trong việc health check, vậy nên không thể t
 
 Đối với các cài đặt load balancing layer 4/7 phía trên , chúng sử dụng 1 load balancer để điều khiển traffic tới một hoặc nhiều backend server. tuy nhiên nếu load balancer bị lỗi thì dữ liệu sẽ bị ứ đọng dẫn tới downtime (bottleneck - nghẽn cổ chai). keepalived sinh ra để giải quyết vấn đề này.
 
-<img src="https://i.imgur.com/nBZWycp.gifv">
+<img src="https://i.imgur.com/nBZWycp.gif">
 
 Ở ví dụ trên, ta có nhiều load balancer (1 active và một hoặc nhiều passive). Khi người dùng kết nối đến một server thông qua ip public của active load balancer, nếu load balancer ấy fails, phương thức failover sẽ detect nó và tự động gán ip tới 1 passive server khác.
 
