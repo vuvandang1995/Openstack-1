@@ -32,9 +32,11 @@
 - Được sử dụng trong rất nhiều môi trường cấu hình cao, như : Github, Imgur, Instagram, Twitter...
 
 <a name="1">
+	
 ## I. Một số thuật ngữ
 
-<a name="2">(/a)
+<a name="2">
+	
 ### 1. Access Control List (ACL)
 
 **ACLs** được dùng để test 1 vài điều kiện và thực hiện hành động (chọn server, block 1 request...) dựa vào kết quả kiểm tra. Sử dụng ACLs cho phép forward linh hoạt các network traffic dựa vào các nhân tố như pattern-matching và một số kết nối tới backend.
