@@ -106,3 +106,21 @@ Một vài ứng dụng yêu cầu user tiếp tục kết nối tới cùng bac
 HAProxy sử dụng health checks để xác định nếu 1 backend server khả dụng cho quá trình request, nó sẽ tránh được việc nếu backend không còn khả dụng, thì việc remove server ra khỏi backend đó phải làm bằng tay. Mặc định thì health check sẽ cố gắng khởi tạo 1 kết nối TCP tới server, nó kiểm tra nếu backend server được lắng nghe trên IP và port được cấu hình.
 
 Nếu 1 server thất bại trong việc health check, vậy nên không thể tiếp nhận request, nó sẽ tự động tắt trong backend, traffic sẽ chỉ chỏ đến nó đến khi nó khả dụng trở lại. Nếu tất cả các server trong backend fail, service sẽ không khả dụng đến khi có ít nhất 1 trong các backend server khả dụng trở lại.
+
+## III. Mô hình kết hợp với keepalive
+
+
+Đối với các cài đặt load balancing layer 4/7 phía trên , chúng sử dụng 1 load balancer để điều khiển traffic tới một hoặc nhiều backend server. tuy nhiên nếu load balancer bị lỗi thì dữ liệu sẽ bị ứ đọng dẫn tới downtime (bottleneck - nghẽn cổ chai). keepalived sinh ra để giải quyết vấn đề này.
+
+<img src="https://i.imgur.com/nBZWycp.gifv">
+
+Ở ví dụ trên, ta có nhiều load balancer (1 active và một hoặc nhiều passive). Khi người dùng kết nối đến một server thông qua ip public của active load balancer, nếu load balancer ấy fails, phương thức failover sẽ detect nó và tự động gán ip tới 1 passive server khác.
+
+
+### So sánh HAProxy và một số giải pháp LB khác
+
+**Một số giải pháp LB khác**
+
+- Linux Virtual Server (LVS) – Một layer 4 load balancer đơn giản, nhanh được giới thiệu trong nhiều bản phân phối Linux.
+
+- Nginx – Máy chủ web nhanh và đáng tin cậy được dùng cho proxy và cân bằng tải. Nginx thường dùng kết hợp với HAProxy cho việc lưu đệm (caching) và nén dữ liệu (compression) của mình.
