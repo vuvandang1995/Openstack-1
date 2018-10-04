@@ -1,16 +1,16 @@
 # Tìm hiểu về HA Proxy
 
-[I. Một số thuật ngữ](#1)
-[1. Access Control List (ACL)](#2)
-[2. Backend](#3)
-[3. Frontend](#4)
-[II. Các dạng của Load Balancing](#5)
-[1. Layer 4 Load Balancing](#6)
-[2. Layer 7 Load Balancing](#7)
-[3. Các thuật toán Cân bằng tải](#8)
-[4. Sticky Session](#9)
-[5. Health Check](#10)
-[III. Mô hình kết hợp với keepalive](#11)
+[I. Một số thuật ngữ](#1).
+[1. Access Control List (ACL)](#2).
+[2. Backend](#3).
+[3. Frontend](#4).
+[II. Các dạng của Load Balancing](#5).
+[1. Layer 4 Load Balancing](#6).
+[2. Layer 7 Load Balancing](#7).
+[3. Các thuật toán Cân bằng tải](#8).
+[4. Sticky Session](#9).
+[5. Health Check](#10).
+[III. Mô hình kết hợp với keepalive](#11).
 
 
 **HAProxy - High Availability Proxy**: Mục đích sử dụng là cân bằng tải TCP/HTTP
