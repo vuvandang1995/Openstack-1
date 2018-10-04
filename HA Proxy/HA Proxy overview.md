@@ -45,7 +45,8 @@ Ví dụ: `acl url_blog path_beg /blog`
 
 ACL sẽ match nếu như phần request của user bắt đầu với /blog, nó sẽ match với request của `http://yourdomain.com/blog/blog-entry-1`
 
-<a name="3">(/a)
+<a name="3">
+	
 ### 2. Backend
 
 Backend là tập hợp của các server mà nhận được request. Các backed được định nghĩa trong section "backend" của file cấu hình HAProxy. Trong phần lớn form cơ bản, 1 backend được định nghĩa bởi thuật toán cân bằng tải nào được dùng và danh sách các server và port.
@@ -68,7 +69,8 @@ backend blog-backend
 	   server blog1 blog1.yourdomain.com:80 check
 ```
 
-<a name="4">(/a)
+<a name="4">
+	
 ### 3. Frontend
 
 **Frontend** định nghĩa việc các request nên được chỏ tới cách backend như thế nào. **Frontend** được định nghĩa trong section **frontend** của file cấu hình HAProxy :
@@ -80,10 +82,12 @@ backend blog-backend
 
 Một frontend có thể được cấu hình theo nhiều kiểu của network traffic.
 
-<a name="5">(/a)
+<a name="5">
+	
 ## II. Các dạng của Load Balancing
 
-<a name="6">(/a)
+<a name="6">
+	
 ### 1. Layer 4 Load Balancing
 
 Cân bằng tải kiểu này sẽ chỏ user traffic dựa vào IP range và port (VD : 1 request tới từ http://yourdomain.com/anything, traffic sẽ được chỏ tới backend mà được kiểm soát bởi yourdomain.com trên port 80)
@@ -92,7 +96,8 @@ Cân bằng tải kiểu này sẽ chỏ user traffic dựa vào IP range và po
 
 User truy cập tới load balancer, request của user sẽ được chỏ tới `web-backend` group của các backend server. Bất kỳ backend server nào được chọn sẽ phản hồi trực tiếp tới request của user. Thông thường, tất cả các user trong `web-backend` nên có nội dung thống nhất, trong khi user nhận được nội dung không đồng nhất. Chú ý rằng các server kết nối tới cùng một database
 
-<a name="7">(/a)
+<a name="7">
+	
 ### 2. Layer 7 Load Balancing
 
 <img src="https://i.imgur.com/9FKaudn.png">
@@ -116,7 +121,8 @@ frontend http
 - `use_backend blog-backend if url_blog`: sử dụng ACLs để proxy traffic tới blog-backend.
 - `default_backend web-backend`: chỉ ra tất cả các traffic khác sẽ chỏ tới web-backend.
 
-<a name="8">(/a)
+<a name="8">
+	
 ### 3. Các thuật toán Cân bằng tải
 
 Các thuật toán cân bằng tải được dùng để chỉ ra rằng server nào trong 1 backend sẽ được chọn khi cân bằng tải. HAProxy đưa ra 1 vài lựa chọn cho các thuật toán, các server có thể được gán parameter `weight` để đánh giá server có được chọn thường xuyên không, so sánh với các server khác.
@@ -129,19 +135,22 @@ Một vài thuật toán thông dụng:
 
 - **Source** chọn server dể dùng dựa vào source IP. Phương thức này đảm bảo user sẽ kết nối tới cùng 1 server.
 
-<a name="9">(/a)
+<a name="9">
+	
 ### 4. Sticky Session
 
 Một vài ứng dụng yêu cầu user tiếp tục kết nối tới cùng backend server. Điều này được thực hiện bởi sticky session, yêu cầu sử dụng appsession parameter ở trên backend.
 
-<a name="10">(/a)
+<a name="10">
+	
 ### 5. Health Check
 
 HAProxy sử dụng health checks để xác định nếu 1 backend server khả dụng cho quá trình request, nó sẽ tránh được việc nếu backend không còn khả dụng, thì việc remove server ra khỏi backend đó phải làm bằng tay. Mặc định thì health check sẽ cố gắng khởi tạo 1 kết nối TCP tới server, nó kiểm tra nếu backend server được lắng nghe trên IP và port được cấu hình.
 
 Nếu 1 server thất bại trong việc health check, vậy nên không thể tiếp nhận request, nó sẽ tự động tắt trong backend, traffic sẽ chỉ chỏ đến nó đến khi nó khả dụng trở lại. Nếu tất cả các server trong backend fail, service sẽ không khả dụng đến khi có ít nhất 1 trong các backend server khả dụng trở lại.
 
-<a name="11">(/a)
+<a name="11">
+	
 ## III. Mô hình kết hợp với keepalive
 
 
