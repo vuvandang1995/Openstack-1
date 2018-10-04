@@ -31,7 +31,7 @@
 
 - Được sử dụng trong rất nhiều môi trường cấu hình cao, như : Github, Imgur, Instagram, Twitter...
 
-<a name="1">(/a)
+<a name="1">
 ## I. Một số thuật ngữ
 
 <a name="2">(/a)
