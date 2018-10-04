@@ -46,7 +46,7 @@ Bây giờ node mới sẽ kết nới tới các node trong cluster tạo thàn
 
 Galera từ phiên bản 3.19 sẽ có 1 trường là **safe_to_bootstrap** bên trong `grastate.dat`, nó là 1 trường điều kiện ngăn chặn các lựa chon không an toàn bằng cách theo dõi thứ tự các node đang tắt, node tắt cuối cùng sẽ được đánh dấu là **Safe-to-Bootstrap** và chỉ được bootstrap trên node đó, còn các node còn lại sẽ bị đánh dấu là không an toàn để bootstrap.
 
-- File `grastate.dat`:
+- File `/var/lib/mysql/grastate.dat`:
 ```
 # GALERA saved state
 version: 2.1
@@ -76,6 +76,7 @@ $ mysqld --wsrep-recover
 
 Ký tự sau UUID là chuỗi cần tìm cho node sẽ bootstrap, chọn node có số cao nhất và chỉnh sửa `grastate.dat` của nó để đặt “safe_to_bootstrap: 1”  như ví dụ sau:
 ```
+cat /var/lib/mysql/grastate.dat
 # GALERA saved state
 version: 2.1
 uuid:    8bcf4a34-aedb-14e5-bcc3-d3e36277729f
