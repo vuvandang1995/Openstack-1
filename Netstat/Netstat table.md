@@ -85,4 +85,5 @@
 |Segments Retransmitted|Số segment đã truyền lại
 |No port| Tống số dữ liệu nhận được mà không phải từ ứng dụng ở port đích
 
+netstat -atun | grep ...  (kiểm tra port có đang chạy hay không)
 
