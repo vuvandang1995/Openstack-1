@@ -56,6 +56,5 @@ Facility: là 1 trong các chuẩn kern user mail daemon auth syslog lpr newsuuc
 max level, min level: emerg alert crit err warning notice info debug
 ```
 
-- log-send-hostname [<string>] : set trường hostname vào trong syslog header
-
+- log-send-hostname [< string >] : set trường hostname vào trong syslog header
 
