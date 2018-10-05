@@ -1,5 +1,10 @@
 # File cấu hình keepalive
 
+### 1. Cấu trúc
+
+<img src="https://i.imgur.com/jIhBFdR.png">
+
+
 Gồm 2 thành phần chính là Health-checker và VRRP 
 
 - Health-checker worker threads: mỗi một health-check được đăng kí với global scheduling framework. Nó sẽ đảm đương nhiệm vụ này bằng cách sử dụng Keepalived health-check framework. health-check framework chứa 3 checkers:
@@ -16,9 +21,17 @@ Gồm 2 thành phần chính là Health-checker và VRRP
 
 Hai thành phần này sử dụng những công cụ sau:
 
-SMTP notification: cho phép keepalived gửi cảnh báo
-IPVS framework: LVS kernel interface cho việc quản lí real server pool
-Netlink: Kernel routing interface cho VRRP. Quản lí VRRP VIP
-Multicast: Dùng để gửi VRRP adverts
-NETFILTER
-SYSLOG
+  - SMTP notification: cho phép keepalived gửi cảnh báo
+  
+  - IPVS framework: LVS kernel interface cho việc quản lí real server pool
+  
+  - Netlink: Kernel routing interface cho VRRP. Quản lí VRRP VIP
+  
+  - Multicast: Dùng để gửi VRRP adverts
+  
+  - NETFILTER
+  
+  - SYSLOG
+  
+### 2. Cấu hình keepalived
+
