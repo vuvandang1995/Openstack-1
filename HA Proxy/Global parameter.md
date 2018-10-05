@@ -56,5 +56,10 @@ Facility: là 1 trong các chuẩn kern user mail daemon auth syslog lpr newsuuc
 max level, min level: emerg alert crit err warning notice info debug
 ```
 
-- log-send-hostname [< string >] : set trường hostname vào trong syslog header
+- maxconn <number> : Đặt số kết nối tối đa cho mỗi phiên 
+  
+- pidfile <pidfile> : Ghi PIDs của tất cả daemons vào trong file pidfile
+  
+- stats socket [<address:port>|<path>] [param*]  : Liên kết một UNIX socket tới <path> , hoặc 1 TCPv4/v6 address tới <address:port>
 
+- d
