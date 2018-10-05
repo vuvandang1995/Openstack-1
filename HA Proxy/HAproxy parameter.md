@@ -1,6 +1,6 @@
-# các tham số trong cấu hình HAproxy
+# các tham số thường sử dụng trong file cấu hình HAproxy
 
-## Một số tham số thường sử dụng trong Global
+## Global
 
 - `daemon` : Thực hiện các tiến trình trong backgroud
 
@@ -50,3 +50,5 @@ userlist L2
 ```
 
 - `stats socket [<address:port>|<path>] [param*]` : Liên kết một UNIX socket tới <path> , hoặc 1 TCPv4/v6 address tới <address:port>
+
+## 
