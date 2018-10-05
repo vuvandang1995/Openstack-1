@@ -71,6 +71,12 @@ userlist L2
 
 - `option splice-auto, no option splice-auto` : Bật hoặc tắt tăng tốc kernel tự động trên socket theo cả hai hướng
 
+- `option srvtcpka , no option srvtcpka ` : Kích hoạt hoặc vô hiệu hóa gói tin TCP keepalive phía máy chủ
+
+- `option clitcpka , no option clitcpka` : Kích hoạt hoặc vô hiệu hóa việc gửi các bản tin keepalive phía client
+
+- `option tcplog` : Bật kết nối TCP log với trạng thái phiên và bộ hẹn giờ
+
 - `mode { tcp|http|health }` : Đặt chế độ chạy hoặc giao thức của instance
 
 - `retries <value>` : Đặt số lần thử kết nối lại server khi kết nối thất bại
@@ -94,3 +100,5 @@ userlist L2
 - `stick on <pattern> [table <table>] [{if | unless} <condition>]` : Xác định mẫu yêu cầu để liên kết người dùng với máy chủ
 
 - `weight <weight>` : Trọng số cân bằng tải, có giá trị từ 1 - 100, bằng 0 nếu không muốn cân bằng tải
+
+- `backup` : Sử dụng trong cân bằng tải khi các máy chủ không dự phòng khác không khả dụng
