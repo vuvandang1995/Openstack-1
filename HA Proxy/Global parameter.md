@@ -65,7 +65,7 @@ max level, min level: emerg alert crit err warning notice info debug
 - tune.maxrewrite <number> : Kích thước giành riêng (tính bằng bytes) trong buffersize để viết lại các header hoặc các trường khác, mặc định nó chiếm 1 nửa kích thước của bộ đệm buffer, giá trị khuyến cáo là 1024
 
 
-- user <username> [password|insecure-password <password>] [groups <group>,<group>,(...)]  : Khai báo user sử dụng cho HAproxy
+- **user <username> [password|insecure-password <password>] [groups <group>,<group>,(...)]**  : Khai báo user sử dụng cho HAproxy
 
 ```
 userlist L1
