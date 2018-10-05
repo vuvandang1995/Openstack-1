@@ -18,5 +18,44 @@ cpu-map 1- 0-     # will be replaced by "cpu-map 1-64 0-63"
                   # word size.
 ```
 
+- crt-base <dir> :Gán thư mục mặc định để tìm nạp chứng chỉ SSL khi sử dụng crtfile
+  
+- daemon : Thực hiện các tiến trình trong backgroud
 
-- crt-base <dir>
+- deviceatlas-json-file <path> : Tải file json bởi API
+
+- deviceatlas-log-level <value> : Đặt mức thông tin được API trả lại. Chỉ thị này là tùy chọn và đặt thành 0 theo mặc định nếu không được đặt
+
+- deviceatlas-separator <char> : Đặt phân cách cho kết quả trả về của API
+  
+- deviceatlas-properties-cookie <name> : Đặt tên cookie sử dụng 
+  
+- external-check : Check các rules thêm vào
+
+- gid <number> : Thay đổi group ID thành 1 số nó là group ID giành riêng cho HAProxy
+  
+- hard-stop-after <time> : Xác định thời gian tối đã thực hiện soft-stop, tính bằng ms
+```
+global
+hard-stop-after 30s
+```
+  
+- group <group name> : Group id
+  
+- log <address> [len <length>] [format <format>] <facility> [max level [min level]]  : Thiết lập log
+
+```
+Address: địa chỉ ip cần lấy log
+  
+Length: có giá trị từ 80 to 65535, giá trị mặc định là 1024 dòng
+
+Format: có 2 dạng là rfc3164 và rfc5424
+
+Facility: là 1 trong các chuẩn kern user mail daemon auth syslog lpr newsuucp cron auth2 ftp ntp audit alert cron2 local0 local1 local2 local3 local4 local5 local6 local7
+
+max level, min level: emerg alert crit err warning notice info debug
+```
+
+- log-send-hostname [<string>] : set trường hostname vào trong syslog header
+
+
