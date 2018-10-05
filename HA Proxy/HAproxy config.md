@@ -1,6 +1,6 @@
 # cấu hình file HAproxy
 
-## 1. Cách thức hoạt động HAproxy
+### 1. Cách thức hoạt động HAproxy
 
 HAProxy là single-threaded, event-driven, non-blocking engine kết hợp các I/O layer với priority-based scheduler. Vì nó được thiết kế với mục tiêu vận chuyển dữ liệu, kiến trúc của nó được tối ưu hóa để chuyển dữ liệu nhanh nhất có thể. Nó có những layer model với những cơ chế riêng để đảm bảo dữ liệu không đi tới những level cao hơn nếu không cần thiết. Phần lớn những quá trình xử lí diễn ra ở kernel và HAProxy làm mọi thứ tốt nhất để giúp kernel làm việc nhanh nhất có thể.
 
@@ -122,3 +122,57 @@ Test cấu hình bằng câu lệnh sau:
 
 `$ sudo haproxy -f configuration.conf -c`
 
+### 6 Hướng dẫn cấu hình để HAProxy đẩy log ra syslog
+
+Vì HAProxy không cho phép nó access tới file system nên cách duy nhất đó là gửi logs thông qua UDP server (mặc định ở port 514).
+
+Để có thể làm được điều này, ta cần khai báo dòng sau vào cấu hình trong section `global`
+
+``` sh
+log /dev/log    local0
+log /dev/log    local1 notice
+```
+
+Sau đó thêm dòng sau vào "defaults" section.
+
+`log global`
+
+Chính sửa lại file cấu hình của rsyslogd `/etc/rsyslog.conf`
+
+``` sh
+$ModLoad imudp
+$UDPServerAddress *
+$UDPServerRun 514
+```
+
+Cuối cùng là restart lại haproxy. Test lại bằng cách chạy câu lệnh sau
+
+`strace -tt -s100 -etrace=sendmsg -p <haproxy's pid>`
+
+<a name="4.3"></a>
+### 7 Tóm tắt và giải thích các lệnh trong HAproxy
+
+Cấu trúc câu lệnh
+
+`$ haproxy [<options>]*`
+
+Trong đó `[<options>]*` là các tùy chọn đi kèm, nếu không có options nào được khai báo thì nó sẽ hiển thị help page.
+
+Danh sách các options:
+
+- -- <cfgfile>* : tất cả các câu lệnh phía sau kí tự `--` đều là đường dẫn tới thư mục hoặc file cần được load và process theo thứ tự được khai báo. nó thường được dùng khi phải load nhiều file cùng lúc. Gần giống với `-f`, khác ở chỗ `-f` phải xuất hiện ở mỗi một file được khai báo đơn lẻ.
+- -f <cfgfile|cfgdir> : Thêm <cfgfile> vào danh sách các file cấu hình được load. Mỗi một file chứa cấu hình của một hoặc nhiều section vì thế nó cần được bắt đầu bằng ` "global", "defaults", "peers", "listen", "frontend", "backend"`
+- -C <dir> : Thay đổi thư mục trước khi load files cấu hình
+- -D : Khởi động như một daemon. Lỗi sẽ không được thông báo trên terminal.
+- -Ds: chạy ở mode systemd
+- -L <name> : thay đổi local peer name thành <name>
+- -N <limit> : Thiết lập maxconn trên mỗi proxy (mặc định là 2000)
+- -V : bật verbose mode
+- -c : Check file cấu hình, nếu mọi thứ ok thì output của nó sẽ không hiện gì
+- -d : bật debug mode, mặc định sẽ tắt daemon mode
+- -dG : tắt hàm getaddrinfo() để chuyển host names thành địa chỉ.
+- -m <limit> : giới hạn số memory theo megabytes trên từng tiến trình
+- -n <limit> : giới hạn các connection trên từng process. giống với <maxconn> trong global section.
+- -p <file> : ghi tất cả các processes' pids vào một file trong quá trình khởi động, giống với `pidfile` trong section global
+- -q: đặt mode quiet
+- -v : thông báo version, ngày cài đặt
