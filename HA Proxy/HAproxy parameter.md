@@ -51,4 +51,46 @@ userlist L2
 
 - `stats socket [<address:port>|<path>] [param*]` : Liên kết một UNIX socket tới <path> , hoặc 1 TCPv4/v6 address tới <address:port>
 
-## 
+## Proxies
+
+- timeout check <timeout> : Thời gian chờ kiểm tra kết nối sau khi đã được thành lập
+  
+- timeout client <timeout> : Thời gian chờ tối đa khi máy khách không hoạt động 
+  
+- timeout connect <timeout> : Thời gian chờ tối đa để kết nối tới server thành công
+  
+- timeout server <timeout> : Thời gian  chờ tối đa không hoạt động ở server
+  
+- timeout queue <timeout> : Thời gian chờ tối đa cho 1 queue được thực hiện
+  
+- timeout http-request <timeout> : Thời gian tối đa cho phép để đợi yêu cầu HTTP hoàn chỉnh
+
+- option redispatch, no option redispatch : Bật hoặc tắt phân phối lại phiên trong trường hợp lỗi kết nối
+
+- option http-server-close, no option http-server-close : Bật hoặc tắt kết nối HTTP ở phía máy chủ
+
+- option splice-auto, no option splice-auto : Bật hoặc tắt tăng tốc kernel tự động trên socket theo cả hai hướng
+
+- mode { tcp|http|health } : Đặt chế độ chạy hoặc giao thức của instance
+
+- retries <value> : Đặt số lần thử kết nối lại server khi kết nối thất bại
+
+- bind [<address>]:<port_range> [, ...] [param*] , bind /<path> [, ...] [param*] : Xác định 1 hay nhiều addresses hoặc ports ở  frontend
+  
+- stats enable : Bật báo cáo thống kê với cài đặt mặc định
+
+- stats uri /stats : Bật report qua URI 
+
+- stats realm <realm> : Bật thống kê và đặt xác thực
+  
+- balance <algorithm> [ <arguments> ] : Xác định thuật toán cân bằng tải được sử dụng trong backend
+  
+- server <name> <address>[:[port]] [param*] : Khai báo 1 máy chủ 
+
+- downinter <delay> , inter <delay> , fastinter <delay> : Tối ưu hóa độ trễ cho việc check trạng thái của server
+
+- stick-table type : Cấu hình stickiness table cho section hiện tại
+
+- stick on <pattern> [table <table>] [{if | unless} <condition>] : Xác định mẫu yêu cầu để liên kết người dùng với máy chủ
+
+- weight <weight> : Trọng số cân bằng tải, có giá trị từ 1 - 100, bằng 0 nếu không muốn cân bằng tải
