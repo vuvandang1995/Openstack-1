@@ -63,11 +63,13 @@ max level, min level: emerg alert crit err warning notice info debug
 - tune.bufsize <number> : Đặt kích thước bộ đệm buffer (tính theo bytes), giá trị thấp hơn cho phép nhiều hơn các phiên cùng tồn tại trong cùng một lượng RAM và các giá trị cao hơn cho phép một số các ứng dụng có cookie rất lớn để hoạt động, nếu tăng buffer thì ta cần giảm maxconn xuống để tránh trường hợp hết bộ nhớ. Giá trị mặc định là 16384 và có thể được thay đổi. Ngoài ra, sử dụng các yêu cầu HTTP  giá trị này phải là 16384 trở lên. Nếu một Yêu cầu HTTP lớn hơn (tune.bufsize - tune.maxrewrite) haproxy sẽ trả lại lỗi HTTP 400 (Yêu cầu Không hợp lệ), tương tự nếu một phản hồi HTTP lớn hơn so với kích thước này, haproxy sẽ trả về HTTP 502 (Bad Gateway).
 
 - tune.maxrewrite <number> : Kích thước giành riêng (tính bằng bytes) trong buffersize để viết lại các header hoặc các trường khác, mặc định nó chiếm 1 nửa kích thước của bộ đệm buffer, giá trị khuyến cáo là 1024
-  
+
+```
 - user <username> [password|insecure-password <password>]  : Khai báo user sử dụng cho HAproxy
                   [groups <group>,<group>,(...)]
 
-```
+
+ví dụ:
 userlist L1
   group G1 users tiger,scott
   group G2 users xdb,scott
