@@ -1,5 +1,20 @@
-# cấu hình file HAproxy
+# File cấu hình HAproxy
 
+[1. Cách thức hoạt động](#1)
+
+[2. Định dạng file cấu hình](#2)
+
+[3. Biến môi trường](#3)
+
+[4. Time format](#4)
+
+[5. Hướng dẫn cấu hình để HAProxy đẩy log ra syslog](#5)
+
+[6. Tóm tắt và giải thích các lệnh trong HAproxy](#6)
+
+
+<a name="1">
+        
 ### 1. Cách thức hoạt động HAproxy
 
 HAProxy là single-threaded, event-driven, non-blocking engine kết hợp các I/O layer với priority-based scheduler. Vì nó được thiết kế với mục tiêu vận chuyển dữ liệu, kiến trúc của nó được tối ưu hóa để chuyển dữ liệu nhanh nhất có thể. Nó có những layer model với những cơ chế riêng để đảm bảo dữ liệu không đi tới những level cao hơn nếu không cần thiết. Phần lớn những quá trình xử lí diễn ra ở kernel và HAProxy làm mọi thứ tốt nhất để giúp kernel làm việc nhanh nhất có thể.
@@ -23,6 +38,8 @@ Quá trình xử lí các incoming connections là phần phức tạp nhất v�
 - Áp dụng frontend-specific processing rules cho dữ liệu được trả về từ server
 - Tạo log để ghi lại những gì đã xảy ra
 - Đối với http, lặp lại bước 2 để đợi một request mới, nếu không có, tiến hành đóng kết nối.
+
+<a name="2">
 
 ### 2. Định dạng file cấu hình
 
@@ -49,6 +66,7 @@ Trong đó:
 
 Hiện tại thì có 2 proxy mode được hỗ trợ đó là "tcp" và "http". Nếu sử dụng "tcp" thì HAProxy đơn giản chỉ forward các traffic giữa 2 sides. Nếu sử dụng "http" mode thì nó sẽ phần tích giao thức và có thể tương tác với chúng bằng cách chặn, chuyển hướng, thêm, sửa, xóa nội dung trong request hoặc responses.
 
+<a name="3">
 
 ### 3. Biến môi trường
 
@@ -64,7 +82,8 @@ Ví dụ:
         user "$HAPROXY_USER"
 ```
 
-<a name="3.3"></a>
+<a name="4">
+
 ### 4. Time format
 
 Thông thường các dịnh dạng thời gian trong HAProxy thường được biểu diễn theo định dạng milliseconds, tuy nhiên HAProxy cũng hỗ trợ nhiều định dạng khác:
@@ -76,8 +95,8 @@ Thông thường các dịnh dạng thời gian trong HAProxy thường được
   - h  : hours.   1h = 60m = 3600s = 3600000ms
   - d  : days.    1d = 24h = 1440m = 86400s = 86400000ms
 
-<a name="3.4"></a>
-### 5. Ví dụ
+
+ Ví dụ:
 
 ``` sh
    # Simple configuration for an HTTP proxy listening on port 80 on all
@@ -122,7 +141,9 @@ Test cấu hình bằng câu lệnh sau:
 
 `$ haproxy -f configuration.conf -c`
 
-### 6 Hướng dẫn cấu hình để HAProxy đẩy log ra syslog
+<a name="5">
+
+### 5. Hướng dẫn cấu hình để HAProxy đẩy log ra syslog
 
 Vì HAProxy không cho phép nó access tới file system nên cách duy nhất đó là gửi logs thông qua UDP server (mặc định ở port 514).
 
@@ -149,8 +170,10 @@ Cuối cùng là restart lại haproxy. Test lại bằng cách chạy câu lệ
 
 `strace -tt -s100 -etrace=sendmsg -p <haproxy's pid>`
 
-<a name="4.3"></a>
-### 7 Tóm tắt và giải thích các lệnh trong HAproxy
+
+<a name="6">
+
+### 6. Tóm tắt và giải thích các lệnh trong HAproxy
 
 Cấu trúc câu lệnh
 
