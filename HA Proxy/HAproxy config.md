@@ -120,7 +120,7 @@ Thông thường các dịnh dạng thời gian trong HAProxy thường được
 
 Test cấu hình bằng câu lệnh sau:
 
-`$ sudo haproxy -f configuration.conf -c`
+`$ haproxy -f configuration.conf -c`
 
 ### 6 Hướng dẫn cấu hình để HAProxy đẩy log ra syslog
 
