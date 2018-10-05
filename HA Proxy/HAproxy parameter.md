@@ -1,6 +1,6 @@
-# các tham số trong option global
+# các tham số trong cấu hình HAproxy
 
-### Process management and security:
+## Một số tham số thường sử dụng trong Global
 
 - `daemon` : Thực hiện các tiến trình trong backgroud
 
