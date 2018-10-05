@@ -133,7 +133,9 @@ Một vài thuật toán thông dụng:
 
 - **Leastconn** chọn server với số các kết nối ít nhất - được đề xuất với các session dài hạn. Các server trong cùng 1 backend được quay vòng với **round-robin**
 
-- **Source** chọn server dể dùng dựa vào source IP. Phương thức này đảm bảo user sẽ kết nối tới cùng 1 server.
+- **Source** chọn server dể dùng dựa vào source IP. Phương thức này đảm bảo user sẽ kết nối tới cùng 1 server. Dùng cho các máy chủ chạy SSL, máy chủ phụ thuộc vào địa chỉ nguồn của client , ví dụ IP address của người dùng của bạn.
+
+Ngoài ra còn 1 số giải thuật như **uri**, **hdr**, **first**
 
 <a name="9">
 	
