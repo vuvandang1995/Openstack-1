@@ -129,11 +129,11 @@ Các thuật toán cân bằng tải được dùng để chỉ ra rằng server
 
 Một vài thuật toán thông dụng:
 
-- **Round Robin** chọn server nào được quay. Đây là thuật toán mặc định.
+- **Round Robin**: Chọn và request đến lần lượt các máy chủ. Đây là thuật toán mặc định.
 
-- **Leastconn** chọn server với số các kết nối ít nhất - được đề xuất với các session dài hạn. Các server trong cùng 1 backend được quay vòng với **round-robin**
+- **Leastconn**: Chọn máy chủ đang có ít kết nối đến nhất – khuyên dùng cho các kết nối có session kéo dài. Các máy chủ trong cùng backend cũng được xoay vòng theo cách roundrobin.
 
-- **Source** chọn server dể dùng dựa vào source IP. Phương thức này đảm bảo user sẽ kết nối tới cùng 1 server. Dùng cho các máy chủ chạy SSL, máy chủ phụ thuộc vào địa chỉ nguồn của client , ví dụ IP address của người dùng của bạn.
+- **Source**: Chọn request đến 1 máy chủ và lưu source tại máy chủ đó, khi cần truy cập lại chỉ request đến máy chủ đó 
 
 Ngoài ra còn 1 số giải thuật như **uri**, **hdr**, **first**
 
