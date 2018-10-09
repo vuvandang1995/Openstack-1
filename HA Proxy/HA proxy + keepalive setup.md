@@ -1,3 +1,7 @@
+# Cài đặt mô hình ha + keepalive
+
+- **Chú ý**: Khi stop dịch vụ haproxy trên node master thì node backup sẽ thành node master và nhận ip VIP nhưng web trên node master cũ vẫn truy cập vào bình thường 
+
 ## 1. Mô hình
 
 <img src="https://i.imgur.com/2XqhdTK.png">
