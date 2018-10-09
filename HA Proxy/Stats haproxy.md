@@ -15,7 +15,7 @@
 
 - Để cho phép HAProxy hiển thị số liệu thống kê, thêm một số dòng sau vào trong file config ở setcion default
 
-``` sh
+```
 stats enable
 stats uri /monitor
 stats auth ducnm37:123456
@@ -109,9 +109,9 @@ Phía dưới là phần thông số chi tiết cho các service mà haproxy đa
 <a name="3"></a>
 ## 3. Cách thu thập stats qua Unix Socket Interface
 
-Ngoài Statistic trên http, HAProxy cũng cho phép bạn thu thập metrics qua unix socket. Để cấu hình, thêm dòng sau tại phần global
+Ngoài Statistic trên http, HAProxy cũng cho phép bạn thu thập metrics qua unix socket. Để cấu hình, thêm dòng sau tại phần **global** trong file cấu hình haproxy
 
-``` sh
+```
 stats socket /var/run/haproxy.sock mode 600 level admin
 stats timeout 2m #Wait up to 2 minutes for input
 ```
