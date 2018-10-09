@@ -18,14 +18,14 @@
 ``` sh
 stats enable
 stats uri /monitor
-stats auth root:meditech2017
+stats auth ducnm37:123456
 ```
 
 - Trong đó `stats uri` là đường dẫn tới trang hiển thị số liệu thống kê và `stats auth` là thông tin tài khoản và mật khẩu để tuy cập.
 
-- Để theo dõi HAProxy Stats, tiến hành truy cập vào địa chỉ http://ipaddress/monitor với username là `root` và mk là `meditech2017`
+- Để theo dõi HAProxy Stats, tiến hành truy cập vào địa chỉ http://192.168.40.70/monitor với 192.168.40.70 là ip VIP, username là `ducnm37` và password là `123456`
 
-<img src="https://i.imgur.com/6VqspDU.png">
+<img src="https://i.imgur.com/ClhEkGI.png">
 
 <a name="2"></a>
 ## 2. Các thông số trên web browser
@@ -122,6 +122,9 @@ Dùng netcat tool để giao tiếp với socket. Với câu lệnh sau, bạn s
 - Thông số của frontend và backup
 
 `echo "show info;show stat" | nc -U /var/run/haproxy.sock`
+
+<img src="https://i.imgur.com/fl8aYU7.png">
+
 
 Nếu muốn vào Interactive mode, sử dụng câu lệnh sau
 
