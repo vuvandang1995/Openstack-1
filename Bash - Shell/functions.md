@@ -9,9 +9,12 @@ cat <<EOF>> 'file'
 EOF
 ```
 
-vú dụ: cat <<EOF>> 123.txt
+vú dụ: 
+```
+cat <<EOF>> 123.txt
 i love you
 EOF
+```
 
 sẽ chèn chữ `i love you` vào file 123.txt
 
