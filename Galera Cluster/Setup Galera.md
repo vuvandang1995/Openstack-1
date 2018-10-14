@@ -90,7 +90,7 @@ db4: 192.168.40.64
 			# this server ip, change for each server
 			wsrep_node_address="192.168.40.63"
 			# this server name, change for each server
-			wsrep_node_name="db3"
+			wsrep_node_name="db2"
 
 			wsrep_sst_method=rsync
 
@@ -118,7 +118,7 @@ db4: 192.168.40.64
 			# this server ip, change for each server
 			wsrep_node_address="192.168.40.64"
 			# this server name, change for each server
-			wsrep_node_name="db4"
+			wsrep_node_name="db2"
 
 			wsrep_sst_method=rsync
 
